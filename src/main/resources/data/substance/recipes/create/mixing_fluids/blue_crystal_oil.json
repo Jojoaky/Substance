@@ -3,17 +3,17 @@
   "ingredients": [
     {
       "fluid": "substance:phenylacetone",
-      "amount": 100
+      "amount": 250
     },
     {
       "fluid": "substance:methylamine",
-      "amount": 100
+      "amount": 250
     }
   ],
   "results": [
     {
-      "fluid": "substance:blue_crystalline",
-      "amount": 200
+      "fluid": "substance:blue_crystal_oil",
+      "amount": 500
     }
   ]
 }

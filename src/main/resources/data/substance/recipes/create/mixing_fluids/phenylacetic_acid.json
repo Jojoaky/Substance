@@ -3,7 +3,7 @@
   "ingredients": [
     {
       "fluid": "minecraft:water",
-      "amount": 100
+      "amount": 250
     },
     {
       "item": "substance:cyanide"
@@ -11,12 +11,8 @@
   ],
   "results": [
     {
-      "fluid": "minecraft:water",
-      "amount": 75
-    },
-    {
       "fluid": "substance:phenylacetic_acid",
-      "amount": 100
+      "amount": 250
     }
   ]
 }

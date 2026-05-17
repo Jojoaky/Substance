@@ -3,11 +3,11 @@
   "ingredients": [
     {
       "fluid": "substance:ammonia",
-      "amount": 5
+      "amount": 250
     },
     {
       "fluid": "substance:methanol",
-      "amount": 5
+      "amount": 250
     },
     {
       "item": "substance:sculk_catalyst_crystal"
@@ -16,7 +16,7 @@
   "results": [
     {
       "fluid": "substance:methylamine",
-      "amount": 10
+      "amount": 500
     },
     {
       "item": "substance:sculk_catalyst_crystal"

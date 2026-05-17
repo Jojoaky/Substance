@@ -14,7 +14,7 @@
   "results": [
     {
       "fluid": "substance:methanol",
-      "amount": 100
+      "amount": 250
     },
     {
       "item": "substance:sculk_catalyst_crystal"
