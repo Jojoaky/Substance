@@ -21,21 +21,20 @@
 
 Substance works as a standalone mod, but gains additional features when used with:
 
-- **Create**  
+- **Create** [[forge](https://modrinth.com/mod/create)] [[fabric](https://modrinth.com/mod/create-fabric)]
   Enables advanced crafting and automation. Some recipes are replaced for better production chains.
 
-- **Farmer's Delight**  
+- **Farmer's Delight** [[forge](https://modrinth.com/mod/farmers-delight)] [[fabric](https://modrinth.com/mod/farmers-delight-refabricated)]
   Adds food-related crafting recipes and expands consumable variety.
 
 ---
 
 ## Requirements
 ### Minecraft Versions
-| Version  | Fabric  | Forge   |
-| -------- | ------- | ------- |
-| 1.20.1   | ✅      | ❌     |
-| 1.21.1   |         |         |
-| latest   |         |         |
+| Version  | Fabric  | NeoForge |
+| -------- | -- | -- |
+| 1.20.1   | ✅ | ❌ |
+| 1.21.1   |    |    |
 
 > Support for newer versions (including 1.21.1 and beyond) is planned but not guaranteed.
 
