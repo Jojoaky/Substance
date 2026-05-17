@@ -19,5 +19,6 @@ public class ModTags {
 
     }
 
-    public static final TagKey<Item> SMOKABLE_ITEM = register(Registries.ITEM, "smokable_item");
+    public static final TagKey<Item> SMOKABLE_ITEM = register(Registries.ITEM, "smokables");
+    public static final TagKey<Item> DRUG_ITEM = register(Registries.ITEM, "drugs");
 }
