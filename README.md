@@ -31,12 +31,12 @@ Substance works as a standalone mod, but gains additional features when used wit
 
 ## Requirements
 ### Minecraft Versions
-| Version  | Fabric  | NeoForge |
-| -------- | -- | -- |
-| 1.20.1   | ✅ | ❌ |
-| 1.21.1   |    |    |
+| Version | Fabric | NeoForge |
+|---------|--------|----------|
+| 1.20.1  | ✅      | ❌        |
+| 1.21.1  |        |          |
 
 > Support for newer versions (including 1.21.1 and beyond) is planned but not guaranteed.
 
 ### Dependencies:
-This mod requires an appropriate version of [YACL](https://modrinth.com/mod/yacl) to be installed.
+This mod requires an appropriate version of [YACL](https://modrinth.com/mod/yacl).
