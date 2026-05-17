@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "substance:herbal_roll",
+    "substance:thick_herbal_roll",
+    "substance:white_crystals",
+    "substance:white_crystals_chili",
+    "substance:blue_crystals"
+  ]
+}
