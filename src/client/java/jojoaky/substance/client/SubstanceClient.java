@@ -1,6 +1,8 @@
 package jojoaky.substance.client;
 
 import jojoaky.substance.Substance;
+import jojoaky.substance.chemical_fluid.ChemicalBucket;
+import jojoaky.substance.chemical_fluid.ChemicalFlaskItem;
 import jojoaky.substance.client.itemmodel.SmokableItemModel;
 import jojoaky.substance.client.shader.PostShaderManager;
 import jojoaky.substance.client.shaders.*;
@@ -14,6 +16,7 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.BucketItem;
 
 import static jojoaky.substance.register.ModFluids.ALL_FLUIDS;
 
@@ -27,21 +30,20 @@ public class SubstanceClient implements ClientModInitializer {
 				.filter(item -> item instanceof SmokableItem)
 				.forEach(SmokableItemModel::registerModel);
 
-		registerFluids();
+		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+			if (tintIndex != 1) return -1;
+			return ((ChemicalBucket)stack.getItem()).fluidColor;
+		}, BuiltInRegistries.ITEM.stream()
+				.filter(item -> item instanceof ChemicalBucket)
+				.toArray(ChemicalBucket[]::new));
 
-		PostShaderManager.add(new DreadShader());
-		PostShaderManager.add(new HallucinationShader());
-		PostShaderManager.add(new HazeShader());
-		PostShaderManager.add(new KeenShader());
-		PostShaderManager.add(new RelaxationShader());
-		PostShaderManager.add(new StaggerShader());
-		PostShaderManager.add(new SurgeShader());
-		PostShaderManager.add(new WarpShader());
+		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+			if (tintIndex != 0) return -1;
+			return ((ChemicalFlaskItem)stack.getItem()).fluidColor;
+		}, ALL_FLUIDS.stream()
+				.map(ModFluids.ChemicalFluidSet::flask)
+				.toArray(ChemicalFlaskItem[]::new));
 
-		PostShaderManager.init();
-	}
-
-	private void registerFluids() {
 		for (ModFluids.ChemicalFluidSet fluid : ALL_FLUIDS) {
 			FluidRenderHandlerRegistry.INSTANCE.register(
 					fluid.still(),
@@ -61,18 +63,15 @@ public class SubstanceClient implements ClientModInitializer {
 			);
 		}
 
-		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
-			if (tintIndex != 1) return -1;
+		PostShaderManager.add(new DreadShader());
+		PostShaderManager.add(new HallucinationShader());
+		PostShaderManager.add(new HazeShader());
+		PostShaderManager.add(new KeenShader());
+		PostShaderManager.add(new RelaxationShader());
+		PostShaderManager.add(new StaggerShader());
+		PostShaderManager.add(new SurgeShader());
+		PostShaderManager.add(new WarpShader());
 
-			for (ModFluids.ChemicalFluidSet fluid : ALL_FLUIDS) {
-				if (stack.is(fluid.bucket())) {
-					return fluid.tint();
-				}
-			}
-
-			return -1;
-		}, ALL_FLUIDS.stream()
-				.map(ModFluids.ChemicalFluidSet::bucket)
-				.toArray(net.minecraft.world.item.Item[]::new));
+		PostShaderManager.init();
 	}
 }

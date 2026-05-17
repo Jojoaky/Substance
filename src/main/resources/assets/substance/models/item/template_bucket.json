@@ -2,6 +2,6 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "item/bucket",
-    "layer1": "substance:item/chemical_bucket_overlay"
+    "layer1": "substance:item/overlay_bucket"
   }
 }

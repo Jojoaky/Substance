@@ -83,15 +83,21 @@ public class ModItems {
 
     // --- production ---
     public static final Item TRAY = register(
-            new Item(new FabricItemSettings()),
+            new Item(new FabricItemSettings()
+                    .stacksTo(1)
+            ),
             "tray"
     );
     public static final Item WHITE_OIL_TRAY = register(
-            new Item(new FabricItemSettings()),
+            new Item(new FabricItemSettings()
+                    .stacksTo(1)
+            ),
             "white_oil_tray"
     );
     public static final Item BLUE_OIL_TRAY = register(
-            new Item(new FabricItemSettings()),
+            new Item(new FabricItemSettings()
+                    .stacksTo(1)
+            ),
             "blue_oil_tray"
     );
     public static final Item SCULK_CATALYST_CRYSTAL = register(
@@ -158,35 +164,38 @@ public class ModItems {
 
     public static final Item FLASK = register(
             new Item(new FabricItemSettings()
-                    .maxCount(16)
+                    .stacksTo(16)
             ),
             "flask"
     );
 
     public static final Item GAS_BOTTLE = register(
             new Item(new FabricItemSettings()
-                    .maxCount(16)
+                    .stacksTo(16)
             ),
             "gas_bottle"
     );
 
     public static final Item GAS_BOTTLE_OXYGEN = register(
             new Item(new FabricItemSettings()
-                    .maxCount(16)
+                    .craftRemainder(ModItems.GAS_BOTTLE)
+                    .stacksTo(16)
             ),
             "gas_bottle_oxygen"
     );
 
     public static final Item GAS_BOTTLE_HYDROGEN = register(
             new Item(new FabricItemSettings()
-                    .maxCount(16)
+                    .craftRemainder(ModItems.GAS_BOTTLE)
+                    .stacksTo(16)
             ),
             "gas_bottle_hydrogen"
     );
 
     public static final Item GAS_BOTTLE_NITROGEN = register(
             new Item(new FabricItemSettings()
-                    .maxCount(16)
+                    .craftRemainder(ModItems.GAS_BOTTLE)
+                    .stacksTo(16)
             ),
             "gas_bottle_nitrogen"
     );

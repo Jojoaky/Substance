@@ -33,6 +33,13 @@ public class DataGenEntry implements DataGeneratorEntrypoint {
                     new TextureSlot[0]
             );
 
+    private static final ModelTemplate CHEMICAL_FLASK_TEMPLATE =
+            new ModelTemplate(
+                    Optional.of(Substance.resource("item/template_flask")),
+                    Optional.empty(),
+                    new TextureSlot[0]
+            );
+
     private static class CustomModelProvider extends FabricModelProvider {
 
         private CustomModelProvider(FabricDataOutput output) {
@@ -59,6 +66,10 @@ public class DataGenEntry implements DataGeneratorEntrypoint {
                 itemModelGenerators.generateFlatItem(
                         fluid.bucket(),
                         CHEMICAL_BUCKET_TEMPLATE
+                );
+                itemModelGenerators.generateFlatItem(
+                        fluid.flask(),
+                        CHEMICAL_FLASK_TEMPLATE
                 );
             }
         }

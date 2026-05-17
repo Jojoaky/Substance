@@ -1,13 +1,15 @@
 package jojoaky.substance.chemical_fluid;
 
-import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.FlowingFluid;
 
-public class ChemicalBucket extends BucketItem {
+public class ChemicalFlaskItem extends Item {
     public final int fluidColor;
+    public final FlowingFluid fluid;
 
-    public ChemicalBucket(FlowingFluid fluid, Properties settings, int fluidColor) {
-        super(fluid, settings);
+    public ChemicalFlaskItem(FlowingFluid fluid, Properties settings, int fluidColor) {
+        super(settings);
+        this.fluid = fluid;
         this.fluidColor = fluidColor;
     }
 
