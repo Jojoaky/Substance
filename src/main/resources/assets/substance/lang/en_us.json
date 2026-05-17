@@ -4,8 +4,8 @@
   "item.substance.white_crystals": "White Crystals",
   "item.substance.white_crystals_chili": "Spiced White Crystals",
   "item.substance.blue_crystals": "Blue Crystals",
-  "item.substance.joint": "Joint",
-  "item.substance.thick_joint": "Thick Joint",
+  "item.substance.herbal_roll": "Herbal Roll",
+  "item.substance.thick_herbal_roll": "Thick Herbal Roll",
 
   "item.substance.tray": "Tray",
   "item.substance.blue_oil_tray": "Blue Oil Tray",
@@ -25,8 +25,8 @@
   "item.substance.methylamine_bucket": "Bucket of Methylamine",
   "item.substance.phenylacetone_bucket": "Bucket of Phenylacetone",
   "item.substance.ammonia_bucket": "Bucket of Ammonia",
-  "item.substance.white_crystalline_bucket": "Bucket of White Crystalline Oil",
-  "item.substance.blue_crystalline_bucket": "Bucket of Blue Crystalline Oil",
+  "item.substance.white_crystal_oil_bucket": "Bucket of White Crystal Oil",
+  "item.substance.blue_crystal_oil_bucket": "Bucket of Blue Crystal Oil",
 
   "block.substance.phenylacetic_acid": "Phenylacetic Acid",
   "block.substance.acetic_anhydride": "Acetic Anhydride",
@@ -34,8 +34,8 @@
   "block.substance.methylamine": "Methylamine",
   "block.substance.phenylacetone": "Phenylacetone",
   "block.substance.ammonia": "Ammonia",
-  "block.substance.white_crystalline": "White Crystalline Oil",
-  "block.substance.blue_crystalline": "Blue Crystalline Oil",
+  "block.substance.white_crystal_oil": "White Crystal Oil",
+  "block.substance.blue_crystal_oil": "Blue Crystal Oil",
 
 
   "item.substance.ephedra_bundle": "Ephedra Bundle",

@@ -4,8 +4,8 @@
   "item.substance.white_crystals": "Weiße Kristalle",
   "item.substance.white_crystals_chili": "Gewürzte Weiße Kristalle",
   "item.substance.blue_crystals": "Blaue Kristalle",
-  "item.substance.joint": "Joint",
-  "item.substance.thick_joint": "Dicker Joint",
+  "item.substance.herbal_roll": "Kräuter Rolle",
+  "item.substance.thick_herbal_roll": "Fette Kräuter Rolle",
 
   "item.substance.tray": "Tray",
   "item.substance.blue_oil_tray": "Blaues Öl-Tray",
@@ -25,8 +25,8 @@
   "item.substance.methylamine_bucket": "Eimer Methylamin",
   "item.substance.phenylacetone_bucket": "Eimer Phenylaceton",
   "item.substance.ammonia_bucket": "Eimer Ammoniak",
-  "item.substance.white_crystalline_bucket": "Eimer Weißes Kristallöl",
-  "item.substance.blue_crystalline_bucket": "Eimer Blaues Kristallöl",
+  "item.substance.white_crystal_oil_bucket": "Eimer Weißes Kristallöl",
+  "item.substance.blue_crystal_oil_bucket": "Eimer Blaues Kristallöl",
 
   "block.substance.phenylacetic_acid": "Phenylessigsäure",
   "block.substance.acetic_anhydride": "Essigsäureanhydrid",
@@ -34,8 +34,8 @@
   "block.substance.methylamine": "Methylamin",
   "block.substance.phenylacetone": "Phenylaceton",
   "block.substance.ammonia": "Ammoniak",
-  "block.substance.white_crystalline": "Weißes Kristallöl",
-  "block.substance.blue_crystalline": "Blaues Kristallöl",
+  "block.substance.white_crystal_oil": "Weißes Kristallöl",
+  "block.substance.blue_crystal_oil": "Blaues Kristallöl",
 
   "item.substance.ephedra_bundle": "Ephedra-Bündel",
   "item.substance.ephedra_seeds": "Ephedra-Samen",
