@@ -1,6 +1,6 @@
 {
   "parent": "builtin/entity",
   "textures": {
-    "layer0": "substance:item/thick_herbal_roll"
+    "layer0": "substance:item/herbal_roll"
   }
 }
