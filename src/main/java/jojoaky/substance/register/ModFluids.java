@@ -70,27 +70,20 @@ public class ModFluids {
     public static final Block AMMONIA_BLOCK = ammonia.block;
     public static final Item AMMONIA_BUCKET = ammonia.bucket;
 
-    // White Crystalline Oil
-    public static final ChemicalFluidSet whiteCrystalline = registerChemicalFluid("white_crystalline", 2.0f, 3.8f, 0xFFf8f8f8);
-    public static final FlowingFluid WHITE_CRYSTALLINE = whiteCrystalline.still();
-    public static final FlowingFluid WHITE_CRYSTALLINE_FLOWING = whiteCrystalline.flowing();
-    public static final Block WHITE_CRYSTALLINE_BLOCK = whiteCrystalline.block;
-    public static final Item WHITE_CRYSTALLINE_BUCKET = whiteCrystalline.bucket;
+    // White Crystal Oil
+    public static final ChemicalFluidSet whiteCrystalOil = registerChemicalFluid("white_crystal_oil", 2.0f, 3.8f, 0xFFf8f8f8);
+    public static final FlowingFluid WHITE_CRYSTAL_OIL = whiteCrystalOil.still();
+    public static final FlowingFluid WHITE_CRYSTAL_OIL_FLOWING = whiteCrystalOil.flowing();
+    public static final Block WHITE_CRYSTAL_OIL_BLOCK = whiteCrystalOil.block;
+    public static final Item WHITE_CRYSTAL_OIL_BUCKET = whiteCrystalOil.bucket;
 
-    // Blue Crystalline Oil
-    public static final ChemicalFluidSet blueCrystalline = registerChemicalFluid("blue_crystalline", 2.0f, 4.0f, 0xFF40c0ff);
-    public static final FlowingFluid BLUE_CRYSTALLINE = blueCrystalline.still();
-    public static final FlowingFluid BLUE_CRYSTALLINE_FLOWING = blueCrystalline.flowing();
-    public static final Block BLUE_CRYSTALLINE_BLOCK = blueCrystalline.block;
-    public static final Item BLUE_CRYSTALLINE_BUCKET = blueCrystalline.bucket;
+    // Blue Crystal Oil
+    public static final ChemicalFluidSet blueCrystalOil = registerChemicalFluid("blue_crystal_oil", 2.0f, 4.0f, 0xFF40c0ff);
+    public static final FlowingFluid BLUE_CRYSTAL_OIL = blueCrystalOil.still();
+    public static final FlowingFluid BLUE_CRYSTAL_OIL_FLOWING = blueCrystalOil.flowing();
+    public static final Block BLUE_CRYSTAL_OIL_BLOCK = blueCrystalOil.block;
+    public static final Item BLUE_CRYSTAL_OIL_BUCKET = blueCrystalOil.bucket;
 
-    /**
-     * Registers a complete chemical fluid (still + flowing + block + bucket).
-     *
-     * @param name      basePotion name; produces "acid", "flowing_acid", block "acid"
-     * @param thickness controls flow speed and spread distance (min 1)
-     * @param toxicity  damage per second applied to entities inside the fluid (0 = harmless)
-     */
     public static ChemicalFluidSet registerChemicalFluid(String name, float thickness, float toxicity, int tint) {
         FlowingFluid[] still   = new FlowingFluid[1];
         FlowingFluid[] flowing = new FlowingFluid[1];
