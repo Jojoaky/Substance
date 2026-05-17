@@ -8,7 +8,7 @@
 
 <h1 align="center">Substance</h1>
 
-**Substance** is a fun Minecraft mod that adds various consumable substances like **alcohol**, **tobacco**, **cannabis**-like, and **Breaking Bad** inspired items.
+**Substance** is a fun Minecraft mod that adds various consumable substances like **alcohol**, **smokables**, and **Breaking Bad** inspired items.
 
 ### Disclaimer:
 **This mod is purely fictional and for entertainment only. It is not meant to encourage or promote the use of real-life drugs or illegal substances.**
