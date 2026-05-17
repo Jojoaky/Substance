@@ -64,20 +64,20 @@ public class ModItems {
             "blue_crystals"
     );
 
-    public static final Item JOINT = register(
+    public static final Item HERBAL_ROLL = register(
             new JointItem(new FabricItemSettings()
                     .durability(128)
                     .rarity(Rarity.RARE)
             ),
-            "joint"
+            "herbal_roll"
     );
 
-    public static final Item THICK_JOINT = register(
+    public static final Item THICK_HERBAL_ROLL = register(
             new JointItem(new FabricItemSettings()
                     .durability(256)
                     .rarity(Rarity.EPIC)
             ),
-            "thick_joint"
+            "thick_herbal_roll"
     );
 
 
@@ -157,27 +157,37 @@ public class ModItems {
     );
 
     public static final Item FLASK = register(
-            new Item(new FabricItemSettings()),
+            new Item(new FabricItemSettings()
+                    .maxCount(16)
+            ),
             "flask"
     );
 
     public static final Item GAS_BOTTLE = register(
-            new Item(new FabricItemSettings()),
+            new Item(new FabricItemSettings()
+                    .maxCount(16)
+            ),
             "gas_bottle"
     );
 
     public static final Item GAS_BOTTLE_OXYGEN = register(
-            new Item(new FabricItemSettings()),
+            new Item(new FabricItemSettings()
+                    .maxCount(16)
+            ),
             "gas_bottle_oxygen"
     );
 
     public static final Item GAS_BOTTLE_HYDROGEN = register(
-            new Item(new FabricItemSettings()),
+            new Item(new FabricItemSettings()
+                    .maxCount(16)
+            ),
             "gas_bottle_hydrogen"
     );
 
     public static final Item GAS_BOTTLE_NITROGEN = register(
-            new Item(new FabricItemSettings()),
+            new Item(new FabricItemSettings()
+                    .maxCount(16)
+            ),
             "gas_bottle_nitrogen"
     );
 
@@ -188,8 +198,8 @@ public class ModItems {
                     itemGroup.accept(ModItems.WHITE_CRYSTALS);
                     itemGroup.accept(ModItems.WHITE_CRYSTALS_CHILI);
                     itemGroup.accept(ModItems.BLUE_CRYSTALS);
-                    itemGroup.accept(ModItems.JOINT);
-                    itemGroup.accept(ModItems.THICK_JOINT);
+                    itemGroup.accept(ModItems.HERBAL_ROLL);
+                    itemGroup.accept(ModItems.THICK_HERBAL_ROLL);
 
                     // tools
                     itemGroup.accept(ModItems.TRAY);
