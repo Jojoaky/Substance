@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "fluid": "substance:phenylacetic_acid",
+      "amount": 50
+    },
+    {
+      "fluid": "substance:acetic_anhydride",
+      "amount": 50
+    }
+  ],
+  "results": [
+    {
+      "fluid": "substance:phenylacetone",
+      "amount": 100
+    }
+  ]
+}

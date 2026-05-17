@@ -1,0 +1,44 @@
+{
+	"schemaVersion": 1,
+	"id": "substance",
+	"version": "${version}",
+	"name": "Substance",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/substance/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"jojoaky.substance.Substance"
+		],
+		"client": [
+			"jojoaky.substance.client.SubstanceClient"
+		],
+		"fabric-datagen": [
+			"jojoaky.substance.datagen.DataGenEntry"
+		],
+		"modmenu": [
+			"jojoaky.substance.client.config.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		"substance.mixins.json",
+		{
+			"config": "substance.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.2",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}

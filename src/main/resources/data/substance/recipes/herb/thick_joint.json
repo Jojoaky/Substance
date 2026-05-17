@@ -1,0 +1,17 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "pgggp"
+  ],
+  "key": {
+    "p": {
+      "item": "minecraft:paper"
+    },
+    "g": {
+      "item": "substance:dried_herb_bud"
+    }
+  },
+  "result": {
+    "item": "substance:thick_joint"
+  }
+}

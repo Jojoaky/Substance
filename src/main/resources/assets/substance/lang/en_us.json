@@ -1,0 +1,92 @@
+{
+  "itemGroup.substance": "Substance",
+
+  "item.substance.white_crystals": "White Crystals",
+  "item.substance.white_crystals_chili": "Spiced White Crystals",
+  "item.substance.blue_crystals": "Blue Crystals",
+  "item.substance.joint": "Joint",
+  "item.substance.thick_joint": "Thick Joint",
+
+  "item.substance.tray": "Tray",
+  "item.substance.blue_oil_tray": "Blue Oil Tray",
+  "item.substance.white_oil_tray": "White Oil Tray",
+
+  "item.substance.flask": "Glass Flask",
+  "item.substance.sculk_catalyst_crystal": "Sculk Catalyst Crystal",
+
+  "item.substance.gas_bottle": "Empty Gas Bottle",
+  "item.substance.gas_bottle_oxygen": "Bottle of Oxygen",
+  "item.substance.gas_bottle_hydrogen": "Bottle of Hydrogen",
+  "item.substance.gas_bottle_nitrogen": "Bottle of Nitrogen",
+
+  "item.substance.phenylacetic_acid_bucket": "Bucket of Phenylacetic Acid",
+  "item.substance.acetic_anhydride_bucket": "Bucket of Acetic Anhydride",
+  "item.substance.methanol_bucket": "Bucket of Methanol",
+  "item.substance.methylamine_bucket": "Bucket of Methylamine",
+  "item.substance.phenylacetone_bucket": "Bucket of Phenylacetone",
+  "item.substance.ammonia_bucket": "Bucket of Ammonia",
+  "item.substance.white_crystalline_bucket": "Bucket of White Crystalline Oil",
+  "item.substance.blue_crystalline_bucket": "Bucket of Blue Crystalline Oil",
+
+  "block.substance.phenylacetic_acid": "Phenylacetic Acid",
+  "block.substance.acetic_anhydride": "Acetic Anhydride",
+  "block.substance.methanol": "Methanol",
+  "block.substance.methylamine": "Methylamine",
+  "block.substance.phenylacetone": "Phenylacetone",
+  "block.substance.ammonia": "Ammonia",
+  "block.substance.white_crystalline": "White Crystalline Oil",
+  "block.substance.blue_crystalline": "Blue Crystalline Oil",
+
+
+  "item.substance.ephedra_bundle": "Ephedra Bundle",
+  "item.substance.ephedra_seeds": "Ephedra Seeds",
+  "item.substance.herb_seeds": "Herb Seeds",
+  "item.substance.herb_bud": "Herb Bud",
+  "item.substance.dried_herb_bud": "Dried Herb Bud",
+
+  "item.substance.sudafed_pill": "Decongestant Pills",
+  "item.substance.cyanide": "Cyanide Powder",
+  "item.substance.iodine": "Iodine Crystals",
+  "item.substance.pseudoephedrine": "Pseudoephedrine",
+  "item.substance.white_phosphorus": "White Phosphorus",
+  "item.substance.red_phosphorus": "Red Phosphorus",
+
+  "block.substance.large_herb": "Large Herb",
+  "block.substance.ephedra": "Ephedra",
+
+  "effect.substance.haze": "Haze",
+  "effect.substance.warp": "Warp",
+  "effect.substance.dread": "Dread",
+  "effect.substance.stagger": "Stagger",
+  "effect.substance.keen": "Keen",
+  "effect.substance.relaxation": "Relaxation",
+  "effect.substance.surge": "Surge",
+  "effect.substance.hallucination": "Hallucination",
+
+  "item.minecraft.potion.effect.haze": "Potion of Haze",
+  "item.minecraft.potion.effect.warp": "Potion of Warp",
+  "item.minecraft.potion.effect.dread": "Potion of Dread",
+  "item.minecraft.potion.effect.stagger": "Potion of Stagger",
+  "item.minecraft.potion.effect.keen": "Potion of Keen",
+  "item.minecraft.potion.effect.relaxation": "Potion of Relaxation",
+  "item.minecraft.potion.effect.surge": "Potion of Surge",
+  "item.minecraft.potion.effect.hallucination": "Potion of Hallucination",
+
+  "item.minecraft.splash_potion.effect.haze": "Splash Potion of Haze",
+  "item.minecraft.splash_potion.effect.warp": "Splash Potion of Warp",
+  "item.minecraft.splash_potion.effect.dread": "Splash Potion of Dread",
+  "item.minecraft.splash_potion.effect.stagger": "Splash Potion of Stagger",
+  "item.minecraft.splash_potion.effect.keen": "Splash Potion of Keen",
+  "item.minecraft.splash_potion.effect.relaxation": "Splash Potion of Relaxation",
+  "item.minecraft.splash_potion.effect.surge": "Splash Potion of Surge",
+  "item.minecraft.splash_potion.effect.hallucination": "Splash Potion of Hallucination",
+
+  "item.minecraft.lingering_potion.effect.haze": "Lingering Potion of Haze",
+  "item.minecraft.lingering_potion.effect.warp": "Lingering Potion of Warp",
+  "item.minecraft.lingering_potion.effect.dread": "Lingering Potion of Dread",
+  "item.minecraft.lingering_potion.effect.stagger": "Lingering Potion of Stagger",
+  "item.minecraft.lingering_potion.effect.keen": "Lingering Potion of Keen",
+  "item.minecraft.lingering_potion.effect.relaxation": "Lingering Potion of Relaxation",
+  "item.minecraft.lingering_potion.effect.surge": "Lingering Potion of Surge",
+  "item.minecraft.lingering_potion.effect.hallucination": "Lingering Potion of Hallucination"
+}

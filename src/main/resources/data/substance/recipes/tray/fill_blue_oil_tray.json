@@ -1,0 +1,17 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "substance:tray"
+    },
+    {
+      "amount": 5000,
+      "fluid": "substance:blue_crystalline"
+    }
+  ],
+  "results": [
+    {
+      "item": "substance:blue_oil_tray"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "category": "misc",
+  "ingredient": {
+    "item": "substance:herb_bud"
+  },
+  "result": "substance:dried_herb_bud",
+  "cookingtime": 150
+}

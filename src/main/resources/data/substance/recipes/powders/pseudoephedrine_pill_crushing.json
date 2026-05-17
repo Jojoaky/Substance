@@ -1,0 +1,19 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "substance:sudafed_pill"
+    }
+  ],
+  "processingTime": 250,
+  "results": [
+    {
+      "chance": 1.0,
+      "item": "substance:pseudoephedrine"
+    },
+    {
+      "chance": 0.6,
+      "item": "substance:pseudoephedrine"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "substance:phenylacetic_acid",
+    "substance:acetic_anhydride",
+    "substance:methanol",
+    "substance:methylamine",
+    "substance:phenylacetone",
+    "substance:ammonia",
+    "substance:white_crystalline",
+    "substance:blue_crystalline"
+  ]
+}

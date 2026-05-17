@@ -1,0 +1,26 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "minecraft:coals"
+    },
+    {
+      "item": "substance:gas_bottle_hydrogen"
+    },
+    {
+      "item": "substance:sculk_catalyst_crystal"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "substance:methanol",
+      "amount": 100
+    },
+    {
+      "item": "substance:sculk_catalyst_crystal"
+    },
+    {
+      "item": "substance:gas_bottle"
+    }
+  ]
+}

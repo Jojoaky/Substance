@@ -1,0 +1,25 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "fluid": "substance:ammonia",
+      "amount": 5
+    },
+    {
+      "fluid": "substance:methanol",
+      "amount": 5
+    },
+    {
+      "item": "substance:sculk_catalyst_crystal"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "substance:methylamine",
+      "amount": 10
+    },
+    {
+      "item": "substance:sculk_catalyst_crystal"
+    }
+  ]
+}

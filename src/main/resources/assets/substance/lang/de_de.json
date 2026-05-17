@@ -1,0 +1,64 @@
+{
+  "itemGroup.substance": "Substanzen",
+
+  "item.substance.white_crystals": "Weiße Kristalle",
+  "item.substance.white_crystals_chili": "Gewürzte Weiße Kristalle",
+  "item.substance.blue_crystals": "Blaue Kristalle",
+  "item.substance.joint": "Joint",
+  "item.substance.thick_joint": "Dicker Joint",
+
+  "item.substance.tray": "Tray",
+  "item.substance.blue_oil_tray": "Blaues Öl-Tray",
+  "item.substance.white_oil_tray": "Weißes Öl-Tray",
+
+  "item.substance.flask": "Glasflasche",
+  "item.substance.sculk_catalyst_crystal": "Sculk-Katalysator-Kristall",
+
+  "item.substance.gas_bottle": "Leere Gasflasche",
+  "item.substance.gas_bottle_oxygen": "Sauerstoffflasche",
+  "item.substance.gas_bottle_hydrogen": "Wasserstoffflasche",
+  "item.substance.gas_bottle_nitrogen": "Stickstoffflasche",
+
+  "item.substance.phenylacetic_acid_bucket": "Eimer Phenylessigsäure",
+  "item.substance.acetic_anhydride_bucket": "Eimer Essigsäureanhydrid",
+  "item.substance.methanol_bucket": "Eimer Methanol",
+  "item.substance.methylamine_bucket": "Eimer Methylamin",
+  "item.substance.phenylacetone_bucket": "Eimer Phenylaceton",
+  "item.substance.ammonia_bucket": "Eimer Ammoniak",
+  "item.substance.white_crystalline_bucket": "Eimer Weißes Kristallöl",
+  "item.substance.blue_crystalline_bucket": "Eimer Blaues Kristallöl",
+
+  "block.substance.phenylacetic_acid": "Phenylessigsäure",
+  "block.substance.acetic_anhydride": "Essigsäureanhydrid",
+  "block.substance.methanol": "Methanol",
+  "block.substance.methylamine": "Methylamin",
+  "block.substance.phenylacetone": "Phenylaceton",
+  "block.substance.ammonia": "Ammoniak",
+  "block.substance.white_crystalline": "Weißes Kristallöl",
+  "block.substance.blue_crystalline": "Blaues Kristallöl",
+
+  "item.substance.ephedra_bundle": "Ephedra-Bündel",
+  "item.substance.ephedra_seeds": "Ephedra-Samen",
+  "item.substance.herb_seeds": "Kräutersamen",
+  "item.substance.herb_bud": "Kräuterknospe",
+  "item.substance.dried_herb_bud": "Getrocknete Kräuterknospe",
+
+  "item.substance.sudafed_pill": "Abschwellende Tabletten",
+  "item.substance.cyanide": "Zyankalipulver",
+  "item.substance.iodine": "Iodkristalle",
+  "item.substance.pseudoephedrine": "Pseudoephedrin",
+  "item.substance.white_phosphorus": "Weißer Phosphor",
+  "item.substance.red_phosphorus": "Roter Phosphor",
+
+  "block.substance.large_herb": "Große Kräuterpflanze",
+  "block.substance.ephedra": "Ephedra",
+
+  "effect.substance.haze": "Dunst",
+  "effect.substance.warp": "Verzerrung",
+  "effect.substance.dread": "Schrecken",
+  "effect.substance.stagger": "Taumeln",
+  "effect.substance.keen": "Schärfe",
+  "effect.substance.relaxation": "Entspannung",
+  "effect.substance.surge": "Energieschub",
+  "effect.substance.hallucination": "Halluzination"
+}

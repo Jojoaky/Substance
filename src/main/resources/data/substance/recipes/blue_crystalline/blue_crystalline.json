@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "fluid": "substance:phenylacetone",
+      "amount": 100
+    },
+    {
+      "fluid": "substance:methylamine",
+      "amount": 100
+    }
+  ],
+  "results": [
+    {
+      "fluid": "substance:blue_crystalline",
+      "amount": 200
+    }
+  ]
+}

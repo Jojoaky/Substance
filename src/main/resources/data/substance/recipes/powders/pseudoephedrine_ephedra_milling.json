@@ -1,0 +1,19 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "substance:ephedra_bundle"
+    }
+  ],
+  "processingTime": 250,
+  "results": [
+    {
+      "chance": 0.7,
+      "item": "substance:pseudoephedrine"
+    },
+    {
+      "chance": 0.4,
+      "item": "substance:ephedra_seeds"
+    }
+  ]
+}

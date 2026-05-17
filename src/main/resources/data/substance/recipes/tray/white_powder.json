@@ -1,0 +1,16 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "substance:white_oil_tray"
+    }
+  ],
+  "results": [
+    {
+      "item": "substance:white_crystals"
+    },
+    {
+      "item": "substance:tray"
+    }
+  ]
+}

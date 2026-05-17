@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "substance:gas_bottle_nitrogen"
+    },
+    {
+      "item": "substance:gas_bottle_hydrogen"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "substance:ammonia",
+      "amount": 100
+    },
+    {
+      "item": "substance:gas_bottle",
+      "count": 2
+    }
+  ],
+  "heatRequirement": "heated"
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "pgp"
+  ],
+  "key": {
+    "p": {
+      "item": "minecraft:paper"
+    },
+    "g": {
+      "item": "substance:dried_herb_bud"
+    }
+  },
+  "result": {
+    "item": "substance:joint"
+  }
+}

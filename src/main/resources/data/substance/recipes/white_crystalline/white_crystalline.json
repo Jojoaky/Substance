@@ -1,0 +1,25 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "substance:pseudoephedrine"
+    },
+    {
+      "item": "substance:red_phosphorus"
+    },
+    {
+      "item": "substance:iodine"
+    },
+    {
+      "fluid": "minecraft:water",
+      "amount": 200
+    }
+  ],
+  "results": [
+    {
+      "fluid": "substance:white_crystalline",
+      "amount": 200
+    }
+  ],
+  "heatRequirement": "heated"
+}

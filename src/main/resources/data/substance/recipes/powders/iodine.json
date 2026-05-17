@@ -1,0 +1,19 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "minecraft:dried_kelp"
+    }
+  ],
+  "results": [
+    {
+      "chance": 1.0,
+      "item": "substance:iodine"
+    },
+    {
+      "chance": 0.25,
+      "count": 2,
+      "item": "substance:iodine"
+    }
+  ]
+}

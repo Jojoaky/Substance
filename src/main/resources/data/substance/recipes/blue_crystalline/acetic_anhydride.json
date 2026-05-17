@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "substance:gas_bottle_oxygen"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "substance:acetic_anhydride",
+      "amount": 50
+    },
+    {
+      "item": "substance:gas_bottle"
+    }
+  ]
+}
