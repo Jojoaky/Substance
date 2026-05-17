@@ -1,9 +1,43 @@
-# Substance
+<p align="center">
+  <img
+    src="https://github.com/Jojoaky/Substance/blob/master/.idea/icon.png?raw=true"
+    width="200"
+    style="image-rendering: pixelated;"
+  />
+</p>
 
-## Setup
+<h1 align="center">Substance</h1>
 
-For setup instructions, please see the [Fabric Documentation page](https://docs.fabricmc.net/develop/getting-started/creating-a-project#setting-up) related to the IDE that you are using.
+**Substance** is a fun Minecraft mod that adds various consumable substances like **alcohol**, **tobacco**, **cannabis**-like, and **Breaking Bad** inspired items.
 
-## License
+### Disclaimer:
+**This mod is purely fictional and for entertainment only. It is not meant to encourage or promote the use of real-life drugs or illegal substances.**
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+---
+
+## Features
+
+**TODO:** Create short tutorial and summary of features
+
+Substance works as a standalone mod, but gains additional features when used with:
+
+- **Create**  
+  Enables advanced crafting and automation. Some recipes are replaced for better production chains.
+
+- **Farmer's Delight**  
+  Adds food-related crafting recipes and expands consumable variety.
+
+---
+
+## Requirements
+### Minecraft Versions
+| Version  | Fabric  | Forge   |
+| -------- | ------- | ------- |
+| 1.20.1   | ✅      | ❌     |
+| 1.21.1   |         |         |
+| latest   |         |         |
+
+> Support for newer versions (including 1.21.1 and beyond) is planned but not guaranteed.
+
+### Dependencies:
+This mod requires an appropriate version of [YACL](https://modrinth.com/mod/yacl) to be installed.
