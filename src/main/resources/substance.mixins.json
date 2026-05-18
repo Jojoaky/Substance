@@ -1,6 +1,7 @@
 {
 	"required": true,
 	"package": "jojoaky.substance.mixin",
+	"plugin": "jojoaky.substance.ConditionalMixinPlugin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"HarvesterMovementBehaviourMixin"
