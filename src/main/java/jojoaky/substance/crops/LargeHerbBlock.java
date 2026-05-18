@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class LargeHerbBlock extends DoublePlantBlock implements BonemealableBlock {
 
@@ -61,35 +62,38 @@ public class LargeHerbBlock extends DoublePlantBlock implements BonemealableBloc
         }
     }
 
+    public ItemStack cut(BlockState state, Level level, BlockPos pos) {
+        int age = state.getValue(AGE);
+
+        if (age < MAX_AGE) return ItemStack.EMPTY;
+
+        setAge(level, pos, state, AGE_AFTER_HARVEST);
+
+        float pitch = 0.9F + level.random.nextFloat() * 0.2F;
+        level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, pitch);
+
+        int count = 1 + level.random.nextInt(3);
+        return new ItemStack(ModItems.HERB_BUD, count);
+    }
+
     @Override
     public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos,
                                           Player player, InteractionHand hand, BlockHitResult hit) {
         int age = state.getValue(AGE);
+        ItemStack stack = player.getItemInHand(hand);
 
-        if (age < MAX_AGE) {
+        if (age < MAX_AGE || !stack.is(Items.SHEARS)) {
             return InteractionResult.PASS;
         }
 
-        ItemStack stack = player.getItemInHand(hand);
-        if (stack.is(Items.SHEARS)) {
-            if (!level.isClientSide) {
-                int count = 1 + level.random.nextInt(3);
-                popResource(level, pos, new ItemStack(ModItems.HERB_BUD, count));
+        ItemStack result = cut(state, level, pos);
 
-                setAge(level, pos, state, AGE_AFTER_HARVEST);
+        stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+        level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
 
-                stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+        popResource(level, pos, result);
 
-                float pitch = 0.9F + level.random.nextFloat() * 0.2F;
-                level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, pitch);
-
-                level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-            }
-
-            return InteractionResult.sidedSuccess(level.isClientSide);
-        }
-
-        return InteractionResult.PASS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
