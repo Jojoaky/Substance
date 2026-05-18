@@ -1,5 +1,6 @@
 package jojoaky.substance.consumable;
 
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -61,6 +62,10 @@ abstract public class ConsumableItem extends Item {
             if (entity instanceof Player) {
                 ((Player) entity).getCooldowns().addCooldown(this, cooldown);
             }
+        }
+
+        if (entity instanceof Player player) {
+            player.awardStat(Stats.ITEM_USED.get(this));
         }
 
         onStopConsuming(stack, level, entity, useDuration);
