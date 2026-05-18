@@ -12,6 +12,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 
 public class ModItems {
@@ -100,8 +101,14 @@ public class ModItems {
             ),
             "blue_oil_tray"
     );
+
     public static final Item SCULK_CATALYST_CRYSTAL = register(
-            new Item(new FabricItemSettings()),
+            new Item(new FabricItemSettings()) {
+                @Override
+                public ItemStack getRecipeRemainder(ItemStack stack) {
+                    return stack; // returns itself
+                }
+            },
             "sculk_catalyst_crystal"
     );
 

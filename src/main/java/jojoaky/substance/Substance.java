@@ -22,6 +22,7 @@ public class Substance implements ModInitializer {
 		ModCreativeTab.initialize();
 		ModItems.initialize();
 		ModBlocks.initialize();
+		ModFlasks.initialize();
 		ModFluids.initialize();
 		ModEffects.initialize();
 		ModTags.initialize();

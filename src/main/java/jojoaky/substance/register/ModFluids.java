@@ -2,7 +2,7 @@ package jojoaky.substance.register;
 
 import jojoaky.substance.Substance;
 import jojoaky.substance.chemical_fluid.ChemicalBucket;
-import jojoaky.substance.chemical_fluid.ChemicalFlaskItem;
+import jojoaky.substance.chemical_fluid.FlaskItem;
 import jojoaky.substance.chemical_fluid.ChemicalFluid;
 import jojoaky.substance.chemical_fluid.ChemicalFluidBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -25,7 +25,7 @@ public class ModFluids {
             FlowingFluid flowing,
             Block block,
             ChemicalBucket bucket,
-            ChemicalFlaskItem flask,
+            FlaskItem flask,
             int tint
     ) {}
     public static final List<ChemicalFluidSet> ALL_FLUIDS = new ArrayList<ChemicalFluidSet>();
@@ -36,7 +36,7 @@ public class ModFluids {
     public static final FlowingFluid PHENYLACETIC_ACID_FLOWING = phenylaceticAcid.flowing();
     public static final Block PHENYLACETIC_ACID_BLOCK = phenylaceticAcid.block;
     public static final Item PHENYLACETIC_ACID_BUCKET = phenylaceticAcid.bucket;
-    public static final ChemicalFlaskItem PHENYLACETIC_ACID_FLASK = phenylaceticAcid.flask;
+    public static final FlaskItem PHENYLACETIC_ACID_FLASK = phenylaceticAcid.flask;
 
     // Acetic Anhydride
     public static final ChemicalFluidSet aceticAnhydride = registerChemicalFluid("acetic_anhydride", 1.0f, 2.5f, 0xFFf5e8c7);
@@ -100,7 +100,7 @@ public class ModFluids {
         FlowingFluid[] flowing = new FlowingFluid[1];
         Block[] block = new Block[1];
         ChemicalBucket[] bucket = new ChemicalBucket[1];
-        ChemicalFlaskItem[] flask  = new ChemicalFlaskItem[1];
+        FlaskItem[] flask  = new FlaskItem[1];
 
         // Look up the bucket lazily so ModItems can be initialised independently
         still[0] = register(name,
@@ -121,7 +121,7 @@ public class ModFluids {
 
         bucket[0] = registerChemicalBucket(name, still[0], tint);
 
-        flask[0] = registerChemicalFlask(name, still[0], tint);
+        flask[0] = ModFlasks.registerForChemicalFluid(name, still[0], block[0], tint);
 
         ChemicalFluidSet set =
                 new ChemicalFluidSet(still[0], flowing[0], block[0], bucket[0], flask[0], tint);
@@ -150,20 +150,6 @@ public class ModFluids {
         );
     }
 
-    private static ChemicalFlaskItem registerChemicalFlask(String name, FlowingFluid fluid, int color) {
-        return Registry.register(
-                BuiltInRegistries.ITEM,
-                Substance.resource(name + "_flask"),
-                new ChemicalFlaskItem(
-                        fluid,
-                        new Item.Properties()
-                                .craftRemainder(ModItems.FLASK)
-                                .stacksTo(16),
-                        color
-                )
-        );
-    }
-
     public static void initialize() {
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES)
                 .register(entries -> {
@@ -176,9 +162,6 @@ public class ModFluids {
                 .register(entries -> {
                     for (ChemicalFluidSet fluid : ALL_FLUIDS) {
                         entries.accept(fluid.bucket);
-                    }
-                    for (ChemicalFluidSet fluid : ALL_FLUIDS) {
-                        entries.accept(fluid.flask);
                     }
                 });
     }
