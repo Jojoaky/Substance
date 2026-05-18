@@ -67,14 +67,17 @@ public class ModFlasks {
     }
 
     public static void initialize() {
-        CreateCompat.initialize();
+        //CreateCompat.initialize();
 
         CauldronInteraction.WATER.put(ModItems.FLASK, (state, level, pos, player, hand, stack) -> {
-            int lvl = state.getValue(LayeredCauldronBlock.LEVEL); // 1–3
+            int lvl = state.getValue(LayeredCauldronBlock.LEVEL);
             if (lvl > 0 && !level.isClientSide) {
-                stack.shrink(1);
-                if (stack.getCount() == 0) player.setItemInHand(hand, new ItemStack(WATER_FLASK));
-                else player.addItem(new ItemStack(WATER_FLASK));
+
+                if (!player.isCreative()) {
+                    stack.shrink(1);
+                    if (stack.getCount() == 0) player.setItemInHand(hand, new ItemStack(WATER_FLASK));
+                    else player.addItem(new ItemStack(WATER_FLASK));
+                }
 
                 LayeredCauldronBlock.lowerFillLevel(state, level, pos);
 
@@ -87,9 +90,12 @@ public class ModFlasks {
         CauldronInteraction.WATER.put(WATER_FLASK, (state, level, pos, player, hand, stack) -> {
             int lvl = state.getValue(LayeredCauldronBlock.LEVEL);
             if (lvl < LayeredCauldronBlock.MAX_FILL_LEVEL && !level.isClientSide) {
-                stack.shrink(1);
-                if (stack.getCount() == 0) player.setItemInHand(hand, new ItemStack(ModItems.FLASK));
-                else player.addItem(new ItemStack(ModItems.FLASK));
+
+                if (!player.isCreative()) {
+                    stack.shrink(1);
+                    if (stack.getCount() == 0) player.setItemInHand(hand, new ItemStack(ModItems.FLASK));
+                    else player.addItem(new ItemStack(ModItems.FLASK));
+                }
 
                 int newValue = state.getValue(LayeredCauldronBlock.LEVEL) + 1;
                 BlockState newState = state.setValue(LayeredCauldronBlock.LEVEL, newValue);
@@ -102,9 +108,12 @@ public class ModFlasks {
 
         CauldronInteraction.EMPTY.put(WATER_FLASK, (state, level, pos, player, hand, stack) -> {
             if (!level.isClientSide) {
-                stack.shrink(1);
-                if (stack.getCount() == 0) player.setItemInHand(hand, new ItemStack(ModItems.FLASK));
-                else player.addItem(new ItemStack(ModItems.FLASK));
+
+                if (!player.isCreative()) {
+                    stack.shrink(1);
+                    if (stack.getCount() == 0) player.setItemInHand(hand, new ItemStack(ModItems.FLASK));
+                    else player.addItem(new ItemStack(ModItems.FLASK));
+                }
 
                 level.setBlockAndUpdate(pos, Blocks.WATER_CAULDRON.defaultBlockState()
                         .setValue(LayeredCauldronBlock.LEVEL, 1));
@@ -145,6 +154,8 @@ public class ModFlasks {
         return (FlowingFluid) fluid;
     }
 
+
+    // Currently not used
     public static final class CreateCompat {
         public static @Nullable FlaskItem HONEY_FLASK;
         public static @Nullable FlaskItem CHOCOLATE_FLASK;

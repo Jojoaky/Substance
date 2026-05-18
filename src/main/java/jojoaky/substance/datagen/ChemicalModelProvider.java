@@ -22,15 +22,13 @@ public class ChemicalModelProvider extends FabricModelProvider {
     private static final ModelTemplate CHEMICAL_BUCKET_TEMPLATE =
             new ModelTemplate(
                     Optional.of(Substance.resource("item/template_bucket")),
-                    Optional.empty(),
-                    new TextureSlot[0]
+                    Optional.empty()
             );
 
     private static final ModelTemplate CHEMICAL_FLASK_TEMPLATE =
             new ModelTemplate(
                     Optional.of(Substance.resource("item/template_flask")),
-                    Optional.empty(),
-                    new TextureSlot[0]
+                    Optional.empty()
             );
 
     public ChemicalModelProvider(FabricDataOutput output) {
@@ -40,7 +38,6 @@ public class ChemicalModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockModelGenerators) {
         for (ModFluids.ChemicalFluidSet fluid : ModFluids.ALL_FLUIDS) {
-            ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(fluid.block());
             blockModelGenerators.blockStateOutput.accept(
                     MultiVariantGenerator.multiVariant(
                             fluid.block(),

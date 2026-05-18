@@ -29,7 +29,7 @@ public class ModFluids {
             FlaskItem flask,
             int tint
     ) {}
-    public static final List<ChemicalFluidSet> ALL_FLUIDS = new ArrayList<ChemicalFluidSet>();
+    public static final List<ChemicalFluidSet> ALL_FLUIDS = new ArrayList<>();
 
     // Phenylacetic Acid
     public static final ChemicalFluidSet phenylaceticAcid = registerChemicalFluid("phenylacetic_acid", 1.0f, 1.2f, 0xFFe8d9b0);

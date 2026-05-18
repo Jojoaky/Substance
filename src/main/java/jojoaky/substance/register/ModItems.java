@@ -2,6 +2,7 @@ package jojoaky.substance.register;
 
 import jojoaky.substance.Substance;
 import jojoaky.substance.consumable.JointItem;
+import jojoaky.substance.flask.EmptyFlaskItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
@@ -170,7 +171,7 @@ public class ModItems {
     );
 
     public static final Item FLASK = register(
-            new Item(new FabricItemSettings()
+            new EmptyFlaskItem(new FabricItemSettings()
                     .stacksTo(16)
             ),
             "flask"
