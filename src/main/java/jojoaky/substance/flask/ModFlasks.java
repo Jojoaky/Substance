@@ -1,9 +1,13 @@
-package jojoaky.substance.register;
+package jojoaky.substance.flask;
 
 import jojoaky.substance.Substance;
-import jojoaky.substance.chemical_fluid.FlaskItem;
+import jojoaky.substance.register.ModCreativeTab;
+import jojoaky.substance.register.ModItems;
+
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.loader.api.FabricLoader;
+
 import net.minecraft.core.Registry;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -19,6 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluids;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -62,7 +67,7 @@ public class ModFlasks {
     }
 
     public static void initialize() {
-        //CreateCompat.initialize();
+        CreateCompat.initialize();
 
         CauldronInteraction.WATER.put(ModItems.FLASK, (state, level, pos, player, hand, stack) -> {
             int lvl = state.getValue(LayeredCauldronBlock.LEVEL); // 1–3
@@ -107,6 +112,19 @@ public class ModFlasks {
             }
             return InteractionResult.sidedSuccess(level.isClientSide);
         });
+
+
+        FluidStorage.ITEM.registerForItems(
+                (itemStack, context) -> new EmptyFlaskFluidStorage(context),
+                ModItems.FLASK
+        );
+
+        for (FlaskEntry entry : ALL_FLASK_ENTRIES) {
+            FluidStorage.ITEM.registerForItems(
+                    (itemStack, context) -> new FullFlaskFluidStorage(context, entry),
+                    entry.flask()
+            );
+        }
 
         ItemGroupEvents.modifyEntriesEvent(ModCreativeTab.SUSPICIOUS_ITEM_GROUP_KEY)
                 .register(entries -> {

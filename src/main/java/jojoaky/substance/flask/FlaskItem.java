@@ -1,4 +1,4 @@
-package jojoaky.substance.chemical_fluid;
+package jojoaky.substance.flask;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.FlowingFluid;

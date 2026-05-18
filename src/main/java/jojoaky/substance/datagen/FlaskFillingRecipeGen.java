@@ -1,8 +1,7 @@
 package jojoaky.substance.datagen;
 
 import com.simibubi.create.api.data.recipe.FillingRecipeGen;
-import jojoaky.substance.register.ModFlasks;
-import jojoaky.substance.register.ModFluids;
+import jojoaky.substance.flask.ModFlasks;
 import jojoaky.substance.register.ModItems;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.core.registries.BuiltInRegistries;

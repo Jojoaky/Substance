@@ -1,5 +1,6 @@
 package jojoaky.substance;
 
+import jojoaky.substance.flask.ModFlasks;
 import jojoaky.substance.register.*;
 import net.fabricmc.api.ModInitializer;
 

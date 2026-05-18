@@ -22,7 +22,7 @@
 			"jojoaky.substance.client.SubstanceClient"
 		],
 		"fabric-datagen": [
-			"jojoaky.substance.datagen.DataGenEntry"
+			"jojoaky.substance.datagen.DataGen"
 		],
 		"modmenu": [
 			"jojoaky.substance.client.config.ModMenuIntegration"

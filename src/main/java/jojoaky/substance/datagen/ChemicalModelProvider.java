@@ -1,7 +1,7 @@
 package jojoaky.substance.datagen;
 
 import jojoaky.substance.Substance;
-import jojoaky.substance.register.ModFlasks;
+import jojoaky.substance.flask.ModFlasks;
 import jojoaky.substance.register.ModFluids;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;

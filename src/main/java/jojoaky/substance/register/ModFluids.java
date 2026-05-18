@@ -2,9 +2,10 @@ package jojoaky.substance.register;
 
 import jojoaky.substance.Substance;
 import jojoaky.substance.chemical_fluid.ChemicalBucket;
-import jojoaky.substance.chemical_fluid.FlaskItem;
+import jojoaky.substance.flask.FlaskItem;
 import jojoaky.substance.chemical_fluid.ChemicalFluid;
 import jojoaky.substance.chemical_fluid.ChemicalFluidBlock;
+import jojoaky.substance.flask.ModFlasks;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
