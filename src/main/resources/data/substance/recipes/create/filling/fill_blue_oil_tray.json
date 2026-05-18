@@ -13,5 +13,11 @@
     {
       "item": "substance:blue_oil_tray"
     }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["create"]
+    }
   ]
 }

@@ -12,11 +12,13 @@
     {
       "fluid": "substance:ammonia",
       "amount": 250
-    },
-    {
-      "item": "substance:gas_bottle",
-      "count": 2
     }
   ],
-  "heatRequirement": "heated"
+  "heatRequirement": "heated",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["create"]
+    }
+  ]
 }

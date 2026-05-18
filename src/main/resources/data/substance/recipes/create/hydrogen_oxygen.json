@@ -21,9 +21,12 @@
     },
     {
       "item": "substance:gas_bottle_hydrogen"
-    },
+    }
+  ],
+  "fabric:load_conditions": [
     {
-      "item": "substance:sculk_catalyst_crystal"
+      "condition": "fabric:all_mods_loaded",
+      "values": ["create"]
     }
   ]
 }

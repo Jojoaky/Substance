@@ -15,12 +15,12 @@
     {
       "fluid": "substance:methanol",
       "amount": 250
-    },
+    }
+  ],
+  "fabric:load_conditions": [
     {
-      "item": "substance:sculk_catalyst_crystal"
-    },
-    {
-      "item": "substance:gas_bottle"
+      "condition": "fabric:all_mods_loaded",
+      "values": ["create"]
     }
   ]
 }

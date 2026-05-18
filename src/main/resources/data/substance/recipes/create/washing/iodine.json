@@ -15,5 +15,11 @@
       "count": 2,
       "item": "substance:iodine"
     }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["create"]
+    }
   ]
 }

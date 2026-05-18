@@ -12,5 +12,11 @@
     {
       "item": "substance:gas_bottle_nitrogen"
     }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["create"]
+    }
   ]
 }
