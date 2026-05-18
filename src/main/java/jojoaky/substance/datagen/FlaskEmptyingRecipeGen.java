@@ -22,7 +22,7 @@ public class FlaskEmptyingRecipeGen extends EmptyingRecipeGen {
         return create(name + "_flask_emptying", b -> b
                 .require(flaskEntry.flask())
                 .output(flaskEntry.still(), FluidConstants.BOTTLE)
-                .output(ModItems.FLASK)
+                .output(ModFlasks.EMPTY_FLASK)
                 .whenModLoaded(Create.ID)
         );
     }

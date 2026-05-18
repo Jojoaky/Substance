@@ -4,6 +4,7 @@ import jojoaky.substance.Substance;
 import jojoaky.substance.register.ModCreativeTab;
 import jojoaky.substance.register.ModItems;
 
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.loader.api.FabricLoader;
@@ -12,6 +13,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
@@ -29,6 +32,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jojoaky.substance.register.ModItems.register;
+
 public class ModFlasks {
 
     public record FlaskEntry(
@@ -38,10 +43,17 @@ public class ModFlasks {
             int tint
     ) {}
 
+    public static final Item EMPTY_FLASK = register(
+            new EmptyFlaskItem(new FabricItemSettings()
+                    .stacksTo(16)
+            ),
+            "flask"
+    );
+
     public static final List<FlaskEntry> ALL_FLASK_ENTRIES = new ArrayList<>();
 
-    public static final FlaskItem WATER_FLASK = registerFlask("water", Fluids.WATER, Blocks.WATER, 0xFF3F76E4);
-    //public static final ChemicalFlaskItem LAVA_FLASK  = registerFlask("lava",  Fluids.LAVA,  Blocks.LAVA,  0xFFFF6600);
+    public static final FlaskItem WATER_FLASK = registerFlask("water", Fluids.WATER, Blocks.WATER, 0xFF4F96F4);
+    public static final FlaskItem LAVA_FLASK  = registerFlask("lava",  Fluids.LAVA,  Blocks.LAVA,  0xFFFF6600);
 
     public static FlaskItem registerForChemicalFluid(
             String name,
@@ -57,19 +69,26 @@ public class ModFlasks {
                 BuiltInRegistries.ITEM,
                 Substance.resource(name + "_flask"),
                 new FlaskItem(still, new Item.Properties()
-                        .craftRemainder(ModItems.FLASK)
+                        .craftRemainder(EMPTY_FLASK)
                         .stacksTo(16), tint)
         );
 
-        ALL_FLASK_ENTRIES.add(new FlaskEntry(still, flask, block, tint));
+        FlaskEntry entry = new FlaskEntry(still, flask, block, tint);
+
+        ALL_FLASK_ENTRIES.add(entry);
+
+        FluidStorage.ITEM.registerForItems(
+                (itemStack, context) -> new FullFlaskFluidStorage(context, entry),
+                flask
+        );
 
         return flask;
     }
 
     public static void initialize() {
-        //CreateCompat.initialize();
+        CreateCompat.initialize();
 
-        CauldronInteraction.WATER.put(ModItems.FLASK, (state, level, pos, player, hand, stack) -> {
+        CauldronInteraction.WATER.put(EMPTY_FLASK, (state, level, pos, player, hand, stack) -> {
             int lvl = state.getValue(LayeredCauldronBlock.LEVEL);
             if (lvl > 0 && !level.isClientSide) {
 
@@ -81,8 +100,10 @@ public class ModFlasks {
 
                 LayeredCauldronBlock.lowerFillLevel(state, level, pos);
 
-                player.awardStat(Stats.USE_CAULDRON);
+                level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_EMPTY, SoundSource.NEUTRAL, 1.0F, 1.0F);
                 level.gameEvent(null, GameEvent.FLUID_PICKUP, pos);
+
+                player.awardStat(Stats.USE_CAULDRON);
             }
             return InteractionResult.sidedSuccess(level.isClientSide);
         });
@@ -93,15 +114,18 @@ public class ModFlasks {
 
                 if (!player.isCreative()) {
                     stack.shrink(1);
-                    if (stack.getCount() == 0) player.setItemInHand(hand, new ItemStack(ModItems.FLASK));
-                    else player.addItem(new ItemStack(ModItems.FLASK));
+                    if (stack.getCount() == 0) player.setItemInHand(hand, new ItemStack(EMPTY_FLASK));
+                    else player.addItem(new ItemStack(EMPTY_FLASK));
                 }
 
                 int newValue = state.getValue(LayeredCauldronBlock.LEVEL) + 1;
                 BlockState newState = state.setValue(LayeredCauldronBlock.LEVEL, newValue);
-
                 level.setBlockAndUpdate(pos, newState);
+
+                level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
                 level.gameEvent(null, GameEvent.FLUID_PLACE, pos);
+
+                player.awardStat(Stats.USE_CAULDRON);
             }
             return InteractionResult.sidedSuccess(level.isClientSide);
         });
@@ -111,13 +135,17 @@ public class ModFlasks {
 
                 if (!player.isCreative()) {
                     stack.shrink(1);
-                    if (stack.getCount() == 0) player.setItemInHand(hand, new ItemStack(ModItems.FLASK));
-                    else player.addItem(new ItemStack(ModItems.FLASK));
+                    if (stack.getCount() == 0) player.setItemInHand(hand, new ItemStack(EMPTY_FLASK));
+                    else player.addItem(new ItemStack(EMPTY_FLASK));
                 }
 
-                level.setBlockAndUpdate(pos, Blocks.WATER_CAULDRON.defaultBlockState()
-                        .setValue(LayeredCauldronBlock.LEVEL, 1));
+                BlockState newState = Blocks.WATER_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 1);
+                level.setBlockAndUpdate(pos, newState);
+
+                level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
                 level.gameEvent(null, GameEvent.FLUID_PLACE, pos);
+
+                player.awardStat(Stats.USE_CAULDRON);
             }
             return InteractionResult.sidedSuccess(level.isClientSide);
         });
@@ -125,18 +153,12 @@ public class ModFlasks {
 
         FluidStorage.ITEM.registerForItems(
                 (itemStack, context) -> new EmptyFlaskFluidStorage(context),
-                ModItems.FLASK
+                EMPTY_FLASK
         );
-
-        for (FlaskEntry entry : ALL_FLASK_ENTRIES) {
-            FluidStorage.ITEM.registerForItems(
-                    (itemStack, context) -> new FullFlaskFluidStorage(context, entry),
-                    entry.flask()
-            );
-        }
 
         ItemGroupEvents.modifyEntriesEvent(ModCreativeTab.SUSPICIOUS_ITEM_GROUP_KEY)
                 .register(entries -> {
+                    entries.accept(EMPTY_FLASK);
                     for (FlaskEntry entry : ALL_FLASK_ENTRIES) {
                         entries.accept(entry.flask());
                     }

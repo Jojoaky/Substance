@@ -31,7 +31,7 @@ public class FullFlaskFluidStorage implements SingleSlotStorage<FluidVariant> {
         long capacity = FluidConstants.BOTTLE;
         if (maxAmount < capacity) return 0;
 
-        long exchanged = context.exchange(ItemVariant.of(ModItems.FLASK), 1, transaction);
+        long exchanged = context.exchange(ItemVariant.of(ModFlasks.EMPTY_FLASK), 1, transaction);
         if (exchanged == 1) {
             return capacity;
         }

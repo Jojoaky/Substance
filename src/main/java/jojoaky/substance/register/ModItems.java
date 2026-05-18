@@ -170,13 +170,6 @@ public class ModItems {
             "ephedra_bundle"
     );
 
-    public static final Item FLASK = register(
-            new EmptyFlaskItem(new FabricItemSettings()
-                    .stacksTo(16)
-            ),
-            "flask"
-    );
-
     public static final Item GAS_BOTTLE = register(
             new Item(new FabricItemSettings()
                     .stacksTo(16)
@@ -238,9 +231,6 @@ public class ModItems {
                     itemGroup.accept(ModItems.PSEUDO);
                     itemGroup.accept(ModItems.WHITE_PHOSPHORUS);
                     itemGroup.accept(ModItems.RED_PHOSPHORUS);
-
-                    // flasks
-                    itemGroup.accept(ModItems.FLASK);
 
                     itemGroup.accept(ModItems.GAS_BOTTLE);
                     itemGroup.accept(ModItems.GAS_BOTTLE_OXYGEN);

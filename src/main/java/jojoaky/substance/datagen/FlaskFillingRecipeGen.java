@@ -19,7 +19,7 @@ public class FlaskFillingRecipeGen extends FillingRecipeGen {
                 .getPath();
 
         return create(name + "_flask_filling", b -> b
-                .require(ModItems.FLASK)
+                .require(ModFlasks.EMPTY_FLASK)
                 .require(flaskEntry.still(), FluidConstants.BOTTLE)
                 .output(flaskEntry.flask())
         );
