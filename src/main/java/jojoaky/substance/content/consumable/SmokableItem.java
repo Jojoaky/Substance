@@ -1,4 +1,4 @@
-package jojoaky.substance.consumable;
+package jojoaky.substance.content.consumable;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;

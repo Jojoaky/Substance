@@ -1,8 +1,8 @@
-package jojoaky.substance.datagen;
+package jojoaky.substance.datagen.recipes;
 
 import com.simibubi.create.api.data.recipe.FillingRecipeGen;
-import jojoaky.substance.flask.FlaskItem;
-import jojoaky.substance.flask.ModFlasks;
+import jojoaky.substance.content.flask.FlaskItem;
+import jojoaky.substance.content.flask.ModFlasks;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 

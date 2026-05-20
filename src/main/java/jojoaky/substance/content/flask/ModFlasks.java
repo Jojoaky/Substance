@@ -1,4 +1,4 @@
-package jojoaky.substance.flask;
+package jojoaky.substance.content.flask;
 
 import jojoaky.substance.Substance;
 import jojoaky.substance.register.ModCreativeTab;
@@ -42,7 +42,7 @@ public class ModFlasks {
     public static final List<FlaskEntry> ALL_FLASK_ENTRIES = new ArrayList<>();
 
     public static final FilledFlaskItem WATER_FLASK = registerFlask("water", Fluids.WATER, Blocks.WATER, 0xFF4F96F4);
-    public static final FilledFlaskItem LAVA_FLASK  = registerFlask("lava",  Fluids.LAVA,  Blocks.LAVA,  0xFFFF6600);
+    public static final FilledFlaskItem LAVA_FLASK  = registerFlask("lava",  Fluids.LAVA,  Blocks.LAVA,  0xFFEA960F);
 
     public static FilledFlaskItem registerForChemicalFluid(
             String name,
@@ -75,7 +75,7 @@ public class ModFlasks {
     }
 
     public static void initialize() {
-        CreateCompat.initialize();
+        //CreateCompat.initialize(); // Doesn't work reliably, not really needed either
 
 
         FluidStorage.ITEM.registerForItems(

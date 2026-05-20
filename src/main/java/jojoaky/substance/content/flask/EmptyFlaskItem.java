@@ -1,4 +1,4 @@
-package jojoaky.substance.flask;
+package jojoaky.substance.content.flask;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;

@@ -1,4 +1,4 @@
-package jojoaky.substance.consumable;
+package jojoaky.substance.content.consumable;
 
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;

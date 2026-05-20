@@ -3,7 +3,7 @@ package jojoaky.substance.mixin;
 import com.simibubi.create.api.behaviour.movement.MovementBehaviour;
 import com.simibubi.create.content.contraptions.actors.harvester.HarvesterMovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
-import jojoaky.substance.crops.LargeHerbBlock;
+import jojoaky.substance.content.crops.LargeHerbBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;

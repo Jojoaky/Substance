@@ -1,4 +1,4 @@
-package jojoaky.substance.consumable;
+package jojoaky.substance.content.consumable;
 
 import jojoaky.substance.register.ModEffects;
 import net.minecraft.util.Mth;

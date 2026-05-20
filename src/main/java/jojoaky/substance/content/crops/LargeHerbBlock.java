@@ -1,4 +1,4 @@
-package jojoaky.substance.crops;
+package jojoaky.substance.content.crops;
 
 import jojoaky.substance.register.ModItems;
 import net.minecraft.core.BlockPos;

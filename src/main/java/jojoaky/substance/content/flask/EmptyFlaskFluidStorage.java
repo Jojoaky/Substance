@@ -1,4 +1,4 @@
-package jojoaky.substance.flask;
+package jojoaky.substance.content.flask;
 
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleSlotStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 
-import static jojoaky.substance.flask.ModFlasks.ALL_FLASK_ENTRIES;
+import static jojoaky.substance.content.flask.ModFlasks.ALL_FLASK_ENTRIES;
 
 public class EmptyFlaskFluidStorage implements SingleSlotStorage<FluidVariant> {
     private final ContainerItemContext context;
