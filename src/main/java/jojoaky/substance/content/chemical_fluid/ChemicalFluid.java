@@ -1,4 +1,4 @@
-package jojoaky.substance.chemical_fluid;
+package jojoaky.substance.content.chemical_fluid;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -1,8 +1,7 @@
 package jojoaky.substance.register;
 
 import jojoaky.substance.Substance;
-import jojoaky.substance.consumable.JointItem;
-import jojoaky.substance.flask.EmptyFlaskItem;
+import jojoaky.substance.content.consumable.JointItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
@@ -107,7 +106,7 @@ public class ModItems {
             new Item(new FabricItemSettings()) {
                 @Override
                 public ItemStack getRecipeRemainder(ItemStack stack) {
-                    return stack; // returns itself
+                    return new ItemStack(SCULK_CATALYST_CRYSTAL);
                 }
             },
             "sculk_catalyst_crystal"

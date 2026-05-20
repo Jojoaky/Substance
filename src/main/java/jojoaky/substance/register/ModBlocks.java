@@ -1,8 +1,8 @@
 package jojoaky.substance.register;
 
 import jojoaky.substance.Substance;
-import jojoaky.substance.crops.EphedraCropBlock;
-import jojoaky.substance.crops.LargeHerbBlock;
+import jojoaky.substance.content.crops.EphedraCropBlock;
+import jojoaky.substance.content.crops.LargeHerbBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;

@@ -1,4 +1,4 @@
-package jojoaky.substance.chemical_fluid;
+package jojoaky.substance.content.chemical_fluid;
 
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.level.material.FlowingFluid;

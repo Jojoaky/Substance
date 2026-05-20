@@ -1,11 +1,11 @@
 package jojoaky.substance.register;
 
 import jojoaky.substance.Substance;
-import jojoaky.substance.chemical_fluid.ChemicalBucket;
-import jojoaky.substance.flask.FilledFlaskItem;
-import jojoaky.substance.chemical_fluid.ChemicalFluid;
-import jojoaky.substance.chemical_fluid.ChemicalFluidBlock;
-import jojoaky.substance.flask.ModFlasks;
+import jojoaky.substance.content.chemical_fluid.ChemicalBucket;
+import jojoaky.substance.content.flask.FilledFlaskItem;
+import jojoaky.substance.content.chemical_fluid.ChemicalFluid;
+import jojoaky.substance.content.chemical_fluid.ChemicalFluidBlock;
+import jojoaky.substance.content.flask.ModFlasks;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -16,6 +16,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.WaterFluid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +27,30 @@ public class ModFluids {
             FlowingFluid still,
             FlowingFluid flowing,
             Block block,
-            ChemicalBucket bucket,
+            Item bucket,
             FilledFlaskItem flask,
             int tint
     ) {}
     public static final List<ChemicalFluidSet> ALL_FLUIDS = new ArrayList<>();
+
+
+    public static final ChemicalFluidSet water = new ChemicalFluidSet(
+            Fluids.WATER,
+            Fluids.FLOWING_WATER,
+            Blocks.WATER,
+            Items.WATER_BUCKET,
+            ModFlasks.WATER_FLASK,
+            0x000000
+    );
+
+    public static final ChemicalFluidSet lava = new ChemicalFluidSet(
+            Fluids.LAVA,
+            Fluids.FLOWING_LAVA,
+            Blocks.LAVA,
+            Items.LAVA_BUCKET,
+            ModFlasks.LAVA_FLASK,
+            0x000000
+    );
 
     // Phenylacetic Acid
     public static final ChemicalFluidSet phenylaceticAcid = registerChemicalFluid("phenylacetic_acid", 1.0f, 1.2f, 0xFFe8d9b0);

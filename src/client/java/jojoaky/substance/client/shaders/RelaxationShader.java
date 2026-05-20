@@ -19,6 +19,6 @@ public class RelaxationShader extends MobEffectShader {
 
         setGlobalUniformf("ShaderGameTime", t / 20.0f);
         setGlobalUniformf("Intensity", getIntensity());
-        setUniformf("minecraft:blur", "Radius", Math.round(Mth.clamp(getIntensity() * 2, 0, 50)));
+        setUniformf("minecraft:blur", "Radius", Math.round(Mth.clamp(getIntensity(), 0, 4)));
     }
 }

@@ -1,14 +1,14 @@
 package jojoaky.substance.client;
 
 import jojoaky.substance.Substance;
-import jojoaky.substance.chemical_fluid.ChemicalBucket;
-import jojoaky.substance.flask.FilledFlaskItem;
+import jojoaky.substance.content.chemical_fluid.ChemicalBucket;
+import jojoaky.substance.content.flask.FilledFlaskItem;
 import jojoaky.substance.client.itemmodel.SmokableItemModel;
 import jojoaky.substance.client.shader.PostShaderManager;
 import jojoaky.substance.client.shaders.*;
-import jojoaky.substance.consumable.SmokableItem;
+import jojoaky.substance.content.consumable.SmokableItem;
 import jojoaky.substance.register.ModBlocks;
-import jojoaky.substance.flask.ModFlasks;
+import jojoaky.substance.content.flask.ModFlasks;
 import jojoaky.substance.register.ModFluids;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;

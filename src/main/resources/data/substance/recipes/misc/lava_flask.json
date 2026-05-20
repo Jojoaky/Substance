@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "eee",
+    "ele",
+    "eee"
+  ],
+  "key": {
+    "l": {
+      "item": "minecraft:lava_bucket"
+    },
+    "e": {
+      "item": "substance:flask"
+    }
+  },
+  "result": {
+    "item": "substance:lava_flask"
+  }
+}

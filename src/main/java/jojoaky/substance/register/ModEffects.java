@@ -1,7 +1,7 @@
 package jojoaky.substance.register;
 
 import jojoaky.substance.Substance;
-import jojoaky.substance.effects.VisualMobEffect;
+import jojoaky.substance.content.effects.VisualMobEffect;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
