@@ -1,8 +1,7 @@
-package jojoaky.substance.datagen;
+package jojoaky.substance.datagen.recipe_generator;
 
 import com.simibubi.create.api.data.recipe.ProcessingRecipeGen;
-import jojoaky.substance.datagen.recipes.mixing.MixingCraftingRecipeGen;
-import jojoaky.substance.datagen.recipes.mixing.MixingRecipeGen;
+import jojoaky.substance.datagen.recipe_generator.processingTypes.*;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.CachedOutput;
@@ -15,11 +14,10 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
-public class SubstanceRecipeProvider extends FabricRecipeProvider {
-    static final List<ProcessingRecipeGen> CREATE_GENERATORS = new ArrayList<>();
-    static final List<FabricRecipeProvider> FABRIC_GENERATORS = new ArrayList<>();
+public class CreateRecipeProvider extends FabricRecipeProvider {
+    static final List<ProcessingRecipeGen> GENERATORS = new ArrayList<>();
 
-    public SubstanceRecipeProvider(FabricDataOutput output) {
+    public CreateRecipeProvider(FabricDataOutput output) {
         super(output);
     }
 
@@ -28,9 +26,14 @@ public class SubstanceRecipeProvider extends FabricRecipeProvider {
     }
 
     public static DataProvider registerAll(FabricDataOutput output) {
-        CREATE_GENERATORS.add(new MixingRecipeGen(output));
-
-        FABRIC_GENERATORS.add(new MixingCraftingRecipeGen(output));
+        GENERATORS.add(new CompactingGen(output));
+        GENERATORS.add(new CrushingGen(output));
+        GENERATORS.add(new MixingGen(output));
+        GENERATORS.add(new MillingGen(output));
+        GENERATORS.add(new PressingGen(output));
+        GENERATORS.add(new EmptyingGen(output));
+        GENERATORS.add(new FillingGen(output));
+        // TODO: Haunting and Splashing
 
         return new DataProvider() {
             @Override
@@ -40,19 +43,11 @@ public class SubstanceRecipeProvider extends FabricRecipeProvider {
 
             @Override
             public @NotNull CompletableFuture<?> run(@NotNull CachedOutput dc) {
-                CompletableFuture<?> createProcessingFutures = CompletableFuture.allOf(
-                        CREATE_GENERATORS.stream()
+                return CompletableFuture.allOf(
+                        GENERATORS.stream()
                                 .map(gen -> gen.run(dc))
                                 .toArray(CompletableFuture[]::new)
                 );
-
-                CompletableFuture<?> fabricProcessingFutures = CompletableFuture.allOf(
-                        FABRIC_GENERATORS.stream()
-                                .map(gen -> gen.run(dc))
-                                .toArray(CompletableFuture[]::new)
-                );
-
-                return CompletableFuture.allOf(createProcessingFutures, fabricProcessingFutures);
             }
         };
     }
