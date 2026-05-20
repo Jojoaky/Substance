@@ -15,6 +15,18 @@
     }
   },
   "result": {
-    "item": "substance:lava_flask"
-  }
+    "item": "substance:lava_flask",
+    "count": 8
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:not",
+      "value": {
+        "condition": "fabric:any_mods_loaded",
+        "values": [
+          "create"
+        ]
+      }
+    }
+  ]
 }
