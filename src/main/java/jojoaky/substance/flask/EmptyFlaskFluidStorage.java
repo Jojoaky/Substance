@@ -1,7 +1,6 @@
 package jojoaky.substance.flask;
 
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleSlotStorage;
@@ -18,7 +17,7 @@ public class EmptyFlaskFluidStorage implements SingleSlotStorage<FluidVariant> {
 
     @Override
     public long insert(FluidVariant resource, long maxAmount, TransactionContext transaction) {
-        long capacity = FluidConstants.BOTTLE;
+        long capacity = FlaskItem.CAPACITY;
         if (maxAmount < capacity) return 0;
 
         ModFlasks.FlaskEntry targetEntry = null;
@@ -53,5 +52,5 @@ public class EmptyFlaskFluidStorage implements SingleSlotStorage<FluidVariant> {
     public long getAmount() { return 0; }
 
     @Override
-    public long getCapacity() { return FluidConstants.BOTTLE; }
+    public long getCapacity() { return FlaskItem.CAPACITY; }
 }

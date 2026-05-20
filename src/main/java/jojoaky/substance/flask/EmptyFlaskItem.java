@@ -8,7 +8,6 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -18,7 +17,7 @@ import net.minecraft.world.phys.HitResult;
 
 import java.util.Set;
 
-public class EmptyFlaskItem extends Item {
+public class EmptyFlaskItem extends FlaskItem {
     public EmptyFlaskItem(Properties settings) {
         super(settings);
     }

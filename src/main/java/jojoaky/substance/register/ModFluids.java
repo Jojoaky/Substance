@@ -2,7 +2,7 @@ package jojoaky.substance.register;
 
 import jojoaky.substance.Substance;
 import jojoaky.substance.chemical_fluid.ChemicalBucket;
-import jojoaky.substance.flask.FlaskItem;
+import jojoaky.substance.flask.FilledFlaskItem;
 import jojoaky.substance.chemical_fluid.ChemicalFluid;
 import jojoaky.substance.chemical_fluid.ChemicalFluidBlock;
 import jojoaky.substance.flask.ModFlasks;
@@ -26,7 +26,7 @@ public class ModFluids {
             FlowingFluid flowing,
             Block block,
             ChemicalBucket bucket,
-            FlaskItem flask,
+            FilledFlaskItem flask,
             int tint
     ) {}
     public static final List<ChemicalFluidSet> ALL_FLUIDS = new ArrayList<>();
@@ -37,7 +37,7 @@ public class ModFluids {
     public static final FlowingFluid PHENYLACETIC_ACID_FLOWING = phenylaceticAcid.flowing();
     public static final Block PHENYLACETIC_ACID_BLOCK = phenylaceticAcid.block;
     public static final Item PHENYLACETIC_ACID_BUCKET = phenylaceticAcid.bucket;
-    public static final FlaskItem PHENYLACETIC_ACID_FLASK = phenylaceticAcid.flask;
+    public static final FilledFlaskItem PHENYLACETIC_ACID_FLASK = phenylaceticAcid.flask;
 
     // Acetic Anhydride
     public static final ChemicalFluidSet aceticAnhydride = registerChemicalFluid("acetic_anhydride", 1.0f, 2.5f, 0xFFf5e8c7);
@@ -101,7 +101,7 @@ public class ModFluids {
         FlowingFluid[] flowing = new FlowingFluid[1];
         Block[] block = new Block[1];
         ChemicalBucket[] bucket = new ChemicalBucket[1];
-        FlaskItem[] flask  = new FlaskItem[1];
+        FilledFlaskItem[] flask  = new FilledFlaskItem[1];
 
         // Look up the bucket lazily so ModItems can be initialised independently
         still[0] = register(name,

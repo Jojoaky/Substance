@@ -1,9 +1,8 @@
 package jojoaky.substance.datagen;
 
 import com.simibubi.create.api.data.recipe.FillingRecipeGen;
+import jojoaky.substance.flask.FlaskItem;
 import jojoaky.substance.flask.ModFlasks;
-import jojoaky.substance.register.ModItems;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 
@@ -20,7 +19,7 @@ public class FlaskFillingRecipeGen extends FillingRecipeGen {
 
         return create(name + "_flask_filling", b -> b
                 .require(ModFlasks.EMPTY_FLASK)
-                .require(flaskEntry.still(), FluidConstants.BOTTLE)
+                .require(flaskEntry.still(), FlaskItem.CAPACITY)
                 .output(flaskEntry.flask())
         );
     }

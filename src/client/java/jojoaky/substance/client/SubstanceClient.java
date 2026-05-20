@@ -2,7 +2,7 @@ package jojoaky.substance.client;
 
 import jojoaky.substance.Substance;
 import jojoaky.substance.chemical_fluid.ChemicalBucket;
-import jojoaky.substance.flask.FlaskItem;
+import jojoaky.substance.flask.FilledFlaskItem;
 import jojoaky.substance.client.itemmodel.SmokableItemModel;
 import jojoaky.substance.client.shader.PostShaderManager;
 import jojoaky.substance.client.shaders.*;
@@ -37,10 +37,10 @@ public class SubstanceClient implements ClientModInitializer {
 				.toArray(ChemicalBucket[]::new));
 
 		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
-			return ((FlaskItem)stack.getItem()).getColor(tintIndex);
+			return ((FilledFlaskItem)stack.getItem()).getColor(tintIndex);
 		}, ModFlasks.ALL_FLASK_ENTRIES.stream()
 				.map(ModFlasks.FlaskEntry::flask)
-				.toArray(FlaskItem[]::new));
+				.toArray(FilledFlaskItem[]::new));
 
 		for (ModFluids.ChemicalFluidSet fluid : ALL_FLUIDS) {
 			FluidRenderHandlerRegistry.INSTANCE.register(
