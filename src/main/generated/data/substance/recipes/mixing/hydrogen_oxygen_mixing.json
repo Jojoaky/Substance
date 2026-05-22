@@ -1,0 +1,39 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "substance:gas_bottle"
+    },
+    {
+      "item": "substance:gas_bottle"
+    },
+    {
+      "item": "substance:gas_bottle"
+    },
+    {
+      "item": "substance:sculk_catalyst_crystal"
+    },
+    {
+      "amount": 810,
+      "fluid": "minecraft:water",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "count": 2,
+      "item": "substance:gas_bottle_hydrogen"
+    },
+    {
+      "item": "substance:gas_bottle_oxygen"
+    }
+  ]
+}

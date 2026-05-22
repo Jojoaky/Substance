@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 150,
+  "experience": 1.0,
+  "ingredient": {
+    "item": "substance:herb_bud"
+  },
+  "result": "substance:dried_herb_bud"
+}
