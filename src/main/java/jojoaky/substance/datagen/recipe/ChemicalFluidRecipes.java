@@ -83,6 +83,8 @@ public class ChemicalFluidRecipes {
                         .output(ModFluids.BLUE_CRYSTAL_OIL, BASE_FLUID)
                         .build(),
 
+
+                // Gas Bottles
                 ShapelessRecipeDef.named("nitrogen")
                         .vanillaShapeless()
                         .require(ModItems.GAS_BOTTLE)
@@ -98,6 +100,9 @@ public class ChemicalFluidRecipes {
                         .output(ModItems.GAS_BOTTLE_HYDROGEN, 2)
                         .output(ModItems.GAS_BOTTLE_OXYGEN)
                         .build()
+
+                // TODO: Create vanilla way of obtaining oxygen and hydrogen
+                // maybe by right clicking with an empty gas bottle in air
         );
     }
 }

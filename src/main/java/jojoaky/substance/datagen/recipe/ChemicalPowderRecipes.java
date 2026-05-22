@@ -41,17 +41,17 @@ public class ChemicalPowderRecipes {
                         .output(ModItems.IODINE, 2, 0.25f)
                         .build(),
 
-                ShapelessRecipeDef.named("pseudoephedrine_ephedra")
+                ShapelessRecipeDef.named("pseudoephedrine_ephedra_create")
                         .createMilling()
                         .createCrushing()
                         .require(ModItems.EPHEDRA_BUNDLE)
                         .output(ModItems.PSEUDO)
-                        .output(ModItems.EPHEDRA_SEEDS, 1, 0.4f)
+                        .output(ModItems.PSEUDO, 1, 0.5f)
+                        .output(ModItems.EPHEDRA_SEEDS, 2, 0.4f)
                         .build(),
 
-                ShapelessRecipeDef.named("ephedra_bundle")
+                ShapelessRecipeDef.named("pseudoephedrine_ephedra_vanilla")
                         .vanillaShapeless()
-                        .disableVanillaIfCreate()
                         .require(ModItems.EPHEDRA_BUNDLE, 4)
                         .output(ModItems.PSEUDO, 4)
                         .build(),
@@ -62,7 +62,7 @@ public class ChemicalPowderRecipes {
                         .vanillaShapeless()
                         .require(ModItems.SUDAFED_PILL)
                         .output(ModItems.PSEUDO, 2)
-                        .output(ModItems.PSEUDO, 1, 0.5f)
+                        .output(ModItems.PSEUDO, 1, 0.7f)
                         .build()
         );
     }
