@@ -2,7 +2,7 @@ package jojoaky.substance.datagen.recipe;
 
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import jojoaky.substance.content.flask.FlaskItem;
-import jojoaky.substance.datagen.recipe_generator.RecipeDef;
+import jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef;
 import jojoaky.substance.datagen.recipe_generator.RecipeGeneratorRegistry;
 import jojoaky.substance.register.ModFluids;
 import jojoaky.substance.register.ModItems;
@@ -10,12 +10,12 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
 
-public class ChemicalFluidRecipes {
-    public static final long BASE_FLUID = FlaskItem.CAPACITY;
+import static jojoaky.substance.datagen.recipe.RecipeConstants.BASE_FLUID;
 
+public class ChemicalFluidRecipes {
     public static void initialize() {
         RecipeGeneratorRegistry.accept(
-                RecipeDef.named("acetic_anhydride")
+                ShapelessRecipeDef.named("acetic_anhydride")
                         .createMixing()
                         .generateVanillaMixing()
                         .require(ModItems.GAS_BOTTLE_OXYGEN)
@@ -23,7 +23,7 @@ public class ChemicalFluidRecipes {
                         .output(ModFluids.ACETIC_ANHYDRIDE, BASE_FLUID)
                         .build(),
 
-                RecipeDef.named("ammonia")
+                ShapelessRecipeDef.named("ammonia")
                         .createMixing()
                         .generateVanillaMixing()
                         .require(ModItems.GAS_BOTTLE_NITROGEN)
@@ -31,7 +31,7 @@ public class ChemicalFluidRecipes {
                         .output(ModFluids.AMMONIA, BASE_FLUID)
                         .build(),
 
-                RecipeDef.named("methanol")
+                ShapelessRecipeDef.named("methanol")
                         .createMixing()
                         .generateVanillaMixing()
                         .require(ItemTags.COALS)
@@ -40,7 +40,7 @@ public class ChemicalFluidRecipes {
                         .output(ModFluids.METHANOL, BASE_FLUID)
                         .build(),
 
-                RecipeDef.named("methylamine")
+                ShapelessRecipeDef.named("methylamine")
                         .createMixing()
                         .generateVanillaMixing()
                         .require(ModFluids.AMMONIA, BASE_FLUID)
@@ -49,7 +49,7 @@ public class ChemicalFluidRecipes {
                         .output(ModFluids.METHYLAMINE, 2 * BASE_FLUID)
                         .build(),
 
-                RecipeDef.named("phenylacetic_acid")
+                ShapelessRecipeDef.named("phenylacetic_acid")
                         .createMixing()
                         .generateVanillaMixing()
                         .require(Fluids.WATER, BASE_FLUID)
@@ -57,7 +57,7 @@ public class ChemicalFluidRecipes {
                         .output(ModFluids.PHENYLACETIC_ACID, BASE_FLUID)
                         .build(),
 
-                RecipeDef.named("phenylacetone")
+                ShapelessRecipeDef.named("phenylacetone")
                         .createMixing()
                         .generateVanillaMixing()
                         .require(ModFluids.PHENYLACETIC_ACID, BASE_FLUID)
@@ -65,7 +65,7 @@ public class ChemicalFluidRecipes {
                         .output(ModFluids.PHENYLACETONE, 2 * BASE_FLUID)
                         .build(),
 
-                RecipeDef.named("white_crystal_oil")
+                ShapelessRecipeDef.named("white_crystal_oil")
                         .createMixing(HeatCondition.HEATED)
                         .generateVanillaMixing()
                         .require(ModItems.PSEUDO)
@@ -75,7 +75,7 @@ public class ChemicalFluidRecipes {
                         .output(ModFluids.WHITE_CRYSTAL_OIL, BASE_FLUID)
                         .build(),
 
-                RecipeDef.named("blue_crystal_oil")
+                ShapelessRecipeDef.named("blue_crystal_oil")
                         .createMixing()
                         .generateVanillaMixing()
                         .require(ModFluids.PHENYLACETONE, BASE_FLUID)
@@ -83,12 +83,20 @@ public class ChemicalFluidRecipes {
                         .output(ModFluids.BLUE_CRYSTAL_OIL, BASE_FLUID)
                         .build(),
 
-                RecipeDef.named("nitrogen")
-                        .createMixing()
-                        .generateVanillaMixing()
+                ShapelessRecipeDef.named("nitrogen")
+                        .vanillaShapeless()
                         .require(ModItems.GAS_BOTTLE)
                         .require(Items.POTATO)
                         .output(ModItems.GAS_BOTTLE_NITROGEN)
+                        .build(),
+
+                ShapelessRecipeDef.named("hydrogen_oxygen")
+                        .createMixing()
+                        .require(ModItems.GAS_BOTTLE, 3)
+                        .require(Fluids.WATER, BASE_FLUID)
+                        .require(ModItems.SCULK_CATALYST_CRYSTAL)
+                        .output(ModItems.GAS_BOTTLE_HYDROGEN, 2)
+                        .output(ModItems.GAS_BOTTLE_OXYGEN)
                         .build()
         );
     }

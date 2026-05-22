@@ -1,0 +1,67 @@
+package jojoaky.substance.datagen.recipe_generator.vanilla_processing_types;
+
+import jojoaky.substance.content.flask.ModFlasks;
+import jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef;
+import jojoaky.substance.datagen.recipe_generator.RecipeGeneratorRegistry;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
+
+import java.util.function.Consumer;
+
+public class VanillaWashingGen extends FabricRecipeProvider {
+
+    public VanillaWashingGen(FabricDataOutput output) {
+        super(output);
+    }
+
+    @Override
+    public void buildRecipes(Consumer<FinishedRecipe> writer) {
+        RecipeGeneratorRegistry.SHAPELESS_RECIPES.stream()
+                .filter(ShapelessRecipeDef::isCustomVanillaWashing)
+                .forEach(def -> buildRecipe(def, writer));
+    }
+
+    private void buildRecipe(ShapelessRecipeDef def, Consumer<FinishedRecipe> writer) {
+        ItemStack outputStack = def.getSingleOutputAsItem();
+        RecipeResult output = new RecipeResult(outputStack.getItem(), outputStack.getCount());
+
+        ShapelessRecipeBuilder builder = ShapelessRecipeBuilder
+                .shapeless(RecipeCategory.MISC, output.item(), output.count())
+                .unlockedBy(getHasName(ModFlasks.EMPTY_FLASK), has(ModFlasks.EMPTY_FLASK));
+
+        def.getItemInputs().forEach(stack ->
+                builder.requires(stack.getItem(), stack.getCount())
+        );
+
+        def.getTagInputs().forEach(tag -> {
+            for (int i = 0; i < tag.count(); i++)
+                builder.requires(tag.tag());
+        });
+
+        def.getFluidInputsAsFlasks().forEach(flask ->
+                builder.requires(flask.getItem(), flask.getCount())
+        );
+
+        builder.requires(ModFlasks.WATER_FLASK);
+
+        Consumer<FinishedRecipe> finalWriter = writer;
+
+        if (def.isDisableVanillaIfCreate()) {
+            finalWriter = withConditions(writer,
+                    DefaultResourceConditions.not(
+                            DefaultResourceConditions.anyModLoaded("create")
+                    )
+            );
+        }
+
+        builder.save(finalWriter, def.getName() + "_v_washing");
+    }
+
+    private record RecipeResult(ItemLike item, int count) {}
+}
