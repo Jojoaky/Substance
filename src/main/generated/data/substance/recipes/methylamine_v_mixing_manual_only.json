@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "substance:sculk_catalyst_crystal"
+    },
+    {
+      "item": "substance:ammonia_flask"
+    },
+    {
+      "item": "substance:methanol_flask"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "substance:methylamine_flask"
+  }
+}

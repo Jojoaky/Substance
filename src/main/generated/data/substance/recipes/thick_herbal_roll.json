@@ -1,0 +1,32 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:not",
+      "value": {
+        "condition": "fabric:any_mod_loaded",
+        "values": [
+          "create"
+        ]
+      }
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "p": {
+      "item": "minecraft:paper"
+    },
+    "w": {
+      "item": "substance:dried_herb_bud"
+    }
+  },
+  "pattern": [
+    " p ",
+    "www",
+    " p "
+  ],
+  "result": {
+    "item": "substance:thick_herbal_roll"
+  },
+  "show_notification": true
+}
