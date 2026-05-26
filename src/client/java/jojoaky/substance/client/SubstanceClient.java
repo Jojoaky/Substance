@@ -40,6 +40,7 @@ public class SubstanceClient implements ClientModInitializer {
 			return ((FilledFlaskItem)stack.getItem()).getColor(tintIndex);
 		}, ModFlasks.ALL_FLASK_ENTRIES.stream()
 				.map(ModFlasks.FlaskEntry::flask)
+				.filter(flask -> !flask.useCustomModel)
 				.toArray(FilledFlaskItem[]::new));
 
 		for (ModFluids.ChemicalFluidSet fluid : ALL_FLUIDS) {

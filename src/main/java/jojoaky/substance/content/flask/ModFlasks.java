@@ -42,7 +42,7 @@ public class ModFlasks {
     public static final List<FlaskEntry> ALL_FLASK_ENTRIES = new ArrayList<>();
 
     public static final FilledFlaskItem WATER_FLASK = registerFlask("water", Fluids.WATER, Blocks.WATER, 0xFF4F96F4);
-    public static final FilledFlaskItem LAVA_FLASK  = registerFlask("lava",  Fluids.LAVA,  Blocks.LAVA,  0xFFEA960F);
+    public static final FilledFlaskItem LAVA_FLASK  = registerFlask("lava",  Fluids.LAVA,  Blocks.LAVA,  0, true);
 
     public static FilledFlaskItem registerForChemicalFluid(
             String name,
@@ -54,12 +54,15 @@ public class ModFlasks {
     }
 
     private static FilledFlaskItem registerFlask(String name, FlowingFluid still, Block block, int tint) {
+        return registerFlask(name, still, block, tint, false);
+    }
+    private static FilledFlaskItem registerFlask(String name, FlowingFluid still, Block block, int tint, boolean useCustomModel) {
         FilledFlaskItem flask = Registry.register(
                 BuiltInRegistries.ITEM,
                 Substance.resource(name + "_flask"),
                 new FilledFlaskItem(still, new Item.Properties()
                         .craftRemainder(EMPTY_FLASK)
-                        .stacksTo(16), tint)
+                        .stacksTo(16), tint, useCustomModel)
         );
 
         FlaskEntry entry = new FlaskEntry(still, flask, block, tint);

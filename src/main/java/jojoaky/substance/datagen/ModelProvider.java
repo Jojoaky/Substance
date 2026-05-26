@@ -55,6 +55,7 @@ public class ModelProvider extends FabricModelProvider {
             );
         }
         for (ModFlasks.FlaskEntry flaskEntry: ModFlasks.ALL_FLASK_ENTRIES) {
+            if (flaskEntry.flask().useCustomModel) continue;
             itemModelGenerators.generateFlatItem(
                     flaskEntry.flask(),
                     CHEMICAL_FLASK_TEMPLATE
