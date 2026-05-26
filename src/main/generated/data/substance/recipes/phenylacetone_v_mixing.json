@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "substance:phenylacetic_acid_flask"
+    },
+    {
+      "item": "substance:acetic_anhydride_flask"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "substance:phenylacetone_flask"
+  }
+}

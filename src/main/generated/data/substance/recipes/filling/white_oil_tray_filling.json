@@ -1,0 +1,26 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ],
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "substance:tray"
+    },
+    {
+      "amount": 2430,
+      "fluid": "substance:white_crystal_oil",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "substance:white_oil_tray"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "x": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "xxx"
+  ],
+  "result": {
+    "item": "substance:tray"
+  },
+  "show_notification": true
+}

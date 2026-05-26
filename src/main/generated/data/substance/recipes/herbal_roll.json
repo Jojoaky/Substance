@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "p": {
+      "item": "minecraft:paper"
+    },
+    "w": {
+      "item": "substance:dried_herb_bud"
+    }
+  },
+  "pattern": [
+    "pwp"
+  ],
+  "result": {
+    "item": "substance:herbal_roll"
+  },
+  "show_notification": true
+}
