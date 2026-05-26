@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:acetic_anhydride_v_mixing"
+        "recipe": "minecraft:lava_flask_manual_only"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:acetic_anhydride_v_mixing"
+      "minecraft:lava_flask_manual_only"
     ]
   },
   "sends_telemetry_event": false

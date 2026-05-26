@@ -12,6 +12,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class ShapelessRecipeDef implements RecipeDef {
@@ -70,7 +71,10 @@ public final class ShapelessRecipeDef implements RecipeDef {
                     VANILLA_BLASTING,
                     VANILLA_CAMPFIRE_COOKING,
                     VANILLA_SMELTING,
-                    VANILLA_SMOKING
+                    VANILLA_SMOKING,
+                    CUSTOM_VANILLA_MIXING,
+                    CUSTOM_VANILLA_COMPACTING,
+                    CUSTOM_VANILLA_WASHING
             };
         }
 
@@ -341,6 +345,11 @@ public final class ShapelessRecipeDef implements RecipeDef {
     public ShapelessRecipeDef manualOnly(Operation... ops) {
         if (ops == null || ops.length == 0) {
             Collections.addAll(this.manualOnlyOperations, Operation.allVanilla());
+
+            String str = manualOnlyOperations.stream()
+                    .map(Operation::toString)
+                    .collect(Collectors.joining(", "));
+
             return this;
         }
 
@@ -530,7 +539,7 @@ public final class ShapelessRecipeDef implements RecipeDef {
         return this.condition(DefaultResourceConditions.tagsPopulated(tags.toArray(new TagKey[0])), ops);
     }
 
-    public ShapelessRecipeDef useWeakReplacements() {
-        return requireModNotLoaded("create", Operation.allReplacements());
+    public ShapelessRecipeDef disableVanillaIfCreate() {
+        return requireModNotLoaded("create", Operation.allVanilla());
     }
 }

@@ -5,8 +5,6 @@ import jojoaky.substance.datagen.recipe_generator.RecipeGeneratorRegistry;
 import jojoaky.substance.register.ModItems;
 import net.minecraft.world.item.Items;
 
-import static jojoaky.substance.datagen.recipe.RecipeConstants.BASE_FLUID;
-
 public class ChemicalPowderRecipes {
     public static void initialize() {
         RecipeGeneratorRegistry.accept(
@@ -21,7 +19,7 @@ public class ChemicalPowderRecipes {
                 ShapelessRecipeDef.named("white_phosphorus")
                         .createCrushing()
                         .vanillaShapeless()
-                        .useWeakReplacements()
+                        .disableVanillaIfCreate()
                         .require(Items.CALCITE)
                         .output(ModItems.WHITE_PHOSPHORUS)
                         .output(ModItems.WHITE_PHOSPHORUS, 1, 0.6f)
@@ -36,6 +34,7 @@ public class ChemicalPowderRecipes {
                 ShapelessRecipeDef.named("iodine")
                         .createWashing()
                         .generateVanillaWashing()
+                        .manualOnly()
                         .require(Items.DRIED_KELP)
                         .output(ModItems.IODINE)
                         .output(ModItems.IODINE, 2, 0.25f)
@@ -51,8 +50,7 @@ public class ChemicalPowderRecipes {
                         .build(),
 
                 ShapelessRecipeDef.named("pseudoephedrine_ephedra_vanilla")
-                        .createMixing()
-                        .generateVanillaMixing()
+                        .vanillaShapeless()
                         .manualOnly()
                         .require(ModItems.EPHEDRA_BUNDLE, 4)
                         .output(ModItems.PSEUDO, 4)
@@ -62,6 +60,7 @@ public class ChemicalPowderRecipes {
                         .createMilling()
                         .createCrushing()
                         .vanillaShapeless()
+                        .manualOnly()
                         .require(ModItems.SUDAFED_PILL)
                         .output(ModItems.PSEUDO, 2)
                         .output(ModItems.PSEUDO, 1, 0.7f)

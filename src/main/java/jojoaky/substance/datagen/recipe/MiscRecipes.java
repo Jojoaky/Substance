@@ -1,8 +1,6 @@
 package jojoaky.substance.datagen.recipe;
 
-import com.simibubi.create.AllTags;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
-import com.simibubi.create.foundation.data.recipe.CommonMetal;
 import jojoaky.substance.content.flask.ModFlasks;
 import jojoaky.substance.datagen.recipe_generator.ShapedRecipeDef;
 import jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef;
@@ -10,17 +8,13 @@ import jojoaky.substance.datagen.recipe_generator.RecipeGeneratorRegistry;
 import jojoaky.substance.register.ModItems;
 import net.minecraft.world.item.Items;
 
-import java.util.List;
-
-import static jojoaky.substance.datagen.recipe.RecipeConstants.BASE_FLUID;
-
 public class MiscRecipes {
     public static void initialize() {
         RecipeGeneratorRegistry.accept(
                 ShapelessRecipeDef.named("sculk_crystal_shard")
                         .createCompacting(HeatCondition.HEATED)
                         .generateVanillaCompacting()
-                        .useWeakReplacements()
+                        .disableVanillaIfCreate()
                         .require(Items.SCULK_CATALYST)
                         .require(Items.ECHO_SHARD)
                         .output(ModItems.SCULK_CATALYST_CRYSTAL, 2)
@@ -28,6 +22,7 @@ public class MiscRecipes {
 
                 ShapelessRecipeDef.named("lava_flask")
                         .vanillaShapeless()
+                        .manualOnly()
                         .require(ModFlasks.EMPTY_FLASK, 4)
                         .require(Items.LAVA_BUCKET)
                         .require(ModFlasks.EMPTY_FLASK, 4)
@@ -36,6 +31,7 @@ public class MiscRecipes {
 
                 ShapelessRecipeDef.named("water_flask")
                         .vanillaShapeless()
+                        .manualOnly()
                         .require(ModFlasks.EMPTY_FLASK, 4)
                         .require(Items.WATER_BUCKET)
                         .require(ModFlasks.EMPTY_FLASK, 4)

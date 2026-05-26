@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:white_oil_tray"
+        "recipe": "minecraft:white_crystal_oil_v_mixing_manual_only"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:white_oil_tray"
+      "minecraft:white_crystal_oil_v_mixing_manual_only"
     ]
   },
   "sends_telemetry_event": false

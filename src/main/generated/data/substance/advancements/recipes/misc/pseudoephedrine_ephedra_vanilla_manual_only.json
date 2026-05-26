@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:methanol_v_mixing"
+        "recipe": "minecraft:pseudoephedrine_ephedra_vanilla_manual_only"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:methanol_v_mixing"
+      "minecraft:pseudoephedrine_ephedra_vanilla_manual_only"
     ]
   },
   "sends_telemetry_event": false

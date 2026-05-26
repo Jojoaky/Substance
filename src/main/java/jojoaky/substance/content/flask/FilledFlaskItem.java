@@ -13,13 +13,15 @@ public class FilledFlaskItem extends FlaskItem {
         return map.get(fluid);
     }
 
+    public final boolean useCustomModel;
     public final int fluidColor;
     public final FlowingFluid fluid;
 
-    public FilledFlaskItem(FlowingFluid fluid, Properties settings, int fluidColor) {
+    public FilledFlaskItem(FlowingFluid fluid, Properties settings, int fluidColor, boolean useCustomModel) {
         super(settings);
         this.fluid = fluid;
         this.fluidColor = fluidColor;
+        this.useCustomModel = useCustomModel;
         map.put(fluid, this);
     }
 

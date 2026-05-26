@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:blue_oil_tray"
+        "recipe": "minecraft:iodine_v_washing_manual_only"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:blue_oil_tray"
+      "minecraft:iodine_v_washing_manual_only"
     ]
   },
   "sends_telemetry_event": false
