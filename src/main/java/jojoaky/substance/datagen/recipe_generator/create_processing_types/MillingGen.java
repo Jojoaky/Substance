@@ -8,6 +8,8 @@ import jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef;
 import jojoaky.substance.datagen.recipe_generator.RecipeGeneratorRegistry;
 import net.minecraft.data.PackOutput;
 
+import static jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef.Operation.CREATE_MILLING;
+
 public class MillingGen extends MillingRecipeGen {
     public MillingGen(PackOutput output) {
         super(output, "substance");
@@ -16,16 +18,16 @@ public class MillingGen extends MillingRecipeGen {
 
     private void registerAll() {
         RecipeGeneratorRegistry.SHAPELESS_RECIPES.stream()
-                .filter(ShapelessRecipeDef::isCreateMilling)
+                .filter(def -> def.hasOperation(CREATE_MILLING))
                 .forEach(this::buildRecipe);
     }
 
     private void buildRecipe(ShapelessRecipeDef def) {
-        create(def.getName() + "_milling", b -> {
+        create(def.getRecipeName(CREATE_MILLING), b -> {
             applyIngredients(b, def);
             applyOutputs(b, def);
             b.whenModLoaded(Create.ID);
-            def.getConditions().forEach(b::withCondition);
+            def.getConditionsFor(CREATE_MILLING).forEach(b::withCondition);
             return b;
         });
     }

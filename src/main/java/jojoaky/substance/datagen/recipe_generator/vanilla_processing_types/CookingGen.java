@@ -22,16 +22,24 @@ public class CookingGen extends FabricRecipeProvider {
 
     @Override
     public void buildRecipes(Consumer<FinishedRecipe> writer) {
-        RecipeGeneratorRegistry.SHAPELESS_RECIPES
-                .forEach(def -> {
-                    if (def.isSmelting()) buildSmeltingRecipe(def, writer);
-                    if (def.isBlasting()) buildBlastingRecipe(def, writer);
-                    if (def.isSmoking()) buildSmokingRecipe(def, writer);
-                    if (def.isVanillaCampfireCooking()) buildCampfireRecipe(def, writer);
-                });
+        RecipeGeneratorRegistry.SHAPELESS_RECIPES.forEach(def -> {
+            if (def.hasOperation(ShapelessRecipeDef.Operation.VANILLA_SMELTING)) {
+                buildSmeltingRecipe(def, writer);
+            }
+            if (def.hasOperation(ShapelessRecipeDef.Operation.VANILLA_BLASTING)) {
+                buildBlastingRecipe(def, writer);
+            }
+            if (def.hasOperation(ShapelessRecipeDef.Operation.VANILLA_SMOKING)) {
+                buildSmokingRecipe(def, writer);
+            }
+            if (def.hasOperation(ShapelessRecipeDef.Operation.VANILLA_CAMPFIRE_COOKING)) {
+                buildCampfireRecipe(def, writer);
+            }
+        });
     }
 
     private void buildSmeltingRecipe(ShapelessRecipeDef def, Consumer<FinishedRecipe> writer) {
+        ShapelessRecipeDef.Operation op = ShapelessRecipeDef.Operation.VANILLA_SMELTING;
         RecipeResult result = getRecipeResult(def);
         Ingredient input = def.getSingleInputAsIngredient();
 
@@ -40,13 +48,14 @@ public class CookingGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(ModFlasks.EMPTY_FLASK), has(ModFlasks.EMPTY_FLASK));
 
         Consumer<FinishedRecipe> finalWriter = writer;
-        for (var con : def.getConditions()) {
+        for (var con : def.getConditionsFor(op)) {
             finalWriter = withConditions(finalWriter, con);
         }
-        builder.save(finalWriter, def.getName() + "_smelting");
+        builder.save(finalWriter, def.getRecipeName(op));
     }
 
     private void buildBlastingRecipe(ShapelessRecipeDef def, Consumer<FinishedRecipe> writer) {
+        ShapelessRecipeDef.Operation op = ShapelessRecipeDef.Operation.VANILLA_BLASTING;
         RecipeResult result = getRecipeResult(def);
         Ingredient input = def.getSingleInputAsIngredient();
 
@@ -55,13 +64,14 @@ public class CookingGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(ModFlasks.EMPTY_FLASK), has(ModFlasks.EMPTY_FLASK));
 
         Consumer<FinishedRecipe> finalWriter = writer;
-        for (var con : def.getConditions()) {
+        for (var con : def.getConditionsFor(op)) {
             finalWriter = withConditions(finalWriter, con);
         }
-        builder.save(finalWriter, def.getName() + "_blasting");
+        builder.save(finalWriter, def.getRecipeName(op));
     }
 
     private void buildSmokingRecipe(ShapelessRecipeDef def, Consumer<FinishedRecipe> writer) {
+        ShapelessRecipeDef.Operation op = ShapelessRecipeDef.Operation.VANILLA_SMOKING;
         RecipeResult result = getRecipeResult(def);
         Ingredient input = def.getSingleInputAsIngredient();
 
@@ -70,13 +80,14 @@ public class CookingGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(ModFlasks.EMPTY_FLASK), has(ModFlasks.EMPTY_FLASK));
 
         Consumer<FinishedRecipe> finalWriter = writer;
-        for (var con : def.getConditions()) {
+        for (var con : def.getConditionsFor(op)) {
             finalWriter = withConditions(finalWriter, con);
         }
-        builder.save(finalWriter, def.getName() + "_smoking");
+        builder.save(finalWriter, def.getRecipeName(op));
     }
 
     private void buildCampfireRecipe(ShapelessRecipeDef def, Consumer<FinishedRecipe> writer) {
+        ShapelessRecipeDef.Operation op = ShapelessRecipeDef.Operation.VANILLA_CAMPFIRE_COOKING;
         RecipeResult result = getRecipeResult(def);
         Ingredient input = def.getSingleInputAsIngredient();
 
@@ -85,10 +96,10 @@ public class CookingGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(ModFlasks.EMPTY_FLASK), has(ModFlasks.EMPTY_FLASK));
 
         Consumer<FinishedRecipe> finalWriter = writer;
-        for (var con : def.getConditions()) {
+        for (var con : def.getConditionsFor(op)) {
             finalWriter = withConditions(finalWriter, con);
         }
-        builder.save(finalWriter, def.getName() + "_campfire_cooking");
+        builder.save(finalWriter, def.getRecipeName(op));
     }
 
     private RecipeResult getRecipeResult(ShapelessRecipeDef def) {

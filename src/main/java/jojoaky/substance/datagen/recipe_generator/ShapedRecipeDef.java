@@ -1,10 +1,8 @@
 package jojoaky.substance.datagen.recipe_generator;
 
-import com.simibubi.create.content.processing.recipe.HeatCondition;
 import jojoaky.substance.Substance;
 import jojoaky.substance.content.flask.FilledFlaskItem;
 import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
-import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -24,11 +22,28 @@ public final class ShapedRecipeDef implements RecipeDef {
     private final List<RandomItemOutput> chancedItemOutputs = new ArrayList<>();
     private final List<FluidOutput> fluidOutputs = new ArrayList<>();
 
-    private boolean vanillaShaped = false;
-    private boolean createMechanicalCrafting = false;
-    private boolean mechanicalAllowMirrored = true;
+    public enum Operation {
+        VANILLA_SHAPED(""),
+        CREATE_MECHANICAL_CRAFTING("_mechanical_crafting");
 
-    private boolean disableVanillaIfCreate = false;
+        private final String suffix;
+
+        Operation(String suffix) {
+            this.suffix = suffix;
+        }
+
+        public String getSuffix() {
+            return suffix;
+        }
+    }
+
+    private final Set<Operation> operations = EnumSet.noneOf(Operation.class);
+    private final Map<Operation, String> nameOverrides = new EnumMap<>(Operation.class);
+
+    private final List<ConditionJsonProvider> globalConditions = new ArrayList<>();
+    private final Map<Operation, List<ConditionJsonProvider>> specificConditions = new EnumMap<>(Operation.class);
+
+    private boolean mechanicalAllowMirrored = true;
 
     public sealed interface ShapeIngredient permits ShapeIngredient.OfItem, ShapeIngredient.OfTag {
         record OfItem(ItemLike item) implements ShapeIngredient {}
@@ -95,35 +110,75 @@ public final class ShapedRecipeDef implements RecipeDef {
 
 
     public ShapedRecipeDef vanillaShaped() {
-        this.vanillaShaped = true;
+        this.operations.add(Operation.VANILLA_SHAPED);
         return this;
     }
 
     public ShapedRecipeDef createMechanicalCrafting() {
-        this.createMechanicalCrafting = true;
+        this.operations.add(Operation.CREATE_MECHANICAL_CRAFTING);
         return this;
     }
 
-    public ShapedRecipeDef disableVanillaIfCreate() {
-        this.disableVanillaIfCreate = true;
-        return this;
-    }
-
-    public ShapedRecipeDef AllowMirroredMechanical(boolean allowMirrored) {
+    public ShapedRecipeDef allowMirroredMechanical(boolean allowMirrored) {
         this.mechanicalAllowMirrored = allowMirrored;
         return this;
     }
 
-    private final List<ConditionJsonProvider> conditions = new ArrayList<>();
+    private boolean disableVanillaIfCreate = false;
+    public ShapedRecipeDef disableVanillaIfCreate() {
+        this.disableVanillaIfCreate = true;
+        return this;
+    }
+    public boolean isDisableVanillaIfCreate() { return disableVanillaIfCreate; }
 
-    public ShapedRecipeDef condition(ConditionJsonProvider condition) {
-        this.conditions.add(condition);
+    private boolean manualOnly = false;
+    public ShapedRecipeDef manualOnly() {
+        this.manualOnly = true;
+        return this;
+    }
+    public boolean isManualOnly() {
+        return this.manualOnly;
+    }
+
+    // Naming & Overrides
+
+    public ShapedRecipeDef overrideName(Operation op, String customName) {
+        this.nameOverrides.put(op, customName);
         return this;
     }
 
-    public List<ConditionJsonProvider> getConditions() {
-        return conditions;
+    public String getRecipeName(Operation op) {
+        String defaultName = this.name + op.getSuffix();
+        String resolvedName = this.nameOverrides.getOrDefault(op, defaultName);
+
+        if (this.isManualOnly()) {
+            resolvedName += "_manual_only";
+        }
+
+        return resolvedName;
     }
+
+    public String getBaseName() { return name; }
+
+    // Conditions
+
+    public ShapedRecipeDef condition(ConditionJsonProvider condition, Operation... ops) {
+        if (ops == null || ops.length == 0) {
+            this.globalConditions.add(condition);
+        } else {
+            for (Operation op : ops) {
+                this.specificConditions.computeIfAbsent(op, k -> new ArrayList<>()).add(condition);
+            }
+        }
+        return this;
+    }
+
+    public List<ConditionJsonProvider> getConditionsFor(Operation op) {
+        List<ConditionJsonProvider> allConditions = new ArrayList<>(globalConditions);
+        allConditions.addAll(specificConditions.getOrDefault(op, Collections.emptyList()));
+        return allConditions;
+    }
+
 
     public ShapedRecipeDef build() {
         validateRecipe();
@@ -160,7 +215,6 @@ public final class ShapedRecipeDef implements RecipeDef {
         }
     }
 
-    public String getName() { return name; }
     public List<String> getPattern() { return pattern; }
     public Map<Character, ShapeIngredient> getKey() { return key; }
     public List<ItemStack> getItemOutputs() { return itemOutputs; }
@@ -169,9 +223,8 @@ public final class ShapedRecipeDef implements RecipeDef {
 
     public boolean isMechanicalMirrorAllowed() { return mechanicalAllowMirrored; }
 
-    public boolean isVanillaShaped() { return vanillaShaped; }
-    public boolean isCreateMechanicalCrafting() { return createMechanicalCrafting; }
-    public boolean isDisableVanillaIfCreate() { return disableVanillaIfCreate; }
+    public Set<Operation> getOperations() { return Collections.unmodifiableSet(operations); }
+    public boolean hasOperation(Operation op) { return operations.contains(op); }
 
     public static ItemStack convertFluidOutputToFlask(FluidOutput fluidOutput) {
         FilledFlaskItem item = FilledFlaskItem.getFlaskForFluid(fluidOutput.fluid());

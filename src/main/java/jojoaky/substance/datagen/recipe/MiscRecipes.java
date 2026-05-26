@@ -1,16 +1,11 @@
 package jojoaky.substance.datagen.recipe;
 
-import com.simibubi.create.AllItems;
-import com.simibubi.create.AllTags;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
-import com.simibubi.create.foundation.data.recipe.CommonMetal;
-import jojoaky.substance.content.flask.FlaskItem;
 import jojoaky.substance.content.flask.ModFlasks;
 import jojoaky.substance.datagen.recipe_generator.ShapedRecipeDef;
 import jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef;
 import jojoaky.substance.datagen.recipe_generator.RecipeGeneratorRegistry;
 import jojoaky.substance.register.ModItems;
-import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.minecraft.world.item.Items;
 
 import static jojoaky.substance.datagen.recipe.RecipeConstants.BASE_FLUID;
@@ -58,7 +53,7 @@ public class MiscRecipes {
                         .pattern(" g ")
                         .pattern("g g")
                         .pattern("ggg")
-                        .output(ModFlasks.EMPTY_FLASK, 3)
+                        .output(ModFlasks.EMPTY_FLASK, 6)
                         .build(),
 
                 ShapedRecipeDef.named("tray")

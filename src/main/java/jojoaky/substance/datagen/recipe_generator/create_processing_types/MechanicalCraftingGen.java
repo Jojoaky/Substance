@@ -5,12 +5,16 @@ import com.simibubi.create.api.data.recipe.MechanicalCraftingRecipeGen;
 import jojoaky.substance.datagen.recipe_generator.RecipeGeneratorRegistry;
 import jojoaky.substance.datagen.recipe_generator.ShapedRecipeDef;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
+
+import static jojoaky.substance.datagen.recipe_generator.ShapedRecipeDef.Operation.CREATE_MECHANICAL_CRAFTING;
 
 public class MechanicalCraftingGen extends MechanicalCraftingRecipeGen {
     public MechanicalCraftingGen(FabricDataOutput output) {
@@ -18,20 +22,53 @@ public class MechanicalCraftingGen extends MechanicalCraftingRecipeGen {
     }
 
     private final List<GeneratedRecipe> recipes = RecipeGeneratorRegistry.SHAPED_RECIPES.stream()
-            .filter(ShapedRecipeDef::isCreateMechanicalCrafting)
+            .filter(def -> def.hasOperation(CREATE_MECHANICAL_CRAFTING))
             .map(this::buildRecipe)
             .toList();
+
+    protected NamedRecipeBuilder create(String name, Supplier<ItemLike> result) {
+        return new NamedRecipeBuilder(name, result);
+    }
+
+    protected class NamedRecipeBuilder {
+        private String name;
+        private Supplier<ItemLike> result;
+        private int amount;
+
+        public NamedRecipeBuilder(String name, Supplier<ItemLike> result) {
+            this.name = name;
+            this.result = result;
+            this.amount = 1;
+        }
+
+        public NamedRecipeBuilder returns(int amount) {
+            this.amount = amount;
+            return this;
+        }
+
+        public GeneratedRecipe recipe(UnaryOperator<MechanicalCraftingRecipeBuilder> builder) {
+            return register(consumer -> {
+                MechanicalCraftingRecipeBuilder b =
+                        builder.apply(MechanicalCraftingRecipeBuilder.shapedRecipe(result.get(), amount));
+
+                ResourceLocation location = asResource("mechanical_crafting/" + name);
+                b.build(consumer, location);
+            });
+        }
+    }
 
     private GeneratedRecipe buildRecipe(ShapedRecipeDef def) {
         ItemStack outputStack = def.getSingleOutputAsItem();
 
-        return create(outputStack::getItem).returns(outputStack.getCount())
-                .withSuffix("_mechanical")
+        return create(
+                def.getRecipeName(CREATE_MECHANICAL_CRAFTING),
+                outputStack::getItem)
+                .returns(outputStack.getCount())
                 .recipe(b -> {
                     applyKeys(b, def);
                     applyPattern(b, def);
                     if (!def.isMechanicalMirrorAllowed()) b.disallowMirrored();
-                    def.getConditions().forEach(b::withCondition);
+                    def.getConditionsFor(CREATE_MECHANICAL_CRAFTING).forEach(b::withCondition);
                     return b;
                 });
     }

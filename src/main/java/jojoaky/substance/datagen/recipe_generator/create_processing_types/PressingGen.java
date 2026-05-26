@@ -8,6 +8,8 @@ import jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef;
 import jojoaky.substance.datagen.recipe_generator.RecipeGeneratorRegistry;
 import net.minecraft.data.PackOutput;
 
+import static jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef.Operation.CREATE_PRESSING;
+
 public class PressingGen extends PressingRecipeGen {
     public PressingGen(PackOutput output) {
         super(output, "substance");
@@ -16,16 +18,16 @@ public class PressingGen extends PressingRecipeGen {
 
     private void registerAll() {
         RecipeGeneratorRegistry.SHAPELESS_RECIPES.stream()
-                .filter(ShapelessRecipeDef::isCreatePressing)
+                .filter(def -> def.hasOperation(CREATE_PRESSING))
                 .forEach(this::buildRecipe);
     }
 
     private void buildRecipe(ShapelessRecipeDef def) {
-        create(def.getName() + "_pressing", b -> {
+        create(def.getRecipeName(CREATE_PRESSING), b -> {
             applyIngredients(b, def);
             applyOutputs(b, def);
             b.whenModLoaded(Create.ID);
-            def.getConditions().forEach(b::withCondition);
+            def.getConditionsFor(CREATE_PRESSING).forEach(b::withCondition);
             return b;
         });
     }
