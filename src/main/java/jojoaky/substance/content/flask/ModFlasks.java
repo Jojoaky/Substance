@@ -24,6 +24,7 @@ import java.util.List;
 
 import static jojoaky.substance.register.ModItems.register;
 
+@SuppressWarnings("UnstableApiUsage")
 public class ModFlasks {
     public record FlaskEntry(
             FlowingFluid still,
