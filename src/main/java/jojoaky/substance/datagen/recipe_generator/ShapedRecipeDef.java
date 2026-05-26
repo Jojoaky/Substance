@@ -1,8 +1,10 @@
 package jojoaky.substance.datagen.recipe_generator;
 
+import com.google.common.collect.Lists;
 import jojoaky.substance.Substance;
 import jojoaky.substance.content.flask.FilledFlaskItem;
 import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
+import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -34,6 +36,23 @@ public final class ShapedRecipeDef implements RecipeDef {
 
         public String getSuffix() {
             return suffix;
+        }
+
+        public static Operation[] allVanilla() {
+            return new Operation[] {
+                    VANILLA_SHAPED
+            };
+        }
+
+        public static Operation[] allReplacements() {
+            return new Operation[] {
+            };
+        }
+
+        public static Operation[] allCreate() {
+            return new Operation[] {
+                    CREATE_MECHANICAL_CRAFTING
+            };
         }
     }
 
@@ -124,20 +143,18 @@ public final class ShapedRecipeDef implements RecipeDef {
         return this;
     }
 
-    private boolean disableVanillaIfCreate = false;
-    public ShapedRecipeDef disableVanillaIfCreate() {
-        this.disableVanillaIfCreate = true;
-        return this;
-    }
-    public boolean isDisableVanillaIfCreate() { return disableVanillaIfCreate; }
+    private final Set<ShapedRecipeDef.Operation> manualOnlyOperations = EnumSet.noneOf(ShapedRecipeDef.Operation.class);
+    public ShapedRecipeDef manualOnly(ShapedRecipeDef.Operation... ops) {
+        if (ops == null || ops.length == 0) {
+            Collections.addAll(this.manualOnlyOperations, Operation.allVanilla());
+            return this;
+        }
 
-    private boolean manualOnly = false;
-    public ShapedRecipeDef manualOnly() {
-        this.manualOnly = true;
+        Collections.addAll(this.manualOnlyOperations, ops);
         return this;
     }
-    public boolean isManualOnly() {
-        return this.manualOnly;
+    public boolean isManualOnly(ShapedRecipeDef.Operation op) {
+        return this.manualOnlyOperations.contains(op);
     }
 
     // Naming & Overrides
@@ -151,7 +168,7 @@ public final class ShapedRecipeDef implements RecipeDef {
         String defaultName = this.name + op.getSuffix();
         String resolvedName = this.nameOverrides.getOrDefault(op, defaultName);
 
-        if (this.isManualOnly()) {
+        if (this.isManualOnly(op)) {
             resolvedName += "_manual_only";
         }
 
@@ -261,5 +278,56 @@ public final class ShapedRecipeDef implements RecipeDef {
         if (!itemOutputs.isEmpty()) return itemOutputs.getFirst();
         if (!fluidOutputs.isEmpty()) return convertFluidOutputToFlask(fluidOutputs.getFirst());
         throw new IllegalStateException("Recipe '" + name + "' does not yield any non-chanced physical item or flask outputs.");
+    }
+
+    public ShapedRecipeDef requireModLoaded(String modId, ShapedRecipeDef.Operation... ops) {
+        return this.condition(DefaultResourceConditions.allModsLoaded(modId), ops);
+    }
+
+    public ShapedRecipeDef requireModNotLoaded(String modId, ShapedRecipeDef.Operation... ops) {
+        return this.condition(DefaultResourceConditions.not(DefaultResourceConditions.allModsLoaded(modId)), ops);
+    }
+
+    public ShapedRecipeDef requireAllModsLoaded(List<String> modIds, ShapedRecipeDef.Operation... ops) {
+        return this.condition(DefaultResourceConditions.allModsLoaded(modIds.toArray(new String[0])), ops);
+    }
+
+    public ShapedRecipeDef requireAnyModLoaded(List<String> modIds, ShapedRecipeDef.Operation... ops) {
+        return this.condition(DefaultResourceConditions.anyModLoaded(modIds.toArray(new String[0])), ops);
+    }
+
+    public ShapedRecipeDef requireNoModsLoaded(List<String> modIds, ShapedRecipeDef.Operation... ops) {
+        return this.condition(
+                DefaultResourceConditions.not(
+                        DefaultResourceConditions.anyModLoaded(modIds.toArray(new String[0]))
+                ),
+                ops
+        );
+    }
+
+    public ShapedRecipeDef requireNotAllModsLoaded(List<String> modIds, ShapedRecipeDef.Operation... ops) {
+        return this.condition(
+                DefaultResourceConditions.not(
+                        DefaultResourceConditions.allModsLoaded(modIds.toArray(new String[0]))
+                ),
+                ops
+        );
+    }
+
+    public ShapedRecipeDef requireTagsEmpty(List<TagKey<?>> tags, ShapedRecipeDef.Operation... ops) {
+        return this.condition(
+                DefaultResourceConditions.not(
+                        DefaultResourceConditions.tagsPopulated(tags.toArray(new TagKey[0]))
+                ),
+                ops
+        );
+    }
+
+    public ShapedRecipeDef requireTagsPopulated(List<TagKey<?>> tags, ShapedRecipeDef.Operation... ops) {
+        return this.condition(DefaultResourceConditions.tagsPopulated(tags.toArray(new TagKey[0])), ops);
+    }
+
+    public ShapedRecipeDef useWeakReplacements() {
+        return requireModNotLoaded("create", ShapedRecipeDef.Operation.allReplacements());
     }
 }

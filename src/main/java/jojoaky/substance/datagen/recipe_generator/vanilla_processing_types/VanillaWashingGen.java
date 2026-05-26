@@ -54,14 +54,6 @@ public class VanillaWashingGen extends FabricRecipeProvider {
 
         Consumer<FinishedRecipe> finalWriter = writer;
 
-        if (def.isDisableVanillaIfCreate()) {
-            finalWriter = withConditions(writer,
-                    DefaultResourceConditions.not(
-                            DefaultResourceConditions.anyModLoaded("create")
-                    )
-            );
-        }
-
         for (var con : def.getConditionsFor(CUSTOM_VANILLA_WASHING)) {
             finalWriter = withConditions(finalWriter, con);
         }

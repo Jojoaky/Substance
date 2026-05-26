@@ -21,7 +21,7 @@ public class ChemicalPowderRecipes {
                 ShapelessRecipeDef.named("white_phosphorus")
                         .createCrushing()
                         .vanillaShapeless()
-                        .disableVanillaIfCreate()
+                        .useWeakReplacements()
                         .require(Items.CALCITE)
                         .output(ModItems.WHITE_PHOSPHORUS)
                         .output(ModItems.WHITE_PHOSPHORUS, 1, 0.6f)
@@ -51,7 +51,9 @@ public class ChemicalPowderRecipes {
                         .build(),
 
                 ShapelessRecipeDef.named("pseudoephedrine_ephedra_vanilla")
-                        .vanillaShapeless()
+                        .createMixing()
+                        .generateVanillaMixing()
+                        .manualOnly()
                         .require(ModItems.EPHEDRA_BUNDLE, 4)
                         .output(ModItems.PSEUDO, 4)
                         .build(),

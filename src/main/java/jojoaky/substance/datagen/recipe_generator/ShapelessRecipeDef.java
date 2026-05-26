@@ -3,6 +3,7 @@ package jojoaky.substance.datagen.recipe_generator;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import jojoaky.substance.content.flask.FilledFlaskItem;
 import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
+import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -10,13 +11,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 public final class ShapelessRecipeDef implements RecipeDef {
@@ -36,6 +31,7 @@ public final class ShapelessRecipeDef implements RecipeDef {
         VANILLA_CAMPFIRE_COOKING("_campfire"),
         VANILLA_SMELTING("_smelting"),
         VANILLA_SMOKING("_smoking"),
+
         CREATE_MIXING("_mixing"),
         CREATE_CRUSHING("_crushing"),
         CREATE_MILLING("_milling"),
@@ -45,8 +41,9 @@ public final class ShapelessRecipeDef implements RecipeDef {
         CREATE_FILLING("_filling"),
         CREATE_HAUNTING("_haunting"),
         CREATE_WASHING("_washing"),
+
         CUSTOM_VANILLA_MIXING("_v_mixing"),
-        CUSTOM_VANILLA_COMPACTING("v_compacting"),
+        CUSTOM_VANILLA_COMPACTING("_v_compacting"),
         CUSTOM_VANILLA_WASHING("_v_washing");
 
         private final String suffix;
@@ -57,6 +54,38 @@ public final class ShapelessRecipeDef implements RecipeDef {
 
         public String getSuffix() {
             return suffix;
+        }
+
+        public static Operation[] allReplacements() {
+            return new Operation[] {
+                    CUSTOM_VANILLA_MIXING,
+                    CUSTOM_VANILLA_COMPACTING,
+                    CUSTOM_VANILLA_WASHING
+            };
+        }
+
+        public static Operation[] allVanilla() {
+            return new Operation[] {
+                    VANILLA_SHAPELESS,
+                    VANILLA_BLASTING,
+                    VANILLA_CAMPFIRE_COOKING,
+                    VANILLA_SMELTING,
+                    VANILLA_SMOKING
+            };
+        }
+
+        public static Operation[] allCreate() {
+            return new Operation[] {
+                    CREATE_MIXING,
+                    CREATE_CRUSHING,
+                    CREATE_MILLING,
+                    CREATE_PRESSING,
+                    CREATE_COMPACTING,
+                    CREATE_EMPTYING,
+                    CREATE_FILLING,
+                    CREATE_HAUNTING,
+                    CREATE_WASHING
+            };
         }
     }
 
@@ -279,7 +308,7 @@ public final class ShapelessRecipeDef implements RecipeDef {
         String defaultName = this.name + op.getSuffix();
         String resolvedName = this.nameOverrides.getOrDefault(op, defaultName);
 
-        if (this.isManualOnly()) {
+        if (this.isManualOnly(op)) {
             resolvedName += "_manual_only";
         }
 
@@ -308,21 +337,18 @@ public final class ShapelessRecipeDef implements RecipeDef {
         return allConditions;
     }
 
+    private final Set<Operation> manualOnlyOperations = EnumSet.noneOf(Operation.class);
+    public ShapelessRecipeDef manualOnly(Operation... ops) {
+        if (ops == null || ops.length == 0) {
+            Collections.addAll(this.manualOnlyOperations, Operation.allVanilla());
+            return this;
+        }
 
-    private boolean disableVanillaIfCreate = false;
-    public ShapelessRecipeDef disableVanillaIfCreate() {
-        this.disableVanillaIfCreate = true;
+        Collections.addAll(this.manualOnlyOperations, ops);
         return this;
     }
-    public boolean isDisableVanillaIfCreate() { return disableVanillaIfCreate; }
-
-    private boolean manualOnly = false;
-    public ShapelessRecipeDef manualOnly() {
-        this.manualOnly = true;
-        return this;
-    }
-    public boolean isManualOnly() {
-        return this.manualOnly;
+    public boolean isManualOnly(Operation op) {
+        return this.manualOnlyOperations.contains(op);
     }
 
     public ShapelessRecipeDef build() {
@@ -454,5 +480,57 @@ public final class ShapelessRecipeDef implements RecipeDef {
         }
 
         throw new IllegalStateException("Recipe '" + name + "' does not contain any input ingredients.");
+    }
+
+
+    public ShapelessRecipeDef requireModLoaded(String modId, Operation... ops) {
+        return this.condition(DefaultResourceConditions.allModsLoaded(modId), ops);
+    }
+
+    public ShapelessRecipeDef requireModNotLoaded(String modId, Operation... ops) {
+        return this.condition(DefaultResourceConditions.not(DefaultResourceConditions.allModsLoaded(modId)), ops);
+    }
+
+    public ShapelessRecipeDef requireAllModsLoaded(List<String> modIds, Operation... ops) {
+        return this.condition(DefaultResourceConditions.allModsLoaded(modIds.toArray(new String[0])), ops);
+    }
+
+    public ShapelessRecipeDef requireAnyModLoaded(List<String> modIds, Operation... ops) {
+        return this.condition(DefaultResourceConditions.anyModLoaded(modIds.toArray(new String[0])), ops);
+    }
+
+    public ShapelessRecipeDef requireNoModsLoaded(List<String> modIds, Operation... ops) {
+        return this.condition(
+                DefaultResourceConditions.not(
+                        DefaultResourceConditions.anyModLoaded(modIds.toArray(new String[0]))
+                ),
+                ops
+        );
+    }
+
+    public ShapelessRecipeDef requireNotAllModsLoaded(List<String> modIds, Operation... ops) {
+        return this.condition(
+                DefaultResourceConditions.not(
+                        DefaultResourceConditions.allModsLoaded(modIds.toArray(new String[0]))
+                ),
+                ops
+        );
+    }
+
+    public ShapelessRecipeDef requireTagsEmpty(List<TagKey<?>> tags, Operation... ops) {
+        return this.condition(
+                DefaultResourceConditions.not(
+                        DefaultResourceConditions.tagsPopulated(tags.toArray(new TagKey[0]))
+                ),
+                ops
+        );
+    }
+
+    public ShapelessRecipeDef requireTagsPopulated(List<TagKey<?>> tags, Operation... ops) {
+        return this.condition(DefaultResourceConditions.tagsPopulated(tags.toArray(new TagKey[0])), ops);
+    }
+
+    public ShapelessRecipeDef useWeakReplacements() {
+        return requireModNotLoaded("create", Operation.allReplacements());
     }
 }
