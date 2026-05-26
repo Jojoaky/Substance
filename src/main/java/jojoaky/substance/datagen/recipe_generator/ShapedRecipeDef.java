@@ -1,6 +1,5 @@
 package jojoaky.substance.datagen.recipe_generator;
 
-import com.google.common.collect.Lists;
 import jojoaky.substance.Substance;
 import jojoaky.substance.content.flask.FilledFlaskItem;
 import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
