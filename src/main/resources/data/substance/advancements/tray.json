@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:white_oil_tray"
+    },
+    "title": "Let him cook",
+    "description": "Obtain a tray to cook"
+  },
+  "parent": "substance:substance",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:tray",
+              "substance:white_oil_tray",
+              "substance:blue_oil_tray"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

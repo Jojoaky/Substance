@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:gas_bottle_nitrogen"
+    },
+    "title": "It's in the air",
+    "description": "Obtain nitrogen from potatoes"
+  },
+  "parent": "substance:gas_bottle",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:gas_bottle_nitrogen"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

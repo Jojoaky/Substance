@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:white_oil_tray"
+    },
+    "title": "There's no going back",
+    "description": "Fill a tray with white oil"
+  },
+  "parent": "substance:tray",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:white_oil_tray"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

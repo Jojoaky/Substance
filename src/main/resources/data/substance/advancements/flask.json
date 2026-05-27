@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:flask"
+    },
+    "title": "Mix and Match",
+    "description": "Obtain a flask for fluid chemistry"
+  },
+  "parent": "substance:substance",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:flask"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

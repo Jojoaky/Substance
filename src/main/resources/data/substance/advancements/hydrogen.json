@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:gas_bottle_hydrogen"
+    },
+    "title": "Number One",
+    "description": "Obtain hydrogen from a magma bubble column"
+  },
+  "parent": "substance:gas_bottle",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:gas_bottle_hydrogen"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

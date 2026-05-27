@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:gas_bottle_oxygen"
+    },
+    "title": "Life Support",
+    "description": "Obtain oxygen from a soul sand bubble column"
+  },
+  "parent": "substance:gas_bottle",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:gas_bottle_oxygen"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
