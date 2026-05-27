@@ -17,7 +17,7 @@ public class ItemInHandRendererMixin {
             method = "renderArmWithItem",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getUseAnimation()Lnet/minecraft/world/item/UseAnim;")
     )
-    public UseAnim hideFirstPersonherbal_roll(ItemStack instance, Operation<UseAnim> original) {
+    public UseAnim hideFirstPersonSmokableAnimation(ItemStack instance, Operation<UseAnim> original) {
         if(instance.is(ModTags.SMOKABLE_ITEM)) {
             return UseAnim.BOW;
         }
