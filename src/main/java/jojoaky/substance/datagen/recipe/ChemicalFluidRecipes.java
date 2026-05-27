@@ -108,9 +108,6 @@ public class ChemicalFluidRecipes {
                         .output(ModItems.GAS_BOTTLE_HYDROGEN, 2)
                         .output(ModItems.GAS_BOTTLE_OXYGEN)
                         .build()
-
-                // TODO: Create vanilla way of obtaining oxygen and hydrogen
-                // maybe by right clicking with an empty gas bottle in air
         );
     }
 }
