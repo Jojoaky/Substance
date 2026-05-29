@@ -11,7 +11,7 @@
   "item.substance.blue_oil_tray": "Blaues Öl-Tray",
   "item.substance.white_oil_tray": "Weißes Öl-Tray",
 
-  "item.substance.flask": "Glasflasche",
+  "item.substance.flask": "Glaskolben",
   "item.substance.sculk_catalyst_crystal": "Sculk-Katalysator-Kristall",
 
   "item.substance.gas_bottle": "Leere Gasflasche",
@@ -19,14 +19,14 @@
   "item.substance.gas_bottle_hydrogen": "Wasserstoffflasche",
   "item.substance.gas_bottle_nitrogen": "Stickstoffflasche",
 
-  "item.substance.phenylacetic_acid_bucket": "Eimer Phenylessigsäure",
-  "item.substance.acetic_anhydride_bucket": "Eimer Essigsäureanhydrid",
-  "item.substance.methanol_bucket": "Eimer Methanol",
-  "item.substance.methylamine_bucket": "Eimer Methylamin",
-  "item.substance.phenylacetone_bucket": "Eimer Phenylaceton",
-  "item.substance.ammonia_bucket": "Eimer Ammoniak",
-  "item.substance.white_crystal_oil_bucket": "Eimer Weißes Kristallöl",
-  "item.substance.blue_crystal_oil_bucket": "Eimer Blaues Kristallöl",
+  "item.substance.phenylacetic_acid_bucket": "Eimer mit Phenylessigsäure",
+  "item.substance.acetic_anhydride_bucket": "Eimer mit Essigsäureanhydrid",
+  "item.substance.methanol_bucket": "Eimer mit Methanol",
+  "item.substance.methylamine_bucket": "Eimer mit Methylamin",
+  "item.substance.phenylacetone_bucket": "Eimer mit Phenylaceton",
+  "item.substance.ammonia_bucket": "Eimer mit Ammoniak",
+  "item.substance.white_crystal_oil_bucket": "Eimer mit Weißem Kristallöl",
+  "item.substance.blue_crystal_oil_bucket": "Eimer mit Blauem Kristallöl",
 
   "block.substance.phenylacetic_acid": "Phenylessigsäure",
   "block.substance.acetic_anhydride": "Essigsäureanhydrid",
