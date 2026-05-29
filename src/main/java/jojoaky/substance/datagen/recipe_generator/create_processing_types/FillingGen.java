@@ -8,6 +8,8 @@ import jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef;
 import jojoaky.substance.datagen.recipe_generator.RecipeGeneratorRegistry;
 import net.minecraft.data.PackOutput;
 
+import static jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef.Operation.CREATE_FILLING;
+
 public class FillingGen extends FillingRecipeGen {
     public FillingGen(PackOutput output) {
         super(output, "substance");
@@ -16,28 +18,28 @@ public class FillingGen extends FillingRecipeGen {
 
     private void registerAll() {
         RecipeGeneratorRegistry.SHAPELESS_RECIPES.stream()
-                .filter(ShapelessRecipeDef::isCreateFilling)
+                .filter(def -> def.hasOperation(CREATE_FILLING))
                 .forEach(this::buildRecipe);
     }
 
     private void buildRecipe(ShapelessRecipeDef def) {
-        create(def.getName() + "_filling", b -> {
+        create(def.getRecipeName(CREATE_FILLING), b -> {
             applyIngredients(b, def);
             applyOutputs(b, def);
             b.whenModLoaded(Create.ID);
-            def.getConditions().forEach(b::withCondition);
+            def.getConditionsFor(CREATE_FILLING).forEach(b::withCondition);
             return b;
         });
     }
 
     private void applyIngredients(ProcessingRecipeBuilder<ProcessingRecipe<?>> b, ShapelessRecipeDef def) {
         if (def.getFluidInputs().size() != 1) {
-            throw new IllegalArgumentException("Filling Recipe must have exactly one fluid input! " + def.getName() + " has " + def.getFluidInputs().size());
+            throw new IllegalArgumentException("Filling Recipe must have exactly one fluid input! " + def.getBaseName() + " has " + def.getFluidInputs().size());
         }
 
         int totalItemInputs = def.getTagInputs().size() + def.getItemInputs().size();
         if (totalItemInputs != 1) {
-            throw new IllegalArgumentException("Filling Recipe must have exactly one item container ingredient! " + def.getName() + " has " + totalItemInputs);
+            throw new IllegalArgumentException("Filling Recipe must have exactly one item container ingredient! " + def.getBaseName() + " has " + totalItemInputs);
         }
 
         def.getFluidInputs().forEach(fluid -> b.require(fluid.fluid(), fluid.amount()));
@@ -48,7 +50,7 @@ public class FillingGen extends FillingRecipeGen {
 
     private void applyOutputs(ProcessingRecipeBuilder<ProcessingRecipe<?>> b, ShapelessRecipeDef def) {
         if (!def.getFluidOutputs().isEmpty()) {
-            throw new IllegalArgumentException("Filling Recipe can't have fluid outputs! in " + def.getName());
+            throw new IllegalArgumentException("Filling Recipe can't have fluid outputs! in " + def.getBaseName());
         }
 
         def.getItemOutputs().forEach(item -> {

@@ -10,8 +10,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class ShapelessRecipeDef implements RecipeDef {
@@ -25,35 +26,90 @@ public final class ShapelessRecipeDef implements RecipeDef {
     private final List<RandomItemOutput> chancedItemOutputs = new ArrayList<>();
     private final List<FluidOutput> fluidOutputs = new ArrayList<>();
 
-    private boolean vanillaShapeless = false;
-    private boolean vanillaBlasting = false;
+    public enum Operation {
+        VANILLA_SHAPELESS(""),
+        VANILLA_BLASTING("_blasting"),
+        VANILLA_CAMPFIRE_COOKING("_campfire"),
+        VANILLA_SMELTING("_smelting"),
+        VANILLA_SMOKING("_smoking"),
+
+        CREATE_MIXING("_mixing"),
+        CREATE_CRUSHING("_crushing"),
+        CREATE_MILLING("_milling"),
+        CREATE_PRESSING("_pressing"),
+        CREATE_COMPACTING("_compacting"),
+        CREATE_EMPTYING("_emptying"),
+        CREATE_FILLING("_filling"),
+        CREATE_HAUNTING("_haunting"),
+        CREATE_WASHING("_washing"),
+
+        CUSTOM_VANILLA_MIXING("_v_mixing"),
+        CUSTOM_VANILLA_COMPACTING("_v_compacting"),
+        CUSTOM_VANILLA_WASHING("_v_washing");
+
+        private final String suffix;
+
+        Operation(String suffix) {
+            this.suffix = suffix;
+        }
+
+        public String getSuffix() {
+            return suffix;
+        }
+
+        public static Operation[] allReplacements() {
+            return new Operation[] {
+                    CUSTOM_VANILLA_MIXING,
+                    CUSTOM_VANILLA_COMPACTING,
+                    CUSTOM_VANILLA_WASHING
+            };
+        }
+
+        public static Operation[] allVanilla() {
+            return new Operation[] {
+                    VANILLA_SHAPELESS,
+                    VANILLA_BLASTING,
+                    VANILLA_CAMPFIRE_COOKING,
+                    VANILLA_SMELTING,
+                    VANILLA_SMOKING,
+                    CUSTOM_VANILLA_MIXING,
+                    CUSTOM_VANILLA_COMPACTING,
+                    CUSTOM_VANILLA_WASHING
+            };
+        }
+
+        public static Operation[] allCreate() {
+            return new Operation[] {
+                    CREATE_MIXING,
+                    CREATE_CRUSHING,
+                    CREATE_MILLING,
+                    CREATE_PRESSING,
+                    CREATE_COMPACTING,
+                    CREATE_EMPTYING,
+                    CREATE_FILLING,
+                    CREATE_HAUNTING,
+                    CREATE_WASHING
+            };
+        }
+    }
+
+    private final Set<Operation> operations = EnumSet.noneOf(Operation.class);
+    private final Map<Operation, String> nameOverrides = new EnumMap<>(Operation.class);
+
+    private final List<ConditionJsonProvider> globalConditions = new ArrayList<>();
+    private final Map<Operation, List<ConditionJsonProvider>> specificConditions = new EnumMap<>(Operation.class);
+
     private int blastDuration = 100;
     private float blastXP = 0;
-    private boolean vanillaCampfireCooking = false;
     private int campfireDuration = 600;
     private float campfireXP = 600;
-    private boolean vanillaSmelting = false;
     private int smeltDuration = 200;
     private float smeltXP = 200;
-    private boolean vanillaSmoking = false;
     private int smokeDuration = 100;
     private float smokeXP = 100;
 
-    private boolean createMixing = false;
     private HeatCondition mixingHeat = HeatCondition.NONE;
-    private boolean createCrushing = false;
-    private boolean createMilling = false;
-    private boolean createPressing = false;
-    private boolean createCompacting = false;
     private HeatCondition compactingHeat = HeatCondition.NONE;
-    private boolean createEmptying = false;
-    private boolean createFilling = false;
-    private boolean createHaunting = false;
-    private boolean createWashing = false;
-
-    private boolean customVanillaMixing = false;
-    private boolean customVanillaCompacting = false;
-    private boolean customVanillaWashing = false;
 
     public record TagInput(TagKey<Item> tag, int count) {}
     public record FluidInput(Fluid fluid, long amount) {}
@@ -126,7 +182,7 @@ public final class ShapelessRecipeDef implements RecipeDef {
     // Operations
 
     public ShapelessRecipeDef vanillaShapeless() {
-        this.vanillaShapeless = true;
+        this.operations.add(Operation.VANILLA_SHAPELESS);
         return this;
     }
 
@@ -135,7 +191,7 @@ public final class ShapelessRecipeDef implements RecipeDef {
     }
 
     public ShapelessRecipeDef blasting(int duration, float xp) {
-        this.vanillaBlasting = true;
+        this.operations.add(Operation.VANILLA_BLASTING);
         this.blastDuration = duration;
         this.blastXP = xp;
         return this;
@@ -146,7 +202,7 @@ public final class ShapelessRecipeDef implements RecipeDef {
     }
 
     public ShapelessRecipeDef vanillaCampfireCooking(int duration, float xp) {
-        this.vanillaCampfireCooking = true;
+        this.operations.add(Operation.VANILLA_CAMPFIRE_COOKING);
         this.campfireDuration = duration;
         this.campfireXP = xp;
         return this;
@@ -157,7 +213,7 @@ public final class ShapelessRecipeDef implements RecipeDef {
     }
 
     public ShapelessRecipeDef smelting(int duration, float xp) {
-        this.vanillaSmelting = true;
+        this.operations.add(Operation.VANILLA_SMELTING);
         this.smeltDuration = duration;
         this.smeltXP = xp;
         return this;
@@ -168,7 +224,7 @@ public final class ShapelessRecipeDef implements RecipeDef {
     }
 
     public ShapelessRecipeDef smoking(int duration, float xp) {
-        this.vanillaSmoking = true;
+        this.operations.add(Operation.VANILLA_SMOKING);
         this.smokeDuration = duration;
         this.smokeXP = xp;
         return this;
@@ -179,23 +235,23 @@ public final class ShapelessRecipeDef implements RecipeDef {
     }
 
     public ShapelessRecipeDef createMixing(HeatCondition condition) {
-        this.createMixing = true;
+        this.operations.add(Operation.CREATE_MIXING);
         this.mixingHeat = condition;
         return this;
     }
 
     public ShapelessRecipeDef createCrushing() {
-        this.createCrushing = true;
+        this.operations.add(Operation.CREATE_CRUSHING);
         return this;
     }
 
     public ShapelessRecipeDef createMilling() {
-        this.createMilling = true;
+        this.operations.add(Operation.CREATE_MILLING);
         return this;
     }
 
     public ShapelessRecipeDef createPressing() {
-        this.createPressing = true;
+        this.operations.add(Operation.CREATE_PRESSING);
         return this;
     }
 
@@ -204,65 +260,105 @@ public final class ShapelessRecipeDef implements RecipeDef {
     }
 
     public ShapelessRecipeDef createCompacting(HeatCondition condition) {
-        this.createCompacting = true;
+        this.operations.add(Operation.CREATE_COMPACTING);
         this.compactingHeat = condition;
         return this;
     }
 
     public ShapelessRecipeDef createEmptying() {
-        this.createEmptying = true;
+        this.operations.add(Operation.CREATE_EMPTYING);
         return this;
     }
 
     public ShapelessRecipeDef createFilling() {
-        this.createFilling = true;
+        this.operations.add(Operation.CREATE_FILLING);
         return this;
     }
 
     public ShapelessRecipeDef createHaunting() {
-        this.createHaunting = true;
+        this.operations.add(Operation.CREATE_HAUNTING);
         return this;
     }
 
     public ShapelessRecipeDef createWashing() {
-        this.createWashing = true;
+        this.operations.add(Operation.CREATE_WASHING);
         return this;
     }
 
     public ShapelessRecipeDef generateVanillaMixing() {
-        this.customVanillaMixing = true;
+        this.operations.add(Operation.CUSTOM_VANILLA_MIXING);
         return this;
     }
 
     public ShapelessRecipeDef generateVanillaCompacting() {
-        this.customVanillaCompacting = true;
+        this.operations.add(Operation.CUSTOM_VANILLA_COMPACTING);
         return this;
     }
 
     public ShapelessRecipeDef generateVanillaWashing() {
-        this.customVanillaWashing = true;
+        this.operations.add(Operation.CUSTOM_VANILLA_WASHING);
         return this;
     }
 
 
-    private final List<ConditionJsonProvider> conditions = new ArrayList<>();
+    // Naming & Overrides
 
-    public ShapelessRecipeDef condition(ConditionJsonProvider condition) {
-        this.conditions.add(condition);
+    public ShapelessRecipeDef overrideName(Operation op, String customName) {
+        this.nameOverrides.put(op, customName);
         return this;
     }
 
-    public List<ConditionJsonProvider> getConditions() {
-        return conditions;
+    public String getRecipeName(Operation op) {
+        String defaultName = this.name + op.getSuffix();
+        String resolvedName = this.nameOverrides.getOrDefault(op, defaultName);
+
+        if (this.isManualOnly(op)) {
+            resolvedName += "_manual_only";
+        }
+
+        return resolvedName;
     }
 
-    private boolean disableVanillaIfCreate = false;
-    public ShapelessRecipeDef disableVanillaIfCreate() {
-        this.disableVanillaIfCreate = true;
+    public String getBaseName() { return name; }
+
+
+    // Conditions
+
+    public ShapelessRecipeDef condition(ConditionJsonProvider condition, Operation... ops) {
+        if (ops == null || ops.length == 0) {
+            this.globalConditions.add(condition);
+        } else {
+            for (Operation op : ops) {
+                this.specificConditions.computeIfAbsent(op, k -> new ArrayList<>()).add(condition);
+            }
+        }
         return this;
     }
-    public boolean isDisableVanillaIfCreate() { return disableVanillaIfCreate; }
 
+    public List<ConditionJsonProvider> getConditionsFor(Operation op) {
+        List<ConditionJsonProvider> allConditions = new ArrayList<>(globalConditions);
+        allConditions.addAll(specificConditions.getOrDefault(op, Collections.emptyList()));
+        return allConditions;
+    }
+
+    private final Set<Operation> manualOnlyOperations = EnumSet.noneOf(Operation.class);
+    public ShapelessRecipeDef manualOnly(Operation... ops) {
+        if (ops == null || ops.length == 0) {
+            Collections.addAll(this.manualOnlyOperations, Operation.allVanilla());
+
+            String str = manualOnlyOperations.stream()
+                    .map(Operation::toString)
+                    .collect(Collectors.joining(", "));
+
+            return this;
+        }
+
+        Collections.addAll(this.manualOnlyOperations, ops);
+        return this;
+    }
+    public boolean isManualOnly(Operation op) {
+        return this.manualOnlyOperations.contains(op);
+    }
 
     public ShapelessRecipeDef build() {
         validateRecipe();
@@ -285,7 +381,6 @@ public final class ShapelessRecipeDef implements RecipeDef {
         }
     }
 
-    public String getName() { return name; }
     public List<ItemStack> getItemInputs() { return itemInputs; }
     public List<TagInput> getTagInputs() { return tagInputs; }
     public List<FluidInput> getFluidInputs() { return fluidInputs; }
@@ -293,11 +388,8 @@ public final class ShapelessRecipeDef implements RecipeDef {
     public List<RandomItemOutput> getChancedItemOutputs() { return chancedItemOutputs; }
     public List<FluidOutput> getFluidOutputs() { return fluidOutputs; }
 
-    public boolean isVanillaShapeless() { return vanillaShapeless; }
-    public boolean isBlasting() { return vanillaBlasting; }
-    public boolean isSmelting() { return vanillaSmelting; }
-    public boolean isSmoking() { return vanillaSmoking; }
-    public boolean isVanillaCampfireCooking() { return vanillaCampfireCooking; }
+    public Set<Operation> getOperations() { return Collections.unmodifiableSet(operations); }
+    public boolean hasOperation(Operation op) { return operations.contains(op); }
 
     public int getBlastDuration() { return blastDuration; }
     public int getSmeltDuration() { return smeltDuration; }
@@ -309,21 +401,8 @@ public final class ShapelessRecipeDef implements RecipeDef {
     public float getSmokeXP() { return smokeXP; }
     public float getCampfireXP() { return campfireXP; }
 
-    public boolean isCreateMixing() { return createMixing; }
     public HeatCondition getMixingHeat() { return mixingHeat; }
-    public boolean isCreateCrushing() { return createCrushing; }
-    public boolean isCreateMilling() { return createMilling; }
-    public boolean isCreatePressing() { return createPressing; }
-    public boolean isCreateCompacting() { return createCompacting; }
     public HeatCondition getCompactingHeat() { return compactingHeat; }
-    public boolean isCreateEmptying() { return createEmptying; }
-    public boolean isCreateFilling() { return createFilling; }
-    public boolean isCreateHaunting() { return createHaunting; }
-    public boolean isCreateWashing() { return createWashing; }
-
-    public boolean isCustomVanillaMixing() { return customVanillaMixing; }
-    public boolean isCustomVanillaCompacting() { return customVanillaCompacting; }
-    public boolean isCustomVanillaWashing() { return customVanillaWashing; }
 
     public static ItemStack convertFluidInputToFlask(ShapelessRecipeDef.FluidInput fluidInput) {
         FilledFlaskItem item = FilledFlaskItem.getFlaskForFluid(fluidInput.fluid());
@@ -410,5 +489,57 @@ public final class ShapelessRecipeDef implements RecipeDef {
         }
 
         throw new IllegalStateException("Recipe '" + name + "' does not contain any input ingredients.");
+    }
+
+
+    public ShapelessRecipeDef requireModLoaded(String modId, Operation... ops) {
+        return this.condition(DefaultResourceConditions.allModsLoaded(modId), ops);
+    }
+
+    public ShapelessRecipeDef requireModNotLoaded(String modId, Operation... ops) {
+        return this.condition(DefaultResourceConditions.not(DefaultResourceConditions.allModsLoaded(modId)), ops);
+    }
+
+    public ShapelessRecipeDef requireAllModsLoaded(List<String> modIds, Operation... ops) {
+        return this.condition(DefaultResourceConditions.allModsLoaded(modIds.toArray(new String[0])), ops);
+    }
+
+    public ShapelessRecipeDef requireAnyModLoaded(List<String> modIds, Operation... ops) {
+        return this.condition(DefaultResourceConditions.anyModLoaded(modIds.toArray(new String[0])), ops);
+    }
+
+    public ShapelessRecipeDef requireNoModsLoaded(List<String> modIds, Operation... ops) {
+        return this.condition(
+                DefaultResourceConditions.not(
+                        DefaultResourceConditions.anyModLoaded(modIds.toArray(new String[0]))
+                ),
+                ops
+        );
+    }
+
+    public ShapelessRecipeDef requireNotAllModsLoaded(List<String> modIds, Operation... ops) {
+        return this.condition(
+                DefaultResourceConditions.not(
+                        DefaultResourceConditions.allModsLoaded(modIds.toArray(new String[0]))
+                ),
+                ops
+        );
+    }
+
+    public ShapelessRecipeDef requireTagsEmpty(List<TagKey<?>> tags, Operation... ops) {
+        return this.condition(
+                DefaultResourceConditions.not(
+                        DefaultResourceConditions.tagsPopulated(tags.toArray(new TagKey[0]))
+                ),
+                ops
+        );
+    }
+
+    public ShapelessRecipeDef requireTagsPopulated(List<TagKey<?>> tags, Operation... ops) {
+        return this.condition(DefaultResourceConditions.tagsPopulated(tags.toArray(new TagKey[0])), ops);
+    }
+
+    public ShapelessRecipeDef disableVanillaIfCreate() {
+        return requireModNotLoaded("create", Operation.allVanilla());
     }
 }

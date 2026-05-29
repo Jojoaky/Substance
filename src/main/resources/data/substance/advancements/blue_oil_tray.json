@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:blue_oil_tray"
+    },
+    "title": "99.9% Purity",
+    "description": "Fill a tray with blue oil"
+  },
+  "parent": "substance:tray",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:blue_oil_tray"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

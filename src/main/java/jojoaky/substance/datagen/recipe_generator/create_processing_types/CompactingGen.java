@@ -8,6 +8,8 @@ import jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef;
 import jojoaky.substance.datagen.recipe_generator.RecipeGeneratorRegistry;
 import net.minecraft.data.PackOutput;
 
+import static jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef.Operation.CREATE_COMPACTING;
+
 public class CompactingGen extends CompactingRecipeGen {
     public CompactingGen(PackOutput output) {
         super(output, "substance");
@@ -16,17 +18,17 @@ public class CompactingGen extends CompactingRecipeGen {
 
     private void registerAll() {
         RecipeGeneratorRegistry.SHAPELESS_RECIPES.stream()
-                .filter(ShapelessRecipeDef::isCreateCompacting)
+                .filter(def -> def.hasOperation(CREATE_COMPACTING))
                 .forEach(this::buildRecipe);
     }
 
     private void buildRecipe(ShapelessRecipeDef def) {
-        create(def.getName() + "_compacting", b -> {
+        create(def.getRecipeName(CREATE_COMPACTING), b -> {
             applyIngredients(b, def);
             applyOutputs(b, def);
             b.requiresHeat(def.getCompactingHeat());
             b.whenModLoaded(Create.ID);
-            def.getConditions().forEach(b::withCondition);
+            def.getConditionsFor(CREATE_COMPACTING).forEach(b::withCondition);
             return b;
         });
     }

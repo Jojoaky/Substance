@@ -14,6 +14,8 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
 
+import static jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef.Operation.CUSTOM_VANILLA_WASHING;
+
 public class VanillaWashingGen extends FabricRecipeProvider {
 
     public VanillaWashingGen(FabricDataOutput output) {
@@ -23,7 +25,7 @@ public class VanillaWashingGen extends FabricRecipeProvider {
     @Override
     public void buildRecipes(Consumer<FinishedRecipe> writer) {
         RecipeGeneratorRegistry.SHAPELESS_RECIPES.stream()
-                .filter(ShapelessRecipeDef::isCustomVanillaWashing)
+                .filter(def -> def.hasOperation(CUSTOM_VANILLA_WASHING))
                 .forEach(def -> buildRecipe(def, writer));
     }
 
@@ -52,15 +54,11 @@ public class VanillaWashingGen extends FabricRecipeProvider {
 
         Consumer<FinishedRecipe> finalWriter = writer;
 
-        if (def.isDisableVanillaIfCreate()) {
-            finalWriter = withConditions(writer,
-                    DefaultResourceConditions.not(
-                            DefaultResourceConditions.anyModLoaded("create")
-                    )
-            );
+        for (var con : def.getConditionsFor(CUSTOM_VANILLA_WASHING)) {
+            finalWriter = withConditions(finalWriter, con);
         }
 
-        builder.save(finalWriter, def.getName() + "_v_washing");
+        builder.save(finalWriter, def.getRecipeName(CUSTOM_VANILLA_WASHING));
     }
 
     private record RecipeResult(ItemLike item, int count) {}

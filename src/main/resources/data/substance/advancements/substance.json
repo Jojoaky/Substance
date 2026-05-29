@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:blue_crystals"
     },
-    "title": "Create: Substance",
-    "description": "There's no going back",
+    "title": "Substance",
+    "description": "Explore a new world",
     "frame": "task",
     "show_toast": false,
     "announce_to_chat": false,
@@ -12,16 +12,7 @@
   },
   "criteria": {
     "requirement": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "substance:blue_crystals"
-            ]
-          }
-        ]
-      }
+      "trigger": "minecraft:inventory_changed"
     }
   }
 }

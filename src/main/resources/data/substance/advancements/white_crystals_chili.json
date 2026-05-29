@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:white_crystals_chili"
+    },
+    "title": "Contamination",
+    "description": "Mix chili powder into white crystals"
+  },
+  "parent": "substance:white_crystals",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:white_crystals_chili"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

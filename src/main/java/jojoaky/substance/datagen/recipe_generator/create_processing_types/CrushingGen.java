@@ -8,6 +8,8 @@ import jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef;
 import jojoaky.substance.datagen.recipe_generator.RecipeGeneratorRegistry;
 import net.minecraft.data.PackOutput;
 
+import static jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef.Operation.CREATE_CRUSHING;
+
 public class CrushingGen extends CrushingRecipeGen {
     public CrushingGen(PackOutput output) {
         super(output, "substance");
@@ -16,16 +18,16 @@ public class CrushingGen extends CrushingRecipeGen {
 
     private void registerAll() {
         RecipeGeneratorRegistry.SHAPELESS_RECIPES.stream()
-                .filter(ShapelessRecipeDef::isCreateCrushing)
+                .filter(def -> def.hasOperation(CREATE_CRUSHING))
                 .forEach(this::buildRecipe);
     }
 
     private void buildRecipe(ShapelessRecipeDef def) {
-        create(def.getName() + "_crushing", b -> {
+        create(def.getRecipeName(CREATE_CRUSHING), b -> {
             applyIngredients(b, def);
             applyOutputs(b, def);
             b.whenModLoaded(Create.ID);
-            def.getConditions().forEach(b::withCondition);
+            def.getConditionsFor(CREATE_CRUSHING).forEach(b::withCondition);
             return b;
         });
     }

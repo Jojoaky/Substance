@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:blue_crystals"
+    },
+    "title": "The Good Stuff",
+    "description": "Obtain blue crystals"
+  },
+  "parent": "substance:blue_oil_tray",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:blue_crystals"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

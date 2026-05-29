@@ -12,6 +12,8 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
 
+import static jojoaky.substance.datagen.recipe_generator.ShapedRecipeDef.Operation.VANILLA_SHAPED;
+
 public class ShapedGen extends FabricRecipeProvider {
 
     public ShapedGen(FabricDataOutput output) {
@@ -21,7 +23,7 @@ public class ShapedGen extends FabricRecipeProvider {
     @Override
     public void buildRecipes(Consumer<FinishedRecipe> writer) {
         RecipeGeneratorRegistry.SHAPED_RECIPES.stream()
-                .filter(ShapedRecipeDef::isVanillaShaped)
+                .filter(def -> def.hasOperation(VANILLA_SHAPED))
                 .forEach(def -> buildRecipe(def, writer));
     }
 
@@ -51,19 +53,11 @@ public class ShapedGen extends FabricRecipeProvider {
 
         Consumer<FinishedRecipe> finalWriter = writer;
 
-        if (def.isDisableVanillaIfCreate()) {
-            finalWriter = withConditions(writer,
-                    DefaultResourceConditions.not(
-                            DefaultResourceConditions.anyModLoaded("create")
-                    )
-            );
-        }
-
-        for (var con : def.getConditions()) {
+        for (var con : def.getConditionsFor(VANILLA_SHAPED)) {
             finalWriter = withConditions(finalWriter, con);
         }
 
-        builder.save(finalWriter, def.getName());
+        builder.save(finalWriter, def.getRecipeName(VANILLA_SHAPED));
     }
 
     private record RecipeResult(ItemLike item, int count) {}

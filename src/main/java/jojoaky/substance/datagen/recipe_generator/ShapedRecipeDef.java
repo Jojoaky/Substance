@@ -1,6 +1,5 @@
 package jojoaky.substance.datagen.recipe_generator;
 
-import com.simibubi.create.content.processing.recipe.HeatCondition;
 import jojoaky.substance.Substance;
 import jojoaky.substance.content.flask.FilledFlaskItem;
 import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
@@ -24,11 +23,45 @@ public final class ShapedRecipeDef implements RecipeDef {
     private final List<RandomItemOutput> chancedItemOutputs = new ArrayList<>();
     private final List<FluidOutput> fluidOutputs = new ArrayList<>();
 
-    private boolean vanillaShaped = false;
-    private boolean createMechanicalCrafting = false;
-    private boolean mechanicalAllowMirrored = true;
+    public enum Operation {
+        VANILLA_SHAPED(""),
+        CREATE_MECHANICAL_CRAFTING("_mechanical_crafting");
 
-    private boolean disableVanillaIfCreate = false;
+        private final String suffix;
+
+        Operation(String suffix) {
+            this.suffix = suffix;
+        }
+
+        public String getSuffix() {
+            return suffix;
+        }
+
+        public static Operation[] allVanilla() {
+            return new Operation[] {
+                    VANILLA_SHAPED
+            };
+        }
+
+        public static Operation[] allReplacements() {
+            return new Operation[] {
+            };
+        }
+
+        public static Operation[] allCreate() {
+            return new Operation[] {
+                    CREATE_MECHANICAL_CRAFTING
+            };
+        }
+    }
+
+    private final Set<Operation> operations = EnumSet.noneOf(Operation.class);
+    private final Map<Operation, String> nameOverrides = new EnumMap<>(Operation.class);
+
+    private final List<ConditionJsonProvider> globalConditions = new ArrayList<>();
+    private final Map<Operation, List<ConditionJsonProvider>> specificConditions = new EnumMap<>(Operation.class);
+
+    private boolean mechanicalAllowMirrored = true;
 
     public sealed interface ShapeIngredient permits ShapeIngredient.OfItem, ShapeIngredient.OfTag {
         record OfItem(ItemLike item) implements ShapeIngredient {}
@@ -95,35 +128,73 @@ public final class ShapedRecipeDef implements RecipeDef {
 
 
     public ShapedRecipeDef vanillaShaped() {
-        this.vanillaShaped = true;
+        this.operations.add(Operation.VANILLA_SHAPED);
         return this;
     }
 
     public ShapedRecipeDef createMechanicalCrafting() {
-        this.createMechanicalCrafting = true;
+        this.operations.add(Operation.CREATE_MECHANICAL_CRAFTING);
         return this;
     }
 
-    public ShapedRecipeDef disableVanillaIfCreate() {
-        this.disableVanillaIfCreate = true;
-        return this;
-    }
-
-    public ShapedRecipeDef AllowMirroredMechanical(boolean allowMirrored) {
+    public ShapedRecipeDef allowMirroredMechanical(boolean allowMirrored) {
         this.mechanicalAllowMirrored = allowMirrored;
         return this;
     }
 
-    private final List<ConditionJsonProvider> conditions = new ArrayList<>();
+    private final Set<ShapedRecipeDef.Operation> manualOnlyOperations = EnumSet.noneOf(ShapedRecipeDef.Operation.class);
+    public ShapedRecipeDef manualOnly(ShapedRecipeDef.Operation... ops) {
+        if (ops == null || ops.length == 0) {
+            Collections.addAll(this.manualOnlyOperations, Operation.allVanilla());
+            return this;
+        }
 
-    public ShapedRecipeDef condition(ConditionJsonProvider condition) {
-        this.conditions.add(condition);
+        Collections.addAll(this.manualOnlyOperations, ops);
+        return this;
+    }
+    public boolean isManualOnly(ShapedRecipeDef.Operation op) {
+        return this.manualOnlyOperations.contains(op);
+    }
+
+    // Naming & Overrides
+
+    public ShapedRecipeDef overrideName(Operation op, String customName) {
+        this.nameOverrides.put(op, customName);
         return this;
     }
 
-    public List<ConditionJsonProvider> getConditions() {
-        return conditions;
+    public String getRecipeName(Operation op) {
+        String defaultName = this.name + op.getSuffix();
+        String resolvedName = this.nameOverrides.getOrDefault(op, defaultName);
+
+        if (this.isManualOnly(op)) {
+            resolvedName += "_manual_only";
+        }
+
+        return resolvedName;
     }
+
+    public String getBaseName() { return name; }
+
+    // Conditions
+
+    public ShapedRecipeDef condition(ConditionJsonProvider condition, Operation... ops) {
+        if (ops == null || ops.length == 0) {
+            this.globalConditions.add(condition);
+        } else {
+            for (Operation op : ops) {
+                this.specificConditions.computeIfAbsent(op, k -> new ArrayList<>()).add(condition);
+            }
+        }
+        return this;
+    }
+
+    public List<ConditionJsonProvider> getConditionsFor(Operation op) {
+        List<ConditionJsonProvider> allConditions = new ArrayList<>(globalConditions);
+        allConditions.addAll(specificConditions.getOrDefault(op, Collections.emptyList()));
+        return allConditions;
+    }
+
 
     public ShapedRecipeDef build() {
         validateRecipe();
@@ -160,7 +231,6 @@ public final class ShapedRecipeDef implements RecipeDef {
         }
     }
 
-    public String getName() { return name; }
     public List<String> getPattern() { return pattern; }
     public Map<Character, ShapeIngredient> getKey() { return key; }
     public List<ItemStack> getItemOutputs() { return itemOutputs; }
@@ -169,9 +239,8 @@ public final class ShapedRecipeDef implements RecipeDef {
 
     public boolean isMechanicalMirrorAllowed() { return mechanicalAllowMirrored; }
 
-    public boolean isVanillaShaped() { return vanillaShaped; }
-    public boolean isCreateMechanicalCrafting() { return createMechanicalCrafting; }
-    public boolean isDisableVanillaIfCreate() { return disableVanillaIfCreate; }
+    public Set<Operation> getOperations() { return Collections.unmodifiableSet(operations); }
+    public boolean hasOperation(Operation op) { return operations.contains(op); }
 
     public static ItemStack convertFluidOutputToFlask(FluidOutput fluidOutput) {
         FilledFlaskItem item = FilledFlaskItem.getFlaskForFluid(fluidOutput.fluid());
@@ -208,5 +277,56 @@ public final class ShapedRecipeDef implements RecipeDef {
         if (!itemOutputs.isEmpty()) return itemOutputs.getFirst();
         if (!fluidOutputs.isEmpty()) return convertFluidOutputToFlask(fluidOutputs.getFirst());
         throw new IllegalStateException("Recipe '" + name + "' does not yield any non-chanced physical item or flask outputs.");
+    }
+
+    public ShapedRecipeDef requireModLoaded(String modId, ShapedRecipeDef.Operation... ops) {
+        return this.condition(DefaultResourceConditions.allModsLoaded(modId), ops);
+    }
+
+    public ShapedRecipeDef requireModNotLoaded(String modId, ShapedRecipeDef.Operation... ops) {
+        return this.condition(DefaultResourceConditions.not(DefaultResourceConditions.allModsLoaded(modId)), ops);
+    }
+
+    public ShapedRecipeDef requireAllModsLoaded(List<String> modIds, ShapedRecipeDef.Operation... ops) {
+        return this.condition(DefaultResourceConditions.allModsLoaded(modIds.toArray(new String[0])), ops);
+    }
+
+    public ShapedRecipeDef requireAnyModLoaded(List<String> modIds, ShapedRecipeDef.Operation... ops) {
+        return this.condition(DefaultResourceConditions.anyModLoaded(modIds.toArray(new String[0])), ops);
+    }
+
+    public ShapedRecipeDef requireNoModsLoaded(List<String> modIds, ShapedRecipeDef.Operation... ops) {
+        return this.condition(
+                DefaultResourceConditions.not(
+                        DefaultResourceConditions.anyModLoaded(modIds.toArray(new String[0]))
+                ),
+                ops
+        );
+    }
+
+    public ShapedRecipeDef requireNotAllModsLoaded(List<String> modIds, ShapedRecipeDef.Operation... ops) {
+        return this.condition(
+                DefaultResourceConditions.not(
+                        DefaultResourceConditions.allModsLoaded(modIds.toArray(new String[0]))
+                ),
+                ops
+        );
+    }
+
+    public ShapedRecipeDef requireTagsEmpty(List<TagKey<?>> tags, ShapedRecipeDef.Operation... ops) {
+        return this.condition(
+                DefaultResourceConditions.not(
+                        DefaultResourceConditions.tagsPopulated(tags.toArray(new TagKey[0]))
+                ),
+                ops
+        );
+    }
+
+    public ShapedRecipeDef requireTagsPopulated(List<TagKey<?>> tags, ShapedRecipeDef.Operation... ops) {
+        return this.condition(DefaultResourceConditions.tagsPopulated(tags.toArray(new TagKey[0])), ops);
+    }
+
+    public ShapedRecipeDef useWeakReplacements() {
+        return requireModNotLoaded("create", ShapedRecipeDef.Operation.allReplacements());
     }
 }

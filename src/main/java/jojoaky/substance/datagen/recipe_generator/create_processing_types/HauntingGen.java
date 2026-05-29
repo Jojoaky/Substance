@@ -8,6 +8,8 @@ import jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef;
 import jojoaky.substance.datagen.recipe_generator.RecipeGeneratorRegistry;
 import net.minecraft.data.PackOutput;
 
+import static jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef.Operation.CREATE_HAUNTING;
+
 public class HauntingGen extends HauntingRecipeGen {
     public HauntingGen(PackOutput output) {
         super(output, "substance");
@@ -16,28 +18,28 @@ public class HauntingGen extends HauntingRecipeGen {
 
     private void registerAll() {
         RecipeGeneratorRegistry.SHAPELESS_RECIPES.stream()
-                .filter(ShapelessRecipeDef::isCreateHaunting)
+                .filter(def -> def.hasOperation(CREATE_HAUNTING))
                 .forEach(this::buildRecipe);
     }
 
     private void buildRecipe(ShapelessRecipeDef def) {
-        create(def.getName() + "_haunting", b -> {
+        create(def.getRecipeName(CREATE_HAUNTING), b -> {
             applyIngredients(b, def);
             applyOutputs(b, def);
             b.whenModLoaded(Create.ID);
-            def.getConditions().forEach(b::withCondition);
+            def.getConditionsFor(CREATE_HAUNTING).forEach(b::withCondition);
             return b;
         });
     }
 
     private void applyIngredients(ProcessingRecipeBuilder<ProcessingRecipe<?>> b, ShapelessRecipeDef def) {
         if (!def.getFluidInputs().isEmpty()) {
-            throw new IllegalArgumentException("Haunting Recipe can't have fluid ingredients! in " + def.getName());
+            throw new IllegalArgumentException("Haunting Recipe can't have fluid ingredients! in " + def.getBaseName());
         }
 
         int totalItemInputs = def.getTagInputs().size() + def.getItemInputs().size();
         if (totalItemInputs != 1) {
-            throw new IllegalArgumentException("Haunting Recipe must have exactly one ingredient! " + def.getName() + " has " + totalItemInputs);
+            throw new IllegalArgumentException("Haunting Recipe must have exactly one ingredient! " + def.getBaseName() + " has " + totalItemInputs);
         }
 
         def.getItemInputs().forEach(itemStack -> b.require(itemStack.getItem()));

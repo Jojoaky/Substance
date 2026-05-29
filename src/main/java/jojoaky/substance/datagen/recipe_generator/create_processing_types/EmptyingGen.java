@@ -8,6 +8,8 @@ import jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef;
 import jojoaky.substance.datagen.recipe_generator.RecipeGeneratorRegistry;
 import net.minecraft.data.PackOutput;
 
+import static jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef.Operation.CREATE_EMPTYING;
+
 public class EmptyingGen extends EmptyingRecipeGen {
     public EmptyingGen(PackOutput output) {
         super(output, "substance");
@@ -16,28 +18,28 @@ public class EmptyingGen extends EmptyingRecipeGen {
 
     private void registerAll() {
         RecipeGeneratorRegistry.SHAPELESS_RECIPES.stream()
-                .filter(ShapelessRecipeDef::isCreateEmptying) // FIXED: Was isCreateCrushing
+                .filter(def -> def.hasOperation(CREATE_EMPTYING))
                 .forEach(this::buildRecipe);
     }
 
     private void buildRecipe(ShapelessRecipeDef def) {
-        create(def.getName() + "_emptying", b -> {
+        create(def.getRecipeName(CREATE_EMPTYING), b -> {
             applyIngredients(b, def);
             applyOutputs(b, def);
             b.whenModLoaded(Create.ID);
-            def.getConditions().forEach(b::withCondition);
+            def.getConditionsFor(CREATE_EMPTYING).forEach(b::withCondition);
             return b;
         });
     }
 
     private void applyIngredients(ProcessingRecipeBuilder<ProcessingRecipe<?>> b, ShapelessRecipeDef def) {
         if (!def.getFluidInputs().isEmpty()) {
-            throw new IllegalArgumentException("Emptying Recipe can't have fluid ingredients! in " + def.getName());
+            throw new IllegalArgumentException("Emptying Recipe can't have fluid ingredients! in " + def.getBaseName());
         }
 
         int totalItemInputs = def.getTagInputs().size() + def.getItemInputs().size();
         if (totalItemInputs != 1) {
-            throw new IllegalArgumentException("Emptying Recipe must have exactly one ingredient! " + def.getName() + " has " + totalItemInputs);
+            throw new IllegalArgumentException("Emptying Recipe must have exactly one ingredient! " + def.getBaseName() + " has " + totalItemInputs);
         }
 
         def.getItemInputs().forEach(itemStack -> b.require(itemStack.getItem()));
@@ -46,7 +48,7 @@ public class EmptyingGen extends EmptyingRecipeGen {
 
     private void applyOutputs(ProcessingRecipeBuilder<ProcessingRecipe<?>> b, ShapelessRecipeDef def) {
         if (def.getFluidOutputs().size() != 1) {
-            throw new IllegalArgumentException("Emptying Recipe must have exactly one fluid output! " + def.getName() + " has " + def.getFluidOutputs().size());
+            throw new IllegalArgumentException("Emptying Recipe must have exactly one fluid output! " + def.getBaseName() + " has " + def.getFluidOutputs().size());
         }
 
         def.getFluidOutputs().forEach(fluid -> {

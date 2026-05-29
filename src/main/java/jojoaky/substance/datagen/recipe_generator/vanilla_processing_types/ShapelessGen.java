@@ -14,6 +14,8 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
 
+import static jojoaky.substance.datagen.recipe_generator.ShapelessRecipeDef.Operation.*;
+
 public class ShapelessGen extends FabricRecipeProvider {
 
     public ShapelessGen(FabricDataOutput output) {
@@ -22,20 +24,22 @@ public class ShapelessGen extends FabricRecipeProvider {
 
     @Override
     public void buildRecipes(Consumer<FinishedRecipe> writer) {
-        RecipeGeneratorRegistry.SHAPELESS_RECIPES.stream()
-                .filter(ShapelessRecipeDef::isVanillaShapeless)
-                .forEach(def -> buildRecipe(def, writer, HeatCondition.NONE, def.getName()));
+        RecipeGeneratorRegistry.SHAPELESS_RECIPES.forEach(def -> {
+            if (def.hasOperation(VANILLA_SHAPELESS)) {
+                buildRecipe(def, writer, VANILLA_SHAPELESS, HeatCondition.NONE);
+            }
 
-        RecipeGeneratorRegistry.SHAPELESS_RECIPES.stream()
-                .filter(ShapelessRecipeDef::isCustomVanillaMixing)
-                .forEach(def -> buildRecipe(def, writer, def.getMixingHeat(), def.getName() + "_v_mixing"));
+            if (def.hasOperation(CUSTOM_VANILLA_MIXING)) {
+                buildRecipe(def, writer, CUSTOM_VANILLA_MIXING, def.getMixingHeat());
+            }
 
-        RecipeGeneratorRegistry.SHAPELESS_RECIPES.stream()
-                .filter(ShapelessRecipeDef::isCustomVanillaCompacting)
-                .forEach(def -> buildRecipe(def, writer, def.getCompactingHeat(), def.getName() + "v_compacting"));
+            if (def.hasOperation(CUSTOM_VANILLA_COMPACTING)) {
+                buildRecipe(def, writer, CUSTOM_VANILLA_COMPACTING, def.getCompactingHeat());
+            }
+        });
     }
 
-    private void buildRecipe(ShapelessRecipeDef def, Consumer<FinishedRecipe> writer, HeatCondition heating, String name) {
+    private void buildRecipe(ShapelessRecipeDef def, Consumer<FinishedRecipe> writer, ShapelessRecipeDef.Operation op, HeatCondition heating) {
         ItemStack outputStack = def.getSingleOutputAsItem();
         RecipeResult output = new RecipeResult(outputStack.getItem(), outputStack.getCount());
 
@@ -44,7 +48,7 @@ public class ShapelessGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(ModFlasks.EMPTY_FLASK), has(ModFlasks.EMPTY_FLASK));
 
         def.getItemInputs().forEach(stack ->
-            builder.requires(stack.getItem(), stack.getCount())
+                builder.requires(stack.getItem(), stack.getCount())
         );
 
         def.getTagInputs().forEach(tag -> {
@@ -63,19 +67,11 @@ public class ShapelessGen extends FabricRecipeProvider {
 
         Consumer<FinishedRecipe> finalWriter = writer;
 
-        if (def.isDisableVanillaIfCreate()) {
-            finalWriter = withConditions(writer,
-                    DefaultResourceConditions.not(
-                            DefaultResourceConditions.anyModLoaded("create")
-                    )
-            );
-        }
-
-        for (var con : def.getConditions()) {
+        for (var con : def.getConditionsFor(op)) {
             finalWriter = withConditions(finalWriter, con);
         }
 
-        builder.save(finalWriter, name);
+        builder.save(finalWriter, def.getRecipeName(op));
     }
 
     private record RecipeResult(ItemLike item, int count) {}
