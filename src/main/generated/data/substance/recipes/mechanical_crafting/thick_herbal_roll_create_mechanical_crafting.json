@@ -1,0 +1,18 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "p": {
+      "item": "minecraft:paper"
+    },
+    "w": {
+      "item": "substance:dried_herb_bud"
+    }
+  },
+  "pattern": [
+    "pwwwp"
+  ],
+  "result": {
+    "item": "substance:thick_herbal_roll"
+  }
+}

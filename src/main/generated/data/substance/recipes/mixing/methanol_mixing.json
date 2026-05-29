@@ -1,0 +1,28 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "substance:gas_bottle_hydrogen"
+    },
+    {
+      "item": "substance:sculk_catalyst_crystal"
+    },
+    {
+      "tag": "minecraft:coals"
+    }
+  ],
+  "results": [
+    {
+      "amount": 810,
+      "fluid": "substance:methanol"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "substance:flask"
+    },
+    {
+      "item": "substance:flask"
+    },
+    {
+      "item": "substance:flask"
+    },
+    {
+      "item": "substance:flask"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "substance:flask"
+    },
+    {
+      "item": "substance:flask"
+    },
+    {
+      "item": "substance:flask"
+    },
+    {
+      "item": "substance:flask"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "item": "substance:lava_flask"
+  }
+}

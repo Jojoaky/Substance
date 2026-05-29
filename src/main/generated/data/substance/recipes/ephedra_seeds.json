@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "substance:ephedra_bundle"
+    }
+  ],
+  "result": {
+    "item": "substance:ephedra_seeds"
+  }
+}
