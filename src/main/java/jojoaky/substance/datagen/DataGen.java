@@ -18,6 +18,7 @@ public class DataGen implements DataGeneratorEntrypoint {
         CrystalRecipes.initialize();
         HerbRollRecipes.initialize();
         PlantRecipes.initialize();
+        TobaccoRecipes.initialize();
 
         RecipeGeneratorRegistry.generate(pack);
     }

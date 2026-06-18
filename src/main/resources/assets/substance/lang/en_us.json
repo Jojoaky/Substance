@@ -6,6 +6,7 @@
   "item.substance.blue_crystals": "Blue Crystals",
   "item.substance.herbal_roll": "Herbal Roll",
   "item.substance.thick_herbal_roll": "Thick Herbal Roll",
+  "item.substance.pipe": "Pipe",
 
   "item.substance.tray": "Tray",
   "item.substance.blue_oil_tray": "Blue Oil Tray",
@@ -19,6 +20,8 @@
   "item.substance.herb_seeds": "Herb Seeds",
   "item.substance.herb_bud": "Herb Bud",
   "item.substance.dried_herb_bud": "Dried Herb Bud",
+  "item.substance.ripe_tobacco_leaf": "Ripe Tobacco Leaf",
+  "item.substance.dried_tobacco_leaf": "Dried Tobacco Leaf",
 
   "item.substance.sudafed_pill": "Decongestant Pills",
   "item.substance.cyanide": "Cyanide Powder",

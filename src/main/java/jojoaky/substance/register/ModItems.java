@@ -2,6 +2,7 @@ package jojoaky.substance.register;
 
 import jojoaky.substance.Substance;
 import jojoaky.substance.content.consumable.JointItem;
+import jojoaky.substance.content.consumable.PipeItem;
 import jojoaky.substance.content.gas_bottle.EmptyGasBottleItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -93,12 +94,19 @@ public class ModItems {
     public static final Item WHITE_OIL_TRAY = register(
             new Item(new FabricItemSettings()
                     .stacksTo(1)
+                    .craftRemainder(TRAY)
+                    .food(new FoodProperties.Builder()
+                            .alwaysEat()
+                            .effect(new MobEffectInstance(ModEffects.WARP, 64 * 20, 255), 1.f)
+                            .build()
+                    )
             ),
             "white_oil_tray"
     );
     public static final Item BLUE_OIL_TRAY = register(
             new Item(new FabricItemSettings()
                     .stacksTo(1)
+                    .craftRemainder(TRAY)
             ),
             "blue_oil_tray"
     );
@@ -170,6 +178,19 @@ public class ModItems {
             "ephedra_bundle"
     );
 
+    public static final Item RIPE_TOBACCO_LEAF = register(
+            new Item(new FabricItemSettings()),
+            "ripe_tobacco_leaf"
+    );
+
+    public static final Item DRIED_TOBACCO_LEAF = register(
+            new Item(new FabricItemSettings()),
+            "dried_tobacco_leaf"
+    );
+
+
+    // gas bottles
+
     public static final Item GAS_BOTTLE = register(
             new EmptyGasBottleItem(new FabricItemSettings()
                     .stacksTo(16)
@@ -201,6 +222,15 @@ public class ModItems {
             "gas_bottle_nitrogen"
     );
 
+    public static final Item PIPE = register(
+            new PipeItem(new FabricItemSettings()
+                    .stacksTo(1)
+                    .durability(512)
+                    .rarity(Rarity.RARE)
+            ),
+            "pipe"
+    );
+
     public static void initialize() {
         ItemGroupEvents.modifyEntriesEvent(ModCreativeTab.SUSPICIOUS_ITEM_GROUP_KEY)
                 .register((itemGroup) -> {
@@ -210,6 +240,7 @@ public class ModItems {
                     itemGroup.accept(ModItems.BLUE_CRYSTALS);
                     itemGroup.accept(ModItems.HERBAL_ROLL);
                     itemGroup.accept(ModItems.THICK_HERBAL_ROLL);
+                    itemGroup.accept(ModItems.PIPE);
 
                     // tools
                     itemGroup.accept(ModItems.TRAY);
@@ -223,6 +254,8 @@ public class ModItems {
                     itemGroup.accept(ModItems.HERB_SEEDS);
                     itemGroup.accept(ModItems.HERB_BUD);
                     itemGroup.accept(ModItems.DRIED_HERB_BUD);
+                    itemGroup.accept(ModItems.RIPE_TOBACCO_LEAF);
+                    itemGroup.accept(ModItems.DRIED_TOBACCO_LEAF);
 
                     // chemicals
                     itemGroup.accept(ModItems.SUDAFED_PILL);

@@ -98,10 +98,16 @@ public class PostShader {
 
             RenderSystem.disableBlend();
             RenderSystem.disableDepthTest();
+            RenderSystem.depthMask(false);
+
             RenderSystem.resetTextureMatrix();
 
             onRender(accessor, partialTicks, time, tick);
             postChain.process(partialTicks);
+
+            RenderSystem.depthMask(true);
+            RenderSystem.enableDepthTest();
+            RenderSystem.enableBlend();
         } else {
             if (lazyLoadShaders) close();
         }

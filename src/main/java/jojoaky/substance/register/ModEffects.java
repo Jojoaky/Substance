@@ -28,14 +28,23 @@ public class ModEffects {
             int       color
     ) {}
 
+    // Generic - visual: delayed visuals, fainting
     public static final MobEffect HAZE         = registerEffect("haze",         MobEffectCategory.NEUTRAL,    0xffccddff);
+    // Generic - visual: slight hallucinations, effects
     public static final MobEffect WARP         = registerEffect("warp",         MobEffectCategory.NEUTRAL,    0xffaa88ff);
-    public static final MobEffect DREAD        = registerEffect("dread",        MobEffectCategory.HARMFUL,    0xff223344);
+
+    // Alcohol -> visual: - / effect: smoothed / delayed inputs
     public static final MobEffect STAGGER      = registerEffect("stagger",      MobEffectCategory.HARMFUL,    0xffddaa55);
+    // Tobacco -> visual: tunnel vision, gray / effect: haste
     public static final MobEffect KEEN         = registerEffect("keen",         MobEffectCategory.BENEFICIAL, 0xffeecc88);
+    // Herbs -> visual: warmth, blur / effect: peace
     public static final MobEffect RELAXATION   = registerEffect("relaxation",   MobEffectCategory.BENEFICIAL, 0xffd9c27a);
+    // Crystals -> visual: rush / effect: speed?
     public static final MobEffect SURGE        = registerEffect("surge",        MobEffectCategory.BENEFICIAL, 0xffffee44);
+    // Shrooms -> visual: fake entities / effect: peace?
     public static final MobEffect HALLUCINATION= registerEffect("hallucination",MobEffectCategory.NEUTRAL,    0xffcc44cc);
+    // Shrooms -> visual: dark, horror / effect: ?
+    public static final MobEffect DREAD        = registerEffect("dread",        MobEffectCategory.HARMFUL,    0xff223344);
 
     public static final List<PotionSet> ALL_POTIONS = new ArrayList<>();
 

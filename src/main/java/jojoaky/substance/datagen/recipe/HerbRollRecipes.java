@@ -12,6 +12,7 @@ public class HerbRollRecipes {
         RecipeGeneratorRegistry.accept(
                 ShapelessRecipeDef.named("dried_herb")
                         .smoking(150, 1)
+                        .smelting(300, 1)
                         .require(ModItems.HERB_BUD)
                         .output(ModItems.DRIED_HERB_BUD)
                         .build(),
