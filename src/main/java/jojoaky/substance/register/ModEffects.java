@@ -48,14 +48,14 @@ public class ModEffects {
 
     public static final List<PotionSet> ALL_POTIONS = new ArrayList<>();
 
-    public static final PotionSet HAZE_POTIONS          = registerPotionSet("haze",          HAZE,          600, 1800, 300, 1, Items.FERMENTED_SPIDER_EYE);
-    public static final PotionSet WARP_POTIONS          = registerPotionSet("warp",          WARP,          600, 1800, 300, 1, ModItems.CYANIDE);
-    public static final PotionSet DREAD_POTIONS         = registerPotionSet("dread",         DREAD,         600, 1800, 300, 1, Items.SCULK);
-    public static final PotionSet STAGGER_POTIONS       = registerPotionSet("stagger",       STAGGER,       600, 1800, 300, 1, Items.HONEYCOMB);
-    public static final PotionSet KEEN_POTIONS          = registerPotionSet("keen",          KEEN,          600, 1800, 300, 1, ModItems.DRIED_TOBACCO_LEAF);
-    public static final PotionSet RELAXATION_POTIONS    = registerPotionSet("relaxation",    RELAXATION,    600, 1800, 300, 1, ModItems.HERB_BUD);
-    public static final PotionSet SURGE_POTIONS         = registerPotionSet("surge",         SURGE,         600, 1800, 300, 1, ModItems.WHITE_CRYSTALS);
-    public static final PotionSet HALLUCINATION_POTIONS = registerPotionSet("hallucination", HALLUCINATION, 600, 1800, 300, 1, Items.RED_MUSHROOM);
+    public static final PotionSet HAZE_POTIONS          = registerPotionSet("haze",          HAZE,          600, 1800, 300, 1);
+    public static final PotionSet WARP_POTIONS          = registerPotionSet("warp",          WARP,          600, 1800, 300, 1);
+    public static final PotionSet DREAD_POTIONS         = registerPotionSet("dread",         DREAD,         600, 1800, 300, 1);
+    public static final PotionSet STAGGER_POTIONS       = registerPotionSet("stagger",       STAGGER,       600, 1800, 300, 1);
+    public static final PotionSet KEEN_POTIONS          = registerPotionSet("keen",          KEEN,          600, 1800, 300, 1);
+    public static final PotionSet RELAXATION_POTIONS    = registerPotionSet("relaxation",    RELAXATION,    600, 1800, 300, 1);
+    public static final PotionSet SURGE_POTIONS         = registerPotionSet("surge",         SURGE,         600, 1800, 300, 1);
+    public static final PotionSet HALLUCINATION_POTIONS = registerPotionSet("hallucination", HALLUCINATION, 600, 1800, 300, 1);
 
     private static MobEffect registerEffect(String name, MobEffectCategory category, int color) {
         return Registry.registerForHolder(
@@ -71,16 +71,11 @@ public class ModEffects {
             int      baseDuration,
             int      longDuration,
             int      strongDuration,
-            int      strongAmplifier,
-            Item     baseIngredient
+            int      strongAmplifier
     ) {
         Potion basePotion   = registerPotion(name, name,           effect, baseDuration,   0);
         Potion longPotion   = registerPotion(name, name + "_long", effect, longDuration,   0);
         Potion strongPotion = registerPotion(name, name + "_strong", effect, strongDuration, strongAmplifier);
-
-        PotionBrewing.addMix(Potions.AWKWARD, baseIngredient,   basePotion);
-        PotionBrewing.addMix(basePotion, Items.REDSTONE, longPotion);
-        PotionBrewing.addMix(basePotion, Items.GLOWSTONE_DUST, strongPotion);
 
         PotionSet set = new PotionSet(effect, basePotion, longPotion, strongPotion, effect.getColor());
         ALL_POTIONS.add(set);
@@ -96,11 +91,30 @@ public class ModEffects {
     }
 
     public static void initialize() {
+        registerBrewingRecipes();
+
         ItemGroupEvents.modifyEntriesEvent(ModCreativeTab.SUSPICIOUS_ITEM_GROUP_KEY)
                 .register(entries -> {
                     for (PotionSet set : ALL_POTIONS) {
                         entries.accept(PotionUtils.setPotion(new ItemStack(Items.POTION), set.basePotion));
                     }
                 });
+    }
+
+    private static void registerBrewingRecipes() {
+        registerBrewingRecipes(HAZE_POTIONS,          Items.FERMENTED_SPIDER_EYE);
+        registerBrewingRecipes(WARP_POTIONS,          ModItems.CYANIDE);
+        registerBrewingRecipes(DREAD_POTIONS,         Items.SCULK);
+        registerBrewingRecipes(STAGGER_POTIONS,       Items.HONEYCOMB);
+        registerBrewingRecipes(KEEN_POTIONS,          ModItems.DRIED_TOBACCO_LEAF);
+        registerBrewingRecipes(RELAXATION_POTIONS,    ModItems.HERB_BUD);
+        registerBrewingRecipes(SURGE_POTIONS,         ModItems.WHITE_CRYSTALS);
+        registerBrewingRecipes(HALLUCINATION_POTIONS, Items.RED_MUSHROOM);
+    }
+
+    private static void registerBrewingRecipes(PotionSet set, Item baseIngredient) {
+        PotionBrewing.addMix(Potions.AWKWARD, baseIngredient,   set.basePotion);
+        PotionBrewing.addMix(set.basePotion, Items.REDSTONE, set.longPotion);
+        PotionBrewing.addMix(set.basePotion, Items.GLOWSTONE_DUST, set.strongPotion);
     }
 }
