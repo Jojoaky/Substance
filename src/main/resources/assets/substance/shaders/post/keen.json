@@ -4,13 +4,20 @@
   ],
   "passes": [
     {
-      "name": "substance:focus",
+      "name": "color_convolve",
       "intarget": "minecraft:main",
       "outtarget": "swap",
-      "uniforms": []
+      "uniforms": [
+        {
+          "name": "Saturation",
+          "values": [
+            0.8
+          ]
+        }
+      ]
     },
     {
-      "name": "blit",
+      "name": "substance:focus",
       "intarget": "swap",
       "outtarget": "minecraft:main",
       "uniforms": []
