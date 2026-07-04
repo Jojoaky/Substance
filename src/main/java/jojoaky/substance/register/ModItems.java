@@ -1,6 +1,7 @@
 package jojoaky.substance.register;
 
 import jojoaky.substance.Substance;
+import jojoaky.substance.content.consumable.CrystalsItem;
 import jojoaky.substance.content.consumable.JointItem;
 import jojoaky.substance.content.consumable.PipeItem;
 import jojoaky.substance.content.gas_bottle.EmptyGasBottleItem;
@@ -25,43 +26,21 @@ public class ModItems {
 
     // --- consumables ---
     public static final Item WHITE_CRYSTALS = register(
-            new Item(new FabricItemSettings()
-                    .food(new FoodProperties.Builder()
-                            .alwaysEat()
-                            .nutrition(1)
-                            .saturationMod(8)
-                            .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 60*20, 2), 1.0f)
-                            .effect(new MobEffectInstance(MobEffects.JUMP, 20*20), 1.0f)
-                            .effect(new MobEffectInstance(MobEffects.DIG_SPEED, 90*20), 1.0f)
-                            .effect(new MobEffectInstance(MobEffects.CONFUSION, 10*20), 1.0f)
-                            .effect(new MobEffectInstance(MobEffects.LEVITATION, 20, 4), 1.0f)
-                            .effect(new MobEffectInstance(MobEffects.SLOW_FALLING, 30), 1.0f)
-                            .effect(new MobEffectInstance(MobEffects.HARM, 5), 1.0f)
-                            .build())
-                    .rarity(Rarity.RARE)
+            new CrystalsItem(new FabricItemSettings()
+                    .rarity(Rarity.UNCOMMON)
             ),
             "white_crystals"
     );
 
     public static final Item WHITE_CRYSTALS_CHILI = register(
-            new Item(new FabricItemSettings()
-                    .food(new FoodProperties.Builder()
-                            .alwaysEat()
-                            .nutrition(1)
-                            .saturationMod(8)
-                            .build())
+            new CrystalsItem(new FabricItemSettings()
                     .rarity(Rarity.RARE)
             ),
             "white_crystals_chili"
     );
 
     public static final Item BLUE_CRYSTALS = register(
-            new Item(new FabricItemSettings()
-                    .food(new FoodProperties.Builder()
-                            .alwaysEat()
-                            .nutrition(1)
-                            .saturationMod(8)
-                            .build())
+            new CrystalsItem(new FabricItemSettings()
                     .rarity(Rarity.EPIC)
             ),
             "blue_crystals"
@@ -70,7 +49,7 @@ public class ModItems {
     public static final Item HERBAL_ROLL = register(
             new JointItem(new FabricItemSettings()
                     .durability(128)
-                    .rarity(Rarity.RARE)
+                    .rarity(Rarity.UNCOMMON)
             ),
             "herbal_roll"
     );
@@ -78,7 +57,7 @@ public class ModItems {
     public static final Item THICK_HERBAL_ROLL = register(
             new JointItem(new FabricItemSettings()
                     .durability(256)
-                    .rarity(Rarity.EPIC)
+                    .rarity(Rarity.RARE)
             ),
             "thick_herbal_roll"
     );
