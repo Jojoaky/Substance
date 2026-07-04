@@ -7,9 +7,9 @@ uniform float Intensity;
 in vec2 texCoord;
 out vec4 fragColor;
 
-const vec4 vignetteColor = vec4(0.0, 0.0, 0.0, 1.0);
-const float maxDarkness = 0.95;
-const float strength = 0.75;
+const vec4 vignetteColor = vec4(0.2, 0.2, 0.2, 1.0);
+const float maxDarkness = 0.9;
+const float strength = 0.6;
 
 void main() {
     vec2 uv = texCoord - vec2(0.5);
