@@ -49,13 +49,13 @@ public class ModEffects {
     public static final List<PotionSet> ALL_POTIONS = new ArrayList<>();
 
     public static final PotionSet HAZE_POTIONS          = registerPotionSet("haze",          HAZE,          600, 1800, 300, 1, Items.FERMENTED_SPIDER_EYE);
-    public static final PotionSet WARP_POTIONS          = registerPotionSet("warp",          WARP,          600, 1800, 300, 1, Items.ENDER_PEARL);
-    public static final PotionSet DREAD_POTIONS         = registerPotionSet("dread",         DREAD,         600, 1800, 300, 1, Items.SPIDER_EYE);
-    public static final PotionSet STAGGER_POTIONS       = registerPotionSet("stagger",       STAGGER,       600, 1800, 300, 1, Items.SUGAR);
-    public static final PotionSet KEEN_POTIONS          = registerPotionSet("keen",          KEEN,          600, 1800, 300, 1, Items.GOLDEN_CARROT);
-    public static final PotionSet RELAXATION_POTIONS    = registerPotionSet("relaxation",    RELAXATION,    600, 1800, 300, 1, Items.HONEYCOMB);
-    public static final PotionSet SURGE_POTIONS         = registerPotionSet("surge",         SURGE,         600, 1800, 300, 1, Items.BLAZE_POWDER);
-    public static final PotionSet HALLUCINATION_POTIONS = registerPotionSet("hallucination", HALLUCINATION, 600, 1800, 300, 1, Items.POISONOUS_POTATO);
+    public static final PotionSet WARP_POTIONS          = registerPotionSet("warp",          WARP,          600, 1800, 300, 1, ModItems.CYANIDE);
+    public static final PotionSet DREAD_POTIONS         = registerPotionSet("dread",         DREAD,         600, 1800, 300, 1, Items.SCULK);
+    public static final PotionSet STAGGER_POTIONS       = registerPotionSet("stagger",       STAGGER,       600, 1800, 300, 1, Items.HONEYCOMB);
+    public static final PotionSet KEEN_POTIONS          = registerPotionSet("keen",          KEEN,          600, 1800, 300, 1, ModItems.DRIED_TOBACCO_LEAF);
+    public static final PotionSet RELAXATION_POTIONS    = registerPotionSet("relaxation",    RELAXATION,    600, 1800, 300, 1, ModItems.HERB_BUD);
+    public static final PotionSet SURGE_POTIONS         = registerPotionSet("surge",         SURGE,         600, 1800, 300, 1, ModItems.WHITE_CRYSTALS);
+    public static final PotionSet HALLUCINATION_POTIONS = registerPotionSet("hallucination", HALLUCINATION, 600, 1800, 300, 1, Items.RED_MUSHROOM);
 
     private static MobEffect registerEffect(String name, MobEffectCategory category, int color) {
         return Registry.registerForHolder(
