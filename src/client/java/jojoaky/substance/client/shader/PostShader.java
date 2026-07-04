@@ -37,7 +37,7 @@ public class PostShader {
         Substance.LOGGER.info("Loading shader {}", resource);
         try {
             postChain = new PostChain(minecraft.getTextureManager(), minecraft.getResourceManager(), minecraft.getMainRenderTarget(), resource);
-            postChain.resize(minecraft.getWindow().getWidth(), minecraft.getWindow().getHeight());
+            postChain.resize(minecraft.getMainRenderTarget().width, minecraft.getMainRenderTarget().height);
         } catch (IOException | JsonSyntaxException ex) {
             Substance.LOGGER.error("Unable to load shader '{}'", resource, ex);
             errorLoading = true;
@@ -103,6 +103,7 @@ public class PostShader {
             RenderSystem.resetTextureMatrix();
 
             onRender(accessor, partialTicks, time, tick);
+
             postChain.process(partialTicks);
 
             RenderSystem.depthMask(true);
