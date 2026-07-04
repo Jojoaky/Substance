@@ -36,11 +36,18 @@ public class PostShader {
         close();
         Substance.LOGGER.info("Loading shader {}", resource);
         try {
-            postChain = new PostChain(minecraft.getTextureManager(), minecraft.getResourceManager(), minecraft.getMainRenderTarget(), resource);
+            postChain = new PostChain(
+                    minecraft.getTextureManager(),
+                    minecraft.getResourceManager(),
+                    minecraft.getMainRenderTarget(),
+                    resource
+            );
             postChain.resize(minecraft.getMainRenderTarget().width, minecraft.getMainRenderTarget().height);
+            errorLoading = false;
         } catch (IOException | JsonSyntaxException ex) {
-            Substance.LOGGER.error("Unable to load shader '{}'", resource, ex);
+            Substance.LOGGER.error("Unable to load shader '{}': invalid post chain JSON or missing shader resource", resource, ex);
             errorLoading = true;
+            postChain = null;
         }
     }
 

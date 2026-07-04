@@ -1,5 +1,54 @@
 {
-  "targets": [ "swap" ],
+  "targets": [
+    "swap",
+    "previous"
+  ],
   "passes": [
+    {
+      "name": "substance:delay",
+      "intarget": "minecraft:main",
+      "outtarget": "swap",
+      "auxtargets": [
+        {
+          "name": "PrevSampler",
+          "id": "previous"
+        }
+      ],
+      "uniforms": [
+        { "name": "Retention", "type": "float", "count": 3, "values": [ 0.11, 0.08, 0.05 ] },
+        { "name": "EdgeAttenuation", "type": "float", "count": 1, "values": [ 0.3 ] }
+      ]
+    },
+    {
+      "name": "blit",
+      "intarget": "swap",
+      "outtarget": "previous",
+      "uniforms": []
+    },
+    {
+      "name": "substance:wave_mix",
+      "intarget": "minecraft:main",
+      "auxtargets": [
+        {
+          "name": "SamplerA",
+          "id": "minecraft:main"
+        },
+        {
+          "name": "SamplerB",
+          "id": "previous"
+        }
+      ],
+      "outtarget": "swap",
+      "uniforms": [
+        { "name": "Strength", "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "Bias", "type": "float", "count": 1, "values": [ 0.8 ] }
+      ]
+    },
+    {
+      "name": "blit",
+      "intarget": "swap",
+      "outtarget": "minecraft:main",
+      "uniforms": []
+    }
   ]
 }
