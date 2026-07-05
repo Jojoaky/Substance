@@ -20,6 +20,8 @@
   "item.substance.herb_seeds": "Herb Seeds",
   "item.substance.herb_bud": "Herb Bud",
   "item.substance.dried_herb_bud": "Dried Herb Bud",
+  "item.substance.tobacco": "Tobacco",
+  "item.substance.tobacco_seeds": "Tobacco Seeds",
   "item.substance.ripe_tobacco_leaf": "Ripe Tobacco Leaf",
   "item.substance.dried_tobacco_leaf": "Dried Tobacco Leaf",
 
@@ -31,6 +33,7 @@
   "item.substance.red_phosphorus": "Red Phosphorus",
 
   "block.substance.large_herb": "Large Herb",
+  "block.substance.tobacco": "Tobacco Plant",
   "block.substance.ephedra": "Ephedra",
 
   "item.substance.gas_bottle": "Empty Gas Bottle",

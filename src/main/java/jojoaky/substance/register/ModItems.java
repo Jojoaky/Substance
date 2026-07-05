@@ -157,6 +157,11 @@ public class ModItems {
             "ephedra_bundle"
     );
 
+    public static final Item TOBACCO_SEEDS = register(
+            new ItemNameBlockItem(ModBlocks.TOBACCO, new FabricItemSettings()),
+            "tobacco_seeds"
+    );
+
     public static final Item RIPE_TOBACCO_LEAF = register(
             new Item(new FabricItemSettings()),
             "ripe_tobacco_leaf"
@@ -230,11 +235,12 @@ public class ModItems {
                     // plants
                     itemGroup.accept(ModItems.EPHEDRA_BUNDLE);
                     itemGroup.accept(ModItems.EPHEDRA_SEEDS);
-                    itemGroup.accept(ModItems.HERB_SEEDS);
                     itemGroup.accept(ModItems.HERB_BUD);
                     itemGroup.accept(ModItems.DRIED_HERB_BUD);
+                    itemGroup.accept(ModItems.HERB_SEEDS);
                     itemGroup.accept(ModItems.RIPE_TOBACCO_LEAF);
                     itemGroup.accept(ModItems.DRIED_TOBACCO_LEAF);
+                    itemGroup.accept(ModItems.TOBACCO_SEEDS);
 
                     // chemicals
                     itemGroup.accept(ModItems.SUDAFED_PILL);

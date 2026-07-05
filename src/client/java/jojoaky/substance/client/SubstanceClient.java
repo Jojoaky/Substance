@@ -25,6 +25,7 @@ public class SubstanceClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LARGE_HERB, RenderType.cutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.EPHEDRA_CROP, RenderType.cutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.TOBACCO, RenderType.cutout());
 
 		BuiltInRegistries.ITEM.stream()
 				.filter(item -> item instanceof SmokableItem)

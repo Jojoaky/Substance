@@ -51,6 +51,9 @@
   "item.substance.red_phosphorus": "Roter Phosphor",
 
   "block.substance.large_herb": "Große Kräuterpflanze",
+  "block.substance.tobacco": "Tabakpflanze",
+  "item.substance.tobacco": "Tabak",
+  "item.substance.tobacco_seeds": "Tabaksamen",
   "block.substance.ephedra": "Ephedra",
 
   "effect.substance.haze": "Dunst",

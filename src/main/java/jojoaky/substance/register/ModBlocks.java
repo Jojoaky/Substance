@@ -3,6 +3,7 @@ package jojoaky.substance.register;
 import jojoaky.substance.Substance;
 import jojoaky.substance.content.crops.EphedraCropBlock;
 import jojoaky.substance.content.crops.LargeHerbBlock;
+import jojoaky.substance.content.crops.TobaccoBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -48,6 +49,19 @@ public class ModBlocks {
             "ephedra",
             false
         );
+
+    public static final Block TOBACCO = register(
+            new TobaccoBlock(
+                    BlockBehaviour.Properties.of()
+                            .sound(SoundType.GRASS)
+                            .noCollission()
+                            .instabreak()
+                            .offsetType(BlockBehaviour.OffsetType.XZ)
+                            .ignitedByLava()
+            ),
+            "tobacco",
+            false
+    );
 
     public static void initialize() {
         ItemGroupEvents.modifyEntriesEvent(ModCreativeTab.SUSPICIOUS_ITEM_GROUP_KEY).register((itemGroup) -> {
