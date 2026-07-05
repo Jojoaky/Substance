@@ -9,7 +9,7 @@ import net.minecraft.world.item.Items;
 
 import java.util.Arrays;
 
-public class ModSecretTrades {
+public class SecretTrades {
     private static final VillagerProfession[] whiteCrystalsProfessions = {
             VillagerProfession.FISHERMAN,
             VillagerProfession.SHEPHERD,
@@ -102,7 +102,7 @@ public class ModSecretTrades {
         TradeRegistry.accept(
                 Arrays.stream(pipeProfessions)
                         .map(profession -> VillagerTradeDef.named("pipe_secret_" + BuiltInRegistries.VILLAGER_PROFESSION.getKey(profession).getPath(), profession, 1)
-                                .buys(ModItems.PIPE, 1)
+                                .buys(ModItems.WOODEN_PIPE, 1)
                                 .sells(Items.EMERALD, 6)
                                 .maxUses(2)
                         )

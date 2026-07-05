@@ -3,6 +3,7 @@ package jojoaky.substance.register;
 import jojoaky.substance.Substance;
 import jojoaky.substance.content.consumable.*;
 import jojoaky.substance.content.gas_bottle.EmptyGasBottleItem;
+import jojoaky.substance.content.pipe.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
@@ -203,13 +204,13 @@ public class ModItems {
             "gas_bottle_nitrogen"
     );
 
-    public static final Item PIPE = register(
+    public static final Item WOODEN_PIPE = register(
             new PipeItem(new FabricItemSettings()
                     .stacksTo(1)
                     .durability(512)
                     .rarity(Rarity.RARE)
             ),
-            "pipe"
+            "wooden_pipe"
     );
 
     public static final Item BUBBLE_PIPE = register(
@@ -241,7 +242,7 @@ public class ModItems {
                     itemGroup.accept(ModItems.HERBAL_ROLL);
                     itemGroup.accept(ModItems.THICK_HERBAL_ROLL);
                     itemGroup.accept(ModItems.CIGARETTE);
-                    itemGroup.accept(ModItems.PIPE);
+                    itemGroup.accept(ModItems.WOODEN_PIPE);
 
                     // tools
                     itemGroup.accept(ModItems.TRAY);

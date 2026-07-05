@@ -6,6 +6,7 @@ import jojoaky.substance.datagen.generator.recipe.ShapedRecipeDef;
 import jojoaky.substance.datagen.generator.recipe.ShapelessRecipeDef;
 import jojoaky.substance.datagen.generator.recipe.RecipeGeneratorRegistry;
 import jojoaky.substance.register.ModItems;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 
 public class MiscRecipes {
@@ -61,6 +62,25 @@ public class MiscRecipes {
                         .key('x', Items.IRON_INGOT)
                         .pattern("xxx")
                         .output(ModItems.TRAY)
+                        .build(),
+
+                ShapedRecipeDef.named("wooden_pipe")
+                        .vanillaShaped()
+                        .pattern("N P")
+                        .pattern("PP ")
+                        .key('P', ItemTags.PLANKS)
+                        .key('N', Items.IRON_NUGGET)
+                        .output(ModItems.WOODEN_PIPE)
+                        .build(),
+
+                ShapedRecipeDef.named("bubble_pipe")
+                        .vanillaShaped()
+                        .pattern("GN")
+                        .pattern("G ")
+                        .pattern("G ")
+                        .key('G', Items.GLASS)
+                        .key('N', Items.IRON_NUGGET)
+                        .output(ModItems.BUBBLE_PIPE)
                         .build()
         );
     }

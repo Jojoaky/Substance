@@ -1,12 +1,16 @@
 package jojoaky.substance.client;
 
 import jojoaky.substance.Substance;
+import jojoaky.substance.client.itemmodel.PipeItemModel;
+import jojoaky.substance.client.screen.PipeScreen;
+import jojoaky.substance.content.ItemContainer;
 import jojoaky.substance.content.chemical_fluid.ChemicalBucket;
 import jojoaky.substance.content.flask.FilledFlaskItem;
 import jojoaky.substance.client.itemmodel.SmokableItemModel;
 import jojoaky.substance.client.shader.PostShaderManager;
 import jojoaky.substance.client.shaders.*;
 import jojoaky.substance.content.consumable.SmokableItem;
+import jojoaky.substance.content.pipe.PipeItem;
 import jojoaky.substance.register.ModBlocks;
 import jojoaky.substance.content.flask.ModFlasks;
 import jojoaky.substance.register.ModFluids;
@@ -15,20 +19,29 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 
 import static jojoaky.substance.register.ModFluids.ALL_FLUIDS;
 
 public class SubstanceClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
+		MenuScreens.register(Substance.PIPE_MENU, PipeScreen::new);
+
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LARGE_HERB, RenderType.cutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.EPHEDRA_CROP, RenderType.cutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.TOBACCO, RenderType.cutout());
 
 		BuiltInRegistries.ITEM.stream()
-				.filter(item -> item instanceof SmokableItem)
+				.filter(item -> item instanceof PipeItem)
+				.forEach(PipeItemModel::registerModel);
+
+		BuiltInRegistries.ITEM.stream()
+				.filter(item -> (item instanceof SmokableItem && !(item instanceof PipeItem)))
 				.forEach(SmokableItemModel::registerModel);
 
 		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
@@ -72,6 +85,5 @@ public class SubstanceClient implements ClientModInitializer {
 		PostShaderManager.add(new SurgeShader());
 		PostShaderManager.add(new WarpShader());
 
-		PostShaderManager.init();
-	}
+		PostShaderManager.init();}
 }

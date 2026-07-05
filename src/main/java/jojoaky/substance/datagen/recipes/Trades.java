@@ -10,7 +10,7 @@ import jojoaky.substance.datagen.generator.trade.VillagerTradeDef;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.Items;
 
-public class ModTrades {
+public class Trades {
     public static void register() {
         TradeRegistry.accept(
                 WanderingTraderTradeDef.named("ephedra_seeds", 1)

@@ -1,6 +1,6 @@
 {
   "parent": "builtin/entity",
   "textures": {
-    "layer0": "substance:item/bubble_pipe"
+    "layer0": "substance:item/wooden_pipe"
   }
 }

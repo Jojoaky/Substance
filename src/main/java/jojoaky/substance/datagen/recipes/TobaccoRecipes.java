@@ -4,7 +4,6 @@ import jojoaky.substance.datagen.generator.recipe.RecipeGeneratorRegistry;
 import jojoaky.substance.datagen.generator.recipe.ShapedRecipeDef;
 import jojoaky.substance.datagen.generator.recipe.ShapelessRecipeDef;
 import jojoaky.substance.register.ModItems;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 
 public class TobaccoRecipes {
@@ -15,16 +14,6 @@ public class TobaccoRecipes {
                         .smelting(300,1)
                         .require(ModItems.RIPE_TOBACCO_LEAF)
                         .output(ModItems.DRIED_TOBACCO_LEAF)
-                        .build(),
-
-
-                ShapedRecipeDef.named("pipe")
-                        .vanillaShaped()
-                        .pattern("N P")
-                        .pattern("PP ")
-                        .key('P', ItemTags.PLANKS)
-                        .key('N', Items.IRON_NUGGET)
-                        .output(ModItems.PIPE)
                         .build(),
 
                 ShapedRecipeDef.named("cigarette")

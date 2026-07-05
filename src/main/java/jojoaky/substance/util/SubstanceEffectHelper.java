@@ -7,6 +7,16 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class SubstanceEffectHelper {
 
+    public static void applyStackingEffect(LivingEntity entity, int baseDuration, StackingEffect effect) {
+        applyStackingEffect(
+                entity,
+                effect.effect(),
+                baseDuration * effect.durationMultiplier(),
+                effect.durationPerAmplifier(),
+                effect.maxAmplifier()
+        );
+    }
+
     public static void applyStackingEffect(LivingEntity entity, MobEffect effect, int duration, int durationPerAmplifier, int maxAmplifier) {
         if (entity.level().isClientSide) return;
 

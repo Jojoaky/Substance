@@ -22,8 +22,8 @@ public class DataGen implements DataGeneratorEntrypoint {
         PlantRecipes.initialize();
         TobaccoRecipes.initialize();
 
-        ModTrades.register();
-        ModSecretTrades.register();
+        Trades.register();
+        SecretTrades.register();
 
         RecipeGeneratorRegistry.generate(pack);
     }

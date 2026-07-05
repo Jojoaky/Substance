@@ -1,0 +1,153 @@
+package jojoaky.substance.client.itemmodel;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import jojoaky.substance.Substance;
+import jojoaky.substance.client.mixin.ItemRendererInvoker;
+import jojoaky.substance.content.ItemContainer;
+import jojoaky.substance.content.pipe.PipeItem;
+import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+
+import java.util.Collection;
+import java.util.List;
+
+import static net.minecraft.world.item.ItemDisplayContext.*;
+
+public class PipeItemModel {
+
+    private final ResourceLocation flatModel;
+    private final ResourceLocation equippedModel;
+    private final ResourceLocation flatLitModel;
+    private final ResourceLocation equippedLitModel;
+    private final Collection<ItemDisplayContext> supportedContexts;
+
+    public PipeItemModel(String name, Collection<ItemDisplayContext> contexts) {
+        this.supportedContexts = contexts;
+
+        var base = new ResourceLocation(Substance.MOD_ID, name).withPrefix("item/");
+        this.flatModel = base.withSuffix("_flat");
+        this.equippedModel = base.withSuffix("_equipped");
+        this.flatLitModel = base.withSuffix("_flat_lit");
+        this.equippedLitModel = base.withSuffix("_equipped_lit");
+    }
+
+    public Collection<? extends ResourceLocation> getModelLocations() {
+        return List.of(flatModel, equippedModel, flatLitModel, equippedLitModel);
+    }
+
+    private boolean usesEquippedModel(ItemDisplayContext context) {
+        return supportedContexts.contains(context);
+    }
+
+    private boolean isContainerEmpty(ItemStack stack) {
+        return new ItemContainer(stack, PipeItem.PIPE_SIZE).isEmpty();
+    }
+
+    public void render(
+            ItemStack stack,
+            ItemDisplayContext context,
+            PoseStack poseStack,
+            MultiBufferSource buffers,
+            RenderFunction renderFunction
+    ) {
+        poseStack.pushPose();
+
+        boolean useEquipped = usesEquippedModel(context);
+        boolean isEmpty = isContainerEmpty(stack);
+
+        // Highly optimized branch picking from cached ResourceLocations
+        ResourceLocation modelLocation;
+        if (useEquipped) {
+            modelLocation = isEmpty ? equippedModel : equippedLitModel;
+        } else {
+            modelLocation = isEmpty ? flatModel : flatLitModel;
+        }
+
+        var itemRenderer = Minecraft.getInstance().getItemRenderer();
+        var model = itemRenderer.getItemModelShaper()
+                .getModelManager()
+                .getModel(modelLocation);
+
+        if (model == null) {
+            poseStack.popPose();
+            return;
+        }
+
+        poseStack.translate(0.5, 0.5, 0.5);
+        model.getTransforms().getTransform(context).apply(false, poseStack);
+        poseStack.translate(-0.5, -0.5, -0.5);
+
+        var renderType = useEquipped
+                ? ItemBlockRenderTypes.getRenderType(stack, false)
+                : RenderType.cutout();
+
+        VertexConsumer vertexConsumer =
+                ItemRenderer.getFoilBufferDirect(buffers, renderType, true, stack.hasFoil());
+
+        renderFunction.render(itemRenderer, model, vertexConsumer);
+
+        poseStack.popPose();
+    }
+
+    @FunctionalInterface
+    public interface RenderFunction {
+        void render(ItemRenderer renderer, BakedModel model, VertexConsumer vertexConsumer);
+    }
+
+    public static class Renderer implements BuiltinItemRendererRegistry.DynamicItemRenderer {
+
+        private final PipeItemModel model;
+
+        public Renderer(PipeItemModel model) {
+            this.model = model;
+        }
+
+        @Override
+        public void render(
+                ItemStack stack,
+                ItemDisplayContext context,
+                PoseStack poseStack,
+                MultiBufferSource buffers,
+                int light,
+                int overlay
+        ) {
+            model.render(stack, context, poseStack, buffers,
+                    (renderer, bakedModel, vertexConsumer) ->
+                            ((ItemRendererInvoker) renderer)
+                                    .invokeRenderModelLists(bakedModel, stack, light, overlay, poseStack, vertexConsumer)
+            );
+        }
+    }
+
+    public static PipeItemModel registerModel(Item item) {
+        String name = BuiltInRegistries.ITEM.getKey(item).getPath();
+        PipeItemModel model = new PipeItemModel(name, List.of(THIRD_PERSON_LEFT_HAND, THIRD_PERSON_RIGHT_HAND, HEAD));
+
+        BuiltinItemRendererRegistry.INSTANCE.register(item, new Renderer(model));
+
+        ModelLoadingPlugin.register(plugin ->
+                plugin.addModels(model.getModelLocations())
+        );
+
+        Substance.LOGGER.info("Registered pipe model variations for {}", item);
+
+        return model;
+    }
+
+    public static void register() {
+    }
+}
