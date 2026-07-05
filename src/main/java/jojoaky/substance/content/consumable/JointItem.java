@@ -17,8 +17,8 @@ public class JointItem extends SmokableItem {
     protected void onConsumeTick(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
         super.onConsumeTick(stack, level, entity, useDuration);
 
-        SubstanceEffectHelper.applyEffectBase(entity, ModEffects.RELAXATION, 100, 0);
-        SubstanceEffectHelper.applyEffectBase(entity, ModEffects.WARP, 100, 0);
+        SubstanceEffectHelper.applyEffectBase(entity, ModEffects.RELAXATION, 160, 0);
+        SubstanceEffectHelper.applyEffectBase(entity, ModEffects.WARP, 160, 0);
     }
 
     @Override
