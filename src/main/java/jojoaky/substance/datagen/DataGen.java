@@ -1,10 +1,8 @@
 package jojoaky.substance.datagen;
 
-import jojoaky.substance.generator.recipe.RecipeGeneratorRegistry;
-import jojoaky.substance.recipes.*;
-import jojoaky.substance.generator.trade.TradeDatagenProvider;
-import jojoaky.substance.trades.ModSecretTrades;
-import jojoaky.substance.trades.ModTrades;
+import jojoaky.substance.datagen.generator.recipe.RecipeGeneratorRegistry;
+import jojoaky.substance.datagen.recipes.*;
+import jojoaky.substance.datagen.generator.trade.TradeDatagenProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
