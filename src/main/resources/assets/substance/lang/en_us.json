@@ -7,6 +7,8 @@
   "item.substance.herbal_roll": "Herbal Roll",
   "item.substance.thick_herbal_roll": "Thick Herbal Roll",
   "item.substance.pipe": "Pipe",
+  "item.substance.bubble_pipe": "Bubble Pipe",
+  "item.substance.cigarette": "Cigarette",
 
   "item.substance.tray": "Tray",
   "item.substance.blue_oil_tray": "Blue Oil Tray",
@@ -20,7 +22,6 @@
   "item.substance.herb_seeds": "Herb Seeds",
   "item.substance.herb_bud": "Herb Bud",
   "item.substance.dried_herb_bud": "Dried Herb Bud",
-  "item.substance.tobacco": "Tobacco",
   "item.substance.tobacco_seeds": "Tobacco Seeds",
   "item.substance.ripe_tobacco_leaf": "Ripe Tobacco Leaf",
   "item.substance.dried_tobacco_leaf": "Dried Tobacco Leaf",
@@ -69,8 +70,6 @@
   "item.substance.ammonia_flask": "Ammonia Flask",
   "item.substance.white_crystal_oil_flask": "White Crystal Oil Flask",
   "item.substance.blue_crystal_oil_flask": "Blue Crystal Oil Flask",
-  "item.substance.honey_flask": "Honey Flask",
-  "item.substance.chocolate_flask": "Chocolate Flask",
 
   "effect.substance.haze": "Haze",
   "effect.substance.warp": "Warp",

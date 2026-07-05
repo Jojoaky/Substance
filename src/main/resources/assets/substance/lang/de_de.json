@@ -6,6 +6,9 @@
   "item.substance.blue_crystals": "Blaue Kristalle",
   "item.substance.herbal_roll": "Kräuter Rolle",
   "item.substance.thick_herbal_roll": "Fette Kräuter Rolle",
+  "item.substance.pipe": "Pfeife",
+  "item.substance.bubble_pipe": "Bubble Pipe",
+  "item.substance.cigarette": "Zigarette",
 
   "item.substance.tray": "Tray",
   "item.substance.blue_oil_tray": "Blaues Öl-Tray",
@@ -19,6 +22,27 @@
   "item.substance.gas_bottle_hydrogen": "Wasserstoffflasche",
   "item.substance.gas_bottle_nitrogen": "Stickstoffflasche",
 
+  "item.substance.ephedra_bundle": "Ephedra-Bündel",
+  "item.substance.ephedra_seeds": "Ephedra-Samen",
+  "item.substance.herb_seeds": "Kräutersamen",
+  "item.substance.herb_bud": "Kräuterknospe",
+  "item.substance.dried_herb_bud": "Getrocknete Kräuterknospe",
+
+  "item.substance.tobacco_seeds": "Tabaksamen",
+  "item.substance.ripe_tobacco_leaf": "Reifes Tabakblatt",
+  "item.substance.dried_tobacco_leaf": "Getrocknetes Tabakblatt",
+
+  "item.substance.sudafed_pill": "Abschwellende Tabletten",
+  "item.substance.cyanide": "Zyankalipulver",
+  "item.substance.iodine": "Iodkristalle",
+  "item.substance.pseudoephedrine": "Pseudoephedrin",
+  "item.substance.white_phosphorus": "Weißer Phosphor",
+  "item.substance.red_phosphorus": "Roter Phosphor",
+
+  "block.substance.large_herb": "Große Kräuterpflanze",
+  "block.substance.ephedra": "Ephedra",
+  "block.substance.tobacco": "Tabakpflanze",
+
   "item.substance.phenylacetic_acid_bucket": "Eimer mit Phenylessigsäure",
   "item.substance.acetic_anhydride_bucket": "Eimer mit Essigsäureanhydrid",
   "item.substance.methanol_bucket": "Eimer mit Methanol",
@@ -27,6 +51,17 @@
   "item.substance.ammonia_bucket": "Eimer mit Ammoniak",
   "item.substance.white_crystal_oil_bucket": "Eimer mit Weißem Kristallöl",
   "item.substance.blue_crystal_oil_bucket": "Eimer mit Blauem Kristallöl",
+
+  "item.substance.water_flask": "Wasser-Glaskolben",
+  "item.substance.lava_flask": "Lava-Glaskolben",
+  "item.substance.phenylacetic_acid_flask": "Phenylessigsäure-Glaskolben",
+  "item.substance.acetic_anhydride_flask": "Essigsäureanhydrid-Glaskolben",
+  "item.substance.methanol_flask": "Methanol-Glaskolben",
+  "item.substance.methylamine_flask": "Methylamin-Glaskolben",
+  "item.substance.phenylacetone_flask": "Phenylaceton-Glaskolben",
+  "item.substance.ammonia_flask": "Ammoniak-Glaskolben",
+  "item.substance.white_crystal_oil_flask": "Weißes Kristallöl-Glaskolben",
+  "item.substance.blue_crystal_oil_flask": "Blaues Kristallöl-Glaskolben",
 
   "block.substance.phenylacetic_acid": "Phenylessigsäure",
   "block.substance.acetic_anhydride": "Essigsäureanhydrid",
@@ -37,25 +72,6 @@
   "block.substance.white_crystal_oil": "Weißes Kristallöl",
   "block.substance.blue_crystal_oil": "Blaues Kristallöl",
 
-  "item.substance.ephedra_bundle": "Ephedra-Bündel",
-  "item.substance.ephedra_seeds": "Ephedra-Samen",
-  "item.substance.herb_seeds": "Kräutersamen",
-  "item.substance.herb_bud": "Kräuterknospe",
-  "item.substance.dried_herb_bud": "Getrocknete Kräuterknospe",
-
-  "item.substance.sudafed_pill": "Abschwellende Tabletten",
-  "item.substance.cyanide": "Zyankalipulver",
-  "item.substance.iodine": "Iodkristalle",
-  "item.substance.pseudoephedrine": "Pseudoephedrin",
-  "item.substance.white_phosphorus": "Weißer Phosphor",
-  "item.substance.red_phosphorus": "Roter Phosphor",
-
-  "block.substance.large_herb": "Große Kräuterpflanze",
-  "block.substance.tobacco": "Tabakpflanze",
-  "item.substance.tobacco": "Tabak",
-  "item.substance.tobacco_seeds": "Tabaksamen",
-  "block.substance.ephedra": "Ephedra",
-
   "effect.substance.haze": "Dunst",
   "effect.substance.warp": "Verzerrung",
   "effect.substance.dread": "Schrecken",
@@ -63,5 +79,32 @@
   "effect.substance.keen": "Schärfe",
   "effect.substance.relaxation": "Entspannung",
   "effect.substance.surge": "Energieschub",
-  "effect.substance.hallucination": "Halluzination"
+  "effect.substance.hallucination": "Halluzination",
+
+  "item.minecraft.potion.effect.haze": "Trank des Dunst",
+  "item.minecraft.potion.effect.warp": "Trank der Verzerrung",
+  "item.minecraft.potion.effect.dread": "Trank des Schreckens",
+  "item.minecraft.potion.effect.stagger": "Trank des Taumelns",
+  "item.minecraft.potion.effect.keen": "Trank der Schärfe",
+  "item.minecraft.potion.effect.relaxation": "Trank der Entspannung",
+  "item.minecraft.potion.effect.surge": "Trank des Energieschubs",
+  "item.minecraft.potion.effect.hallucination": "Trank der Halluzination",
+
+  "item.minecraft.splash_potion.effect.haze": "Wurftrank des Dunst",
+  "item.minecraft.splash_potion.effect.warp": "Wurftrank der Verzerrung",
+  "item.minecraft.splash_potion.effect.dread": "Wurftrank des Schreckens",
+  "item.minecraft.splash_potion.effect.stagger": "Wurftrank des Taumelns",
+  "item.minecraft.splash_potion.effect.keen": "Wurftrank der Schärfe",
+  "item.minecraft.splash_potion.effect.relaxation": "Wurftrank der Entspannung",
+  "item.minecraft.splash_potion.effect.surge": "Wurftrank des Energieschubs",
+  "item.minecraft.splash_potion.effect.hallucination": "Wurftrank der Halluzination",
+
+  "item.minecraft.lingering_potion.effect.haze": "Verweiltrank des Dunst",
+  "item.minecraft.lingering_potion.effect.warp": "Verweiltrank der Verzerrung",
+  "item.minecraft.lingering_potion.effect.dread": "Verweiltrank des Schreckens",
+  "item.minecraft.lingering_potion.effect.stagger": "Verweiltrank des Taumelns",
+  "item.minecraft.lingering_potion.effect.keen": "Verweiltrank der Schärfe",
+  "item.minecraft.lingering_potion.effect.relaxation": "Verweiltrank der Entspannung",
+  "item.minecraft.lingering_potion.effect.surge": "Verweiltrank des Energieschubs",
+  "item.minecraft.lingering_potion.effect.hallucination": "Verweiltrank der Halluzination"
 }
