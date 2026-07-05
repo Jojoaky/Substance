@@ -70,4 +70,6 @@ public class Substance implements ModInitializer {
 				new StackingEffect(ModEffects.HALLUCINATION, 8, 1000, 1)
 		));
 	}
+
+	// TODO: Smoke animation broken (left hand), Sound effects, Improved way of obtaining pipes, Bubble pipe lit texture, Advancements with translation
 }
