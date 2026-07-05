@@ -2,9 +2,9 @@ package jojoaky.substance.datagen.generator.trade;
 
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
-import jojoaky.substance.datagen.generator.trade.json.PiglinBarterJson;
-import jojoaky.substance.datagen.generator.trade.json.VillagerTradeJson;
-import jojoaky.substance.datagen.generator.trade.json.WanderingTraderTradeJson;
+import jojoaky.substance.trade.PiglinBarterJson;
+import jojoaky.substance.trade.VillagerTradeJson;
+import jojoaky.substance.trade.WanderingTraderTradeJson;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;

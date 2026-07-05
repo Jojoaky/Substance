@@ -1,4 +1,4 @@
-package jojoaky.substance.datagen.generator.trade.json;
+package jojoaky.substance.trade;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;

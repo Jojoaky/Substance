@@ -1,6 +1,6 @@
 package jojoaky.substance.register;
 
-import jojoaky.substance.datagen.generator.trade.json.TradeLoader;
+import jojoaky.substance.trade.TradeLoader;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.server.packs.PackType;
 

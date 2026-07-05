@@ -1,4 +1,4 @@
-package jojoaky.substance.datagen.generator.trade.json;
+package jojoaky.substance.trade;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
