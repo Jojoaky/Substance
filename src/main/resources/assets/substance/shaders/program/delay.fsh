@@ -27,6 +27,7 @@ void main() {
     edgeMask = clamp(edgeMask, 0.0, 1.0);
     edgeMask = mix(1.0, edgeMask, EdgeAttenuation);
 
+    float applyedIntensity = pow(Intensity, 2);
     vec3 weight = pow(Retention, vec3(FrameTime / Intensity));
     weight *= edgeMask;
     weight = clamp(weight, 0.0, 1.0);

@@ -18,7 +18,7 @@ public abstract class GameRendererMixin {
 
     @Inject(
             method = "render",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;doEntityOutline()V")
+            at = @At("TAIL")
     )
     private void renderShaders(float partialTicks, long l, boolean bl, CallbackInfo ci) {
         var accessor = (GameRendererAccessor) this;

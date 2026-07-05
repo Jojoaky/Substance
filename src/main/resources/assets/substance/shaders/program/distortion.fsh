@@ -13,9 +13,10 @@ uniform float ShaderGameTime;
 
 uniform float Intensity;
 uniform float Speed;
+uniform float IntensityMultiplier;
 
 void main() {
-    float s = Intensity * 0.002;
+    float s = Intensity * IntensityMultiplier * 0.002;
     float t = ShaderGameTime * TAU * Speed;
 
     float offsetX = sin(texCoord.y * 10.0 + t) * s;

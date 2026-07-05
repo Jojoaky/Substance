@@ -5,9 +5,18 @@
   ],
   "passes": [
     {
-      "name": "substance:delay",
+      "name": "substance:distortion",
       "intarget": "minecraft:main",
       "outtarget": "swap",
+      "uniforms": [
+        { "name": "Speed", "values": [ 0.14 ] },
+        { "name": "IntensityMultiplier", "values": [ 0.2 ] }
+      ]
+    },
+    {
+      "name": "substance:delay",
+      "intarget": "swap",
+      "outtarget": "minecraft:main",
       "auxtargets": [
         {
           "name": "PrevSampler",
@@ -21,34 +30,28 @@
     },
     {
       "name": "blit",
-      "intarget": "swap",
+      "intarget": "minecraft:main",
       "outtarget": "previous",
       "uniforms": []
     },
     {
       "name": "substance:wave_mix",
-      "intarget": "minecraft:main",
+      "intarget": "swap",
       "auxtargets": [
         {
           "name": "SamplerA",
-          "id": "minecraft:main"
+          "id": "swap"
         },
         {
           "name": "SamplerB",
           "id": "previous"
         }
       ],
-      "outtarget": "swap",
+      "outtarget": "minecraft:main",
       "uniforms": [
         { "name": "Strength", "type": "float", "count": 1, "values": [ 1.0 ] },
         { "name": "Bias", "type": "float", "count": 1, "values": [ 0.8 ] }
       ]
-    },
-    {
-      "name": "blit",
-      "intarget": "swap",
-      "outtarget": "minecraft:main",
-      "uniforms": []
     }
   ]
 }
