@@ -215,6 +215,24 @@ public class ModItems {
             "pipe"
     );
 
+    public static final Item BUBBLE_PIPE = register(
+            new PipeItem(new FabricItemSettings()
+                    .stacksTo(1)
+                    .durability(512)
+                    .rarity(Rarity.RARE)
+            ),
+            "bubble_pipe"
+    );
+
+    public static final Item CIGARETTE = register(
+            new JointItem(new FabricItemSettings()
+                    .stacksTo(1)
+                    .durability(512)
+                    .rarity(Rarity.RARE)
+            ),
+            "cigarette"
+    );
+
     public static void initialize() {
         ItemGroupEvents.modifyEntriesEvent(ModCreativeTab.SUSPICIOUS_ITEM_GROUP_KEY)
                 .register((itemGroup) -> {
@@ -222,8 +240,10 @@ public class ModItems {
                     itemGroup.accept(ModItems.WHITE_CRYSTALS);
                     itemGroup.accept(ModItems.WHITE_CRYSTALS_CHILI);
                     itemGroup.accept(ModItems.BLUE_CRYSTALS);
+                    itemGroup.accept(ModItems.BUBBLE_PIPE);
                     itemGroup.accept(ModItems.HERBAL_ROLL);
                     itemGroup.accept(ModItems.THICK_HERBAL_ROLL);
+                    itemGroup.accept(ModItems.CIGARETTE);
                     itemGroup.accept(ModItems.PIPE);
 
                     // tools

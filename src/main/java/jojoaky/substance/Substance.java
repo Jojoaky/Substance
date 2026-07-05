@@ -27,5 +27,6 @@ public class Substance implements ModInitializer {
 		ModFluids.initialize();
 		ModEffects.initialize();
 		ModTags.initialize();
+		ModRegisterTrades.initialize();
 	}
 }
