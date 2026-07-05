@@ -18,5 +18,8 @@ public abstract class ChannelMixin {
         AudioManager.onSourceCreated(this.source);
     }
 
-    // We should also handle release, but Channel usually exists for the lifetime of the engine's pool
+    @Inject(method = "destroy", at = @At("HEAD"))
+    private void substance$onClose(CallbackInfo ci) {
+        AudioManager.onSourceReleased(this.source);
+    }
 }

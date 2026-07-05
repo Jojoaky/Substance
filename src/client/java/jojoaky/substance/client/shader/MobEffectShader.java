@@ -45,7 +45,7 @@ public class MobEffectShader extends PostShader {
         }
         float dt = Mth.clamp(timeNow - timeBefore, 0.0001f, 1f);
 
-        boolean fadingOut = effect.getDuration() < FADE_OUT_DURATION_TICKS;
+        boolean fadingOut = effect.getDuration() >= 0 && effect.getDuration() < FADE_OUT_DURATION_TICKS;
 
         int amp = Byte.toUnsignedInt((byte)effect.getAmplifier());
 

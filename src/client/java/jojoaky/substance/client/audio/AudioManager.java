@@ -24,10 +24,8 @@ public class AudioManager {
         if (initialized) return;
 
         try {
-            // Check if AL capabilities are set, otherwise we might crash
             AL.getCapabilities();
         } catch (IllegalStateException e) {
-            // AL capabilities not set yet
             return;
         }
 
@@ -50,6 +48,14 @@ public class AudioManager {
         initialized = true;
     }
 
+    public static float getEffectIntensity(MobEffectInstance effect) {
+        if (effect == null) return 0.0f;
+        float intensity = Mth.clamp((float)effect.getDuration() / 20.0f, 0.0f, 1.0f);
+        if (effect.getDuration() > 200) intensity = 1.0f;
+        else intensity = (float)effect.getDuration() / 200.0f;
+        return intensity;
+    }
+
     public static void tick(boolean pause) {
         if (!initialized) init();
 
@@ -57,16 +63,10 @@ public class AudioManager {
         Player player = mc.player;
         if (player == null || pause) return;
 
-        float intensity = 0;
-        // We'll use Haze or Relaxation as a base for distant audio
-        MobEffectInstance effect = player.getEffect(ModEffects.HAZE);
-        if (effect == null) effect = player.getEffect(ModEffects.RELAXATION);
-
-        if (effect != null) {
-            intensity = Mth.clamp((float)effect.getDuration() / 20.0f, 0.0f, 1.0f);
-            if (effect.getDuration() > 200) intensity = 1.0f;
-            else intensity = (float)effect.getDuration() / 200.0f;
-        }
+        float intensity = Math.max(
+                getEffectIntensity(player.getEffect(ModEffects.HAZE)),
+                getEffectIntensity(player.getEffect(ModEffects.WARP))
+        );
 
         updateFilters(intensity);
     }
@@ -104,8 +104,6 @@ public class AudioManager {
                     AL11.alSource3i(sourceId, EXTEfx.AL_AUXILIARY_SEND_FILTER, reverbSlot, 0, EXTEfx.AL_FILTER_NULL);
                 }
             } catch (IllegalStateException ignored) {
-                // Should not happen if initialized is true and we're on the right thread, 
-                // but better safe than crashing.
             }
         }
     }

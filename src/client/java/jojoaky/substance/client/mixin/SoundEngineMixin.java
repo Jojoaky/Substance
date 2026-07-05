@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class SoundEngineMixin {
     @Shadow private boolean loaded;
 
-    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "tick", at = @At("HEAD"))
     private void substance$tick(boolean pause, CallbackInfo ci) {
         if (!this.loaded) return;
         AudioManager.tick(pause);

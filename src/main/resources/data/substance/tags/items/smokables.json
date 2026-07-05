@@ -2,6 +2,9 @@
   "replace": false,
   "values": [
     "substance:herbal_roll",
-    "substance:thick_herbal_roll"
+    "substance:thick_herbal_roll",
+    "substance:cigarette",
+    "substance:pipe",
+    "substance:bubble_pipe"
   ]
 }
