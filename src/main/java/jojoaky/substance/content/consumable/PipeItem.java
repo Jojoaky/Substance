@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class PipeItem extends SmokableItem {
-    public PipeItem(Properties properties) {
+    public  PipeItem(Properties properties) {
         super(properties);
     }
 
@@ -25,7 +25,7 @@ public class PipeItem extends SmokableItem {
         super.onStopConsuming(stack, level, entity, useDuration);
         if (useDuration > 100) entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 4 * 20));
 
-        SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.KEEN, useDuration * 10, 800, 3);
-        SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.WARP, useDuration * 10, 800, 1);
+        SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.KEEN, useDuration * 10, 550, 3);
+        SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.WARP, useDuration * 6, 800, 1);
     }
 }

@@ -8,8 +8,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class JointItem extends SmokableItem {
-    public JointItem(Properties properties) {
+public class CigaretteItem extends SmokableItem {
+    public CigaretteItem(Properties properties) {
         super(properties);
     }
 
@@ -17,8 +17,7 @@ public class JointItem extends SmokableItem {
     protected void onConsumeTick(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
         super.onConsumeTick(stack, level, entity, useDuration);
 
-        SubstanceEffectHelper.applyEffectBase(entity, ModEffects.RELAXATION, 160, 0);
-        SubstanceEffectHelper.applyEffectBase(entity, ModEffects.WARP, 160, 0);
+        SubstanceEffectHelper.applyEffectBase(entity, ModEffects.KEEN, 160, 0);
     }
 
     @Override
@@ -26,7 +25,8 @@ public class JointItem extends SmokableItem {
         super.onStopConsuming(stack, level, entity, useDuration);
         if (useDuration > 100) entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 4 * 20));
 
-        SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.RELAXATION, useDuration * 10, 800, 2);
-        SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.WARP, useDuration * 10, 600, 3);
+        SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.KEEN, useDuration * 6, 550, 2);
+        SubstanceEffectHelper.applyEffectBase(entity, MobEffects.DIG_SPEED, 400, 1);
+
     }
 }

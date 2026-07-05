@@ -1,9 +1,7 @@
 package jojoaky.substance.register;
 
 import jojoaky.substance.Substance;
-import jojoaky.substance.content.consumable.CrystalsItem;
-import jojoaky.substance.content.consumable.JointItem;
-import jojoaky.substance.content.consumable.PipeItem;
+import jojoaky.substance.content.consumable.*;
 import jojoaky.substance.content.gas_bottle.EmptyGasBottleItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -11,7 +9,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
@@ -55,7 +52,7 @@ public class ModItems {
     );
 
     public static final Item THICK_HERBAL_ROLL = register(
-            new JointItem(new FabricItemSettings()
+            new ThickJointItem(new FabricItemSettings()
                     .durability(256)
                     .rarity(Rarity.RARE)
             ),
@@ -225,9 +222,9 @@ public class ModItems {
     );
 
     public static final Item CIGARETTE = register(
-            new JointItem(new FabricItemSettings()
+            new CigaretteItem(new FabricItemSettings()
                     .stacksTo(1)
-                    .durability(512)
+                    .durability(164)
                     .rarity(Rarity.RARE)
             ),
             "cigarette"

@@ -127,6 +127,8 @@ public class SmokableItemModel {
                 plugin.addModels(model.getModelLocations())
         );
 
+        Substance.LOGGER.info("Registered smokable model for {}", item);
+
         return model;
     }
 

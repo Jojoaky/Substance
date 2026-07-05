@@ -8,8 +8,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class JointItem extends SmokableItem {
-    public JointItem(Properties properties) {
+public class ThickJointItem extends JointItem {
+    public ThickJointItem(Properties properties) {
         super(properties);
     }
 
@@ -26,7 +26,8 @@ public class JointItem extends SmokableItem {
         super.onStopConsuming(stack, level, entity, useDuration);
         if (useDuration > 100) entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 4 * 20));
 
-        SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.RELAXATION, useDuration * 10, 800, 2);
-        SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.WARP, useDuration * 10, 600, 3);
+        SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.RELAXATION, useDuration * 12, 800, 3);
+        SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.WARP, useDuration * 12, 600, 4);
+        SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.HAZE, useDuration * 8, 600, 1);
     }
 }

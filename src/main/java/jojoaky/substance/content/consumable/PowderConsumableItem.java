@@ -41,7 +41,7 @@ public class PowderConsumableItem extends ConsumableItem {
         level.playSound(
                 null,
                 entity.getX(), entity.getY(), entity.getZ(),
-                SoundEvents.PLAYER_BREATH,
+                SoundEvents.EXPERIENCE_ORB_PICKUP,
                 SoundSource.PLAYERS,
                 0.6f,
                 0.8f + level.random.nextFloat() * 0.4f

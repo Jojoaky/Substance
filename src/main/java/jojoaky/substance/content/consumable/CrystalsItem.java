@@ -23,6 +23,6 @@ public class CrystalsItem extends PowderConsumableItem {
         super.onStopConsuming(stack, level, entity, useDuration);
 
         SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.SURGE, useDuration, 900, 3);
-        SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.WARP, useDuration, 800, 2);
+        SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.WARP, useDuration, 600, 2);
     }
 }
