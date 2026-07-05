@@ -1,0 +1,13 @@
+{
+  "costA": {
+    "Count": 12,
+    "id": "minecraft:emerald"
+  },
+  "level": 2,
+  "profession": "minecraft:farmer",
+  "result": {
+    "Count": 1,
+    "id": "substance:ephedra_bundle"
+  },
+  "xp": 3
+}

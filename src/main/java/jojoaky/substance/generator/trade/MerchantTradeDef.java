@@ -1,19 +1,29 @@
 package jojoaky.substance.generator.trade;
 
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.ItemLike;
 
-public abstract class MerchantTradeDef<T extends MerchantTradeDef<T>> implements TradeRegistry.TradeDef {
+public abstract class MerchantTradeDef<T extends MerchantTradeDef<T>> {
+    protected String name;
     protected ItemStack costA = ItemStack.EMPTY;
     protected ItemStack costB = ItemStack.EMPTY;
     protected ItemStack result = ItemStack.EMPTY;
     protected int maxUses = 12;
     protected int villagerXp = 2;
     protected float priceMultiplier = 0.05f;
+
+    public static String toPathSafe(String name) {
+        return name.toLowerCase().replace(" ", "_");
+    }
+
+    public T named(String name) {
+        this.name = name;
+        return self();
+    }
+
+    public String getName() {
+        return name;
+    }
 
     @SuppressWarnings("unchecked")
     protected final T self() {
@@ -50,9 +60,10 @@ public abstract class MerchantTradeDef<T extends MerchantTradeDef<T>> implements
         return self();
     }
 
-    public VillagerTrades.ItemListing toItemListing() {
-        return (Entity entity, RandomSource random) -> new MerchantOffer(
-                this.costA, this.costB, this.result, this.maxUses, this.villagerXp, this.priceMultiplier
-        );
-    }
+    public ItemStack getCostA() { return costA; }
+    public ItemStack getCostB() { return costB; }
+    public ItemStack getResult() { return result; }
+    public int getMaxUses() { return maxUses; }
+    public int getVillagerXp() { return villagerXp; }
+    public float getPriceMultiplier() { return priceMultiplier; }
 }

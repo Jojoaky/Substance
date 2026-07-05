@@ -9,20 +9,28 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-public class PiglinBarterDef implements TradeRegistry.TradeDef {
-    private static final ResourceLocation PIGLIN_BARTERING_ID = new ResourceLocation("minecraft", "gameplay/piglin_bartering");
-
-    private final ItemLike item;
+public class PiglinBarterDef {
+    private String name;
+    private ItemLike item;
     private int weight = 10;
     private float minCount = 1.0f;
     private float maxCount = 1.0f;
 
-    private PiglinBarterDef(ItemLike item) {
-        this.item = item;
+    private PiglinBarterDef() {}
+
+    public static PiglinBarterDef named(String name) {
+        PiglinBarterDef def = new PiglinBarterDef();
+        def.name = name;
+        return def;
     }
 
-    public static PiglinBarterDef bartersFor(ItemLike item) {
-        return new PiglinBarterDef(item);
+    public PiglinBarterDef drops(ItemLike item) {
+        this.item = item;
+        return this;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public PiglinBarterDef weight(int weight) {
@@ -36,18 +44,8 @@ public class PiglinBarterDef implements TradeRegistry.TradeDef {
         return this;
     }
 
-    public LootPoolEntryContainer.Builder<?> toLootPoolEntry() {
-        return LootItem.lootTableItem(this.item)
-                .setWeight(this.weight)
-                .apply(SetItemCountFunction.setCount(UniformGenerator.between(this.minCount, this.maxCount)));
-    }
-
-    @Override
-    public void register() {
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-            if (source.isBuiltin() && PIGLIN_BARTERING_ID.equals(id)) {
-                tableBuilder.modifyPools(poolBuilder -> poolBuilder.add(toLootPoolEntry()));
-            }
-        });
-    }
+    public ItemLike getItem() { return item; }
+    public int getWeight() { return weight; }
+    public float getMinCount() { return minCount; }
+    public float getMaxCount() { return maxCount; }
 }

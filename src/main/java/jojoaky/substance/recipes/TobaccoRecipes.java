@@ -25,6 +25,14 @@ public class TobaccoRecipes {
                         .key('P', ItemTags.PLANKS)
                         .key('N', Items.IRON_NUGGET)
                         .output(ModItems.PIPE)
+                        .build(),
+
+                ShapedRecipeDef.named("cigarette")
+                        .vanillaShaped()
+                        .pattern("TPT")
+                        .key('P', Items.PAPER)
+                        .key('T', ModItems.DRIED_TOBACCO_LEAF)
+                        .output(ModItems.CIGARETTE)
                         .build()
         );
     }

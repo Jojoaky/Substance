@@ -1,0 +1,12 @@
+{
+  "costA": {
+    "Count": 5,
+    "id": "minecraft:emerald"
+  },
+  "max_uses": 8,
+  "pool": 1,
+  "result": {
+    "Count": 3,
+    "id": "substance:ephedra_seeds"
+  }
+}

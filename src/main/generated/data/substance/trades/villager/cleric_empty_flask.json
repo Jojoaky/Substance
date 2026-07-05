@@ -1,0 +1,12 @@
+{
+  "costA": {
+    "Count": 4,
+    "id": "substance:flask"
+  },
+  "level": 1,
+  "profession": "minecraft:cleric",
+  "result": {
+    "Count": 1,
+    "id": "minecraft:emerald"
+  }
+}

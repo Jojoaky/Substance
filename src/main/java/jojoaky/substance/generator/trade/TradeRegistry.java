@@ -1,27 +1,31 @@
 package jojoaky.substance.generator.trade;
 
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
-import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
-import net.minecraft.resources.ResourceLocation;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class TradeRegistry {
-    public interface TradeDef {
-        void register();
+    public static List<VillagerTradeDef> VILLAGER_TRADES = new ArrayList<>();
+    public static List<WanderingTraderTradeDef> WANDERING_TRADER_TRADES = new ArrayList<>();
+    public static List<PiglinBarterDef> PIGLIN_BARTERS = new ArrayList<>();
+
+    public static void register(Object... trades) {
+        Arrays.stream(trades).forEach(TradeRegistry::registerSingle);
     }
 
-    public static void register(TradeDef... trades) {
-        Arrays.stream(trades).forEach(TradeDef::register);
+    public static void register(Stream<?> trades) {
+        trades.forEach(TradeRegistry::registerSingle);
     }
 
-    public static void register(Stream<? extends TradeDef> trades) {
-        trades.forEach(TradeDef::register);
+    public static void register(Collection<?> trades) {
+        trades.forEach(TradeRegistry::registerSingle);
     }
 
-    public static void register(Collection<? extends TradeDef> trades) {
-        trades.forEach(TradeDef::register);
+    private static void registerSingle(Object trade) {
+        if (trade instanceof VillagerTradeDef v) VILLAGER_TRADES.add(v);
+        else if (trade instanceof WanderingTraderTradeDef w) WANDERING_TRADER_TRADES.add(w);
+        else if (trade instanceof PiglinBarterDef p) PIGLIN_BARTERS.add(p);
     }
 }

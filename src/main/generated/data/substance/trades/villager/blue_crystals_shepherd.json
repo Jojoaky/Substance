@@ -1,0 +1,13 @@
+{
+  "costA": {
+    "Count": 2,
+    "id": "substance:blue_crystals"
+  },
+  "level": 3,
+  "max_uses": 4,
+  "profession": "minecraft:shepherd",
+  "result": {
+    "Count": 36,
+    "id": "minecraft:emerald"
+  }
+}

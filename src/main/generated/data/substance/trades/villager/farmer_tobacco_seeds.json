@@ -1,0 +1,13 @@
+{
+  "costA": {
+    "Count": 4,
+    "id": "minecraft:emerald"
+  },
+  "level": 2,
+  "profession": "minecraft:farmer",
+  "result": {
+    "Count": 3,
+    "id": "substance:tobacco_seeds"
+  },
+  "xp": 3
+}
