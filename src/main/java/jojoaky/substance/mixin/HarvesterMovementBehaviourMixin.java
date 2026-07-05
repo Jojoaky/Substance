@@ -3,11 +3,15 @@ package jojoaky.substance.mixin;
 import com.simibubi.create.api.behaviour.movement.MovementBehaviour;
 import com.simibubi.create.content.contraptions.actors.harvester.HarvesterMovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
+import com.simibubi.create.foundation.utility.BlockHelper;
 import jojoaky.substance.content.crops.LargeHerbBlock;
+import jojoaky.substance.content.crops.TobaccoBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,12 +26,21 @@ public class HarvesterMovementBehaviourMixin implements MovementBehaviour {
         if (state.getBlock() instanceof LargeHerbBlock) {
             cir.setReturnValue(false);
         }
+
+        if (state.getBlock() instanceof TobaccoBlock) {
+            cir.setReturnValue(false);
+        }
     }
 
     @Inject(method = "isValidOther", at = @At("HEAD"), cancellable = true)
     private void onIsValidOther(Level world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir) {
         if (state.getBlock() instanceof LargeHerbBlock) {
             boolean isMature = state.getValue(LargeHerbBlock.AGE) == LargeHerbBlock.MAX_AGE;
+            cir.setReturnValue(isMature);
+        }
+
+        if (state.getBlock() instanceof TobaccoBlock) {
+            boolean isMature = state.getValue(TobaccoBlock.AGE) == TobaccoBlock.MAX_AGE;
             cir.setReturnValue(isMature);
         }
     }
@@ -54,11 +67,18 @@ public class HarvesterMovementBehaviourMixin implements MovementBehaviour {
         Level world = context.world;
         BlockState stateVisited = world.getBlockState(pos);
 
-        if (!(stateVisited.getBlock() instanceof LargeHerbBlock largeHerbBlock)) return;
+        if (stateVisited.getBlock() instanceof LargeHerbBlock largeHerbBlock) {
+            ItemStack result = largeHerbBlock.cut(stateVisited, world, pos);
+            dropItem(context, result);
 
-        ItemStack result = largeHerbBlock.cut(stateVisited, world, pos);
-        dropItem(context, result);
+            ci.cancel();
+        }
 
-        ci.cancel();
+        if (stateVisited.getBlock() instanceof TobaccoBlock tobaccoBlock) {
+            ItemStack result = tobaccoBlock.cut(stateVisited, world, pos);
+            dropItem(context, result);
+
+            ci.cancel();
+        }
     }
 }

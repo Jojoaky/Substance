@@ -31,6 +31,7 @@ public class TobaccoBlock extends DoublePlantBlock implements BonemealableBlock 
 
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
     public static final int MAX_AGE = 3;
+    public static final int AGE_AFTER_HARVEST = 0;
 
     public TobaccoBlock(Properties properties) {
         super(properties);
@@ -60,6 +61,40 @@ public class TobaccoBlock extends DoublePlantBlock implements BonemealableBlock 
                 level.setBlock(pos.below(), lower.setValue(AGE, newAge), 2);
             }
         }
+    }
+
+    public ItemStack cut(BlockState state, Level level, BlockPos pos) {
+        int age = state.getValue(AGE);
+
+        if (age < MAX_AGE) return ItemStack.EMPTY;
+
+        setAge(level, pos, state, AGE_AFTER_HARVEST);
+
+        float pitch = 0.9F + level.random.nextFloat() * 0.2F;
+        level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, pitch);
+
+        int count = 1 + level.random.nextInt(3);
+        return new ItemStack(ModItems.RIPE_TOBACCO_LEAF, count);
+    }
+
+    @Override
+    public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos,
+                                          Player player, InteractionHand hand, BlockHitResult hit) {
+        int age = state.getValue(AGE);
+        ItemStack stack = player.getItemInHand(hand);
+
+        if (age < MAX_AGE || !stack.is(Items.SHEARS)) {
+            return InteractionResult.PASS;
+        }
+
+        ItemStack result = cut(state, level, pos);
+
+        stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+        level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+
+        popResource(level, pos, result);
+
+        return InteractionResult.SUCCESS;
     }
 
     protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
