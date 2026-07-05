@@ -2,6 +2,7 @@ package jojoaky.substance.content.crops;
 
 import jojoaky.substance.register.ModItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -24,14 +25,24 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class TobaccoBlock extends DoublePlantBlock implements BonemealableBlock {
 
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
     public static final int MAX_AGE = 3;
     public static final int AGE_AFTER_HARVEST = 0;
+
+    private static final ResourceLocation CUT_LOOT_TABLE =
+            new ResourceLocation("substance", "gameplay/tobacco_cut");
 
     public TobaccoBlock(Properties properties) {
         super(properties);
@@ -63,18 +74,25 @@ public class TobaccoBlock extends DoublePlantBlock implements BonemealableBlock 
         }
     }
 
-    public ItemStack cut(BlockState state, Level level, BlockPos pos) {
+    public List<ItemStack> cut(BlockState state, ServerLevel level, BlockPos pos, ItemStack tool) {
         int age = state.getValue(AGE);
 
-        if (age < MAX_AGE) return ItemStack.EMPTY;
+        if (age < MAX_AGE) return List.of();
 
         setAge(level, pos, state, AGE_AFTER_HARVEST);
 
         float pitch = 0.9F + level.random.nextFloat() * 0.2F;
         level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, pitch);
 
-        int count = 1 + level.random.nextInt(3);
-        return new ItemStack(ModItems.RIPE_TOBACCO_LEAF, count);
+        LootTable lootTable = level.getServer().getLootData().getLootTable(CUT_LOOT_TABLE);
+
+        LootParams params = new LootParams.Builder(level)
+                .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
+                .withParameter(LootContextParams.TOOL, tool)
+                .withOptionalParameter(LootContextParams.BLOCK_STATE, state)
+                .create(LootContextParamSets.BLOCK);
+
+        return lootTable.getRandomItems(params);
     }
 
     @Override
@@ -87,12 +105,16 @@ public class TobaccoBlock extends DoublePlantBlock implements BonemealableBlock 
             return InteractionResult.PASS;
         }
 
-        ItemStack result = cut(state, level, pos);
+        if (level instanceof ServerLevel serverLevel) {
+            List<ItemStack> drops = cut(state, serverLevel, pos, stack);
 
-        stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
-        level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+            stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+            level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
 
-        popResource(level, pos, result);
+            for (ItemStack drop : drops) {
+                popResource(level, pos, drop);
+            }
+        }
 
         return InteractionResult.SUCCESS;
     }

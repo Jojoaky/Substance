@@ -7,8 +7,10 @@ import com.simibubi.create.foundation.utility.BlockHelper;
 import jojoaky.substance.content.crops.LargeHerbBlock;
 import jojoaky.substance.content.crops.TobaccoBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -17,6 +19,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.List;
 
 @Mixin(value = HarvesterMovementBehaviour.class)
 public class HarvesterMovementBehaviourMixin implements MovementBehaviour {
@@ -65,18 +69,22 @@ public class HarvesterMovementBehaviourMixin implements MovementBehaviour {
             CallbackInfo ci
     ) {
         Level world = context.world;
+
         BlockState stateVisited = world.getBlockState(pos);
 
         if (stateVisited.getBlock() instanceof LargeHerbBlock largeHerbBlock) {
-            ItemStack result = largeHerbBlock.cut(stateVisited, world, pos);
-            dropItem(context, result);
-
+            if (world instanceof ServerLevel serverLevel) {
+                List<ItemStack> result = largeHerbBlock.cut(stateVisited, serverLevel, pos, Items.SHEARS.getDefaultInstance());
+                result.forEach(item -> dropItem(context, item));
+            }
             ci.cancel();
         }
 
         if (stateVisited.getBlock() instanceof TobaccoBlock tobaccoBlock) {
-            ItemStack result = tobaccoBlock.cut(stateVisited, world, pos);
-            dropItem(context, result);
+            if (world instanceof ServerLevel serverLevel) {
+                List<ItemStack> result = tobaccoBlock.cut(stateVisited, serverLevel, pos, Items.SHEARS.getDefaultInstance());
+                result.forEach(item -> dropItem(context, item));
+            }
 
             ci.cancel();
         }
