@@ -11,10 +11,12 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -60,6 +62,10 @@ public class TobaccoBlock extends DoublePlantBlock implements BonemealableBlock 
         }
     }
 
+    protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.is(Blocks.FARMLAND);
+    }
+
     @Override
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos,
                                          BlockState state, boolean isClient) {
@@ -76,7 +82,7 @@ public class TobaccoBlock extends DoublePlantBlock implements BonemealableBlock 
     public void performBonemeal(ServerLevel level, RandomSource random,
                                 BlockPos pos, BlockState state) {
         int age = state.getValue(AGE);
-        if (age < MAX_AGE && (random.nextInt(10) == 0)) {
+        if (age < MAX_AGE && (random.nextInt(7) == 0)) {
             setAge(level, pos, state, age+1);
         }
     }
@@ -87,7 +93,7 @@ public class TobaccoBlock extends DoublePlantBlock implements BonemealableBlock 
                            BlockPos pos, RandomSource random) {
         int age = state.getValue(AGE);
 
-        if (age < MAX_AGE && random.nextInt(10) == 0) {
+        if (age < MAX_AGE && random.nextInt(7) == 0) {
             setAge(level, pos, state, age+1);
         }
     }
