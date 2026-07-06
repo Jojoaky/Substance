@@ -10,31 +10,15 @@
   "parent": "substance:substance",
   "criteria": {
     "has_multiple_effects": {
-      "trigger": "minecraft:tick",
+      "trigger": "minecraft:effects_changed",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "effects": {
-              "substance:haze": {
-                "min": 1
-              },
-              "substance:warp": {
-                "min": 1
-              },
-              "substance:keen": {
-                "min": 1
-              },
-              "substance:relaxation": {
-                "min": 1
-              },
-              "substance:surge": {
-                "min": 1
-              }
-            }
-          }
-        ]
+        "effects": {
+          "substance:haze": {},
+          "substance:warp": {},
+          "substance:keen": {},
+          "substance:relaxation": {},
+          "substance:surge": {}
+        }
       }
     }
   }

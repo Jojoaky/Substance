@@ -7,7 +7,7 @@
     "description": "cough"
   },
   "hidden": true,
-  "parent": "substance:cigarette/place_tobacco",
+  "parent": "substance:tobacco/place_tobacco",
   "criteria": {
     "interacted_item": {
       "trigger": "minecraft:using_item",
