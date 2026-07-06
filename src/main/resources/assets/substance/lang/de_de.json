@@ -106,5 +106,46 @@
   "item.minecraft.lingering_potion.effect.keen": "Verweiltrank der Schärfe",
   "item.minecraft.lingering_potion.effect.relaxation": "Verweiltrank der Entspannung",
   "item.minecraft.lingering_potion.effect.surge": "Verweiltrank des Energieschubs",
-  "item.minecraft.lingering_potion.effect.hallucination": "Verweiltrank der Halluzination"
+  "item.minecraft.lingering_potion.effect.hallucination": "Verweiltrank der Halluzination",
+
+  "text.config.substance.title": "Substance Konfig",
+  "text.config.substance.category.gameplay": "Gameplay",
+  "text.config.substance.category.gameplay.tooltip": "Verwalte gameplaybezogene Einstellungen.",
+  "text.config.substance.category.client": "Client",
+  "text.config.substance.category.client.tooltip": "Konfiguriere clientseitiges Verhalten.",
+
+  "text.config.substance.group.durabilities": "Haltbarkeiten",
+  "text.config.substance.group.durabilities.desc": "Konfiguriere die maximale Haltbarkeit von Verbrauchsgegenständen.",
+  "text.config.substance.group.mechanics": "Mechaniken",
+  "text.config.substance.group.mechanics.desc": "Konfiguriere Aktionsdauern, Abklingzeiten und Wahrscheinlichkeiten.",
+  "text.config.substance.group.immersion": "Immersion",
+  "text.config.substance.group.immersion.desc": "Passe die visuellen und akustischen Effekte dieser Mod an oder deaktiviere sie.",
+
+  "text.config.substance.option.woodenPipeDurability": "Holzpfeifen-Haltbarkeit",
+  "text.config.substance.option.bubblePipeDurability": "Seifenblasenpfeifen-Haltbarkeit",
+  "text.config.substance.option.herbalRollDurability": "Kräuterrollen-Haltbarkeit",
+  "text.config.substance.option.thickHerbalRollDurability": "Dicke Kräuterrollen-Haltbarkeit",
+  "text.config.substance.option.cigaretteDurability": "Zigaretten-Haltbarkeit",
+
+  "text.config.substance.option.maxSmokeDuration": "Maximale Rauchdauer",
+  "text.config.substance.option.maxSmokeDuration.desc": "Maximale Dauer einer Interaktion (in Sekunden).",
+  "text.config.substance.option.smokeCooldown": "Rauch-Abklingzeit",
+  "text.config.substance.option.smokeCooldown.desc": "Abklingzeit nach dem Rauchen (in Sekunden).",
+  "text.config.substance.option.maxSniffDuration": "Maximale Schnüffeldauer",
+  "text.config.substance.option.maxSniffDuration.desc": "Maximale Dauer einer Interaktion (in Sekunden).",
+  "text.config.substance.option.sniffCooldown": "Schnüffel-Abklingzeit",
+  "text.config.substance.option.sniffCooldown.desc": "Abklingzeit nach dem Schnüffeln (in Sekunden).",
+  "text.config.substance.option.pipeItemConsumeProbability": "Pfeifen-Verbrauchswahrscheinlichkeit",
+  "text.config.substance.option.pipeItemConsumeProbability.desc": "Die prozentuale Chance, dass die Benutzung einer Pfeife einen Gegenstand darin verbraucht.",
+
+  "text.config.substance.option.enableShaderEffects": "Shader-Effekte aktivieren",
+  "text.config.substance.option.enableShaderEffects.desc": "Aktiviert oder deaktiviert Post-Processing-Shader vollständig. Erfordert einen Neustart!",
+  "text.config.substance.option.visualEffectStrength": "Visuelle Intensität",
+  "text.config.substance.option.visualEffectStrength.desc": "Passe die Gesamtstärke der Shader-Effekte an.",
+  "text.config.substance.option.visualEffectsInMenus": "Visuelle Effekte in Menüs",
+  "text.config.substance.option.visualEffectsInMenus.desc": "Bestimmt, ob Shader-Effekte auch auf Menüs oder nur auf die Kamera angewendet werden.",
+  "text.config.substance.option.enableAudioEffects": "Audioverarbeitung aktivieren",
+  "text.config.substance.option.enableAudioEffects.desc": "Aktiviert oder deaktiviert Audioeffekte vollständig. Erfordert einen Neustart!",
+  "text.config.substance.option.audioEffectStrength": "Audioeffekt-Intensität",
+  "text.config.substance.option.audioEffectStrength.desc": "Passe die Intensität der Audiofilter an."
 }
