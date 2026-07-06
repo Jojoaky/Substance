@@ -71,5 +71,5 @@ public class Substance implements ModInitializer {
 		));
 	}
 
-	// TODO: Smoke animation broken (left hand), Sound effects, Improved way of obtaining pipes, Bubble pipe lit texture, Advancements with translation
+	// TODO: Smoke animation broken (left hand), Sound effects, Improved way of obtaining pipes, Advancements with translation
 }
