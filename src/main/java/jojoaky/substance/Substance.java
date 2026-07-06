@@ -8,6 +8,7 @@ import jojoaky.substance.register.*;
 import jojoaky.substance.util.StackingEffect;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -69,6 +70,8 @@ public class Substance implements ModInitializer {
 				Items.RED_MUSHROOM,
 				new StackingEffect(ModEffects.HALLUCINATION, 8, 1000, 1)
 		));
+
+		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> WelcomeHandler.onPlayerJoin(handler.getPlayer(), server));
 	}
 
 	// TODO: Smoke animation broken (left hand), Sound effects, Improved way of obtaining pipes, Advancements with translation
