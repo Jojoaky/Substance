@@ -1,4 +1,4 @@
-package jojoaky.substance.datagen;
+package jojoaky.substance.datagen.generator;
 
 import jojoaky.substance.Substance;
 import jojoaky.substance.content.flask.FilledFlaskItem;
@@ -56,7 +56,11 @@ public class ModelProvider extends FabricModelProvider {
             ModItems.GAS_BOTTLE_OXYGEN,
             ModItems.GAS_BOTTLE_HYDROGEN,
             ModItems.GAS_BOTTLE_NITROGEN,
-            ModFlasks.EMPTY_FLASK
+            ModFlasks.EMPTY_FLASK,
+            ModFlasks.LAVA_FLASK,
+            ModItems.WHITE_CRYSTALS,
+            ModItems.WHITE_CRYSTALS_CHILI,
+            ModItems.BLUE_CRYSTALS,
     };
 
     public ModelProvider(FabricDataOutput output) {

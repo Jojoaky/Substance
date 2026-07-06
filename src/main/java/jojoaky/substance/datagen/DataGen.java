@@ -1,5 +1,6 @@
 package jojoaky.substance.datagen;
 
+import jojoaky.substance.datagen.generator.ModelProvider;
 import jojoaky.substance.datagen.generator.recipe.RecipeGeneratorRegistry;
 import jojoaky.substance.datagen.recipes.*;
 import jojoaky.substance.datagen.generator.TradeDatagenProvider;
