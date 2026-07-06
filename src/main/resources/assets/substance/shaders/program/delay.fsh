@@ -13,7 +13,7 @@ uniform float FrameTime;
 in vec2 texCoord;
 out vec4 fragColor;
 
-uniform float Intensity;
+uniform float NauseatingIntensity;
 uniform vec3 Retention; // % left after 1s
 uniform float EdgeAttenuation;
 
@@ -27,8 +27,8 @@ void main() {
     edgeMask = clamp(edgeMask, 0.0, 1.0);
     edgeMask = mix(1.0, edgeMask, EdgeAttenuation);
 
-    float applyedIntensity = pow(Intensity, 2);
-    vec3 weight = pow(Retention, vec3(FrameTime / Intensity));
+    float applyedIntensity = pow(NauseatingIntensity, 2);
+    vec3 weight = pow(Retention, vec3(FrameTime / NauseatingIntensity));
     weight *= edgeMask;
     weight = clamp(weight, 0.0, 1.0);
 

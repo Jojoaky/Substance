@@ -4,8 +4,6 @@ import jojoaky.substance.Substance;
 import jojoaky.substance.client.mixin.GameRendererAccessor;
 import jojoaky.substance.client.shader.MobEffectShader;
 import jojoaky.substance.register.ModEffects;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.Mth;
 
 public class KeenShader extends MobEffectShader {
     public KeenShader() {
@@ -14,10 +12,6 @@ public class KeenShader extends MobEffectShader {
 
     @Override
     protected void onRender(GameRendererAccessor accessor, float partialTicks, long time, boolean tick) {
-        assert Minecraft.getInstance().level != null;
-        float t = (Minecraft.getInstance().level.getGameTime() + partialTicks);
-
-        setGlobalUniformf("Intensity", getIntensity());
-        setGlobalUniformf("ShaderGameTime", t / 20.0f);
+        super.onRender(accessor, partialTicks, time, tick);
     }
 }

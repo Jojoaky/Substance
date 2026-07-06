@@ -11,12 +11,12 @@ out vec4 fragColor;
 
 uniform float ShaderGameTime;
 
-uniform float Intensity;
+uniform float NauseatingIntensity;
 uniform float Speed;
 uniform float IntensityMultiplier;
 
 void main() {
-    float s = Intensity * IntensityMultiplier * 0.002;
+    float s = NauseatingIntensity * IntensityMultiplier * 0.002;
     float t = ShaderGameTime * TAU * Speed;
 
     float offsetX = sin(texCoord.y * 10.0 + t) * s;

@@ -2,6 +2,7 @@ package jojoaky.substance.client.shader;
 
 import jojoaky.substance.Config;
 import jojoaky.substance.client.mixin.GameRendererAccessor;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -24,6 +25,29 @@ public class MobEffectShader extends PostShader {
 
     public float getIntensity() {
         return intensity * Config.get().visualEffectStrength;
+    }
+
+    public float getNauseatingIntensity(Minecraft mc) {
+        float distortionScale = mc.options.screenEffectScale().get().floatValue();
+        return getIntensity() * distortionScale;
+    }
+
+    private float shaderTimeBefore = 0.0f;
+
+    @Override
+    protected void onRender(GameRendererAccessor accessor, float partialTicks, long time, boolean tick) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level == null) return;
+
+        float t = Util.getMillis() / 1000.0f;
+        float dt = (t - shaderTimeBefore);
+
+        setGlobalUniformf("ShaderGameTime", t);
+        setGlobalUniformf("FrameTime", dt);
+        setGlobalUniformf("Intensity", getIntensity());
+        setGlobalUniformf("NauseatingIntensity", getNauseatingIntensity(mc));
+
+        shaderTimeBefore = t;
     }
 
     @Override
