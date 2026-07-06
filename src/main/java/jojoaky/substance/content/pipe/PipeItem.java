@@ -1,5 +1,6 @@
 package jojoaky.substance.content.pipe;
 
+import jojoaky.substance.Config;
 import jojoaky.substance.Substance;
 import  jojoaky.substance.content.ItemContainer;
 import jojoaky.substance.content.consumable.SmokableItem;
@@ -9,6 +10,7 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -23,19 +25,19 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
-import java.util.Random;
+import java.util.Set;
 
 public class PipeItem extends SmokableItem {
     public PipeItem(Properties properties) {
         super(properties);
     }
 
-    public static final int PIPE_SIZE = 5;
+    public static final int PIPE_INVENTORY_SIZE = 5;
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        var container = new ItemContainer(stack, PIPE_SIZE);
+        var container = new ItemContainer(stack, PIPE_INVENTORY_SIZE);
         container.readFromNbt();
 
         if (!container.isEmpty() && !player.isCrouching()) super.use(level, player, hand);
@@ -55,7 +57,7 @@ public class PipeItem extends SmokableItem {
 
                     @Override
                     public @NotNull AbstractContainerMenu createMenu(int syncId, @NotNull Inventory playerInventory, @NotNull Player player) {
-                        return new PipeMenu(syncId, playerInventory, new ItemContainer(stack, PIPE_SIZE), hand);
+                        return new PipeMenu(syncId, playerInventory, new ItemContainer(stack, PIPE_INVENTORY_SIZE), hand);
                     }
                 });
             }
@@ -71,12 +73,49 @@ public class PipeItem extends SmokableItem {
         SubstanceEffectHelper.applyEffectBase(entity, ModEffects.WARP, 160, 0);
     }
 
+    private void reduceStackAfterConsume(RandomSource random, ItemStack stack, int useDuration) {
+        float probability = Config.get().pipeItemConsumeProbability;
+
+        if (probability <= 0) return;
+
+        if (probability >= 1) {
+            stack.shrink(1);
+            return;
+        }
+
+        int maxRoll = (int) (getUseDuration(stack) * (1 / probability));
+        if (random.nextInt(maxRoll) < useDuration) {
+            stack.shrink(1);
+        }
+    }
+
+    private void handleConsumeIngredient(ItemStack ingredientStack, Set<Item> processedItems, ItemStack stack, Level level, LivingEntity entity, int useDuration) {
+        if (ingredientStack == null || ingredientStack.isEmpty()) return;
+
+        Item item = ingredientStack.getItem();
+
+        if (!processedItems.add(item)) return;
+
+        PipeSmokableItem smokable = PipeRegistry.getItem(item);
+
+        if (smokable == null) {
+            Substance.LOGGER.error("Item {} in pipe is not registered as pipe smokable item!", item);
+            return;
+        }
+
+        var context = new PipeSmokableConsumeContext(stack, ingredientStack, level, entity, useDuration);
+        smokable.onConsume().accept(context);
+
+        reduceStackAfterConsume(level.random, ingredientStack, useDuration);
+    }
+
     @Override
     protected void onStopConsuming(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
         super.onStopConsuming(stack, level, entity, useDuration);
 
-        var container = new ItemContainer(stack, PIPE_SIZE);
+        var container = new ItemContainer(stack, PIPE_INVENTORY_SIZE);
         container.readFromNbt();
+
         if (container.isEmpty()) return;
 
         if (useDuration > 100) entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 4 * 20));
@@ -84,26 +123,7 @@ public class PipeItem extends SmokableItem {
 
         var processedItems = new HashSet<Item>();
 
-        for (ItemStack ingredientStack : container.items) {
-            if (ingredientStack == null || ingredientStack.isEmpty()) continue;
-
-            Item item = ingredientStack.getItem();
-
-            if (!processedItems.add(item)) continue;
-
-            PipeSmokableItem smokable = PipeRegistry.getItem(item);
-
-            if (smokable == null) {
-                Substance.LOGGER.error("Item {} in pipe is not registered as pipe smokable item!", item);
-                return;
-            }
-
-            var context = new PipeSmokableConsumeContext(stack, ingredientStack, level, entity, useDuration);
-            smokable.onConsume().accept(context);
-
-            if (level.random.nextInt(USE_DURATION * 2) < useDuration)
-                ingredientStack.shrink(1);
-        }
+        container.items.forEach((item) -> handleConsumeIngredient(item, processedItems, stack, level, entity, useDuration));
 
         container.writeToNbt();
     }

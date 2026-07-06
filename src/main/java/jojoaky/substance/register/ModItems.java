@@ -1,5 +1,6 @@
 package jojoaky.substance.register;
 
+import jojoaky.substance.Config;
 import jojoaky.substance.Substance;
 import jojoaky.substance.content.consumable.*;
 import jojoaky.substance.content.gas_bottle.EmptyGasBottleItem;
@@ -46,7 +47,7 @@ public class ModItems {
 
     public static final Item HERBAL_ROLL = register(
             new JointItem(new FabricItemSettings()
-                    .durability(128)
+                    .durability(Config.get().herbalRollDurability)
                     .rarity(Rarity.UNCOMMON)
             ),
             "herbal_roll"
@@ -54,10 +55,37 @@ public class ModItems {
 
     public static final Item THICK_HERBAL_ROLL = register(
             new ThickJointItem(new FabricItemSettings()
-                    .durability(256)
+                    .durability(Config.get().thickHerbalRollDurability)
                     .rarity(Rarity.RARE)
             ),
             "thick_herbal_roll"
+    );
+
+    public static final Item WOODEN_PIPE = register(
+            new PipeItem(new FabricItemSettings()
+                    .stacksTo(1)
+                    .durability(Config.get().woodenPipeDurability)
+                    .rarity(Rarity.RARE)
+            ),
+            "wooden_pipe"
+    );
+
+    public static final Item BUBBLE_PIPE = register(
+            new PipeItem(new FabricItemSettings()
+                    .stacksTo(1)
+                    .durability(Config.get().bubblePipeDurability)
+                    .rarity(Rarity.RARE)
+            ),
+            "bubble_pipe"
+    );
+
+    public static final Item CIGARETTE = register(
+            new CigaretteItem(new FabricItemSettings()
+                    .stacksTo(1)
+                    .durability(Config.get().cigaretteDurability)
+                    .rarity(Rarity.RARE)
+            ),
+            "cigarette"
     );
 
 
@@ -202,33 +230,6 @@ public class ModItems {
                     .stacksTo(16)
             ),
             "gas_bottle_nitrogen"
-    );
-
-    public static final Item WOODEN_PIPE = register(
-            new PipeItem(new FabricItemSettings()
-                    .stacksTo(1)
-                    .durability(512)
-                    .rarity(Rarity.RARE)
-            ),
-            "wooden_pipe"
-    );
-
-    public static final Item BUBBLE_PIPE = register(
-            new PipeItem(new FabricItemSettings()
-                    .stacksTo(1)
-                    .durability(512)
-                    .rarity(Rarity.RARE)
-            ),
-            "bubble_pipe"
-    );
-
-    public static final Item CIGARETTE = register(
-            new CigaretteItem(new FabricItemSettings()
-                    .stacksTo(1)
-                    .durability(164)
-                    .rarity(Rarity.RARE)
-            ),
-            "cigarette"
     );
 
     public static void initialize() {

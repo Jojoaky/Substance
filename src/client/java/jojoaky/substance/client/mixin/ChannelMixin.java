@@ -1,6 +1,7 @@
 package jojoaky.substance.client.mixin;
 
 import com.mojang.blaze3d.audio.Channel;
+import jojoaky.substance.Config;
 import jojoaky.substance.client.audio.AudioManager;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

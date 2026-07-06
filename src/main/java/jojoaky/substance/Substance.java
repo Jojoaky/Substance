@@ -34,8 +34,6 @@ public class Substance implements ModInitializer {
 	public void onInitialize() {
 		Config.HANDLER.load();
 
-		PipeRegistry.initialize();
-
 		ModCreativeTab.initialize();
 		ModItems.initialize();
 		ModBlocks.initialize();
@@ -44,6 +42,8 @@ public class Substance implements ModInitializer {
 		ModEffects.initialize();
 		ModTags.initialize();
 		ModRegisterTrades.initialize();
+
+		PipeRegistry.initialize();
 
 		PipeRegistry.register(PipeSmokableItem.effectGiving(
 				ModItems.DRIED_HERB_BUD,

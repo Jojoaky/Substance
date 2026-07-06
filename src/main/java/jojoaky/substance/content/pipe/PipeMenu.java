@@ -17,7 +17,7 @@ public class PipeMenu extends AbstractContainerMenu {
     private final InteractionHand hand;
 
     public PipeMenu(int syncId, Inventory playerInventory, FriendlyByteBuf buf) {
-        this(syncId, playerInventory, new SimpleContainer(PipeItem.PIPE_SIZE), buf.readEnum(InteractionHand.class));
+        this(syncId, playerInventory, new SimpleContainer(PipeItem.PIPE_INVENTORY_SIZE), buf.readEnum(InteractionHand.class));
     }
 
     public boolean canContainStack(@NotNull ItemStack stack) {
@@ -29,11 +29,11 @@ public class PipeMenu extends AbstractContainerMenu {
         this.container = container;
         this.hand = hand;
 
-        checkContainerSize(container, PipeItem.PIPE_SIZE);
+        checkContainerSize(container, PipeItem.PIPE_INVENTORY_SIZE);
         container.startOpen(playerInventory.player);
 
         // Pipe Container
-        for (int i = 0; i < PipeItem.PIPE_SIZE; i++) {
+        for (int i = 0; i < PipeItem.PIPE_INVENTORY_SIZE; i++) {
             this.addSlot(new Slot(container, i, 44 + i * 18, 20) {
                 @Override
                 public boolean mayPlace(@NotNull ItemStack stack) {
@@ -84,15 +84,15 @@ public class PipeMenu extends AbstractContainerMenu {
                 return ItemStack.EMPTY;
             }
 
-            if (index < PipeItem.PIPE_SIZE) {
-                if (!this.moveItemStackTo(sourceStack, PipeItem.PIPE_SIZE, this.slots.size(), true)) {
+            if (index < PipeItem.PIPE_INVENTORY_SIZE) {
+                if (!this.moveItemStackTo(sourceStack, PipeItem.PIPE_INVENTORY_SIZE, this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
             } else {
                 if (!canContainStack(sourceStack)) {
                     return ItemStack.EMPTY;
                 }
-                if (!this.moveItemStackTo(sourceStack, 0, PipeItem.PIPE_SIZE, false)) {
+                if (!this.moveItemStackTo(sourceStack, 0, PipeItem.PIPE_INVENTORY_SIZE, false)) {
                     return ItemStack.EMPTY;
                 }
             }

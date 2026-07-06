@@ -15,8 +15,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -54,7 +52,7 @@ public class PipeItemModel {
     }
 
     private boolean isContainerEmpty(ItemStack stack) {
-        return new ItemContainer(stack, PipeItem.PIPE_SIZE).isEmpty();
+        return new ItemContainer(stack, PipeItem.PIPE_INVENTORY_SIZE).isEmpty();
     }
 
     public void render(

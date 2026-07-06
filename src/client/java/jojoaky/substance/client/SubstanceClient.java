@@ -1,9 +1,9 @@
 package jojoaky.substance.client;
 
+import jojoaky.substance.Config;
 import jojoaky.substance.Substance;
 import jojoaky.substance.client.itemmodel.PipeItemModel;
 import jojoaky.substance.client.screen.PipeScreen;
-import jojoaky.substance.content.ItemContainer;
 import jojoaky.substance.content.chemical_fluid.ChemicalBucket;
 import jojoaky.substance.content.flask.FilledFlaskItem;
 import jojoaky.substance.client.itemmodel.SmokableItemModel;
@@ -74,14 +74,17 @@ public class SubstanceClient implements ClientModInitializer {
 			);
 		}
 
-		PostShaderManager.add(new DreadShader());
-		PostShaderManager.add(new HallucinationShader());
-		PostShaderManager.add(new HazeShader());
-		PostShaderManager.add(new KeenShader());
-		PostShaderManager.add(new RelaxationShader());
-		PostShaderManager.add(new StaggerShader());
-		PostShaderManager.add(new SurgeShader());
-		PostShaderManager.add(new WarpShader());
+		if (Config.get().enableShaderEffects) {
+			PostShaderManager.add(new DreadShader());
+			PostShaderManager.add(new HallucinationShader());
+			PostShaderManager.add(new HazeShader());
+			PostShaderManager.add(new KeenShader());
+			PostShaderManager.add(new RelaxationShader());
+			PostShaderManager.add(new StaggerShader());
+			PostShaderManager.add(new SurgeShader());
+			PostShaderManager.add(new WarpShader());
 
-		PostShaderManager.init();}
+			PostShaderManager.init();
+		}
+	}
 }

@@ -1,5 +1,6 @@
 package jojoaky.substance.content.chemical_fluid;
 
+import jojoaky.substance.register.ModEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -28,6 +29,7 @@ public class ChemicalFluidBlock extends LiquidBlock {
         if (world.getGameTime() % 20 == 0) {
             livingEntity.hurt(world.damageSources().magic(), toxicity/2);
             if (toxicity > 2) livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON , 180, 0));
+            if (toxicity > 2) livingEntity.addEffect(new MobEffectInstance(ModEffects.HAZE , 120, 0));
             if (toxicity > 4) livingEntity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 50, 0));
         }
     }

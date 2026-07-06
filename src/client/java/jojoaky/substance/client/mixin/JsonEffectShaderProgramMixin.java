@@ -2,6 +2,7 @@ package jojoaky.substance.client.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import jojoaky.substance.Config;
 import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,6 +28,10 @@ public class JsonEffectShaderProgramMixin {
             String id,
             Operation<ResourceLocation> original
     ) {
+        if (!Config.get().enableShaderEffects) {
+            return original.call(id);
+        }
+
         int colon = id.indexOf(':');
 
         if (colon < 0) return original.call(id);
@@ -52,6 +57,10 @@ public class JsonEffectShaderProgramMixin {
             String id,
             Operation<ResourceLocation> original
     ) {
+        if (!Config.get().enableShaderEffects) {
+            return original.call(id);
+        }
+
         int colon = id.indexOf(':');
 
         if (colon < 0) return original.call(id);

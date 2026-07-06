@@ -1,5 +1,6 @@
 package jojoaky.substance.client.mixin;
 
+import jojoaky.substance.Config;
 import jojoaky.substance.client.audio.AudioManager;
 import net.minecraft.client.sounds.SoundEngine;
 import org.spongepowered.asm.mixin.Mixin;

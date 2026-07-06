@@ -1,5 +1,6 @@
 package jojoaky.substance.client.audio;
 
+import jojoaky.substance.Config;
 import jojoaky.substance.register.ModEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
@@ -21,6 +22,7 @@ public class AudioManager {
     private static final Set<Integer> activeSources = new HashSet<>();
 
     public static void init() {
+        if (!Config.get().enableAudioEffects) return;
         if (initialized) return;
 
         try {
@@ -50,35 +52,56 @@ public class AudioManager {
 
     public static float getEffectIntensity(MobEffectInstance effect) {
         if (effect == null) return 0.0f;
-        float intensity = Mth.clamp((float)effect.getDuration() / 20.0f, 0.0f, 1.0f);
+        float intensity;
         if (effect.getDuration() > 200) intensity = 1.0f;
         else intensity = (float)effect.getDuration() / 200.0f;
         return intensity;
     }
 
+    private static final float OVERDRIVE_MAX = 2.0f;
+
     public static void tick(boolean pause) {
+        if (!Config.get().enableAudioEffects) return;
         if (!initialized) init();
 
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
         if (player == null || pause) return;
 
-        float intensity = Math.max(
+        float baseIntensity = Math.max(
                 getEffectIntensity(player.getEffect(ModEffects.HAZE)),
                 getEffectIntensity(player.getEffect(ModEffects.WARP))
         );
 
-        updateFilters(intensity);
+        float configMultiplier = Config.get().audioEffectStrength; // 0..2
+
+        // Ramp stays 0..1 - controls *when* the effect kicks in, untouched by multiplier
+        // Overdrive extends 0..2 - controls *how strong* it gets once engaged
+        float overdrive = Mth.clamp(baseIntensity * configMultiplier, 0.0f, OVERDRIVE_MAX);
+
+        updateFilters(overdrive);
     }
 
-    private static void updateFilters(float intensity) {
+    private static void updateFilters(float overdrive) {
         if (lowPassFilter == -1) return;
 
-        // GainHF: 1.0 is no filter, lower is more muffled
-        float gainHF = 1.0f - (intensity * 0.8f); 
-        EXTEfx.alFilterf(lowPassFilter, EXTEfx.AL_LOWPASS_GAINHF, gainHF);
+        float stage1 = Mth.clamp(overdrive, 0.0f, 1.0f);
+        float gainHF = 1.0f - (stage1 * 0.8f); // 1.0 -> 0.2
 
-        // Update all active sources
+        float stage2 = Mth.clamp(overdrive - 1.0f, 0.0f, 1.0f);
+        float gain = 1.0f - (stage2 * 0.5f);
+
+        EXTEfx.alFilterf(lowPassFilter, EXTEfx.AL_LOWPASS_GAINHF, gainHF);
+        EXTEfx.alFilterf(lowPassFilter, EXTEfx.AL_LOWPASS_GAIN, gain);
+
+        if (reverbEffect != -1 && reverbSlot != -1) {
+            float reverbGain = 0.32f + (stage2 * 0.4f);      // wetter mix past 1x
+            float decayTime = 1.49f + (stage2 * 1.5f);        // longer tail past 1x
+            EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_GAIN, reverbGain);
+            EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_DECAY_TIME, decayTime);
+            EXTEfx.alAuxiliaryEffectSloti(reverbSlot, EXTEfx.AL_EFFECTSLOT_EFFECT, reverbEffect);
+        }
+
         synchronized (activeSources) {
             for (Integer source : activeSources) {
                 if (AL10.alIsSource(source)) {
@@ -92,6 +115,8 @@ public class AudioManager {
     }
 
     public static void onSourceCreated(int sourceId) {
+        if (!Config.get().enableAudioEffects) return;
+
         synchronized (activeSources) {
             activeSources.add(sourceId);
         }
@@ -109,6 +134,8 @@ public class AudioManager {
     }
 
     public static void onSourceReleased(int sourceId) {
+        if (!Config.get().enableAudioEffects) return;
+
         synchronized (activeSources) {
             activeSources.remove(sourceId);
         }

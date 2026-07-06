@@ -105,5 +105,46 @@
   "item.minecraft.lingering_potion.effect.keen": "Lingering Potion of Keen",
   "item.minecraft.lingering_potion.effect.relaxation": "Lingering Potion of Relaxation",
   "item.minecraft.lingering_potion.effect.surge": "Lingering Potion of Surge",
-  "item.minecraft.lingering_potion.effect.hallucination": "Lingering Potion of Hallucination"
+  "item.minecraft.lingering_potion.effect.hallucination": "Lingering Potion of Hallucination",
+
+  "text.config.substance.title": "Substance Configuration",
+  "text.config.substance.category.gameplay": "Gameplay",
+  "text.config.substance.category.gameplay.tooltip": "Manage gameplay-related settings.",
+  "text.config.substance.category.client": "Client",
+  "text.config.substance.category.client.tooltip": "Configure client-side behavior.",
+
+  "text.config.substance.group.durabilities": "Durabilities",
+  "text.config.substance.group.durabilities.desc": "Configure the max durability of various items.",
+  "text.config.substance.group.mechanics": "Mechanics",
+  "text.config.substance.group.mechanics.desc": "Configure action durations, cooldowns, and probabilities.",
+  "text.config.substance.group.immersion": "Immersion",
+  "text.config.substance.group.immersion.desc": "Tune or disable visual and audio effects introduced by this mod.",
+
+  "text.config.substance.option.woodenPipeDurability": "Wooden Pipe Durability",
+  "text.config.substance.option.bubblePipeDurability": "Bubble Pipe Durability",
+  "text.config.substance.option.herbalRollDurability": "Herbal Roll Durability",
+  "text.config.substance.option.thickHerbalRollDurability": "Thick Herbal Roll Durability",
+  "text.config.substance.option.cigaretteDurability": "Cigarette Durability",
+
+  "text.config.substance.option.maxSmokeDuration": "Max Smoke Duration",
+  "text.config.substance.option.maxSmokeDuration.desc": "Maximum time an interaction can last (in seconds).",
+  "text.config.substance.option.smokeCooldown": "Smoke Cooldown",
+  "text.config.substance.option.smokeCooldown.desc": "Cooldown after smoking (in seconds).",
+  "text.config.substance.option.maxSniffDuration": "Max Sniff Duration",
+  "text.config.substance.option.maxSniffDuration.desc": "Maximum time an interaction can last (in seconds).",
+  "text.config.substance.option.sniffCooldown": "Sniff Cooldown",
+  "text.config.substance.option.sniffCooldown.desc": "Cooldown after sniffing (in seconds).",
+  "text.config.substance.option.pipeItemConsumeProbability": "Pipe Consumption Probability",
+  "text.config.substance.option.pipeItemConsumeProbability.desc": "The percentage chance that using a pipe consumes an item inside.",
+
+  "text.config.substance.option.enableShaderEffects": "Enable Shader Effects",
+  "text.config.substance.option.enableShaderEffects.desc": "Completely enables or disables custom post-processing shaders. Requires restart!",
+  "text.config.substance.option.visualEffectStrength": "Visual Intensity",
+  "text.config.substance.option.visualEffectStrength.desc": "Adjust the overall strength of screen distortion and visual overlays in real-time.",
+  "text.config.substance.option.visualEffectsInMenus": "Visual Effects in Menus",
+  "text.config.substance.option.visualEffectsInMenus.desc": "Determines whether active post-processing shaders remain visible while viewing GUI screens.",
+  "text.config.substance.option.enableAudioEffects": "Enable Audio Processing",
+  "text.config.substance.option.enableAudioEffects.desc": "Completely enables or disables custom acoustic systems. Disabling this stops audio filter injection. Requires restart!",
+  "text.config.substance.option.audioEffectStrength": "Audio Effect Intensity",
+  "text.config.substance.option.audioEffectStrength.desc": "Adjust the intensity of custom audio filters and distortion mechanics."
 }

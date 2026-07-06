@@ -1,5 +1,6 @@
 package jojoaky.substance.content.consumable;
 
+import jojoaky.substance.Config;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -13,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class SmokableItem extends ConsumableItem {
     public SmokableItem(Properties properties) {
-        super(properties, 64, 40);
+        super(properties);
     }
 
     @Override
@@ -93,5 +94,14 @@ public class SmokableItem extends ConsumableItem {
                 }
             }
         }
+    }
+
+    @Override
+    public int getUseDuration(ItemStack stack) {
+        return Math.round(Config.get().maxSmokeDuration * 20.0f);
+    }
+    @Override
+    public int getCooldown(ItemStack stack) {
+        return Math.round(Config.get().smokeCooldown * 20.0f);
     }
 }

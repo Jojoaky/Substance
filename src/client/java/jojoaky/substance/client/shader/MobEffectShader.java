@@ -1,5 +1,6 @@
 package jojoaky.substance.client.shader;
 
+import jojoaky.substance.Config;
 import jojoaky.substance.client.mixin.GameRendererAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
@@ -22,7 +23,7 @@ public class MobEffectShader extends PostShader {
     private float intensity = 0;
 
     public float getIntensity() {
-        return intensity;
+        return intensity * Config.get().visualEffectStrength;
     }
 
     @Override

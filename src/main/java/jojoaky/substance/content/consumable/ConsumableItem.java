@@ -13,19 +13,14 @@ import org.jetbrains.annotations.NotNull;
 
 abstract public class ConsumableItem extends Item {
 
-    public final int USE_DURATION;
-    public final int COOLDOWN;
-
     @Override
     @NotNull
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         return ItemUtils.startUsingInstantly(level, player, hand);
     }
 
-    public ConsumableItem(Properties properties, int useDuration, int cooldown) {
+    public ConsumableItem(Properties properties) {
         super(properties);
-        this.USE_DURATION = useDuration;
-        this.COOLDOWN = cooldown;
     }
 
     @Override
@@ -59,8 +54,9 @@ abstract public class ConsumableItem extends Item {
     public void stopConsuming(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
 
         if (!level.isClientSide) {
-            if (entity instanceof Player) {
-                ((Player) entity).getCooldowns().addCooldown(this, COOLDOWN);
+            int cooldown = getCooldown(stack);
+            if (cooldown > 0 && entity instanceof Player) {
+                ((Player) entity).getCooldowns().addCooldown(this, cooldown);
             }
         }
 
@@ -76,7 +72,7 @@ abstract public class ConsumableItem extends Item {
     abstract protected void onStopConsuming(ItemStack stack, Level level, LivingEntity entity, int useDuration);
 
     @Override
-    public int getUseDuration(ItemStack stack) {
-        return USE_DURATION;
-    }
+    abstract public int getUseDuration(@NotNull ItemStack stack);
+
+    abstract public int getCooldown(ItemStack stack);
 }
