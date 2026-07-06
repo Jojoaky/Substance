@@ -1,12 +1,12 @@
 {
   "display": {
     "icon": {
-      "item": "substance:blue_crystals"
+      "item": "substance:gas_bottle_hydrogen"
     },
-    "title": "The Good Stuff",
-    "description": "Obtain blue crystals"
+    "title": "Number One",
+    "description": "Obtain hydrogen from a magma bubble column"
   },
-  "parent": "substance:blue_oil_tray",
+  "parent": "substance:misc/gas_bottle",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
@@ -14,7 +14,7 @@
         "items": [
           {
             "items": [
-              "substance:blue_crystals"
+              "substance:gas_bottle_hydrogen"
             ]
           }
         ]

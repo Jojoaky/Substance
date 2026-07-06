@@ -1,12 +1,12 @@
 {
   "display": {
     "icon": {
-      "item": "substance:gas_bottle_oxygen"
+      "item": "substance:blue_oil_tray"
     },
-    "title": "Life Support",
-    "description": "Obtain oxygen from a soul sand bubble column"
+    "title": "99.9% Purity",
+    "description": "Fill a tray with blue oil"
   },
-  "parent": "substance:gas_bottle",
+  "parent": "substance:crystals/tray",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
@@ -14,7 +14,7 @@
         "items": [
           {
             "items": [
-              "substance:gas_bottle_oxygen"
+              "substance:blue_oil_tray"
             ]
           }
         ]

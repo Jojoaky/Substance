@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:bubble_pipe"
+    },
+    "title": "Serious Business",
+    "description": "Steal a wooden pipe from the pillagers"
+  },
+  "parent": "substance:pipe/pipe",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:wooden_pipe"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

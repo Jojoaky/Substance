@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:cigarette"
+    },
+    "title": "Up in Smoke",
+    "description": "cough"
+  },
+  "hidden": true,
+  "parent": "substance:cigarette/place_tobacco",
+  "criteria": {
+    "interacted_item": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "substance:cigarette"
+          ]
+        }
+      }
+    }
+  }
+}

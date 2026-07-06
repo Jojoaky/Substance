@@ -1,0 +1,41 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:white_crystals_chili"
+    },
+    "title": "A Furious Snack",
+    "description": "Have the effects haze, warp, keen, relaxation and surge at the same time!",
+    "frame": "goal"
+  },
+  "parent": "substance:substance",
+  "criteria": {
+    "has_multiple_effects": {
+      "trigger": "minecraft:tick",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "effects": {
+              "substance:haze": {
+                "min": 1
+              },
+              "substance:warp": {
+                "min": 1
+              },
+              "substance:keen": {
+                "min": 1
+              },
+              "substance:relaxation": {
+                "min": 1
+              },
+              "substance:surge": {
+                "min": 1
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

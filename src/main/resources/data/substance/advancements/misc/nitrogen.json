@@ -6,7 +6,7 @@
     "title": "It's in the air",
     "description": "Obtain nitrogen from potatoes"
   },
-  "parent": "substance:gas_bottle",
+  "parent": "substance:misc/gas_bottle",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",

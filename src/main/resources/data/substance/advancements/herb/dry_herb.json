@@ -1,12 +1,12 @@
 {
   "display": {
     "icon": {
-      "item": "substance:blue_oil_tray"
+      "item": "substance:dried_herb_bud"
     },
-    "title": "99.9% Purity",
-    "description": "Fill a tray with blue oil"
+    "title": "Dry and High",
+    "description": "Cook a herb bud"
   },
-  "parent": "substance:tray",
+  "parent": "substance:herb/place_herb",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
@@ -14,7 +14,7 @@
         "items": [
           {
             "items": [
-              "substance:blue_oil_tray"
+              "substance:dried_herb_bud"
             ]
           }
         ]

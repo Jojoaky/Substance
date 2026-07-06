@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:wooden_pipe_flat_lit"
+    },
+    "title": "Fully Loaded",
+    "description": "Theres no stopping you now",
+    "hidden": true
+  },
+  "parent": "substance:pipe/pipe",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:wooden_pipe"
+            ],
+            "nbt": "{Inventory:[{Slot:0b},{Slot:1b},{Slot:2b},{Slot:3b},{Slot:4b}]}"
+          }
+        ]
+      }
+    }
+  }
+}

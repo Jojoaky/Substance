@@ -6,7 +6,7 @@
     "title": "Contamination",
     "description": "Mix chili powder into white crystals"
   },
-  "parent": "substance:white_crystals",
+  "parent": "substance:crystals/white_crystals",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",

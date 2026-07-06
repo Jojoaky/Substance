@@ -1,12 +1,12 @@
 {
   "display": {
     "icon": {
-      "item": "substance:white_crystals"
+      "item": "substance:gas_bottle_oxygen"
     },
-    "title": "Stuff",
-    "description": "Obtain white crystals"
+    "title": "Life Support",
+    "description": "Obtain oxygen from a soul sand bubble column"
   },
-  "parent": "substance:white_oil_tray",
+  "parent": "substance:misc/gas_bottle",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
@@ -14,7 +14,7 @@
         "items": [
           {
             "items": [
-              "substance:white_crystals"
+              "substance:gas_bottle_oxygen"
             ]
           }
         ]

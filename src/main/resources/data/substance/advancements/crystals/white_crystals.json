@@ -1,12 +1,12 @@
 {
   "display": {
     "icon": {
-      "item": "substance:white_oil_tray"
+      "item": "substance:white_crystals"
     },
-    "title": "There's no going back",
-    "description": "Fill a tray with white oil"
+    "title": "Stuff",
+    "description": "Obtain white crystals"
   },
-  "parent": "substance:tray",
+  "parent": "substance:crystals/white_oil_tray",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
@@ -14,7 +14,7 @@
         "items": [
           {
             "items": [
-              "substance:white_oil_tray"
+              "substance:white_crystals"
             ]
           }
         ]

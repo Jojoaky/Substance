@@ -1,12 +1,12 @@
 {
   "display": {
     "icon": {
-      "item": "substance:gas_bottle_hydrogen"
+      "item": "substance:white_oil_tray"
     },
-    "title": "Number One",
-    "description": "Obtain hydrogen from a magma bubble column"
+    "title": "There's no going back",
+    "description": "Fill a tray with white oil"
   },
-  "parent": "substance:gas_bottle",
+  "parent": "substance:crystals/tray",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
@@ -14,7 +14,7 @@
         "items": [
           {
             "items": [
-              "substance:gas_bottle_hydrogen"
+              "substance:white_oil_tray"
             ]
           }
         ]

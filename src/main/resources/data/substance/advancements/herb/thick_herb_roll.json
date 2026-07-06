@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:thick_herbal_roll"
+    },
+    "title": "Roll Model",
+    "description": "How did we get here?"
+  },
+  "hidden": true,
+  "parent": "substance:herb/dry_herb",
+  "criteria": {
+    "interacted_item": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "substance:thick_herbal_roll"
+          ]
+        }
+      }
+    }
+  }
+}

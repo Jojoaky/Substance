@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:bubble_pipe"
+    },
+    "title": "Plumbing Business",
+    "description": "Obtain a pipe"
+  },
+  "parent": "substance:substance",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:bubble_pipe",
+              "substance:wooden_pipe"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
