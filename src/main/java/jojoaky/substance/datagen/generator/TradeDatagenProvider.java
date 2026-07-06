@@ -1,7 +1,9 @@
-package jojoaky.substance.datagen.generator.trade;
+package jojoaky.substance.datagen.generator;
 
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
+import jojoaky.substance.datagen.generator.trade.MerchantTradeDef;
+import jojoaky.substance.datagen.generator.trade.TradeRegistry;
 import jojoaky.substance.trade.PiglinBarterJson;
 import jojoaky.substance.trade.VillagerTradeJson;
 import jojoaky.substance.trade.WanderingTraderTradeJson;
