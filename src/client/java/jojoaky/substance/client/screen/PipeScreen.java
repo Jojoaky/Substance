@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
 public class PipeScreen extends AbstractContainerScreen<PipeMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation("minecraft", "textures/gui/container/hopper.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation("substance", "textures/gui/container/pipe.png");
 
     public PipeScreen(PipeMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

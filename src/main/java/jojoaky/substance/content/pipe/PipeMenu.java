@@ -89,7 +89,7 @@ public class PipeMenu extends AbstractContainerMenu {
                     return ItemStack.EMPTY;
                 }
             } else {
-                if (canContainStack(sourceStack)) {
+                if (!canContainStack(sourceStack)) {
                     return ItemStack.EMPTY;
                 }
                 if (!this.moveItemStackTo(sourceStack, 0, PipeItem.PIPE_SIZE, false)) {
@@ -97,15 +97,17 @@ public class PipeMenu extends AbstractContainerMenu {
                 }
             }
 
+            if (sourceStack.isEmpty()) {
+                slot.setByPlayer(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
+            }
+
             if (sourceStack.getCount() == itemStack.getCount()) {
                 return ItemStack.EMPTY;
             }
 
-            if (sourceStack.isEmpty()) {
-                slot.set(ItemStack.EMPTY);
-            } else {
-                slot.setChanged();
-            }
+            slot.onTake(player, sourceStack);
         }
         return itemStack;
     }

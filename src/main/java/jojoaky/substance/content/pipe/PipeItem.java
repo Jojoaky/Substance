@@ -23,6 +23,7 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
+import java.util.Random;
 
 public class PipeItem extends SmokableItem {
     public PipeItem(Properties properties) {
@@ -100,7 +101,8 @@ public class PipeItem extends SmokableItem {
             var context = new PipeSmokableConsumeContext(stack, ingredientStack, level, entity, useDuration);
             smokable.onConsume().accept(context);
 
-            ingredientStack.shrink(1);
+            if (level.random.nextInt(USE_DURATION * 2) < useDuration)
+                ingredientStack.shrink(1);
         }
 
         container.writeToNbt();

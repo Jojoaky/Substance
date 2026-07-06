@@ -13,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 
 abstract public class ConsumableItem extends Item {
 
-    public final int useDuration;
-    public final int cooldown;
+    public final int USE_DURATION;
+    public final int COOLDOWN;
 
     @Override
     @NotNull
@@ -24,8 +24,8 @@ abstract public class ConsumableItem extends Item {
 
     public ConsumableItem(Properties properties, int useDuration, int cooldown) {
         super(properties);
-        this.useDuration = useDuration;
-        this.cooldown = cooldown;
+        this.USE_DURATION = useDuration;
+        this.COOLDOWN = cooldown;
     }
 
     @Override
@@ -60,7 +60,7 @@ abstract public class ConsumableItem extends Item {
 
         if (!level.isClientSide) {
             if (entity instanceof Player) {
-                ((Player) entity).getCooldowns().addCooldown(this, cooldown);
+                ((Player) entity).getCooldowns().addCooldown(this, COOLDOWN);
             }
         }
 
@@ -77,6 +77,6 @@ abstract public class ConsumableItem extends Item {
 
     @Override
     public int getUseDuration(ItemStack stack) {
-        return useDuration;
+        return USE_DURATION;
     }
 }
