@@ -1,0 +1,13 @@
+{
+  "costA": {
+    "Count": 2,
+    "id": "substance:white_crystals"
+  },
+  "level": 2,
+  "max_uses": 4,
+  "profession": "minecraft:fisherman",
+  "result": {
+    "Count": 14,
+    "id": "minecraft:emerald"
+  }
+}

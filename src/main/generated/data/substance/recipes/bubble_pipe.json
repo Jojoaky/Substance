@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "N": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "GN",
+    "G ",
+    "G "
+  ],
+  "result": {
+    "item": "substance:bubble_pipe"
+  },
+  "show_notification": true
+}

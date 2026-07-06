@@ -1,0 +1,13 @@
+{
+  "costA": {
+    "Count": 3,
+    "id": "substance:white_crystals_chili"
+  },
+  "level": 2,
+  "max_uses": 6,
+  "profession": "minecraft:butcher",
+  "result": {
+    "Count": 24,
+    "id": "minecraft:emerald"
+  }
+}

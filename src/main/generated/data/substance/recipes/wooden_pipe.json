@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "item": "minecraft:iron_nugget"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "N P",
+    "PP "
+  ],
+  "result": {
+    "item": "substance:wooden_pipe"
+  },
+  "show_notification": true
+}

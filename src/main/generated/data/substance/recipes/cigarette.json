@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "T": {
+      "item": "substance:dried_tobacco_leaf"
+    }
+  },
+  "pattern": [
+    "TPT"
+  ],
+  "result": {
+    "item": "substance:cigarette"
+  },
+  "show_notification": true
+}

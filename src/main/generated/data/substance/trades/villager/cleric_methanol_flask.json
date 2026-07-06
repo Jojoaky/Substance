@@ -1,0 +1,17 @@
+{
+  "costA": {
+    "Count": 4,
+    "id": "minecraft:emerald"
+  },
+  "costB": {
+    "Count": 4,
+    "id": "substance:flask"
+  },
+  "level": 1,
+  "max_uses": 5,
+  "profession": "minecraft:cleric",
+  "result": {
+    "Count": 1,
+    "id": "substance:methanol_flask"
+  }
+}

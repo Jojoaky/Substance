@@ -1,0 +1,32 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "substance:sculk_catalyst_crystal"
+    },
+    {
+      "amount": 810,
+      "fluid": "substance:ammonia",
+      "nbt": {}
+    },
+    {
+      "amount": 810,
+      "fluid": "substance:methanol",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 1620,
+      "fluid": "substance:methylamine"
+    }
+  ]
+}

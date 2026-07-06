@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:dried_kelp"
+    },
+    {
+      "item": "substance:water_flask"
+    }
+  ],
+  "result": {
+    "item": "substance:iodine"
+  }
+}
