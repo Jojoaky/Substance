@@ -1,8 +1,8 @@
 package jojoaky.substance.datagen.recipes;
 
-import jojoaky.substance.datagen.generator.recipe.RecipeGeneratorRegistry;
-import jojoaky.substance.datagen.generator.recipe.ShapedRecipeDef;
-import jojoaky.substance.datagen.generator.recipe.ShapelessRecipeDef;
+import jojoaky.substance.data.generator.recipe.RecipeGeneratorRegistry;
+import jojoaky.substance.data.generator.recipe.ShapedRecipeDef;
+import jojoaky.substance.data.generator.recipe.ShapelessRecipeDef;
 import jojoaky.substance.register.ModItems;
 import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.minecraft.world.item.Items;

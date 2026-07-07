@@ -1,7 +1,7 @@
 package jojoaky.substance.datagen.recipes;
 
-import jojoaky.substance.datagen.generator.recipe.RecipeGeneratorRegistry;
-import jojoaky.substance.datagen.generator.recipe.ShapelessRecipeDef;
+import jojoaky.substance.data.generator.recipe.RecipeGeneratorRegistry;
+import jojoaky.substance.data.generator.recipe.ShapelessRecipeDef;
 import jojoaky.substance.register.ModItems;
 
 public class PlantRecipes {

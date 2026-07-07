@@ -1,7 +1,7 @@
 package jojoaky.substance.datagen.recipes;
 
-import jojoaky.substance.datagen.generator.trade.TradeRegistry;
-import jojoaky.substance.datagen.generator.trade.VillagerTradeDef;
+import jojoaky.substance.data.generator.datapatch.DatapatchRegistry;
+import jojoaky.substance.data.generator.datapatch.def.VillagerTradeDef;
 import jojoaky.substance.register.ModItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -53,8 +53,8 @@ public class SecretTrades {
             VillagerProfession.WEAPONSMITH,
     };
 
-    public static void register() {
-        TradeRegistry.accept(
+    public static void initialize() {
+        DatapatchRegistry.accept(
             Arrays.stream(whiteCrystalsProfessions)
                 .map(profession -> VillagerTradeDef.named("white_crystals_" + BuiltInRegistries.VILLAGER_PROFESSION.getKey(profession).getPath(), profession, 2)
                     .buys(ModItems.WHITE_CRYSTALS, 2)
@@ -63,7 +63,7 @@ public class SecretTrades {
                 )
         );
 
-        TradeRegistry.accept(
+        DatapatchRegistry.accept(
             Arrays.stream(chiliCrystalsProfessions)
                 .map(profession -> VillagerTradeDef.named("chili_crystals_" + BuiltInRegistries.VILLAGER_PROFESSION.getKey(profession).getPath(), profession, 2)
                     .buys(ModItems.WHITE_CRYSTALS_CHILI, 3)
@@ -72,7 +72,7 @@ public class SecretTrades {
                 )
         );
 
-        TradeRegistry.accept(
+        DatapatchRegistry.accept(
             Arrays.stream(blueCrystalsProfessions)
                 .map(profession -> VillagerTradeDef.named("blue_crystals_" + BuiltInRegistries.VILLAGER_PROFESSION.getKey(profession).getPath(), profession, 3)
                     .buys(ModItems.BLUE_CRYSTALS, 2)
@@ -81,7 +81,7 @@ public class SecretTrades {
                 )
         );
 
-        TradeRegistry.accept(
+        DatapatchRegistry.accept(
                 Arrays.stream(herbProfessions)
                         .map(profession -> VillagerTradeDef.named("herb_secret_" + BuiltInRegistries.VILLAGER_PROFESSION.getKey(profession).getPath(), profession, 1)
                                 .buys(ModItems.DRIED_HERB_BUD, 3)
@@ -90,7 +90,7 @@ public class SecretTrades {
                         )
         );
 
-        TradeRegistry.accept(
+        DatapatchRegistry.accept(
                 Arrays.stream(cigaretteProfessions)
                         .map(profession -> VillagerTradeDef.named("cigarette_secret_" + BuiltInRegistries.VILLAGER_PROFESSION.getKey(profession).getPath(), profession, 1)
                                 .buys(ModItems.CIGARETTE, 12)
@@ -99,7 +99,7 @@ public class SecretTrades {
                         )
         );
 
-        TradeRegistry.accept(
+        DatapatchRegistry.accept(
                 Arrays.stream(pipeProfessions)
                         .map(profession -> VillagerTradeDef.named("pipe_secret_" + BuiltInRegistries.VILLAGER_PROFESSION.getKey(profession).getPath(), profession, 1)
                                 .buys(ModItems.WOODEN_PIPE, 1)

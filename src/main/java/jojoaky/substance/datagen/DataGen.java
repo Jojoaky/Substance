@@ -1,9 +1,8 @@
 package jojoaky.substance.datagen;
 
-import jojoaky.substance.datagen.generator.ModelProvider;
-import jojoaky.substance.datagen.generator.recipe.RecipeGeneratorRegistry;
+import jojoaky.substance.data.generator.recipe.RecipeGeneratorRegistry;
 import jojoaky.substance.datagen.recipes.*;
-import jojoaky.substance.datagen.generator.TradeDatagenProvider;
+import jojoaky.substance.data.generator.datapatch.DatapatchDatagenProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
@@ -13,7 +12,7 @@ public class DataGen implements DataGeneratorEntrypoint {
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         final FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
         pack.addProvider(ModelProvider::new);
-        pack.addProvider(TradeDatagenProvider::new);
+        pack.addProvider(DatapatchDatagenProvider::new);
 
         MiscRecipes.initialize();
         ChemicalFluidRecipes.initialize();
@@ -23,8 +22,9 @@ public class DataGen implements DataGeneratorEntrypoint {
         PlantRecipes.initialize();
         TobaccoRecipes.initialize();
 
-        Trades.register();
-        SecretTrades.register();
+        Trades.initialize();
+        SecretTrades.initialize();
+        Loot.initialize();
 
         RecipeGeneratorRegistry.generate(pack);
     }

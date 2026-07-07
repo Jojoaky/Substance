@@ -1,0 +1,7 @@
+{
+  "item": "substance:herb_seeds",
+  "max_count": 4.0,
+  "min_count": 2.0,
+  "target_table": "minecraft:gameplay/piglin_bartering",
+  "weight": 40
+}

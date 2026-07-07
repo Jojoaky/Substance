@@ -1,8 +1,8 @@
 package jojoaky.substance.datagen.recipes;
 
 import com.simibubi.create.content.processing.recipe.HeatCondition;
-import jojoaky.substance.datagen.generator.recipe.ShapelessRecipeDef;
-import jojoaky.substance.datagen.generator.recipe.RecipeGeneratorRegistry;
+import jojoaky.substance.data.generator.recipe.ShapelessRecipeDef;
+import jojoaky.substance.data.generator.recipe.RecipeGeneratorRegistry;
 import jojoaky.substance.register.ModFluids;
 import jojoaky.substance.register.ModItems;
 import net.minecraft.tags.ItemTags;
