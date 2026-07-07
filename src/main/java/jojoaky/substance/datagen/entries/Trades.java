@@ -1,4 +1,4 @@
-package jojoaky.substance.datagen.recipes;
+package jojoaky.substance.datagen.entries;
 
 import jojoaky.substance.content.flask.ModFlasks;
 import jojoaky.substance.data.generator.datapatch.def.WanderingTraderTradeDef;

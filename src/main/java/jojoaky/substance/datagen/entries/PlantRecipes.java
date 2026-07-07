@@ -1,4 +1,4 @@
-package jojoaky.substance.datagen.recipes;
+package jojoaky.substance.datagen.entries;
 
 import jojoaky.substance.data.generator.recipe.RecipeGeneratorRegistry;
 import jojoaky.substance.data.generator.recipe.ShapelessRecipeDef;

@@ -1,4 +1,4 @@
-package jojoaky.substance.datagen.recipes;
+package jojoaky.substance.datagen.entries;
 
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import jojoaky.substance.data.generator.recipe.ShapelessRecipeDef;
@@ -9,7 +9,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
 
-import static jojoaky.substance.datagen.recipes.RecipeConstants.BASE_FLUID;
+import static jojoaky.substance.datagen.entries.RecipeConstants.BASE_FLUID;
 
 public class ChemicalFluidRecipes {
     public static void initialize() {

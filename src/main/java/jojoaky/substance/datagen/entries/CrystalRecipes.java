@@ -1,11 +1,11 @@
-package jojoaky.substance.datagen.recipes;
+package jojoaky.substance.datagen.entries;
 
 import jojoaky.substance.data.generator.recipe.ShapelessRecipeDef;
 import jojoaky.substance.data.generator.recipe.RecipeGeneratorRegistry;
 import jojoaky.substance.register.ModFluids;
 import jojoaky.substance.register.ModItems;
 
-import static jojoaky.substance.datagen.recipes.RecipeConstants.BASE_FLUID;
+import static jojoaky.substance.datagen.entries.RecipeConstants.BASE_FLUID;
 
 public class CrystalRecipes {
     public static void initialize() {

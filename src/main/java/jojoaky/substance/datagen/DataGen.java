@@ -1,7 +1,7 @@
 package jojoaky.substance.datagen;
 
 import jojoaky.substance.data.generator.recipe.RecipeGeneratorRegistry;
-import jojoaky.substance.datagen.recipes.*;
+import jojoaky.substance.datagen.entries.*;
 import jojoaky.substance.data.generator.datapatch.DatapatchDatagenProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;

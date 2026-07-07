@@ -1,4 +1,4 @@
-package jojoaky.substance.datagen.recipes;
+package jojoaky.substance.datagen.entries;
 
 import jojoaky.substance.data.generator.datapatch.DatapatchRegistry;
 import jojoaky.substance.data.generator.datapatch.def.LootEntryDef;
@@ -28,7 +28,7 @@ public class Loot {
     };
 
     public static void initialize() {
-        Stream<LootEntryDef> staticLoot = Stream.of(
+        DatapatchRegistry.accept(
                 LootEntryDef.named("wooden_pipe_outpost", outpostChest)
                         .drops(ModItems.WOODEN_PIPE)
                         .weight(4)
@@ -47,16 +47,11 @@ public class Loot {
                 LootEntryDef.named("wooden_pipe_vindicator", vindicatorDrop)
                         .drops(ModItems.WOODEN_PIPE)
                         .weight(1)
-                        .count(1.0f, 1.0f),
-
-                LootEntryDef.named("pipe_outpost_bubble", outpostChest)
-                        .drops(ModItems.BUBBLE_PIPE)
-                        .weight(4)
                         .count(1.0f, 1.0f)
         );
 
         Stream<LootEntryDef> villageBubblePipeLoot = Arrays.stream(ALL_VILLAGE_CHESTS)
-                .map(chestLocation -> LootEntryDef.named(chestLocation.getPath().replace('/', '_') + "_bubble_pipe", chestLocation)
+                .map(chestLocation -> LootEntryDef.named("bubble_pipe_" + chestLocation.getPath().replace('/', '_'), chestLocation)
                         .drops(ModItems.BUBBLE_PIPE)
                         .weight(2)
                         .count(1.0f, 1.0f)
