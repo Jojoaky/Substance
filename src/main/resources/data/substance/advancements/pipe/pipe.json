@@ -9,7 +9,7 @@
   "parent": "substance:substance",
   "criteria": {
     "requirement": {
-      "trigger": "minecraft:inventory_changed",
+      "trigger": "minecraft:using_item",
       "conditions": {
         "items": [
           {

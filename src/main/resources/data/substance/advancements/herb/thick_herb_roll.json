@@ -6,7 +6,6 @@
     "title": "Roll Model",
     "description": "How did we get here?"
   },
-  "hidden": true,
   "parent": "substance:herb/dry_herb",
   "criteria": {
     "interacted_item": {

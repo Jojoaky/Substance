@@ -6,7 +6,6 @@
     "title": "Up in Smoke",
     "description": "cough"
   },
-  "hidden": true,
   "parent": "substance:tobacco/place_tobacco",
   "criteria": {
     "interacted_item": {

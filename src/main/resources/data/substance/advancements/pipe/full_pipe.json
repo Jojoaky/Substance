@@ -5,12 +5,11 @@
     },
     "title": "Fully Loaded",
     "description": "Theres no stopping you now",
-    "hidden": true
   },
   "parent": "substance:pipe/pipe",
   "criteria": {
     "requirement": {
-      "trigger": "minecraft:inventory_changed",
+      "trigger": "minecraft:using_item",
       "conditions": {
         "items": [
           {
