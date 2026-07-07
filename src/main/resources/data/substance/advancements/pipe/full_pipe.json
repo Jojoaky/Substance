@@ -4,7 +4,7 @@
       "item": "substance:wooden_pipe"
     },
     "title": "Fully Loaded",
-    "description": "Theres no stopping you now",
+    "description": "Theres no stopping you now"
   },
   "parent": "substance:pipe/pipe",
   "criteria": {
