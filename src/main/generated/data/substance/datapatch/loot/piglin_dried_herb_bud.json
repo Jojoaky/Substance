@@ -1,7 +1,0 @@
-{
-  "item": "substance:dried_herb_bud",
-  "max_count": 3.0,
-  "min_count": 2.0,
-  "target_table": "minecraft:gameplay/piglin_bartering",
-  "weight": 5
-}

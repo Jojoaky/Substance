@@ -12,9 +12,10 @@ public class RecipeGeneratorRegistry {
     public static List<ShapedRecipeDef> SHAPED_RECIPES = new ArrayList<>();
 
     public static void accept(RecipeDef recipe) {
-        switch (recipe) {
-            case ShapelessRecipeDef r -> SHAPELESS_RECIPES.add(r);
-            case ShapedRecipeDef r -> SHAPED_RECIPES.add(r);
+        if (recipe instanceof ShapelessRecipeDef r) {
+            SHAPELESS_RECIPES.add(r);
+        } else if (recipe instanceof ShapedRecipeDef r) {
+            SHAPED_RECIPES.add(r);
         }
     }
 

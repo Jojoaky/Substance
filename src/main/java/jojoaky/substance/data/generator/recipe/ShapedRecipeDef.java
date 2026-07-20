@@ -266,7 +266,7 @@ public final class ShapedRecipeDef implements RecipeDef {
         if (itemOutputs.isEmpty()) {
             throw new IllegalStateException("Recipe '" + name + "' does not contain a definitive standard Item output.");
         }
-        return itemOutputs.getFirst();
+        return itemOutputs.get(0);
     }
 
     public ItemStack getSingleOutputAsItem() {
@@ -274,8 +274,8 @@ public final class ShapedRecipeDef implements RecipeDef {
         if (totalOutputs > 1) {
             throw new IllegalStateException("Recipe '" + name + "' expects exactly one singular item or fluid outcome, but multiple exist.");
         }
-        if (!itemOutputs.isEmpty()) return itemOutputs.getFirst();
-        if (!fluidOutputs.isEmpty()) return convertFluidOutputToFlask(fluidOutputs.getFirst());
+        if (!itemOutputs.isEmpty()) return itemOutputs.get(0);
+        if (!fluidOutputs.isEmpty()) return convertFluidOutputToFlask(fluidOutputs.get(0));
         throw new IllegalStateException("Recipe '" + name + "' does not yield any non-chanced physical item or flask outputs.");
     }
 

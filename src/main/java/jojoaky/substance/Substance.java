@@ -4,6 +4,9 @@ import jojoaky.substance.content.flask.ModFlasks;
 import jojoaky.substance.content.pipe.PipeMenu;
 import jojoaky.substance.content.pipe.PipeRegistry;
 import jojoaky.substance.content.pipe.PipeSmokableItem;
+import jojoaky.substance.datagen.entries.Loot;
+import jojoaky.substance.datagen.entries.SecretTrades;
+import jojoaky.substance.datagen.entries.Trades;
 import jojoaky.substance.register.*;
 import jojoaky.substance.util.StackingEffect;
 import net.fabricmc.api.ModInitializer;
@@ -34,6 +37,10 @@ public class Substance implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		Config.HANDLER.load();
+
+		Trades.initialize();
+		SecretTrades.initialize();
+		Loot.initialize();
 
 		ModCreativeTab.initialize();
 		ModItems.initialize();

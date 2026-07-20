@@ -441,7 +441,7 @@ public final class ShapelessRecipeDef implements RecipeDef {
         if (itemOutputs.isEmpty()) {
             throw new IllegalStateException("Recipe '" + name + "' does not contain a definitive standard Item output.");
         }
-        return itemOutputs.getFirst();
+        return itemOutputs.get(0);
     }
 
     public FluidOutput getSingleFluidOutput() {
@@ -451,7 +451,7 @@ public final class ShapelessRecipeDef implements RecipeDef {
         if (fluidOutputs.isEmpty()) {
             throw new IllegalStateException("Recipe '" + name + "' does not contain a definitive Fluid output.");
         }
-        return fluidOutputs.getFirst();
+        return fluidOutputs.get(0);
     }
 
     public ItemStack getSingleOutputAsItem() {
@@ -461,10 +461,10 @@ public final class ShapelessRecipeDef implements RecipeDef {
             throw new IllegalStateException("Recipe '" + name + "' expects exactly one singular item or fluid outcome, but multiple exist.");
         }
         if (!itemOutputs.isEmpty()) {
-            return itemOutputs.getFirst();
+            return itemOutputs.get(0);
         }
         if (!fluidOutputs.isEmpty()) {
-            return convertFluidOutputToFlask(fluidOutputs.getFirst());
+            return convertFluidOutputToFlask(fluidOutputs.get(0));
         }
 
         throw new IllegalStateException("Recipe '" + name + "' does not yield any non-chanced physical item or flask outputs.");
@@ -478,13 +478,13 @@ public final class ShapelessRecipeDef implements RecipeDef {
         }
 
         if (!itemInputs.isEmpty()) {
-            return Ingredient.of(itemInputs.getFirst());
+            return Ingredient.of(itemInputs.get(0));
         }
         if (!tagInputs.isEmpty()) {
-            return Ingredient.of(tagInputs.getFirst().tag());
+            return Ingredient.of(tagInputs.get(0).tag());
         }
         if (!fluidInputs.isEmpty()) {
-            ItemStack flask = convertFluidInputToFlask(fluidInputs.getFirst());
+            ItemStack flask = convertFluidInputToFlask(fluidInputs.get(0));
             return Ingredient.of(flask);
         }
 

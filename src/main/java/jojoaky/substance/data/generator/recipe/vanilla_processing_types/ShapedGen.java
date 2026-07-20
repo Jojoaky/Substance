@@ -35,16 +35,12 @@ public class ShapedGen extends FabricRecipeProvider {
                 .unlockedBy(getHasName(ModFlasks.EMPTY_FLASK), has(ModFlasks.EMPTY_FLASK));
 
         def.getKey().forEach((character, ingredient) -> {
-                switch (ingredient) {
-                    case ShapedRecipeDef.ShapeIngredient.OfItem item
-                            -> builder.define(character, item.item());
-
-                    case ShapedRecipeDef.ShapeIngredient.OfTag tag
-                            -> builder.define(character, tag.tag());
-                }
-
+            if (ingredient instanceof ShapedRecipeDef.ShapeIngredient.OfItem item) {
+                builder.define(character, item.item());
+            } else if (ingredient instanceof ShapedRecipeDef.ShapeIngredient.OfTag tag) {
+                builder.define(character, tag.tag());
             }
-        );
+        });
 
         for (var row : def.getPattern()) {
             builder.pattern(row);

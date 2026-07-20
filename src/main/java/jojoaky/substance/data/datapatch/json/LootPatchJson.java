@@ -6,6 +6,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
+// TODO: Support different types than only item
 public record LootPatchJson(
         boolean disabled,
         ResourceLocation targetTable,

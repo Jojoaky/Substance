@@ -12,7 +12,7 @@ public class DataGen implements DataGeneratorEntrypoint {
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         final FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
         pack.addProvider(ModelProvider::new);
-        pack.addProvider(DatapatchDatagenProvider::new);
+
 
         MiscRecipes.initialize();
         ChemicalFluidRecipes.initialize();
@@ -22,9 +22,12 @@ public class DataGen implements DataGeneratorEntrypoint {
         PlantRecipes.initialize();
         TobaccoRecipes.initialize();
 
+        /*Currently hardcoded, no datagen needed:
+        pack.addProvider(DatapatchDatagenProvider::new);
         Trades.initialize();
         SecretTrades.initialize();
         Loot.initialize();
+        */
 
         RecipeGeneratorRegistry.generate(pack);
     }

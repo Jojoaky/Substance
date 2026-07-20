@@ -75,16 +75,12 @@ public class MechanicalCraftingGen extends MechanicalCraftingRecipeGen {
 
     void applyKeys(MechanicalCraftingRecipeBuilder builder, ShapedRecipeDef def) {
         def.getKey().forEach((character, ingredient) -> {
-                    switch (ingredient) {
-                        case ShapedRecipeDef.ShapeIngredient.OfItem item
-                                -> builder.key(character, Ingredient.of(item.item()));
-
-                        case ShapedRecipeDef.ShapeIngredient.OfTag tag
-                                -> builder.key(character, Ingredient.of(tag.tag()));
-                    }
-
-                }
-        );
+            if (ingredient instanceof ShapedRecipeDef.ShapeIngredient.OfItem item) {
+                builder.key(character, Ingredient.of(item.item()));
+            } else if (ingredient instanceof ShapedRecipeDef.ShapeIngredient.OfTag tag) {
+                builder.key(character, Ingredient.of(tag.tag()));
+            }
+        });
     }
 
     void applyPattern(MechanicalCraftingRecipeBuilder builder, ShapedRecipeDef def) {
