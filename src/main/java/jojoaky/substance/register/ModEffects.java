@@ -34,7 +34,7 @@ public class ModEffects {
     public static final MobEffect WARP         = registerEffect("warp",         MobEffectCategory.NEUTRAL,    0xffaa88ff);
 
     // Alcohol -> visual: - / effect: smoothed / delayed inputs
-    public static final MobEffect STAGGER      = registerEffect("stagger",      MobEffectCategory.HARMFUL,    0xffddaa55);
+    //public static final MobEffect STAGGER      = registerEffect("stagger",      MobEffectCategory.HARMFUL,    0xffddaa55);
     // Tobacco -> visual: tunnel vision, gray / effect: haste
     public static final MobEffect KEEN         = registerEffect("keen",         MobEffectCategory.BENEFICIAL, 0xffeecc88);
     // Herbs -> visual: warmth, blur / effect: peace
@@ -51,7 +51,7 @@ public class ModEffects {
     public static final PotionSet HAZE_POTIONS          = registerPotionSet("haze",          HAZE,          600, 1800, 300, 1);
     public static final PotionSet WARP_POTIONS          = registerPotionSet("warp",          WARP,          600, 1800, 300, 1);
     public static final PotionSet DREAD_POTIONS         = registerPotionSet("dread",         DREAD,         600, 1800, 300, 1);
-    public static final PotionSet STAGGER_POTIONS       = registerPotionSet("stagger",       STAGGER,       600, 1800, 300, 1);
+    //public static final PotionSet STAGGER_POTIONS       = registerPotionSet("stagger",       STAGGER,       600, 1800, 300, 1);
     public static final PotionSet KEEN_POTIONS          = registerPotionSet("keen",          KEEN,          600, 1800, 300, 1);
     public static final PotionSet RELAXATION_POTIONS    = registerPotionSet("relaxation",    RELAXATION,    600, 1800, 300, 1);
     public static final PotionSet SURGE_POTIONS         = registerPotionSet("surge",         SURGE,         600, 1800, 300, 1);
@@ -105,7 +105,7 @@ public class ModEffects {
         registerBrewingRecipes(HAZE_POTIONS,          Items.FERMENTED_SPIDER_EYE);
         registerBrewingRecipes(WARP_POTIONS,          ModItems.CYANIDE);
         registerBrewingRecipes(DREAD_POTIONS,         Items.SCULK);
-        registerBrewingRecipes(STAGGER_POTIONS,       Items.HONEYCOMB);
+        //registerBrewingRecipes(STAGGER_POTIONS,       Items.HONEYCOMB);
         registerBrewingRecipes(KEEN_POTIONS,          ModItems.DRIED_TOBACCO_LEAF);
         registerBrewingRecipes(RELAXATION_POTIONS,    ModItems.HERB_BUD);
         registerBrewingRecipes(SURGE_POTIONS,         ModItems.WHITE_CRYSTALS);

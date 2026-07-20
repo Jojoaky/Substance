@@ -80,7 +80,7 @@ public class SubstanceClient implements ClientModInitializer {
 			PostShaderManager.add(new HazeShader());
 			PostShaderManager.add(new KeenShader());
 			PostShaderManager.add(new RelaxationShader());
-			PostShaderManager.add(new StaggerShader());
+			//PostShaderManager.add(new StaggerShader());
 			PostShaderManager.add(new SurgeShader());
 			PostShaderManager.add(new WarpShader());
 

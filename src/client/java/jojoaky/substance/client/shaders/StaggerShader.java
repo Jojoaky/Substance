@@ -5,6 +5,7 @@ import jojoaky.substance.client.mixin.GameRendererAccessor;
 import jojoaky.substance.client.shader.MobEffectShader;
 import jojoaky.substance.register.ModEffects;
 
+/*
 public class StaggerShader extends MobEffectShader {
     public StaggerShader() {
         super(ModEffects.STAGGER, Substance.resource("shaders/post/stagger.json"));
@@ -15,3 +16,4 @@ public class StaggerShader extends MobEffectShader {
         super.onRender(accessor, partialTicks, time, tick);
     }
 }
+*/
