@@ -50,17 +50,20 @@ public class Config {
     public int cigaretteDurability = 256;
 
     @SerialEntry
-    public float maxSmokeDuration = 24.0f;
+    public float maxSmokeDuration = 12.0f;
     @SerialEntry
     public float smokeCooldown = 1.5f;
 
     @SerialEntry
-    public float maxSniffDuration = 4.0f;
+    public float maxSniffDuration = 3.0f;
     @SerialEntry
-    public float sniffCooldown = 3.0f;
+    public float sniffCooldown = 2.0f;
 
     @SerialEntry
     public float pipeItemConsumeProbability = 0.4f;
+
+    @SerialEntry
+    public float horrorTripChance = 0.05f;
 }
 
 

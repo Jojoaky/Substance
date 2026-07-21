@@ -9,6 +9,7 @@ import jojoaky.substance.datagen.entries.SecretTrades;
 import jojoaky.substance.datagen.entries.Trades;
 import jojoaky.substance.register.*;
 import jojoaky.substance.util.StackingEffect;
+import jojoaky.substance.util.SubstanceEffectHelper;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -73,13 +74,30 @@ public class Substance implements ModInitializer {
 				new StackingEffect(ModEffects.SURGE, 8, 700, 3)
 		));
 
-		PipeRegistry.register(PipeSmokableItem.effectGiving(
+		PipeRegistry.register(new PipeSmokableItem(
 				Items.RED_MUSHROOM,
-				new StackingEffect(ModEffects.HALLUCINATION, 8, 1000, 1)
+				(context) -> {
+					boolean horrorTrip = context.level().random.nextFloat() < Config.get().horrorTripChance;
+
+					if (horrorTrip) {
+						SubstanceEffectHelper.applyEffectBase(
+								context.entity(),
+								ModEffects.DREAD,
+								context.consumeDuration() * 10,
+								0
+						);
+					} else {
+						SubstanceEffectHelper.applyStackingEffect(
+								context.entity(),
+								context.consumeDuration(),
+								new StackingEffect(ModEffects.HALLUCINATION, 8, 1000, 1)
+						);
+					}
+				}
 		));
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> WelcomeHandler.onPlayerJoin(handler.getPlayer(), server));
 	}
 
-	// TODO: Smoke animation broken (left hand), Sound effects, Improved way of obtaining pipes, Advancements with translation
+	// TODO: Smoke animation broken (left hand), Sound effects, Improved way of obtaining pipes?, Advancements with translation
 }

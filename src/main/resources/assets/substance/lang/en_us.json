@@ -146,5 +146,7 @@
   "text.config.substance.option.enableAudioEffects": "Enable Audio Processing",
   "text.config.substance.option.enableAudioEffects.desc": "Completely enables or disables audio effects. Requires restart!",
   "text.config.substance.option.audioEffectStrength": "Audio Effect Intensity",
-  "text.config.substance.option.audioEffectStrength.desc": "Adjust the intensity of audio filters."
+  "text.config.substance.option.audioEffectStrength.desc": "Adjust the intensity of audio filters.",
+  "text.config.substance.option.horrorTripChance": "Horror Trip Chance",
+  "text.config.substance.option.horrorTripChance.desc": "Adjust the chance of horror trips."
 }

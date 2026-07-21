@@ -117,6 +117,20 @@ public class ModMenuIntegration implements ModMenuApi {
                                         .formatValue(val -> Component.literal(String.format("%.0f%%", val * 100))))
                                 .build())
                         .build())
+
+                .option(Option.<Float>createBuilder()
+                        .name(Component.translatable("text.config.substance.option.horrorTripChance"))
+                        .description(OptionDescription.of(Component.translatable("text.config.substance.option.horrorTripChance.desc")))
+                        .binding(
+                                1.0f,
+                                () -> Config.get().horrorTripChance,
+                                val -> Config.get().horrorTripChance = val
+                        )
+                        .controller(opt -> FloatSliderControllerBuilder.create(opt)
+                                .range(0.0f, 1.0f)
+                                .step(0.01f)
+                                .formatValue(val -> Component.literal(String.format("%.1f%%", val * 100))))
+                        .build())
                 .build();
     }
 
