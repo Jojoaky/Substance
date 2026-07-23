@@ -1,15 +1,16 @@
 {
-	"required": true,
-	"package": "jojoaky.substance.mixin",
-	"plugin": "jojoaky.substance.ConditionalMixinPlugin",
-	"compatibilityLevel": "JAVA_17",
-	"mixins": [
-		"HarvesterMovementBehaviourMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"overwrites": {
-		"requireAnnotations": true
+  "required": true,
+  "package": "jojoaky.substance.mixin",
+  "plugin": "jojoaky.substance.ConditionalMixinPlugin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "HarvesterMovementBehaviourMixin",
+    "ItemStackMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
 	}
 }
