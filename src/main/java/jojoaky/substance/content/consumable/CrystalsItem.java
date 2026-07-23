@@ -12,8 +12,8 @@ public class CrystalsItem extends PowderConsumableItem {
     }
 
     @Override
-    protected void onConsumeTick(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
-        super.onConsumeTick(stack, level, entity, useDuration);
+    public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int i) {
+        super.onUseTick(level, entity, stack, i);
 
         SubstanceEffectHelper.applyEffectBase(entity, ModEffects.WARP, 100, 0);
     }

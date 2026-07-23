@@ -99,5 +99,5 @@ public class Substance implements ModInitializer {
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> WelcomeHandler.onPlayerJoin(handler.getPlayer(), server));
 	}
 
-	// TODO: Smoke animation broken (left hand), Sound effects, Improved way of obtaining pipes?, Advancements with translation
+	// TODO: Smoke animation broken (left hand), Sound effects, Improved way of obtaining pipes?, Advancements with translation, pipe advancements granting, fix animation bug, hallucination effect
 }

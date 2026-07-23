@@ -1,5 +1,6 @@
 package jojoaky.substance.content.consumable;
 
+import jojoaky.substance.Config;
 import jojoaky.substance.register.ModEffects;
 import jojoaky.substance.util.SubstanceEffectHelper;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -10,12 +11,12 @@ import net.minecraft.world.level.Level;
 
 public class ThickJointItem extends JointItem {
     public ThickJointItem(Properties properties) {
-        super(properties);
+        super(properties, stack -> Config.get().thickHerbalRollDurability);
     }
 
     @Override
-    protected void onConsumeTick(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
-        super.onConsumeTick(stack, level, entity, useDuration);
+    public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int i) {
+        super.onUseTick(level, entity, stack, i);
 
         SubstanceEffectHelper.applyEffectBase(entity, ModEffects.RELAXATION, 160, 0);
         SubstanceEffectHelper.applyEffectBase(entity, ModEffects.WARP, 160, 0);

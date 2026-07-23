@@ -26,6 +26,7 @@ public class ModItems {
     // --- consumables ---
     public static final Item WHITE_CRYSTALS = register(
             new CrystalsItem(new FabricItemSettings()
+                    .stacksTo(16)
                     .rarity(Rarity.UNCOMMON)
             ),
             "white_crystals"
@@ -33,6 +34,7 @@ public class ModItems {
 
     public static final Item WHITE_CRYSTALS_CHILI = register(
             new CrystalsItem(new FabricItemSettings()
+                    .stacksTo(16)
                     .rarity(Rarity.RARE)
             ),
             "white_crystals_chili"
@@ -40,6 +42,7 @@ public class ModItems {
 
     public static final Item BLUE_CRYSTALS = register(
             new CrystalsItem(new FabricItemSettings()
+                    .stacksTo(16)
                     .rarity(Rarity.EPIC)
             ),
             "blue_crystals"
@@ -47,7 +50,7 @@ public class ModItems {
 
     public static final Item HERBAL_ROLL = register(
             new JointItem(new FabricItemSettings()
-                    .durability(Config.get().herbalRollDurability)
+                    .stacksTo(1)
                     .rarity(Rarity.UNCOMMON)
             ),
             "herbal_roll"
@@ -55,10 +58,18 @@ public class ModItems {
 
     public static final Item THICK_HERBAL_ROLL = register(
             new ThickJointItem(new FabricItemSettings()
-                    .durability(Config.get().thickHerbalRollDurability)
+                    .stacksTo(1)
                     .rarity(Rarity.RARE)
             ),
             "thick_herbal_roll"
+    );
+
+    public static final Item CIGARETTE = register(
+            new CigaretteItem(new FabricItemSettings()
+                    .stacksTo(1)
+                    .rarity(Rarity.RARE)
+            ),
+            "cigarette"
     );
 
     public static final Item WOODEN_PIPE = register(
@@ -77,15 +88,6 @@ public class ModItems {
                     .rarity(Rarity.RARE)
             ),
             "bubble_pipe"
-    );
-
-    public static final Item CIGARETTE = register(
-            new CigaretteItem(new FabricItemSettings()
-                    .stacksTo(1)
-                    .durability(Config.get().cigaretteDurability)
-                    .rarity(Rarity.RARE)
-            ),
-            "cigarette"
     );
 
 

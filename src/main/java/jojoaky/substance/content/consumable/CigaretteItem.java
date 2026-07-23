@@ -1,21 +1,34 @@
 package jojoaky.substance.content.consumable;
 
+import jojoaky.substance.Config;
+import jojoaky.substance.content.consumable.framework.ConsumableItem;
+import jojoaky.substance.content.consumable.framework.ConsumptionDurabilityStrategy;
+import jojoaky.substance.content.consumable.framework.SmokeComponent;
 import jojoaky.substance.register.ModEffects;
 import jojoaky.substance.util.SubstanceEffectHelper;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
-public class CigaretteItem extends SmokableItem {
+public class CigaretteItem extends ConsumableItem {
     public CigaretteItem(Properties properties) {
-        super(properties);
+        super(
+                properties,
+                new ConsumptionDurabilityStrategy(stack -> Config.get().cigaretteDurability),
+                () -> Math.round(Config.get().maxSmokeDuration * 20.0f),
+                () -> Math.round(Config.get().smokeCooldown * 20.0f),
+                UseAnim.SPYGLASS,
+                new SmokeComponent()
+        );
     }
 
     @Override
-    protected void onConsumeTick(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
-        super.onConsumeTick(stack, level, entity, useDuration);
+    public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int i) {
+        super.onUseTick(level, entity, stack, i);
+        int useDuration = getUseDuration(stack) - i;
 
         SubstanceEffectHelper.applyEffectBase(entity, ModEffects.KEEN, 160, 0);
     }

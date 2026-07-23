@@ -9,7 +9,7 @@ import jojoaky.substance.content.flask.FilledFlaskItem;
 import jojoaky.substance.client.itemmodel.SmokableItemModel;
 import jojoaky.substance.client.shader.PostShaderManager;
 import jojoaky.substance.client.shaders.*;
-import jojoaky.substance.content.consumable.SmokableItem;
+import jojoaky.substance.content.consumable.framework.ConsumableItem;
 import jojoaky.substance.content.pipe.PipeItem;
 import jojoaky.substance.register.ModBlocks;
 import jojoaky.substance.content.flask.ModFlasks;
@@ -39,7 +39,9 @@ public class SubstanceClient implements ClientModInitializer {
 				.forEach(PipeItemModel::registerModel);
 
 		BuiltInRegistries.ITEM.stream()
-				.filter(item -> (item instanceof SmokableItem && !(item instanceof PipeItem)))
+				.filter(item -> item instanceof ConsumableItem consumableItem
+						&& consumableItem.hasCustomRenderModel()
+						&& !(item instanceof PipeItem))
 				.forEach(SmokableItemModel::registerModel);
 
 		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {

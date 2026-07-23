@@ -3,7 +3,9 @@ package jojoaky.substance.content.pipe;
 import jojoaky.substance.Config;
 import jojoaky.substance.Substance;
 import  jojoaky.substance.content.ItemContainer;
-import jojoaky.substance.content.consumable.SmokableItem;
+import jojoaky.substance.content.consumable.framework.ConsumableItem;
+import jojoaky.substance.content.consumable.framework.SmokeComponent;
+import jojoaky.substance.content.consumable.framework.VanillaDurabilityStrategy;
 import jojoaky.substance.register.ModEffects;
 import jojoaky.substance.util.SubstanceEffectHelper;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
@@ -21,21 +23,29 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class PipeItem extends SmokableItem {
+public class PipeItem extends ConsumableItem {
     public PipeItem(Properties properties) {
-        super(properties);
+        super(
+                properties,
+                new VanillaDurabilityStrategy(),
+                () -> Math.round(Config.get().maxSmokeDuration * 20.0f),
+                () -> Math.round(Config.get().smokeCooldown * 20.0f),
+                UseAnim.SPYGLASS,
+                new SmokeComponent()
+        );
     }
 
     public static final int PIPE_INVENTORY_SIZE = 5;
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         var container = new ItemContainer(stack, PIPE_INVENTORY_SIZE);
         container.readFromNbt();

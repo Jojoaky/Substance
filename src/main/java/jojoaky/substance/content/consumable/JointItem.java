@@ -1,21 +1,37 @@
 package jojoaky.substance.content.consumable;
 
+import jojoaky.substance.Config;
+import jojoaky.substance.content.consumable.framework.ConsumableItem;
+import jojoaky.substance.content.consumable.framework.ConsumptionDurabilityStrategy;
+import jojoaky.substance.content.consumable.framework.SmokeComponent;
 import jojoaky.substance.register.ModEffects;
 import jojoaky.substance.util.SubstanceEffectHelper;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
-public class JointItem extends SmokableItem {
+public class JointItem extends ConsumableItem {
     public JointItem(Properties properties) {
-        super(properties);
+        this(properties, stack -> Config.get().herbalRollDurability);
+    }
+
+    protected JointItem(Properties properties, java.util.function.ToIntFunction<ItemStack> durabilityProvider) {
+        super(
+                properties,
+                new ConsumptionDurabilityStrategy(durabilityProvider),
+                () -> Math.round(Config.get().maxSmokeDuration * 20.0f),
+                () -> Math.round(Config.get().smokeCooldown * 20.0f),
+                UseAnim.SPYGLASS,
+                new SmokeComponent()
+        );
     }
 
     @Override
-    protected void onConsumeTick(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
-        super.onConsumeTick(stack, level, entity, useDuration);
+    public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int i) {
+        super.onUseTick(level, entity, stack, i);
 
         SubstanceEffectHelper.applyEffectBase(entity, ModEffects.RELAXATION, 160, 0);
         SubstanceEffectHelper.applyEffectBase(entity, ModEffects.WARP, 160, 0);

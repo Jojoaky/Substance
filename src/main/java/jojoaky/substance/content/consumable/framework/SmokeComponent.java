@@ -1,31 +1,17 @@
-package jojoaky.substance.content.consumable;
+package jojoaky.substance.content.consumable.framework;
 
-import jojoaky.substance.Config;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 
-public class SmokableItem extends ConsumableItem {
-    public SmokableItem(Properties properties) {
-        super(properties);
-    }
-
+public class SmokeComponent implements ConsumableComponent {
     @Override
-    @NotNull
-    public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.SPYGLASS;
-    }
-
-    protected void onStartConsuming(ItemStack stack, Level level, LivingEntity entity) {}
-
-    protected void onConsumeTick(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
+    public void onConsumeTick(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
         spawnSmokeParticles(level, entity, false);
 
         if (level.random.nextFloat() < 0.15f) {
@@ -40,7 +26,8 @@ public class SmokableItem extends ConsumableItem {
         }
     }
 
-    protected void onStopConsuming(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
+    @Override
+    public void onStopConsuming(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
         spawnSmokeParticles(level, entity, true);
 
         level.playSound(
@@ -53,11 +40,15 @@ public class SmokableItem extends ConsumableItem {
         );
     }
 
+    @Override
+    public boolean hasCustomRenderModel() {
+        return true;
+    }
+
     private void spawnSmokeParticles(Level level, LivingEntity entity, boolean puff) {
         if (level instanceof ServerLevel serverLevel) {
             Vec3 eyePos = entity.getEyePosition();
             Vec3 lookVec = entity.getLookAngle();
-
             Vec3 spawnPos = eyePos.add(lookVec.scale(0.6D));
 
             if (puff) {
@@ -73,35 +64,17 @@ public class SmokableItem extends ConsumableItem {
                     serverLevel.sendParticles(
                             ParticleTypes.LARGE_SMOKE,
                             spawnPos.x, spawnPos.y, spawnPos.z,
-                            0,
-                            lookVec.x * 0.1,
-                            lookVec.y * 0.1 + 0.03,
-                            lookVec.z * 0.1,
-                            1.0
+                            0, lookVec.x * 0.1, lookVec.y * 0.1 + 0.03, lookVec.z * 0.1, 1.0
                     );
                 }
-
                 if (serverLevel.random.nextFloat() < 0.05) {
                     serverLevel.sendParticles(
                             ParticleTypes.CAMPFIRE_COSY_SMOKE,
                             spawnPos.x, spawnPos.y, spawnPos.z,
-                            0,
-                            lookVec.x * 0.04,
-                            lookVec.y * 0.04 + 0.03,
-                            lookVec.z * 0.04,
-                            1.0
+                            0, lookVec.x * 0.04, lookVec.y * 0.04 + 0.03, lookVec.z * 0.04, 1.0
                     );
                 }
             }
         }
-    }
-
-    @Override
-    public int getUseDuration(ItemStack stack) {
-        return Math.round(Config.get().maxSmokeDuration * 20.0f);
-    }
-    @Override
-    public int getCooldown(ItemStack stack) {
-        return Math.round(Config.get().smokeCooldown * 20.0f);
     }
 }
