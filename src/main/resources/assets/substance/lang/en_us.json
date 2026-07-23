@@ -9,6 +9,7 @@
   "item.substance.wooden_pipe": "Wooden Pipe",
   "item.substance.bubble_pipe": "Bubble Pipe",
   "item.substance.cigarette": "Cigarette",
+  "item.substance.consumption": "Consumption: %s / %s",
 
   "item.substance.tray": "Tray",
   "item.substance.blue_oil_tray": "Blue Oil Tray",

@@ -7,6 +7,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import net.minecraft.network.chat.Component;
+
+import java.util.List;
+
 public interface DurabilityStrategy {
     default Item.Properties configureProperties(Item.Properties properties) {
         return properties;
@@ -28,6 +32,9 @@ public interface DurabilityStrategy {
 
     default Integer getBarColor(ItemStack stack) {
         return null;
+    }
+
+    default void appendAdvancedTooltip(ItemStack stack, List<Component> tooltip) {
     }
 
     default boolean allowNbtUpdateAnimation(

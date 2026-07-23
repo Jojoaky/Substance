@@ -9,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -127,6 +128,10 @@ public class ConsumableItem extends Item {
     public int getBarColor(@NotNull ItemStack stack) {
         Integer strategyValue = durabilityStrategy.getBarColor(stack);
         return strategyValue != null ? strategyValue : super.getBarColor(stack);
+    }
+
+    public void appendAdvancedTooltip(ItemStack stack, List<Component> tooltip) {
+        durabilityStrategy.appendAdvancedTooltip(stack, tooltip);
     }
 
     @Override
