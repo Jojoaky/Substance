@@ -39,9 +39,7 @@ public class Substance implements ModInitializer {
 	public void onInitialize() {
 		Config.HANDLER.load();
 
-		Trades.initialize();
-		SecretTrades.initialize();
-		Loot.initialize();
+		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> WelcomeHandler.onPlayerJoin(handler.getPlayer(), server));
 
 		ModCreativeTab.initialize();
 		ModItems.initialize();
@@ -50,7 +48,13 @@ public class Substance implements ModInitializer {
 		ModFluids.initialize();
 		ModEffects.initialize();
 		ModTags.initialize();
+
+
+		Trades.initialize();
+		SecretTrades.initialize();
+		Loot.initialize();
 		ModRegisterDatapatch.initialize();
+
 
 		PipeRegistry.initialize();
 
@@ -95,9 +99,10 @@ public class Substance implements ModInitializer {
 					}
 				}
 		));
-
-		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> WelcomeHandler.onPlayerJoin(handler.getPlayer(), server));
 	}
 
-	// TODO: Smoke animation broken (left hand), Advancements with translation, pipe advancements granting, hallucination effect
+	// TODO:
+	//  Fix smoke animation (left hand)
+	//  hallucination effect
+	//  Placeable Trays
 }
