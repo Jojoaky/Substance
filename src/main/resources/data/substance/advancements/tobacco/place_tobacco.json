@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:dried_tobacco_leaf"
     },
-    "title": "A Smoky Place",
-    "description": "Plant a tobacco plant obtained from farmers"
+    "title": {"translate": "advancements.substance.tobacco.place_tobacco.title"},
+    "description": {"translate": "advancements.substance.tobacco.place_tobacco.description"}
   },
   "parent": "substance:substance",
   "criteria": {

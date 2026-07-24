@@ -36,7 +36,6 @@ public class CrystalRecipes {
         RecipeGeneratorRegistry.accept(
                 ShapelessRecipeDef.named("blue_crystals")
                         .createPressing()
-                        .disableVanillaIfCreate()
                         .output(ModItems.BLUE_CRYSTALS)
                         .require(ModItems.BLUE_OIL_TRAY)
                         .build()
@@ -45,7 +44,6 @@ public class CrystalRecipes {
         RecipeGeneratorRegistry.accept(
                 ShapelessRecipeDef.named("white_crystals")
                         .createPressing()
-                        .disableVanillaIfCreate()
                         .output(ModItems.WHITE_CRYSTALS)
                         .require(ModItems.WHITE_OIL_TRAY)
                         .build()

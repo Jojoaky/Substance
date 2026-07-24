@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:blue_crystals"
     },
-    "title": "The Good Stuff",
-    "description": "Obtain blue crystals"
+    "title": {"translate": "advancements.substance.crystals.blue_crystals.title"},
+    "description": {"translate": "advancements.substance.crystals.blue_crystals.description"}
   },
   "parent": "substance:crystals/blue_oil_tray",
   "criteria": {

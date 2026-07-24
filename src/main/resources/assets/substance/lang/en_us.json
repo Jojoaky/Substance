@@ -1,6 +1,8 @@
 {
   "itemGroup.substance": "Substance",
 
+  "item.substance.consumption": "Consumption: %s / %s",
+
   "item.substance.white_crystals": "White Crystals",
   "item.substance.white_crystals_chili": "Spiced White Crystals",
   "item.substance.blue_crystals": "Blue Crystals",
@@ -9,7 +11,6 @@
   "item.substance.wooden_pipe": "Wooden Pipe",
   "item.substance.bubble_pipe": "Bubble Pipe",
   "item.substance.cigarette": "Cigarette",
-  "item.substance.consumption": "Consumption: %s / %s",
 
   "item.substance.tray": "Tray",
   "item.substance.blue_oil_tray": "Blue Oil Tray",
@@ -149,5 +150,53 @@
   "text.config.substance.option.audioEffectStrength": "Audio Effect Intensity",
   "text.config.substance.option.audioEffectStrength.desc": "Adjust the intensity of audio filters.",
   "text.config.substance.option.horrorTripChance": "Horror Trip Chance",
-  "text.config.substance.option.horrorTripChance.desc": "Adjust the chance of horror trips."
+  "text.config.substance.option.horrorTripChance.desc": "Adjust the chance of horror trips.",
+
+  "advancements.substance.root.title": "Substance",
+  "advancements.substance.root.description": "Explore a new world",
+
+  "advancements.substance.pipe.pipe.title": "Smoke Signal",
+  "advancements.substance.pipe.pipe.description": "Use a pipe",
+  "advancements.substance.pipe.wooden_pipe.title": "Borrowed Goods",
+  "advancements.substance.pipe.wooden_pipe.description": "Steal a wooden pipe from the pillagers",
+  "advancements.substance.pipe.full_pipe.title": "Well Packed",
+  "advancements.substance.pipe.full_pipe.description": "There's No Stopping You Now",
+
+  "advancements.substance.herb.place_herb.title": "Potting Season",
+  "advancements.substance.herb.place_herb.description": "Plant large herb obtained from piglins",
+  "advancements.substance.herb.dry_herb.title": "High Expectations",
+  "advancements.substance.herb.dry_herb.description": "Cook a herb bud",
+  "advancements.substance.herb.thick_herb_roll.title": "Roll Model",
+  "advancements.substance.herb.thick_herb_roll.description": "Craft a particularly hefty herb roll",
+
+  "advancements.substance.tobacco.place_tobacco.title": "A Smoky Place",
+  "advancements.substance.tobacco.place_tobacco.description": "Plant a tobacco plant obtained from farmers",
+  "advancements.substance.tobacco.cigarette.title": "Up in Smoke",
+  "advancements.substance.tobacco.cigarette.description": "Watch it burn away",
+
+  "advancements.substance.crystals.tray.title": "Let Him Cook",
+  "advancements.substance.crystals.tray.description": "Obtain a tray to cook",
+  "advancements.substance.crystals.white_oil_tray.title": "There's No Going Back",
+  "advancements.substance.crystals.white_oil_tray.description": "Fill a tray with white oil",
+  "advancements.substance.crystals.white_crystals.title": "Crystal Clear",
+  "advancements.substance.crystals.white_crystals.description": "Obtain white crystals",
+  "advancements.substance.crystals.white_crystals_chili.title": "Extra Spicy",
+  "advancements.substance.crystals.white_crystals_chili.description": "Mix chili powder into white crystals",
+  "advancements.substance.crystals.blue_oil_tray.title": "99.9% Purity",
+  "advancements.substance.crystals.blue_oil_tray.description": "Fill a tray with blue oil",
+  "advancements.substance.crystals.blue_crystals.title": "Color Corrected",
+  "advancements.substance.crystals.blue_crystals.description": "Obtain blue crystals",
+
+  "advancements.substance.misc.flask.title": "Mix and Match",
+  "advancements.substance.misc.flask.description": "Obtain a flask for fluid chemistry",
+  "advancements.substance.misc.gas_bottle.title": "Vacuum Sealed",
+  "advancements.substance.misc.gas_bottle.description": "Obtain a gas bottle",
+  "advancements.substance.misc.hydrogen.title": "Element One",
+  "advancements.substance.misc.hydrogen.description": "Obtain hydrogen from a magma bubble column",
+  "advancements.substance.misc.nitrogen.title": "It's in the Air",
+  "advancements.substance.misc.nitrogen.description": "Obtain nitrogen from potatoes",
+  "advancements.substance.misc.oxygen.title": "Life Support",
+  "advancements.substance.misc.oxygen.description": "Obtain oxygen from a soul sand bubble column",
+  "advancements.substance.misc.all_effects.title": "A Furious Snack",
+  "advancements.substance.misc.all_effects.description": "Have the effects haze, warp, keen, relaxation and surge at the same time!"
 }

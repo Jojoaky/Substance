@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:gas_bottle_oxygen"
     },
-    "title": "Life Support",
-    "description": "Obtain oxygen from a soul sand bubble column"
+    "title": {"translate": "advancements.substance.misc.oxygen.title"},
+    "description": {"translate": "advancements.substance.misc.oxygen.description"}
   },
   "parent": "substance:misc/gas_bottle",
   "criteria": {

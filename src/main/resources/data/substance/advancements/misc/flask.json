@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:flask"
     },
-    "title": "Mix and Match",
-    "description": "Obtain a flask for fluid chemistry"
+    "title": {"translate": "advancements.substance.misc.flask.title"},
+    "description": {"translate": "advancements.substance.misc.flask.description"}
   },
   "parent": "substance:substance",
   "criteria": {

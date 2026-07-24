@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:white_crystals_chili"
     },
-    "title": "A Furious Snack",
-    "description": "Have the effects haze, warp, keen, relaxation and surge at the same time!",
+    "title": {"translate": "advancements.substance.misc.all_effects.title"},
+    "description": {"translate": "advancements.substance.misc.all_effects.description"},
     "frame": "goal"
   },
   "parent": "substance:substance",

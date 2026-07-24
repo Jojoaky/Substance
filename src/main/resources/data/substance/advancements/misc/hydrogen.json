@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:gas_bottle_hydrogen"
     },
-    "title": "Number One",
-    "description": "Obtain hydrogen from a magma bubble column"
+    "title": {"translate": "advancements.substance.misc.hydrogen.title"},
+    "description": {"translate": "advancements.substance.misc.hydrogen.description"}
   },
   "parent": "substance:misc/gas_bottle",
   "criteria": {

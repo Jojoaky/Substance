@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:gas_bottle"
     },
-    "title": "Vacuum Sealed",
-    "description": "Obtain a gas bottle"
+    "title": {"translate": "advancements.substance.misc.gas_bottle.title"},
+    "description": {"translate": "advancements.substance.misc.gas_bottle.description"}
   },
   "parent": "substance:substance",
   "criteria": {

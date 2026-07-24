@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:white_crystals"
     },
-    "title": "Stuff",
-    "description": "Obtain white crystals"
+    "title": {"translate": "advancements.substance.crystals.white_crystals.title"},
+    "description": {"translate": "advancements.substance.crystals.white_crystals.description"}
   },
   "parent": "substance:crystals/white_oil_tray",
   "criteria": {

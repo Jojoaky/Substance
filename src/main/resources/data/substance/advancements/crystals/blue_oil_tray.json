@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:blue_oil_tray"
     },
-    "title": "99.9% Purity",
-    "description": "Fill a tray with blue oil"
+    "title": {"translate": "advancements.substance.crystals.blue_oil_tray.title"},
+    "description": {"translate": "advancements.substance.crystals.blue_oil_tray.description"}
   },
   "parent": "substance:crystals/tray",
   "criteria": {

@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:herb_bud"
     },
-    "title": "Potting Season",
-    "description": "Plant large herb obtained from piglings"
+    "title": {"translate": "advancements.substance.herb.place_herb.title"},
+    "description": {"translate": "advancements.substance.herb.place_herb.description"}
   },
   "parent": "substance:substance",
   "criteria": {

@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:white_crystals_chili"
     },
-    "title": "Contamination",
-    "description": "Mix chili powder into white crystals"
+    "title": {"translate": "advancements.substance.crystals.white_crystals_chili.title"},
+    "description": {"translate": "advancements.substance.crystals.white_crystals_chili.description"}
   },
   "parent": "substance:crystals/white_crystals",
   "criteria": {

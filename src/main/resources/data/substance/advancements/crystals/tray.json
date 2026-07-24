@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:white_oil_tray"
     },
-    "title": "Let him cook",
-    "description": "Obtain a tray to cook"
+    "title": {"translate": "advancements.substance.crystals.tray.title"},
+    "description": {"translate": "advancements.substance.crystals.tray.description"}
   },
   "parent": "substance:substance",
   "criteria": {

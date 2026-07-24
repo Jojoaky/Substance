@@ -3,22 +3,20 @@
     "icon": {
       "item": "substance:bubble_pipe"
     },
-    "title": "Plumbing Business",
-    "description": "Obtain a pipe"
+    "title": {"translate": "advancements.substance.pipe.pipe.title"},
+    "description": {"translate": "advancements.substance.pipe.pipe.description"}
   },
   "parent": "substance:substance",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:using_item",
       "conditions": {
-        "items": [
-          {
-            "items": [
-              "substance:bubble_pipe",
-              "substance:wooden_pipe"
-            ]
-          }
-        ]
+        "item": {
+          "items": [
+            "substance:bubble_pipe",
+            "substance:wooden_pipe"
+          ]
+        }
       }
     }
   }

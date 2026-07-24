@@ -1,6 +1,8 @@
 {
   "itemGroup.substance": "Substanzen",
 
+  "item.substance.consumption": "Verbraucht: %s / %s",
+
   "item.substance.white_crystals": "Weiße Kristalle",
   "item.substance.white_crystals_chili": "Gewürzte Weiße Kristalle",
   "item.substance.blue_crystals": "Blaue Kristalle",
@@ -149,5 +151,53 @@
   "text.config.substance.option.audioEffectStrength": "Audioeffekt-Intensität",
   "text.config.substance.option.audioEffectStrength.desc": "Passe die Intensität der Audiofilter an.",
   "text.config.substance.option.horrorTripChance": "Horror Trip Wahrscheinlichkeit",
-  "text.config.substance.option.horrorTripChance.desc": "Passe die Wahrscheinlichkeit von Horror-Trips an."
+  "text.config.substance.option.horrorTripChance.desc": "Passe die Wahrscheinlichkeit von Horror-Trips an.",
+
+  "advancements.substance.root.title": "Substance",
+  "advancements.substance.root.description": "Erkunde eine neue Welt",
+
+  "advancements.substance.pipe.pipe.title": "Rauchsignal",
+  "advancements.substance.pipe.pipe.description": "Benutze eine Pfeife",
+  "advancements.substance.pipe.wooden_pipe.title": "Gestohlene Ware",
+  "advancements.substance.pipe.wooden_pipe.description": "Stiehl eine Holzpfeife von Plünderern",
+  "advancements.substance.pipe.full_pipe.title": "Gut gestopft",
+  "advancements.substance.pipe.full_pipe.description": "Jetzt hält dich nichts mehr auf",
+
+  "advancements.substance.herb.place_herb.title": "Pflanzsaison",
+  "advancements.substance.herb.place_herb.description": "Pflanze ein großes Kraut von den Piglins",
+  "advancements.substance.herb.dry_herb.title": "Hohe Erwartungen",
+  "advancements.substance.herb.dry_herb.description": "Trockne eine Kräuterblüte",
+  "advancements.substance.herb.thick_herb_roll.title": "Rollenvorbild",
+  "advancements.substance.herb.thick_herb_roll.description": "Stelle eine besonders dicke Kräuterrolle her",
+
+  "advancements.substance.tobacco.place_tobacco.title": "Ein rauchiger Ort",
+  "advancements.substance.tobacco.place_tobacco.description": "Pflanze eine Tabakpflanze von Dorfbewohnern",
+  "advancements.substance.tobacco.cigarette.title": "In Rauch aufgehen",
+  "advancements.substance.tobacco.cigarette.description": "Sieh ihr beim Abbrennen zu",
+
+  "advancements.substance.crystals.tray.title": "Lass ihn kochen",
+  "advancements.substance.crystals.tray.description": "Erhalte ein Kochtablett",
+  "advancements.substance.crystals.white_oil_tray.title": "Jetzt gibt's kein Zurück mehr",
+  "advancements.substance.crystals.white_oil_tray.description": "Fülle ein Tablett mit weißem Öl",
+  "advancements.substance.crystals.white_crystals.title": "Kristallklar",
+  "advancements.substance.crystals.white_crystals.description": "Erhalte weiße Kristalle",
+  "advancements.substance.crystals.white_crystals_chili.title": "Extra scharf",
+  "advancements.substance.crystals.white_crystals_chili.description": "Mische Chilipulver in weiße Kristalle",
+  "advancements.substance.crystals.blue_oil_tray.title": "99,9 % Reinheit",
+  "advancements.substance.crystals.blue_oil_tray.description": "Fülle ein Tablett mit blauem Öl",
+  "advancements.substance.crystals.blue_crystals.title": "Farbkorrektur",
+  "advancements.substance.crystals.blue_crystals.description": "Erhalte blaue Kristalle",
+
+  "advancements.substance.misc.flask.title": "Mischen & Kombinieren",
+  "advancements.substance.misc.flask.description": "Erhalte einen Kolben für die Flüssigkeitschemie",
+  "advancements.substance.misc.gas_bottle.title": "Vakuumversiegelt",
+  "advancements.substance.misc.gas_bottle.description": "Erhalte eine Gasflasche",
+  "advancements.substance.misc.hydrogen.title": "Element Eins",
+  "advancements.substance.misc.hydrogen.description": "Gewinne Wasserstoff aus einer Magmablasensäule",
+  "advancements.substance.misc.nitrogen.title": "Liegt in der Luft",
+  "advancements.substance.misc.nitrogen.description": "Gewinne Stickstoff aus Kartoffeln",
+  "advancements.substance.misc.oxygen.title": "Lebenserhaltung",
+  "advancements.substance.misc.oxygen.description": "Gewinne Sauerstoff aus einer Seelensand-Blasensäule",
+  "advancements.substance.misc.all_effects.title": "Ein seltsamer Snack",
+  "advancements.substance.misc.all_effects.description": "Habe gleichzeitig die Effekte Dunst, Verzerrung, Scharfsinn, Entspannung und Schub!"
 }

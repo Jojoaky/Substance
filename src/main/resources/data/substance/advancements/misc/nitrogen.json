@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:gas_bottle_nitrogen"
     },
-    "title": "It's in the air",
-    "description": "Obtain nitrogen from potatoes"
+    "title": {"translate": "advancements.substance.misc.nitrogen.title"},
+    "description": {"translate": "advancements.substance.misc.nitrogen.description"}
   },
   "parent": "substance:misc/gas_bottle",
   "criteria": {

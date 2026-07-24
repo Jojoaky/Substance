@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:wooden_pipe"
     },
-    "title": "Serious Business",
-    "description": "Steal a wooden pipe from the pillagers"
+    "title": {"translate": "advancements.substance.pipe.wooden_pipe.title"},
+    "description": {"translate": "advancements.substance.pipe.wooden_pipe.description"}
   },
   "parent": "substance:pipe/pipe",
   "criteria": {

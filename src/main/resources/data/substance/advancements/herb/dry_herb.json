@@ -3,8 +3,8 @@
     "icon": {
       "item": "substance:dried_herb_bud"
     },
-    "title": "Dry and High",
-    "description": "Cook a herb bud"
+    "title": {"translate": "advancements.substance.herb.dry_herb.title"},
+    "description": {"translate": "advancements.substance.herb.dry_herb.description"}
   },
   "parent": "substance:herb/place_herb",
   "criteria": {

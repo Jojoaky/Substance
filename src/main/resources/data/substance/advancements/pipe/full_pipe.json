@@ -3,22 +3,21 @@
     "icon": {
       "item": "substance:wooden_pipe"
     },
-    "title": "Fully Loaded",
-    "description": "Theres no stopping you now"
+    "title": {"translate": "advancements.substance.pipe.full_pipe.title"},
+    "description": {"translate": "advancements.substance.pipe.full_pipe.description"}
   },
   "parent": "substance:pipe/pipe",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:using_item",
       "conditions": {
-        "items": [
-          {
-            "items": [
-              "substance:wooden_pipe"
-            ],
-            "nbt": "{Inventory:[{Slot:0b},{Slot:1b},{Slot:2b},{Slot:3b},{Slot:4b}]}"
-          }
-        ]
+        "item": {
+          "items": [
+            "substance:bubble_pipe",
+            "substance:wooden_pipe"
+          ],
+          "nbt": "{Inventory:[{Slot:0b},{Slot:1b},{Slot:2b},{Slot:3b},{Slot:4b}]}"
+        }
       }
     }
   }
