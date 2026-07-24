@@ -8,7 +8,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.ToIntFunction;
@@ -61,13 +63,15 @@ public class ConsumptionDurabilityStrategy implements DurabilityStrategy {
     }
 
     @Override
-    public void appendAdvancedTooltip(ItemStack stack, List<Component> tooltip) {
-        if (getCustomDamage(stack) > 0) {
-            tooltip.add(Component.translatable(
-                    "item.substance.consumption",
-                    getConsumeDurability(stack) - getCustomDamage(stack),
-                    getConsumeDurability(stack)
-            ));
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
+        if (isAdvanced.isAdvanced()) {
+            if (getCustomDamage(stack) > 0) {
+                tooltipComponents.add(Component.translatable(
+                        "item.substance.consumption",
+                        getConsumeDurability(stack) - getCustomDamage(stack),
+                        getConsumeDurability(stack)
+                ));
+            }
         }
     }
 

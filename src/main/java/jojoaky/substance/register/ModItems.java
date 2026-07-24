@@ -241,10 +241,10 @@ public class ModItems {
                     itemGroup.accept(ModItems.WHITE_CRYSTALS);
                     itemGroup.accept(ModItems.WHITE_CRYSTALS_CHILI);
                     itemGroup.accept(ModItems.BLUE_CRYSTALS);
-                    itemGroup.accept(ModItems.BUBBLE_PIPE);
                     itemGroup.accept(ModItems.HERBAL_ROLL);
                     itemGroup.accept(ModItems.THICK_HERBAL_ROLL);
                     itemGroup.accept(ModItems.CIGARETTE);
+                    itemGroup.accept(ModItems.BUBBLE_PIPE);
                     itemGroup.accept(ModItems.WOODEN_PIPE);
 
                     // tools

@@ -32,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class PipeItem extends ConsumableItem {
     public PipeItem(Properties properties) {
