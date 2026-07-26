@@ -102,8 +102,16 @@ public class Substance implements ModInitializer {
 		));
 	}
 
-	// TODO:
-	//  Fix smoke animation (left hand)
+	// TODO: (before release)
 	//  hallucination effect
+	//  surge effect
+	//  Sniff animation
+	//  bubble pipe lit texture
 	//  Balance content and default config
+	//  Update README & pages with features and screenshots
+	//  Create tutorial
+	//  Add translations
+	//  Check crafting recipes and obtainability of all content
+	//  Check mod compatability with other mods
+	//  Make mobs spawn with joints & Mob ai mixin
 }
