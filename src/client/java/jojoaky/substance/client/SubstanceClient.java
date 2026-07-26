@@ -12,6 +12,7 @@ import jojoaky.substance.client.shaders.*;
 import jojoaky.substance.content.consumable.framework.ConsumableItem;
 import jojoaky.substance.content.pipe.PipeItem;
 import jojoaky.substance.register.ModBlocks;
+import jojoaky.substance.register.ModTrays;
 import jojoaky.substance.content.flask.ModFlasks;
 import jojoaky.substance.register.ModFluids;
 import net.fabricmc.api.ClientModInitializer;
@@ -34,6 +35,9 @@ public class SubstanceClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LARGE_HERB, RenderType.cutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.EPHEDRA_CROP, RenderType.cutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.TOBACCO, RenderType.cutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.TRAY, RenderType.cutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(ModTrays.WHITE_CRYSTAL_OIL.block(), RenderType.translucent());
+		BlockRenderLayerMap.INSTANCE.putBlock(ModTrays.BLUE_CRYSTAL_OIL.block(), RenderType.translucent());
 
 		BuiltInRegistries.ITEM.stream()
 				.filter(item -> item instanceof PipeItem)
@@ -57,6 +61,13 @@ public class SubstanceClient implements ClientModInitializer {
 				.map(ModFlasks.FlaskEntry::flask)
 				.filter(flask -> !flask.useCustomModel)
 				.toArray(FilledFlaskItem[]::new));
+
+		ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> tintIndex == 0
+				? ModFluids.whiteCrystalOil.tint()
+				: -1, ModTrays.WHITE_CRYSTAL_OIL.block());
+		ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> tintIndex == 0
+				? ModFluids.blueCrystalOil.tint()
+				: -1, ModTrays.BLUE_CRYSTAL_OIL.block());
 
 		for (ModFluids.ChemicalFluidSet fluid : ALL_FLUIDS) {
 			FluidRenderHandlerRegistry.INSTANCE.register(

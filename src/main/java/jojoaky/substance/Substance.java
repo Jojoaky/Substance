@@ -46,6 +46,7 @@ public class Substance implements ModInitializer {
 		ModBlocks.initialize();
 		ModFlasks.initialize();
 		ModFluids.initialize();
+		ModTrays.initialize();
 		ModEffects.initialize();
 		ModTags.initialize();
 
@@ -104,5 +105,5 @@ public class Substance implements ModInitializer {
 	// TODO:
 	//  Fix smoke animation (left hand)
 	//  hallucination effect
-	//  Placeable Trays
+	//  Balance content and default config
 }

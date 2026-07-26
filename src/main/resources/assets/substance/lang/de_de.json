@@ -15,6 +15,9 @@
   "item.substance.tray": "Tray",
   "item.substance.blue_oil_tray": "Blaues Öl-Tray",
   "item.substance.white_oil_tray": "Weißes Öl-Tray",
+  "block.substance.tray": "Tray",
+  "block.substance.blue_oil_tray": "Blaues Öl-Tray",
+  "block.substance.white_oil_tray": "Weißes Öl-Tray",
 
   "item.substance.flask": "Glaskolben",
   "item.substance.sculk_catalyst_crystal": "Sculk-Katalysator-Kristall",

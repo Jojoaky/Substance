@@ -92,37 +92,15 @@ public class ModItems {
 
 
     // --- production ---
-    public static final Item TRAY = register(
-            new Item(new FabricItemSettings()
-                    .stacksTo(1)
-            ),
-            "tray"
-    );
-    public static final Item WHITE_OIL_TRAY = register(
-            new Item(new FabricItemSettings()
-                    .stacksTo(1)
-                    .craftRemainder(TRAY)
-                    .food(new FoodProperties.Builder()
-                            .alwaysEat()
-                            .effect(new MobEffectInstance(ModEffects.WARP, 64 * 20, 255), 1.f)
-                            .build()
-                    )
-            ),
-            "white_oil_tray"
-    );
-    public static final Item BLUE_OIL_TRAY = register(
-            new Item(new FabricItemSettings()
-                    .stacksTo(1)
-                    .craftRemainder(TRAY)
-            ),
-            "blue_oil_tray"
-    );
+    public static final Item TRAY = ModBlocks.TRAY.asItem();
+    public static final Item WHITE_OIL_TRAY = ModTrays.WHITE_CRYSTAL_OIL.filledTray();
+    public static final Item BLUE_OIL_TRAY = ModTrays.BLUE_CRYSTAL_OIL.filledTray();
 
     public static final Item SCULK_CATALYST_CRYSTAL = register(
             new Item(new FabricItemSettings()) {
                 @Override
                 public ItemStack getRecipeRemainder(ItemStack stack) {
-                    return new ItemStack(SCULK_CATALYST_CRYSTAL);
+                    return new ItemStack(this);
                 }
             },
             "sculk_catalyst_crystal"

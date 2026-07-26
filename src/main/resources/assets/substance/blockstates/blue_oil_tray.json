@@ -1,0 +1,203 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "substance:block/tray"
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "substance:block/tray",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "substance:block/tray",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "substance:block/tray",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "level": "1"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_1"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "level": "1"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "level": "1"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "level": "1"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "level": "2"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_2"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "level": "2"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "level": "2"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "level": "2"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "level": "3",
+        "dried": "false"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_3"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "level": "3",
+        "dried": "false"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "level": "3",
+        "dried": "false"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "level": "3",
+        "dried": "false"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "level": "3",
+        "dried": "true"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_3_dried"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "level": "3",
+        "dried": "true"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_3_dried",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "level": "3",
+        "dried": "true"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_3_dried",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "level": "3",
+        "dried": "true"
+      },
+      "apply": {
+        "model": "substance:block/tray_fluid_level_3_dried",
+        "y": 270
+      }
+    }
+  ]
+}

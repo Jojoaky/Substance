@@ -4,6 +4,7 @@ import jojoaky.substance.Substance;
 import jojoaky.substance.content.crops.EphedraCropBlock;
 import jojoaky.substance.content.crops.LargeHerbBlock;
 import jojoaky.substance.content.crops.TobaccoBlock;
+import jojoaky.substance.content.tray.EmptyTrayBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -36,6 +37,15 @@ public class ModBlocks {
                             .ignitedByLava()
             ),
             "large_herb",
+            true
+    );
+
+    public static final Block TRAY = register(
+            new EmptyTrayBlock(BlockBehaviour.Properties.of()
+                    .sound(SoundType.METAL)
+                    .strength(0.5F)
+                    .noOcclusion()),
+            "tray",
             true
     );
 

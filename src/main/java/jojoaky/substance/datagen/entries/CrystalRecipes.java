@@ -31,8 +31,6 @@ public class CrystalRecipes {
                         .build()
         );
 
-
-        // TODO: replace vanilla with in world interaction, such as right clicking with pickaxe
         RecipeGeneratorRegistry.accept(
                 ShapelessRecipeDef.named("blue_crystals")
                         .createPressing()
