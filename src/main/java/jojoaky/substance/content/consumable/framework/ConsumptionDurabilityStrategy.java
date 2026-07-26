@@ -30,6 +30,10 @@ public class ConsumptionDurabilityStrategy implements DurabilityStrategy {
 
     @Override
     public void onConsumeTick(ConsumableItem item, ItemStack stack, Level level, LivingEntity entity, int useDuration) {
+        if (entity instanceof Player player && player.isCreative()) return;
+
+        if (isUnbreakable(stack)) return;
+
         int nextDamage = getCustomDamage(stack) + 1;
         if (nextDamage >= getConsumeDurability(stack)) {
             item.stopConsuming(stack, level, entity, useDuration);
@@ -48,6 +52,8 @@ public class ConsumptionDurabilityStrategy implements DurabilityStrategy {
 
     @Override
     public Boolean isBarVisible(ItemStack stack) {
+        // Hide durability bar if item is unbreakable
+        if (isUnbreakable(stack)) return false;
         return getCustomDamage(stack) > 0;
     }
 
@@ -78,6 +84,10 @@ public class ConsumptionDurabilityStrategy implements DurabilityStrategy {
     @Override
     public boolean allowNbtUpdateAnimation(Player player, InteractionHand hand, ItemStack oldStack, ItemStack newStack) {
         return true;
+    }
+
+    private boolean isUnbreakable(ItemStack stack) {
+        return stack.hasTag() && stack.getTag().getBoolean("Unbreakable");
     }
 
     private int getConsumeDurability(ItemStack stack) {
