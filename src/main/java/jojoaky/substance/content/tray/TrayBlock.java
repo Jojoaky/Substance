@@ -127,6 +127,21 @@ public class TrayBlock extends Block {
     }
 
     @Override
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        BlockPos below = pos.below();
+        return level.getBlockState(below).isFaceSturdy(level, below, Direction.UP);
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,
+                                  LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (direction == Direction.DOWN && !canSurvive(state, level, pos)) {
+            return Blocks.AIR.defaultBlockState();
+        }
+        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
+    }
+
+    @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
         if (!level.isClientSide && state.getValue(LEVEL) == 3 && !state.getValue(DRIED)) {

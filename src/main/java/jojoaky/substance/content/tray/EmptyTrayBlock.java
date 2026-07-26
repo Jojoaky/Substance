@@ -10,7 +10,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
@@ -68,6 +71,21 @@ public class EmptyTrayBlock extends Block {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return defaultBlockState().setValue(FACING, getPlacementFacing(context));
+    }
+
+    @Override
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        BlockPos below = pos.below();
+        return level.getBlockState(below).isFaceSturdy(level, below, Direction.UP);
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,
+                                  LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (direction == Direction.DOWN && !canSurvive(state, level, pos)) {
+            return Blocks.AIR.defaultBlockState();
+        }
+        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
     public static Direction getPlacementFacing(BlockPlaceContext context) {
