@@ -1,0 +1,53 @@
+package jojoaky.substance.mixin;
+
+import jojoaky.substance.content.mob.MobConsumableEquipment;
+import jojoaky.substance.content.mob.MobUseConsumableGoal;
+import jojoaky.substance.register.ModTags;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.ai.goal.GoalSelector;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+@Mixin(Mob.class)
+public abstract class MobMixin {
+    @Shadow @Final protected GoalSelector goalSelector;
+
+    @Inject(method = "<init>", at = @At("TAIL"))
+    private void addConsumableGoal(EntityType<? extends Mob> entityType, Level level, CallbackInfo ci) {
+        Mob mob = (Mob) (Object) this;
+        if (mob.getType().is(ModTags.EntityTypes.CAN_SMOKE)) {
+            this.goalSelector.addGoal(3, new MobUseConsumableGoal(mob));
+        }
+    }
+
+    @Inject(method = "finalizeSpawn", at = @At("TAIL"))
+    private void equipConsumable(
+            ServerLevelAccessor level,
+            DifficultyInstance difficulty,
+            MobSpawnType spawnType,
+            @Nullable SpawnGroupData spawnGroupData,
+            @Nullable CompoundTag tag,
+            CallbackInfoReturnable<SpawnGroupData> cir
+    ) {
+        Mob mob = (Mob) (Object) this;
+
+        if (mob.isBaby() || !mob.getType().is(ModTags.EntityTypes.CAN_SMOKE)) {
+            return;
+        }
+
+        MobConsumableEquipment.tryEquip(mob);
+    }
+}

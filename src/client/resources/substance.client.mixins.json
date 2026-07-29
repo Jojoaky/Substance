@@ -1,22 +1,26 @@
 {
-	"required": true,
-	"package": "jojoaky.substance.client.mixin",
-	"compatibilityLevel": "JAVA_17",
-	"client": [
-		"ChannelMixin",
-		"GameRendererAccessor",
-		"GameRendererMixin",
-		"ItemInHandRendererMixin",
-		"ItemRendererInvoker",
-		"JsonEffectShaderProgramMixin",
-		"PostChainAccessor",
-		"PostPassAccessor",
-		"SoundEngineMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"overwrites": {
-		"requireAnnotations": true
+  "required": true,
+  "package": "jojoaky.substance.client.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "AbstractZombieModelMixin",
+    "ChannelMixin",
+    "GameRendererAccessor",
+    "GameRendererMixin",
+    "IllagerModelMixin",
+    "ItemInHandRendererMixin",
+    "ItemRendererInvoker",
+    "JsonEffectShaderProgramMixin",
+    "PiglinModelMixin",
+    "PostChainAccessor",
+    "PostPassAccessor",
+    "SkeletonModelMixin",
+    "SoundEngineMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
 	}
 }

@@ -103,12 +103,12 @@ public class Substance implements ModInitializer {
 	}
 
 	// TODO: (before release)
+	//  Make mobs spawn with herbal rolls & Mob ai mixin
 	//  hallucination effect
 	//  surge effect
 	//  Relaxation effect behavior, other effect behaviors?
 	//  Sniff animation
 	//  bubble pipe lit texture
-	//  Make mobs spawn with joints & Mob ai mixin
 	//  Balance content and default config
 	//  Check crafting recipes and obtainability of all content
 	//  Check mod compatability with other mods

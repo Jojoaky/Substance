@@ -41,16 +41,16 @@ public class Config {
     public int bubblePipeDurability = 512;
 
     @SerialEntry
-    public int herbalRollDurability = 156;
+    public int herbalRollDurability = 460;
 
     @SerialEntry
-    public int thickHerbalRollDurability = 196;
+    public int thickHerbalRollDurability = 570;
 
     @SerialEntry
-    public int cigaretteDurability = 256;
+    public int cigaretteDurability = 525;
 
     @SerialEntry
-    public float maxSmokeDuration = 12.0f;
+    public float maxSmokeDuration = 6.0f;
     @SerialEntry
     public float smokeCooldown = 1.5f;
 
@@ -61,6 +61,18 @@ public class Config {
 
     @SerialEntry
     public float pipeItemConsumeProbability = 0.4f;
+
+    @SerialEntry
+    public float mobCigaretteSpawnChance = 0.03f;
+
+    @SerialEntry
+    public float mobHerbalRollSpawnChance = 0.03f;
+
+    @SerialEntry
+    public float mobThickHerbalRollSpawnChance = 0.0025f;
+
+    @SerialEntry
+    public int mobUseAttemptInterval = 140;
 
     @SerialEntry
     public float horrorTripChance = 0.05f;

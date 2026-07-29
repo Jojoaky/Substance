@@ -122,6 +122,8 @@
   "text.config.substance.group.durabilities.desc": "Configure the max durability of consumable items.",
   "text.config.substance.group.mechanics": "Mechanics",
   "text.config.substance.group.mechanics.desc": "Configure action durations, cooldowns, and probabilities.",
+  "text.config.substance.group.mobEquipment": "Mob Equipment",
+  "text.config.substance.group.mobEquipment.desc": "Configure the chances for mobs with an empty main hand to spawn with a consumable.",
   "text.config.substance.group.immersion": "Immersion",
   "text.config.substance.group.immersion.desc": "Tune or disable visual and audio effects introduced by this mod.",
 
@@ -141,6 +143,14 @@
   "text.config.substance.option.sniffCooldown.desc": "Cooldown after sniffing (in seconds).",
   "text.config.substance.option.pipeItemConsumeProbability": "Pipe Consumption Probability",
   "text.config.substance.option.pipeItemConsumeProbability.desc": "The percentage chance that using a pipe consumes an item inside.",
+  "text.config.substance.option.mobCigaretteSpawnChance": "Mob Cigarette Spawn Chance",
+  "text.config.substance.option.mobCigaretteSpawnChance.desc": "The chance that a mob spawns with a cigarette; equipment chances are evaluated in listed order.",
+  "text.config.substance.option.mobHerbalRollSpawnChance": "Mob Herbal Roll Spawn Chance",
+  "text.config.substance.option.mobHerbalRollSpawnChance.desc": "The chance that a mob spawns with an herbal roll after the cigarette chance.",
+  "text.config.substance.option.mobThickHerbalRollSpawnChance": "Mob Thick Herbal Roll Spawn Chance",
+  "text.config.substance.option.mobThickHerbalRollSpawnChance.desc": "The chance that a mob spawns with a thick herbal roll after the other equipment chances.",
+  "text.config.substance.option.mobUseAttemptInterval": "Mob Use Attempt Interval",
+  "text.config.substance.option.mobUseAttemptInterval.desc": "The number of ticks between attempts for an idle mob to use its held consumable.",
 
   "text.config.substance.option.enableShaderEffects": "Enable Shader Effects",
   "text.config.substance.option.enableShaderEffects.desc": "Completely enables or disables post-processing shaders. Requires restart!",

@@ -123,6 +123,8 @@
   "text.config.substance.group.durabilities.desc": "Konfiguriere die maximale Haltbarkeit von Verbrauchsgegenständen.",
   "text.config.substance.group.mechanics": "Mechaniken",
   "text.config.substance.group.mechanics.desc": "Konfiguriere Aktionsdauern, Abklingzeiten und Wahrscheinlichkeiten.",
+  "text.config.substance.group.mobEquipment": "Mob-Ausrüstung",
+  "text.config.substance.group.mobEquipment.desc": "Konfiguriere die Wahrscheinlichkeiten, mit denen Mobs mit leerer Haupthand mit einem Verbrauchsgegenstand spawnen.",
   "text.config.substance.group.immersion": "Immersion",
   "text.config.substance.group.immersion.desc": "Passe die visuellen und akustischen Effekte dieser Mod an oder deaktiviere sie.",
 
@@ -142,6 +144,14 @@
   "text.config.substance.option.sniffCooldown.desc": "Abklingzeit nach dem Schnüffeln (in Sekunden).",
   "text.config.substance.option.pipeItemConsumeProbability": "Pfeifen-Verbrauchswahrscheinlichkeit",
   "text.config.substance.option.pipeItemConsumeProbability.desc": "Die prozentuale Chance, dass die Benutzung einer Pfeife einen Gegenstand darin verbraucht.",
+  "text.config.substance.option.mobCigaretteSpawnChance": "Mob-Zigaretten-Spawnchance",
+  "text.config.substance.option.mobCigaretteSpawnChance.desc": "Die Chance, dass ein Mob mit einer Zigarette spawnt; Ausrüstungswahrscheinlichkeiten werden in der aufgeführten Reihenfolge geprüft.",
+  "text.config.substance.option.mobHerbalRollSpawnChance": "Mob-Kräuterrollen-Spawnchance",
+  "text.config.substance.option.mobHerbalRollSpawnChance.desc": "Die Chance, dass ein Mob nach der Zigarettenchance mit einer Kräuterrolle spawnt.",
+  "text.config.substance.option.mobThickHerbalRollSpawnChance": "Mob-Dicke-Kräuterrollen-Spawnchance",
+  "text.config.substance.option.mobThickHerbalRollSpawnChance.desc": "Die Chance, dass ein Mob nach den anderen Ausrüstungswahrscheinlichkeiten mit einer dicken Kräuterrolle spawnt.",
+  "text.config.substance.option.mobUseAttemptInterval": "Mob-Nutzungsversuchsintervall",
+  "text.config.substance.option.mobUseAttemptInterval.desc": "Die Anzahl der Ticks zwischen Versuchen eines untätigen Mobs, den gehaltenen Verbrauchsgegenstand zu benutzen.",
 
   "text.config.substance.option.enableShaderEffects": "Shader-Effekte aktivieren",
   "text.config.substance.option.enableShaderEffects.desc": "Aktiviert oder deaktiviert Post-Processing-Shader vollständig. Erfordert einen Neustart!",

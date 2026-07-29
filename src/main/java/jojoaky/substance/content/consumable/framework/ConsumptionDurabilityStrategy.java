@@ -30,7 +30,7 @@ public class ConsumptionDurabilityStrategy implements DurabilityStrategy {
 
     @Override
     public void onConsumeTick(ConsumableItem item, ItemStack stack, Level level, LivingEntity entity, int useDuration) {
-        if (entity instanceof Player player && player.isCreative()) return;
+        if (!(entity instanceof Player player) || player.isCreative()) return;
 
         if (isUnbreakable(stack)) return;
 

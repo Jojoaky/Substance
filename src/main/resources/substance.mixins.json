@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "HarvesterMovementBehaviourMixin",
-    "ItemStackMixin"
+    "ItemStackMixin",
+    "MobMixin"
   ],
   "injectors": {
     "defaultRequire": 1
