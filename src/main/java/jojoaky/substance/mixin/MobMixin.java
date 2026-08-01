@@ -16,6 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -24,6 +25,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Mob.class)
 public abstract class MobMixin {
     @Shadow @Final protected GoalSelector goalSelector;
+
+    @Unique
+    private boolean substance$pendingEquipment = false;
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void addConsumableGoal(EntityType<? extends Mob> entityType, Level level, CallbackInfo ci) {
@@ -34,7 +38,7 @@ public abstract class MobMixin {
     }
 
     @Inject(method = "finalizeSpawn", at = @At("TAIL"))
-    private void equipConsumable(
+    private void markForCustomEquipment(
             ServerLevelAccessor level,
             DifficultyInstance difficulty,
             MobSpawnType spawnType,
@@ -42,7 +46,16 @@ public abstract class MobMixin {
             @Nullable CompoundTag tag,
             CallbackInfoReturnable<SpawnGroupData> cir
     ) {
-        Mob mob = (Mob) (Object) this;
-        MobEquipmentRegistry.applyRandomEquipment(mob);
+        // The items cant be added here directly because it would get overriden by custom logic from some mobs like skeletons
+        this.substance$pendingEquipment = true;
+    }
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void applyCustomEquipmentOnFirstTick(CallbackInfo ci) {
+        if (this.substance$pendingEquipment) {
+            this.substance$pendingEquipment = false;
+            Mob mob = (Mob) (Object) this;
+            MobEquipmentRegistry.applyRandomEquipment(mob);
+        }
     }
 }
