@@ -1,6 +1,6 @@
 package jojoaky.substance.mixin;
 
-import jojoaky.substance.content.mob.MobEquipmentRegistry;
+import jojoaky.substance.content.mob.equipment.MobEquipmentRegistry;
 import jojoaky.substance.content.mob.MobUseConsumableGoal;
 import jojoaky.substance.register.ModTags;
 import net.minecraft.nbt.CompoundTag;

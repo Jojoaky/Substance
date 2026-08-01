@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:entity",
+  "type": "substance:equipment",
   "pools": [
     {
       "rolls": 1,

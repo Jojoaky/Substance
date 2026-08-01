@@ -2,7 +2,7 @@ package jojoaky.substance;
 
 import com.google.gson.Gson;
 import jojoaky.substance.content.flask.ModFlasks;
-import jojoaky.substance.content.mob.MobEquipmentRegistry;
+import jojoaky.substance.content.mob.equipment.MobEquipmentRegistry;
 import jojoaky.substance.content.pipe.PipeMenu;
 import jojoaky.substance.content.pipe.PipeRegistry;
 import jojoaky.substance.content.pipe.PipeSmokableItem;
