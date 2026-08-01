@@ -24,9 +24,11 @@ public class ModTags {
     public static final TagKey<Item> DRUG_ITEM = register(Registries.ITEM, "drugs");
 
     public static final class EntityTypes {
-        public static final TagKey<EntityType<?>> CAN_SMOKE = TagKey.create(
-                Registries.ENTITY_TYPE,
-                new ResourceLocation(Substance.MOD_ID, "can_smoke")
-        );
+        public static final TagKey<EntityType<?>> CAN_SMOKE = register(Registries.ENTITY_TYPE, "can_smoke");
+
+        public static final TagKey<EntityType<?>> ZOMBIES = register(Registries.ENTITY_TYPE, "zombies");
+        public static final TagKey<EntityType<?>> SKELETONS = register(Registries.ENTITY_TYPE, "skeletons");
+        public static final TagKey<EntityType<?>> PIGLINS = register(Registries.ENTITY_TYPE, "piglins");
+        public static final TagKey<EntityType<?>> ILLAGERS = register(Registries.ENTITY_TYPE, "illagers");
     }
 }
