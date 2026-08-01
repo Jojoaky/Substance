@@ -12,17 +12,17 @@ import org.jetbrains.annotations.Nullable;
 
 public class PipeRegistry {
 
-    public static final ResourceKey<Registry<PipeSmokableItem>> CUSTOM_DATA_KEY =
+    public static final ResourceKey<Registry<PipeSmokableItem>> PIPE_DATA_KEY =
             ResourceKey.createRegistryKey(new ResourceLocation(Substance.MOD_ID, "pipe_smokables"));
 
-    public static final Registry<PipeSmokableItem> CUSTOM_DATA_REGISTRY =
-            FabricRegistryBuilder.createSimple(CUSTOM_DATA_KEY)
+    public static final Registry<PipeSmokableItem> PIPE_DATA_REGISTRY =
+            FabricRegistryBuilder.createSimple(PIPE_DATA_KEY)
                     .attribute(RegistryAttribute.SYNCED)
                     .buildAndRegister();
 
     public static PipeSmokableItem register(PipeSmokableItem entry) {
         ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(entry.item());
-        return Registry.register(CUSTOM_DATA_REGISTRY, itemId, entry);
+        return Registry.register(PIPE_DATA_REGISTRY, itemId, entry);
     }
 
     public static boolean isPipeSmokableItem(Item item) {
@@ -31,7 +31,7 @@ public class PipeRegistry {
 
     public static @Nullable PipeSmokableItem getItem(Item item) {
         ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
-        return CUSTOM_DATA_REGISTRY.get(id);
+        return PIPE_DATA_REGISTRY.get(id);
     }
 
     public static void initialize() {
