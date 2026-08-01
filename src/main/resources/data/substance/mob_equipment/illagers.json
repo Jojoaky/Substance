@@ -1,0 +1,8 @@
+{
+  "entities": [
+    "#substance:illagers"
+  ],
+  "equipment": {
+    "mainhand": "substance:equipment/smoking_illagers"
+  }
+}

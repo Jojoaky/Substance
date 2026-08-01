@@ -1,0 +1,8 @@
+{
+  "entities": [
+    "#substance:skeletons"
+  ],
+  "equipment": {
+    "mainhand": "substance:equipment/smoking_skeleton"
+  }
+}

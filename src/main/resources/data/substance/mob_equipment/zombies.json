@@ -1,0 +1,8 @@
+{
+  "entities": [
+    "#substance:zombies"
+  ],
+  "equipment": {
+    "mainhand": "substance:equipment/smoking_zombie"
+  }
+}
