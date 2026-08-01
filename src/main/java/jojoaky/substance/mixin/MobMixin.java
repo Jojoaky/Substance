@@ -1,6 +1,6 @@
 package jojoaky.substance.mixin;
 
-import jojoaky.substance.content.mob.MobConsumableEquipment;
+import jojoaky.substance.content.mob.MobEquipmentRegistry;
 import jojoaky.substance.content.mob.MobUseConsumableGoal;
 import jojoaky.substance.register.ModTags;
 import net.minecraft.nbt.CompoundTag;
@@ -43,11 +43,6 @@ public abstract class MobMixin {
             CallbackInfoReturnable<SpawnGroupData> cir
     ) {
         Mob mob = (Mob) (Object) this;
-
-        if (mob.isBaby() || !mob.getType().is(ModTags.EntityTypes.CAN_SMOKE)) {
-            return;
-        }
-
-        MobConsumableEquipment.tryEquip(mob);
+        MobEquipmentRegistry.applyRandomEquipment(mob);
     }
 }

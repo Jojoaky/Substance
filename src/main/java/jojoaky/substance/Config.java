@@ -63,23 +63,8 @@ public class Config {
     public float pipeItemConsumeProbability = 0.4f;
 
     @SerialEntry
-    public float mobCigaretteSpawnChance = 0.03f;
-
-    @SerialEntry
-    public float mobHerbalRollSpawnChance = 0.03f;
-
-    @SerialEntry
-    public float mobThickHerbalRollSpawnChance = 0.0025f;
-
-    @SerialEntry
     public int mobUseAttemptInterval = 140;
 
     @SerialEntry
     public float horrorTripChance = 0.05f;
 }
-
-
-/*
- * Configs to implement:
- *  General: Durabilities
- */

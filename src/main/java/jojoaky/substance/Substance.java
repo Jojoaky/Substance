@@ -1,6 +1,8 @@
 package jojoaky.substance;
 
+import com.google.gson.Gson;
 import jojoaky.substance.content.flask.ModFlasks;
+import jojoaky.substance.content.mob.MobEquipmentRegistry;
 import jojoaky.substance.content.pipe.PipeMenu;
 import jojoaky.substance.content.pipe.PipeRegistry;
 import jojoaky.substance.content.pipe.PipeSmokableItem;
@@ -30,6 +32,7 @@ public class Substance implements ModInitializer {
 			resource("pipe_menu"),
 			new ExtendedScreenHandlerType<>(PipeMenu::new)
 );
+	public static final Gson GSON = new Gson();
 
 	public static ResourceLocation resource(String string) {
 		return new ResourceLocation(MOD_ID, string);
@@ -50,12 +53,12 @@ public class Substance implements ModInitializer {
 		ModEffects.initialize();
 		ModTags.initialize();
 
-
 		Trades.initialize();
 		SecretTrades.initialize();
 		Loot.initialize();
 		ModRegisterDatapatch.initialize();
 
+		MobEquipmentRegistry.initialize();
 
 		PipeRegistry.initialize();
 
@@ -103,7 +106,6 @@ public class Substance implements ModInitializer {
 	}
 
 	// TODO: (before release)
-	//  Make mobs spawn with herbal rolls & Mob ai mixin
 	//  hallucination effect
 	//  surge effect
 	//  Relaxation effect behavior, other effect behaviors?
