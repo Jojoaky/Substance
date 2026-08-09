@@ -26,35 +26,66 @@ public class AudioManager {
         if (initialized) return;
 
         try {
-            AL.getCapabilities();
+            if (!AL.getCapabilities().ALC_EXT_EFX) {
+                return;
+            }
         } catch (IllegalStateException e) {
             return;
         }
 
-        lowPassFilter = EXTEfx.alGenFilters();
-        EXTEfx.alFilteri(lowPassFilter, EXTEfx.AL_FILTER_TYPE, EXTEfx.AL_FILTER_LOWPASS);
+        try {
+            lowPassFilter = EXTEfx.alGenFilters();
+            EXTEfx.alFilteri(lowPassFilter, EXTEfx.AL_FILTER_TYPE, EXTEfx.AL_FILTER_LOWPASS);
 
-        reverbEffect = EXTEfx.alGenEffects();
-        EXTEfx.alEffecti(reverbEffect, EXTEfx.AL_EFFECT_TYPE, EXTEfx.AL_EFFECT_REVERB);
-        // Default reverb settings, can be tuned
-        EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_DENSITY, 1.0f);
-        EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_DIFFUSION, 1.0f);
-        EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_GAIN, 0.32f);
-        EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_GAINHF, 0.89f);
-        EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_DECAY_TIME, 1.49f);
-        EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_DECAY_HFRATIO, 0.83f);
+            reverbEffect = EXTEfx.alGenEffects();
+            EXTEfx.alEffecti(reverbEffect, EXTEfx.AL_EFFECT_TYPE, EXTEfx.AL_EFFECT_REVERB);
 
-        reverbSlot = EXTEfx.alGenAuxiliaryEffectSlots();
-        EXTEfx.alAuxiliaryEffectSloti(reverbSlot, EXTEfx.AL_EFFECTSLOT_EFFECT, reverbEffect);
+            // Default reverb settings
+            EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_DENSITY, 1.0f);
+            EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_DIFFUSION, 1.0f);
+            EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_GAIN, 0.32f);
+            EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_GAINHF, 0.89f);
+            EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_DECAY_TIME, 1.49f);
+            EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_DECAY_HFRATIO, 0.83f);
 
-        initialized = true;
+            reverbSlot = EXTEfx.alGenAuxiliaryEffectSlots();
+            EXTEfx.alAuxiliaryEffectSloti(reverbSlot, EXTEfx.AL_EFFECTSLOT_EFFECT, reverbEffect);
+
+            initialized = true;
+        } catch (Exception e) {
+            reset();
+        }
+    }
+
+    /**
+     * Called when Minecraft destroys/re-creates the SoundEngine (e.g., audio device change).
+     */
+    public static void reset() {
+        synchronized (activeSources) {
+            activeSources.clear();
+        }
+
+        try {
+            if (initialized && AL.getCapabilities().ALC_EXT_EFX) {
+                if (lowPassFilter != -1) EXTEfx.alDeleteFilters(lowPassFilter);
+                if (reverbEffect != -1) EXTEfx.alDeleteEffects(reverbEffect);
+                if (reverbSlot != -1) EXTEfx.alDeleteAuxiliaryEffectSlots(reverbSlot);
+            }
+        } catch (Exception ignored) {
+            // OpenAL context might already be invalidated/destroyed by Minecraft
+        }
+
+        lowPassFilter = -1;
+        reverbEffect = -1;
+        reverbSlot = -1;
+        initialized = false;
     }
 
     public static float getEffectIntensity(MobEffectInstance effect) {
         if (effect == null) return 0.0f;
         float intensity;
         if (effect.getDuration() > 200) intensity = 1.0f;
-        else intensity = (float)effect.getDuration() / 200.0f;
+        else intensity = (float) effect.getDuration() / 200.0f;
         return intensity;
     }
 
@@ -62,31 +93,37 @@ public class AudioManager {
 
     public static void tick(boolean pause) {
         if (!Config.get().enableAudioEffects) return;
-        if (!initialized) init();
 
-        Minecraft mc = Minecraft.getInstance();
-        Player player = mc.player;
-        if (player == null || pause) return;
+        try {
+            if (!initialized) {
+                init();
+            }
+            if (!initialized) return;
 
-        float baseIntensity = Math.max(
-                getEffectIntensity(player.getEffect(ModEffects.HAZE)),
-                getEffectIntensity(player.getEffect(ModEffects.WARP))
-        );
+            Minecraft mc = Minecraft.getInstance();
+            Player player = mc.player;
+            if (player == null || pause) return;
 
-        float configMultiplier = Config.get().audioEffectStrength; // 0..2
+            float baseIntensity = Math.max(
+                    getEffectIntensity(player.getEffect(ModEffects.HAZE)),
+                    getEffectIntensity(player.getEffect(ModEffects.WARP))
+            );
 
-        // Ramp stays 0..1 - controls *when* the effect kicks in, untouched by multiplier
-        // Overdrive extends 0..2 - controls *how strong* it gets once engaged
-        float overdrive = Mth.clamp(baseIntensity * configMultiplier, 0.0f, OVERDRIVE_MAX);
+            float configMultiplier = Config.get().audioEffectStrength;
+            float overdrive = Mth.clamp(baseIntensity * configMultiplier, 0.0f, OVERDRIVE_MAX);
 
-        updateFilters(overdrive);
+            updateFilters(overdrive);
+        } catch (IllegalStateException e) {
+            // Context was destroyed during processing; reset state for the next tick
+            reset();
+        }
     }
 
     private static void updateFilters(float overdrive) {
         if (lowPassFilter == -1) return;
 
         float stage1 = Mth.clamp(overdrive, 0.0f, 1.0f);
-        float gainHF = 1.0f - (stage1 * 0.8f); // 1.0 -> 0.2
+        float gainHF = 1.0f - (stage1 * 0.8f);
 
         float stage2 = Mth.clamp(overdrive - 1.0f, 0.0f, 1.0f);
         float gain = 1.0f - (stage2 * 0.5f);
@@ -95,8 +132,8 @@ public class AudioManager {
         EXTEfx.alFilterf(lowPassFilter, EXTEfx.AL_LOWPASS_GAIN, gain);
 
         if (reverbEffect != -1 && reverbSlot != -1) {
-            float reverbGain = 0.32f + (stage2 * 0.4f);      // wetter mix past 1x
-            float decayTime = 1.49f + (stage2 * 1.5f);        // longer tail past 1x
+            float reverbGain = 0.32f + (stage2 * 0.4f);
+            float decayTime = 1.49f + (stage2 * 1.5f);
             EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_GAIN, reverbGain);
             EXTEfx.alEffectf(reverbEffect, EXTEfx.AL_REVERB_DECAY_TIME, decayTime);
             EXTEfx.alAuxiliaryEffectSloti(reverbSlot, EXTEfx.AL_EFFECTSLOT_EFFECT, reverbEffect);
