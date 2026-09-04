@@ -13,7 +13,7 @@ public class PowderConsumableItem extends ConsumableItem {
                 new SingleUseDurabilityStrategy(),
                 () -> Math.round(Config.get().maxSniffDuration * 20.0f),
                 () -> Math.round(Config.get().sniffCooldown * 20.0f),
-                UseAnim.SPYGLASS,
+                UseAnim.NONE,
                 new PowderComponent()
         );
     }

@@ -1,5 +1,15 @@
 {
   "targets": [ "swap" ],
   "passes": [
+    {
+      "name": "substance:surge",
+      "intarget": "minecraft:main",
+      "outtarget": "swap"
+    },
+    {
+      "name": "blit",
+      "intarget": "swap",
+      "outtarget": "minecraft:main"
+    }
   ]
 }

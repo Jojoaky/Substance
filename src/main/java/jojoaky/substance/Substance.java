@@ -107,9 +107,8 @@ public class Substance implements ModInitializer {
 
 	// TODO: (before release)
 	//  hallucination effect
-	//  surge effect
 	//  Relaxation effect behavior, other effect behaviors?
-	//  Sniff animation
+	//  Addiction, dread effect
 	//  bubble pipe lit texture
 	//  Balance content and default config
 	//  Check crafting recipes and obtainability of all content
