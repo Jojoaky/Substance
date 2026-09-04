@@ -106,12 +106,15 @@ public class Substance implements ModInitializer {
 	}
 
 	// TODO: (before release)
-	//  1. Implement hallucination, relaxation, addiction, and dread effects; add gameplay behavior to other effects.
-	//  2. Check crafting recipes and ensure all content is obtainable.
-	//  3. Balance content and default config.
+	//  1. Implement hallucination & dread visual effects; add gameplay behavior to other effects.
+	//  2. Balance content and default config.
+	//  3. Check crafting recipes and ensure all content is obtainable.
 	//  4. Check mod compatibility with other mods.
 	//  5. Add translations.
 	//  6. Add the bubble pipe lit texture.
 	//  7. Update README and pages with features and screenshots.
 	//  8. Create a README tutorial.
+	// 	(future):
+	//  - Addiction
+	//  - Update to work with 1.21.1 neoforge and latest fabric & (neo/)forge
 }
