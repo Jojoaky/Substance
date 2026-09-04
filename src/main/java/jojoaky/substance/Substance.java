@@ -106,14 +106,12 @@ public class Substance implements ModInitializer {
 	}
 
 	// TODO: (before release)
-	//  hallucination effect
-	//  Relaxation effect behavior, other effect behaviors?
-	//  Addiction, dread effect
-	//  bubble pipe lit texture
-	//  Balance content and default config
-	//  Check crafting recipes and obtainability of all content
-	//  Check mod compatability with other mods
-	//  Update README & pages with features and screenshots
-	//  Create tutorial
-	//  Add translations
+	//  1. Implement hallucination, relaxation, addiction, and dread effects; add gameplay behavior to other effects.
+	//  2. Check crafting recipes and ensure all content is obtainable.
+	//  3. Balance content and default config.
+	//  4. Check mod compatibility with other mods.
+	//  5. Add translations.
+	//  6. Add the bubble pipe lit texture.
+	//  7. Update README and pages with features and screenshots.
+	//  8. Create a README tutorial.
 }
