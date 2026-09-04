@@ -6,8 +6,10 @@
   "mixins": [
     "HarvesterMovementBehaviourMixin",
     "ItemStackMixin",
+    "LivingEntityMixin",
     "LootContextRegisterInvoker",
-    "MobMixin"
+    "MobMixin",
+    "PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

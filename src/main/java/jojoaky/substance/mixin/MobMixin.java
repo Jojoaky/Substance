@@ -1,5 +1,6 @@
 package jojoaky.substance.mixin;
 
+import jojoaky.substance.content.effects.GameplayEffects;
 import jojoaky.substance.content.mob.equipment.MobEquipmentRegistry;
 import jojoaky.substance.content.mob.MobUseConsumableGoal;
 import jojoaky.substance.register.ModTags;
@@ -9,6 +10,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -30,6 +32,21 @@ public abstract class MobMixin {
         Mob mob = (Mob) (Object) this;
         if (mob.getType().is(ModTags.EntityTypes.CAN_SMOKE)) {
             this.goalSelector.addGoal(3, new MobUseConsumableGoal(mob));
+        }
+    }
+
+    @Inject(method = "setTarget", at = @At("HEAD"), cancellable = true)
+    private void preventTargetingRelaxedEntities(@Nullable LivingEntity target, CallbackInfo ci) {
+        if (target != null && GameplayEffects.isRelaxed(target)) {
+            ci.cancel();
+        }
+    }
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void forgetRelaxedTarget(CallbackInfo ci) {
+        Mob mob = (Mob) (Object) this;
+        if (mob.getTarget() != null && GameplayEffects.isRelaxed(mob.getTarget())) {
+            mob.setTarget(null);
         }
     }
 

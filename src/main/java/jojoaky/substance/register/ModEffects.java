@@ -1,6 +1,9 @@
 package jojoaky.substance.register;
 
+import jojoaky.substance.Config;
 import jojoaky.substance.Substance;
+import jojoaky.substance.content.effects.FixedStrengthMobEffect;
+import jojoaky.substance.content.effects.GameplayEffects;
 import jojoaky.substance.content.effects.VisualMobEffect;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
@@ -8,6 +11,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -40,7 +45,16 @@ public class ModEffects {
     // Herbs -> visual: warmth, blur / effect: peace
     public static final MobEffect RELAXATION   = registerEffect("relaxation",   MobEffectCategory.BENEFICIAL, 0xffd9c27a);
     // Crystals -> visual: rush / effect: speed?
-    public static final MobEffect SURGE        = registerEffect("surge",        MobEffectCategory.BENEFICIAL, 0xffffee44);
+    public static final MobEffect SURGE        = registerEffect(
+            "surge",
+            new FixedStrengthMobEffect(MobEffectCategory.BENEFICIAL, 0xffffee44)
+                    .addAttributeModifier(
+                            Attributes.MOVEMENT_SPEED,
+                            GameplayEffects.SURGE_MOVEMENT_SPEED_MODIFIER_UUID,
+                            Config.get().surgeMovementSpeedBonus,
+                            AttributeModifier.Operation.MULTIPLY_TOTAL
+                    )
+    );
     // Shrooms -> visual: fake entities / effect: peace?
     public static final MobEffect HALLUCINATION= registerEffect("hallucination",MobEffectCategory.NEUTRAL,    0xffcc44cc);
     // Shrooms -> visual: dark, horror / effect: ?
@@ -58,10 +72,14 @@ public class ModEffects {
     public static final PotionSet HALLUCINATION_POTIONS = registerPotionSet("hallucination", HALLUCINATION, 600, 1800, 300, 1);
 
     private static MobEffect registerEffect(String name, MobEffectCategory category, int color) {
+        return registerEffect(name, new VisualMobEffect(category, color));
+    }
+
+    private static MobEffect registerEffect(String name, MobEffect effect) {
         return Registry.registerForHolder(
                 BuiltInRegistries.MOB_EFFECT,
                 Substance.resource(name),
-                new VisualMobEffect(category, color)
+                effect
         ).value();
     }
 

@@ -67,4 +67,16 @@ public class Config {
 
     @SerialEntry
     public float horrorTripChance = 0.05f;
+
+    @SerialEntry
+    public float surgeMovementSpeedBonus = 0.3f;
+
+    @SerialEntry
+    public float surgeElytraBoost = 0.02f;
+
+    @SerialEntry
+    public float keenMiningSpeedMultiplier = 3.0f;
+
+    @SerialEntry
+    public int relaxationDarknessDuration = 200;
 }
