@@ -109,7 +109,6 @@ public class Substance implements ModInitializer {
 
 
 // TODO: (before release)
-//  1. Implement hallucination & dread visual effects; add gameplay behavior to other effects.
 //  2. Balance content and default config.
 //  3. Check crafting recipes and ensure all content is obtainable.
 //  4. Check mod compatibility with other mods.

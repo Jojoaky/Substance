@@ -28,6 +28,42 @@ public class Config {
     public boolean visualEffectsInMenus = true;
 
     @SerialEntry
+    public boolean enableHallucinationVisuals = true;
+
+    @SerialEntry
+    public float hallucinationVisualStrength = 1.0f;
+
+    @SerialEntry
+    public float hallucinationApparitionInterval = 6.0f;
+
+    @SerialEntry
+    public int hallucinationMaxApparitions = 5;
+
+    @SerialEntry
+    public float hallucinationVillagerChance = 0.33f;
+
+    @SerialEntry
+    public boolean enableDreadVisuals = true;
+
+    @SerialEntry
+    public float dreadVisualStrength = 1.0f;
+
+    @SerialEntry
+    public float dreadApparitionInterval = 10.0f;
+
+    @SerialEntry
+    public int dreadMaxApparitions = 6;
+
+    @SerialEntry
+    public float dreadCreeperChance = 0.5f;
+
+    @SerialEntry
+    public float dreadAnimalDistance = 95.0f;
+
+    @SerialEntry
+    public float dreadAnimalFadeDistance = 24.0f;
+
+    @SerialEntry
     public boolean enableAudioEffects = true;
 
     @SerialEntry

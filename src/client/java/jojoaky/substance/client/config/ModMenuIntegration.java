@@ -248,6 +248,98 @@ public class ModMenuIntegration implements ModMenuApi {
                                         .formatValue(val -> Component.literal(String.format("%.0f%%", val * 100))))
                                 .build())
                         .build())
+                .group(buildHallucinationVisualsGroup())
+                .group(buildDreadVisualsGroup())
+                .build();
+    }
+
+    private OptionGroup buildHallucinationVisualsGroup() {
+        return OptionGroup.createBuilder()
+                .name(Component.translatable("text.config.substance.group.hallucinationVisuals"))
+                .description(OptionDescription.of(Component.translatable("text.config.substance.group.hallucinationVisuals.desc")))
+                .option(booleanOption("enableHallucinationVisuals", true,
+                        () -> Config.get().enableHallucinationVisuals, val -> Config.get().enableHallucinationVisuals = val))
+                .option(percentOption("hallucinationVisualStrength", 1.0f, 0.0f, 2.0f,
+                        () -> Config.get().hallucinationVisualStrength, val -> Config.get().hallucinationVisualStrength = val))
+                .option(secondsOption("hallucinationApparitionInterval", 6.0f,
+                        () -> Config.get().hallucinationApparitionInterval, val -> Config.get().hallucinationApparitionInterval = val))
+                .option(integerOption("hallucinationMaxApparitions", 5, 0, 20,
+                        () -> Config.get().hallucinationMaxApparitions, val -> Config.get().hallucinationMaxApparitions = val))
+                .option(percentOption("hallucinationVillagerChance", 0.33f, 0.0f, 1.0f,
+                        () -> Config.get().hallucinationVillagerChance, val -> Config.get().hallucinationVillagerChance = val))
+                .build();
+    }
+
+    private OptionGroup buildDreadVisualsGroup() {
+        return OptionGroup.createBuilder()
+                .name(Component.translatable("text.config.substance.group.dreadVisuals"))
+                .description(OptionDescription.of(Component.translatable("text.config.substance.group.dreadVisuals.desc")))
+                .option(booleanOption("enableDreadVisuals", true,
+                        () -> Config.get().enableDreadVisuals, val -> Config.get().enableDreadVisuals = val))
+                .option(percentOption("dreadVisualStrength", 1.0f, 0.0f, 2.0f,
+                        () -> Config.get().dreadVisualStrength, val -> Config.get().dreadVisualStrength = val))
+                .option(secondsOption("dreadApparitionInterval", 10.0f,
+                        () -> Config.get().dreadApparitionInterval, val -> Config.get().dreadApparitionInterval = val))
+                .option(integerOption("dreadMaxApparitions", 6, 0, 20,
+                        () -> Config.get().dreadMaxApparitions, val -> Config.get().dreadMaxApparitions = val))
+                .option(percentOption("dreadCreeperChance", 0.5f, 0.0f, 1.0f,
+                        () -> Config.get().dreadCreeperChance, val -> Config.get().dreadCreeperChance = val))
+                .option(floatOption("dreadAnimalDistance", 95.0f, 32.0f, 128.0f, 1.0f, "%.0f blocks",
+                        () -> Config.get().dreadAnimalDistance, val -> Config.get().dreadAnimalDistance = val))
+                .option(floatOption("dreadAnimalFadeDistance", 24.0f, 4.0f, 64.0f, 1.0f, "%.0f blocks",
+                        () -> Config.get().dreadAnimalFadeDistance, val -> Config.get().dreadAnimalFadeDistance = val))
+                .build();
+    }
+
+    private Option<Boolean> booleanOption(String key, boolean defaultValue,
+                                          java.util.function.Supplier<Boolean> getter,
+                                          java.util.function.Consumer<Boolean> setter) {
+        return Option.<Boolean>createBuilder()
+                .name(Component.translatable("text.config.substance.option." + key))
+                .description(OptionDescription.of(Component.translatable("text.config.substance.option." + key + ".desc")))
+                .binding(defaultValue, getter, setter)
+                .controller(TickBoxControllerBuilder::create)
+                .build();
+    }
+
+    private Option<Float> percentOption(String key, float defaultValue, float min, float max,
+                                        java.util.function.Supplier<Float> getter,
+                                        java.util.function.Consumer<Float> setter) {
+        return floatOption(key, defaultValue, min, max, 0.01f, "%.0f%%", getter, setter, 100.0f);
+    }
+
+    private Option<Float> secondsOption(String key, float defaultValue,
+                                        java.util.function.Supplier<Float> getter,
+                                        java.util.function.Consumer<Float> setter) {
+        return floatOption(key, defaultValue, 0.5f, 60.0f, 0.5f, "%.1f s", getter, setter);
+    }
+
+    private Option<Float> floatOption(String key, float defaultValue, float min, float max, float step,
+                                      String format, java.util.function.Supplier<Float> getter,
+                                      java.util.function.Consumer<Float> setter) {
+        return floatOption(key, defaultValue, min, max, step, format, getter, setter, 1.0f);
+    }
+
+    private Option<Float> floatOption(String key, float defaultValue, float min, float max, float step,
+                                      String format, java.util.function.Supplier<Float> getter,
+                                      java.util.function.Consumer<Float> setter, float displayMultiplier) {
+        return Option.<Float>createBuilder()
+                .name(Component.translatable("text.config.substance.option." + key))
+                .description(OptionDescription.of(Component.translatable("text.config.substance.option." + key + ".desc")))
+                .binding(defaultValue, getter, setter)
+                .controller(opt -> FloatSliderControllerBuilder.create(opt).range(min, max).step(step)
+                        .formatValue(val -> Component.literal(String.format(format, val * displayMultiplier))))
+                .build();
+    }
+
+    private Option<Integer> integerOption(String key, int defaultValue, int min, int max,
+                                          java.util.function.Supplier<Integer> getter,
+                                          java.util.function.Consumer<Integer> setter) {
+        return Option.<Integer>createBuilder()
+                .name(Component.translatable("text.config.substance.option." + key))
+                .description(OptionDescription.of(Component.translatable("text.config.substance.option." + key + ".desc")))
+                .binding(defaultValue, getter, setter)
+                .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(min, max).step(1))
                 .build();
     }
 }

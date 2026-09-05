@@ -1,5 +1,17 @@
 {
-  "targets": [ "swap" ],
   "passes": [
+    {
+      "intarget": "minecraft:main",
+      "name": "substance:hallucination",
+      "outtarget": "swap"
+    },
+    {
+      "intarget": "swap",
+      "name": "blit",
+      "outtarget": "minecraft:main"
+    }
+  ],
+  "targets": [
+    "swap"
   ]
 }

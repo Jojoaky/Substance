@@ -9,6 +9,7 @@ import jojoaky.substance.content.flask.FilledFlaskItem;
 import jojoaky.substance.client.itemmodel.SmokableItemModel;
 import jojoaky.substance.client.shader.PostShaderManager;
 import jojoaky.substance.client.shaders.*;
+import jojoaky.substance.client.visual.TripVisuals;
 import jojoaky.substance.content.consumable.framework.ConsumableItem;
 import jojoaky.substance.content.pipe.PipeItem;
 import jojoaky.substance.register.ModBlocks;
@@ -30,6 +31,7 @@ import static jojoaky.substance.register.ModFluids.ALL_FLUIDS;
 public class SubstanceClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
+		TripVisuals.init();
 		MenuScreens.register(Substance.PIPE_MENU, PipeScreen::new);
 
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LARGE_HERB, RenderType.cutout());
