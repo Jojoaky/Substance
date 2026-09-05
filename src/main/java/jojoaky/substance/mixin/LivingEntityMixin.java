@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
     /**
-     * Let vanilla's fall-flying lifecycle treat Surge as a usable Elytra. A real, usable Elytra is
-     * returned unchanged so that it still takes its normal durability damage while flying.
+     * Let vanilla's fall-flying lifecycle treat Surge as a usable Elytra. Usable vanilla or
+     * Fabric-compatible custom flight equipment is left in control of the flight lifecycle.
      */
     @Redirect(
             method = "updateFallFlying",

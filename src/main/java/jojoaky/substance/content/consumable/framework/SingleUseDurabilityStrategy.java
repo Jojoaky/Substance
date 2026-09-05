@@ -8,13 +8,15 @@ import net.minecraft.world.level.Level;
 
 public class SingleUseDurabilityStrategy implements DurabilityStrategy {
     @Override
-    public void onStopConsuming(ConsumableItem item, ItemStack stack, Level level, LivingEntity entity, int useDuration) {
-        if (!level.isClientSide && useDuration >= item.getUseDuration(stack)) {
-            stack.shrink(1);
+    public void onFinishConsuming(ConsumableItem item, ItemStack stack, Level level, LivingEntity entity, int useDuration) {
+        if (level.isClientSide) return;
 
-            if (entity instanceof Player player) {
-                player.awardStat(Stats.ITEM_USED.get(item));
-            }
+        if (entity instanceof Player player && player.isCreative()) return;
+
+        stack.shrink(1);
+
+        if (entity instanceof Player player) {
+            player.awardStat(Stats.ITEM_USED.get(item));
         }
     }
 }

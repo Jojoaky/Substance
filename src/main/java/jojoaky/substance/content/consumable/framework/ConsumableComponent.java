@@ -14,6 +14,9 @@ public interface ConsumableComponent {
     default void onStopConsuming(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
     }
 
+    default void onFinishConsuming(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
+    }
+
     default boolean hasCustomRenderModel() {
         return false;
     }

@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "substance:item/bubble_pipe"
+    "layer0": "substance:item/bubble_pipe_lit"
   },
 
   "display": {

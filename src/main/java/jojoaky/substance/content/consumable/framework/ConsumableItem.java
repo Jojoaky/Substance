@@ -86,7 +86,9 @@ public class ConsumableItem extends Item {
     @Override
     @NotNull
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-        stopConsuming(stack, level, entity, getUseDuration(stack));
+        int useDuration = getUseDuration(stack);
+        finishConsuming(stack, level, entity, useDuration);
+        stopConsuming(stack, level, entity, useDuration);
         return stack;
     }
 
@@ -153,14 +155,6 @@ public class ConsumableItem extends Item {
     }
 
     protected void stopConsuming(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
-
-        if (!level.isClientSide) {
-            int cooldown = getCooldown(stack);
-            if (cooldown > 0 && entity instanceof Player) {
-                ((Player) entity).getCooldowns().addCooldown(this, cooldown);
-            }
-        }
-
         durabilityStrategy.onStopConsuming(this, stack, level, entity, useDuration);
 
         for (ConsumableComponent component : components) {
@@ -168,6 +162,23 @@ public class ConsumableItem extends Item {
         }
 
         onStopConsuming(stack, level, entity, useDuration);
+    }
+
+    protected void finishConsuming(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
+        if (!level.isClientSide) {
+            int cooldown = getCooldown(stack);
+            if (cooldown > 0 && entity instanceof Player player) {
+                player.getCooldowns().addCooldown(this, cooldown);
+            }
+        }
+
+        durabilityStrategy.onFinishConsuming(this, stack, level, entity, useDuration);
+
+        for (ConsumableComponent component : components) {
+            component.onFinishConsuming(stack, level, entity, useDuration);
+        }
+
+        onFinishConsuming(stack, level, entity, useDuration);
     }
 
     protected void onStartConsuming(ItemStack stack, Level level, LivingEntity entity) {
@@ -180,5 +191,8 @@ public class ConsumableItem extends Item {
     }
 
     protected void onStopConsuming(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
+    }
+
+    protected void onFinishConsuming(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
     }
 }

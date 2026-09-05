@@ -4,6 +4,7 @@
   "plugin": "jojoaky.substance.ConditionalMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "FireworkRocketItemMixin",
     "HarvesterMovementBehaviourMixin",
     "ItemStackMixin",
     "LivingEntityMixin",

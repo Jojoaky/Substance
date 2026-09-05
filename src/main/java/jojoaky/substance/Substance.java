@@ -106,39 +106,13 @@ public class Substance implements ModInitializer {
 	}
 }
 
-
-
 // TODO: (before release)
-//  2. Balance content and default config.
-//  3. Check crafting recipes and ensure all content is obtainable.
-//  4. Check mod compatibility with other mods.
-//  5. Add translations.
-//  6. Add the bubble pipe lit texture.
-//  7. Update README and pages with features and screenshots.
-//  8. Create a README tutorial.
+//  1. Sound effects
+//  2. Check crafting recipes and ensure all content is obtainable.
+//  3. Check mod compatibility with other mods.
+//  4. Update README and pages with features and screenshots & Create a README tutorial.
 // 	(future):
+//  - Add more translations.
 //  - Addiction
 //  - Update to work with 1.21.1 neoforge and latest fabric & (neo/)forge
 //  - Sound effects for effects
-
-
-/*
-	Hallucination:
-	- Subtle visual artifacts (floaters, distortions)
-	- Random blocks slightly shifting out of grid
-	- something unexpected, like villager floating in the sky
-	- Fitting sound effects & chimes
-	Dread (dark version of hallucination / horror trip):
-	- Farm animals in the distance (eg. 100 blocks away, somtimes multiple in groups) that stare at the player and fade when approaching
-	- Fake creepers that spawn beind the player, fake explotion when the player turns around
-	- Random dark noises and visuals
-*/
-
-/*
-	Gameplay effects:
-	- Purely visual: Haze, Warp, Hallucination, Dread
-	- Relaxation: Won't be targeted by mobs, Attacking: stops effect, gives darkness and lightning strike
-	- Surge: Increased movement speed, player can fly without elytra and has constant but slow boost with elytra
-	- Keen: Significantly increase mining speed
-	- (Stagger: Delayed inputs)
-*/

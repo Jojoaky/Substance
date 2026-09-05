@@ -24,6 +24,9 @@ public interface DurabilityStrategy {
     default void onStopConsuming(ConsumableItem item, ItemStack stack, Level level, LivingEntity entity, int useDuration) {
     }
 
+    default void onFinishConsuming(ConsumableItem item, ItemStack stack, Level level, LivingEntity entity, int useDuration) {
+    }
+
     default Boolean isBarVisible(ItemStack stack) {
         return null;
     }

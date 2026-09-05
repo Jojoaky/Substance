@@ -48,7 +48,7 @@ public final class HallucinationTripVisualType extends TripVisualType {
             RandomSource random,
             Consumer<TripVisual> sink
     ) {
-        if (random.nextFloat() < Mth.clamp(config.hallucinationVillagerChance, 0.0f, 1.0f)) {
+        if (random.nextFloat() < config.hallucinationVillagerChance) {
             Vec3 position = minecraft.player.position().add(minecraft.player.getLookAngle().scale(22))
                     .add(random.nextInt(13) - 6, 10 + random.nextInt(8), random.nextInt(13) - 6);
             LivingEntity villager = createEntity(level, EntityType.VILLAGER, position);

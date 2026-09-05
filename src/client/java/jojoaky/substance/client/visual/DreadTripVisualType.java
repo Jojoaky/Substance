@@ -47,7 +47,7 @@ public final class DreadTripVisualType extends TripVisualType {
             RandomSource random,
             Consumer<TripVisual> sink
     ) {
-        if (random.nextFloat() < Mth.clamp(config.dreadCreeperChance, 0.0f, 1.0f)) {
+        if (random.nextFloat() < config.dreadCreeperChance) {
             Vec3 behind = minecraft.player.getLookAngle().multiply(1, 0, 1).normalize().scale(-5);
             BlockPos ground = groundAt(level, minecraft.player.position().add(behind));
             if (ground != null && Math.abs(ground.getY() - minecraft.player.getY()) < 4) {
@@ -61,7 +61,7 @@ public final class DreadTripVisualType extends TripVisualType {
         }
 
         double angle = random.nextDouble() * Math.PI * 2;
-        float distance = Mth.clamp(config.dreadAnimalDistance, 32.0f, 128.0f);
+        float distance = config.dreadAnimalDistance;
         Vec3 center = minecraft.player.position().add(
                 Math.sin(angle) * distance,
                 0,
