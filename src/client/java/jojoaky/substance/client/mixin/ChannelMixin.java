@@ -2,7 +2,7 @@ package jojoaky.substance.client.mixin;
 
 import com.mojang.blaze3d.audio.Channel;
 import jojoaky.substance.Config;
-import jojoaky.substance.client.audio.AudioManager;
+import jojoaky.substance.client.audio.AudioProcessingManager;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,11 +16,11 @@ public abstract class ChannelMixin {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void substance$onInit(int source, CallbackInfo ci) {
-        AudioManager.onSourceCreated(this.source);
+        AudioProcessingManager.onSourceCreated(this.source);
     }
 
     @Inject(method = "destroy", at = @At("HEAD"))
     private void substance$onClose(CallbackInfo ci) {
-        AudioManager.onSourceReleased(this.source);
+        AudioProcessingManager.onSourceReleased(this.source);
     }
 }

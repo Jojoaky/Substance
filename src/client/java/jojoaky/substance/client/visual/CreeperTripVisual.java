@@ -17,6 +17,7 @@ public final class CreeperTripVisual extends EntityTripVisual {
     @Override
     protected void tickVisual(Minecraft minecraft, ClientLevel level, Config config) {
         super.tickVisual(minecraft, level, config);
+        if (minecraft.player == null) return;
         Vec3 direction = minecraft.player.getEyePosition().subtract(position());
         if (age() > 15
                 && minecraft.player.getLookAngle().dot(direction.normalize().scale(-1)) > 0.88
@@ -29,6 +30,7 @@ public final class CreeperTripVisual extends EntityTripVisual {
     }
 
     private boolean isVisible(Minecraft minecraft, ClientLevel level, Vec3 target) {
+        if (minecraft.player == null) return false;
         return level.clip(new ClipContext(
                 minecraft.player.getEyePosition(),
                 target,

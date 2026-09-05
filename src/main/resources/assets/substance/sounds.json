@@ -1,0 +1,28 @@
+{
+  "effect.hallucination.ambient": {
+    "subtitle": "subtitles.substance.effect.hallucination.ambient",
+    "sounds": [
+      {
+        "name": "substance:effects/hallucination_ambient",
+        "stream": true
+      },
+      {
+        "name": "substance:effects/trip_ambient",
+        "stream": true
+      }
+    ]
+  },
+  "effect.dread.ambient": {
+    "subtitle": "subtitles.substance.effect.dread.ambient",
+    "sounds": [
+      {
+        "name": "substance:effects/dread_ambient",
+        "stream": true
+      },
+      {
+        "name": "substance:effects/trip_ambient",
+        "stream": true
+      }
+    ]
+  }
+}

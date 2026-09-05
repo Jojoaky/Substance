@@ -30,6 +30,7 @@ public class EntityTripVisual extends TripVisual {
 
     @Override
     protected void tickVisual(Minecraft minecraft, ClientLevel level, Config config) {
+        if (minecraft.player == null) return;
         Vec3 direction = minecraft.player.getEyePosition().subtract(position());
         float yaw = (float) (Math.atan2(-direction.x, direction.z) * Mth.RAD_TO_DEG);
         entity.setYRot(yaw);

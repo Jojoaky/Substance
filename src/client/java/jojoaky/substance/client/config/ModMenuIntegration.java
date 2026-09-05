@@ -265,6 +265,12 @@ public class ModMenuIntegration implements ModMenuApi {
                                         .step(0.05f)
                                         .formatValue(val -> Component.literal(String.format("%.0f%%", val * 100))))
                                 .build())
+
+                        .option(booleanOption("enableAmbientSounds", Config.DEFAULT_ENABLE_AMBIENT_SOUNDS,
+                                () -> Config.get().enableAmbientSounds, val -> Config.get().enableAmbientSounds = val))
+
+                        .option(secondsOption("ambientSoundInterval", Config.DEFAULT_AMBIENT_SOUND_INTERVAL, 1.0f, 120.0f, 1.0f,
+                                () -> Config.get().ambientSoundInterval, val -> Config.get().ambientSoundInterval = val))
                         .build())
                 .group(buildHallucinationVisualsGroup())
                 .group(buildDreadVisualsGroup())
@@ -329,7 +335,13 @@ public class ModMenuIntegration implements ModMenuApi {
     private Option<Float> secondsOption(String key, float defaultValue,
                                         java.util.function.Supplier<Float> getter,
                                         java.util.function.Consumer<Float> setter) {
-        return floatOption(key, defaultValue, 0.5f, 60.0f, 0.5f, "%.1f s", getter, setter);
+        return secondsOption(key, defaultValue, 0.5f, 60.0f, 0.5f, getter, setter);
+    }
+
+    private Option<Float> secondsOption(String key, float defaultValue, float min, float max, float step,
+                                        java.util.function.Supplier<Float> getter,
+                                        java.util.function.Consumer<Float> setter) {
+        return floatOption(key, defaultValue, min, max, step, "%.1f s", getter, setter);
     }
 
     private Option<Float> floatOption(String key, float defaultValue, float min, float max, float step,

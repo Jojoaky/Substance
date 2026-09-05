@@ -66,6 +66,7 @@ public class PostShader {
         return errorLoading;
     }
 
+    @SuppressWarnings("resource")
     public void setGlobalUniformf(String name, float value) {
         if (postChain == null) return;
 
@@ -77,6 +78,7 @@ public class PostShader {
         }
     }
 
+    @SuppressWarnings("resource")
     public void setUniformf(String passName, String name, float value) {
         if (postChain == null) return;
 

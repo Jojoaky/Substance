@@ -46,7 +46,7 @@ public abstract class TripVisual {
 
     public boolean shouldRemove(Minecraft minecraft, ClientLevel level, Config config) {
         return expired || age >= lifetime
-                || position.distanceToSqr(minecraft.player.position()) > 160 * 160;
+                || (minecraft.player != null && position.distanceToSqr(minecraft.player.position()) > 160 * 160);
     }
 
     public final void render(

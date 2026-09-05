@@ -29,7 +29,7 @@ public final class BlockTripVisual extends TripVisual {
             float alpha
     ) {
         float motion = minecraft.options.screenEffectScale().get().floatValue();
-        if (motion <= 0) {
+        if (motion <= 0 || context.consumers() == null) {
             return;
         }
 

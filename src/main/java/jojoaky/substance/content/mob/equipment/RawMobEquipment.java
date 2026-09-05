@@ -1,10 +1,9 @@
-package jojoaky.substance.content.mob;
+package jojoaky.substance.content.mob.equipment;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import jojoaky.substance.Substance;
-import jojoaky.substance.content.mob.equipment.MobEquipment;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;

@@ -23,6 +23,8 @@ public class Config {
     public static final float DEFAULT_DREAD_ANIMAL_FADE_DISTANCE = 4.0f;
     public static final boolean DEFAULT_ENABLE_AUDIO_EFFECTS = true;
     public static final float DEFAULT_AUDIO_EFFECT_STRENGTH = 1.0f;
+    public static final boolean DEFAULT_ENABLE_AMBIENT_SOUNDS = true;
+    public static final float DEFAULT_AMBIENT_SOUND_INTERVAL = 30.0f;
     public static final int DEFAULT_WOODEN_PIPE_DURABILITY = 2048;
     public static final int DEFAULT_BUBBLE_PIPE_DURABILITY = 512;
     public static final int DEFAULT_HERBAL_ROLL_DURABILITY = 460;
@@ -104,6 +106,12 @@ public class Config {
 
     @SerialEntry
     public float audioEffectStrength = DEFAULT_AUDIO_EFFECT_STRENGTH;
+
+    @SerialEntry
+    public boolean enableAmbientSounds = DEFAULT_ENABLE_AMBIENT_SOUNDS;
+
+    @SerialEntry
+    public float ambientSoundInterval = DEFAULT_AMBIENT_SOUND_INTERVAL;
 
     // Gameplay
     @SerialEntry

@@ -3,7 +3,6 @@ package jojoaky.substance.content.mob.equipment;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
 import jojoaky.substance.Substance;
-import jojoaky.substance.content.mob.RawMobEquipment;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;

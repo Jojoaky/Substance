@@ -1,5 +1,6 @@
 package jojoaky.substance.content.consumable.framework;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
@@ -38,10 +39,13 @@ public class ConsumptionDurabilityStrategy implements DurabilityStrategy {
         if (nextDamage >= getConsumeDurability(stack)) {
             item.stopConsuming(stack, level, entity, useDuration);
             stack.shrink(1);
-            if (!stack.isEmpty() && stack.hasTag()) {
-                stack.getTag().remove(DAMAGE_KEY);
-                if (stack.getTag().isEmpty()) {
-                    stack.setTag(null);
+            if (!stack.isEmpty()) {
+                CompoundTag tag = stack.getTag();
+                if (tag != null) {
+                    tag.remove(DAMAGE_KEY);
+                    if (tag.isEmpty()) {
+                        stack.setTag(null);
+                    }
                 }
             }
         } else {
@@ -93,7 +97,8 @@ public class ConsumptionDurabilityStrategy implements DurabilityStrategy {
     }
 
     private boolean isUnbreakable(ItemStack stack) {
-        return stack.hasTag() && stack.getTag().getBoolean("Unbreakable");
+        CompoundTag tag = stack.getTag();
+        return tag != null && tag.getBoolean("Unbreakable");
     }
 
     private int getConsumeDurability(ItemStack stack) {
@@ -101,7 +106,8 @@ public class ConsumptionDurabilityStrategy implements DurabilityStrategy {
     }
 
     private int getCustomDamage(ItemStack stack) {
-        return stack.hasTag() ? stack.getTag().getInt(DAMAGE_KEY) : 0;
+        CompoundTag tag = stack.getTag();
+        return tag != null ? tag.getInt(DAMAGE_KEY) : 0;
     }
 
     private void setCustomDamage(ItemStack stack, int damage) {

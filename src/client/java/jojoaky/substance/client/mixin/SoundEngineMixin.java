@@ -1,6 +1,7 @@
 package jojoaky.substance.client.mixin;
 
-import jojoaky.substance.client.audio.AudioManager;
+import jojoaky.substance.client.audio.AmbientSoundManager;
+import jojoaky.substance.client.audio.AudioProcessingManager;
 import net.minecraft.client.sounds.SoundEngine;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -15,11 +16,13 @@ public abstract class SoundEngineMixin {
     @Inject(method = "tick", at = @At("HEAD"))
     private void substance$tick(boolean pause, CallbackInfo ci) {
         if (!this.loaded) return;
-        AudioManager.tick(pause);
+        AudioProcessingManager.tick(pause);
+        AmbientSoundManager.tick(pause);
     }
 
     @Inject(method = "destroy", at = @At("HEAD"))
     private void substance$onDestroy(CallbackInfo ci) {
-        AudioManager.reset();
+        AudioProcessingManager.reset();
+        AmbientSoundManager.reset();
     }
 }

@@ -24,9 +24,13 @@ final class TripVisualRenderer {
             LivingEntity entity,
             float alpha
     ) {
+        MultiBufferSource consumers = context.consumers();
+        if (consumers == null) {
+            return;
+        }
         renderingEntity = entity;
         try {
-            MultiBufferSource faded = type -> new AlphaConsumer(context.consumers().getBuffer(type), alpha);
+            MultiBufferSource faded = type -> new AlphaConsumer(consumers.getBuffer(type), alpha);
             minecraft.getEntityRenderDispatcher().getRenderer(entity).render(
                     entity,
                     entity.getYRot(),
@@ -41,7 +45,11 @@ final class TripVisualRenderer {
     }
 
     static MultiBufferSource alphaBuffers(WorldRenderContext context, float alpha) {
-        return type -> new AlphaConsumer(context.consumers().getBuffer(type), alpha);
+        MultiBufferSource consumers = context.consumers();
+        if (consumers == null) {
+            return type -> null;
+        }
+        return type -> new AlphaConsumer(consumers.getBuffer(type), alpha);
     }
 
     private record AlphaConsumer(VertexConsumer delegate, float alpha) implements VertexConsumer {

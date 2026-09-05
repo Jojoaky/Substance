@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleSlotStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 
+@SuppressWarnings("UnstableApiUsage")
 public class FullFlaskFluidStorage implements SingleSlotStorage<FluidVariant> {
     private final ContainerItemContext context;
     private final ModFlasks.FlaskEntry entry;

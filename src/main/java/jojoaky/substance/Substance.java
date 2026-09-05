@@ -51,6 +51,7 @@ public class Substance implements ModInitializer {
 		ModFluids.initialize();
 		ModTrays.initialize();
 		ModEffects.initialize();
+		ModSounds.initialize();
 		ModTags.initialize();
 
 		Trades.initialize();

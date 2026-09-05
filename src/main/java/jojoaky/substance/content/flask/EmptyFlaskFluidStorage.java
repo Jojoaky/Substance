@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 
 import static jojoaky.substance.content.flask.ModFlasks.ALL_FLASK_ENTRIES;
 
+@SuppressWarnings("UnstableApiUsage")
 public class EmptyFlaskFluidStorage implements SingleSlotStorage<FluidVariant> {
     private final ContainerItemContext context;
 

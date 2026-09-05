@@ -14,12 +14,15 @@ import org.lwjgl.openal.EXTEfx;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AudioManager {
+public final class AudioProcessingManager {
     private static int lowPassFilter = -1;
     private static int reverbEffect = -1;
     private static int reverbSlot = -1;
     private static boolean initialized = false;
     private static final Set<Integer> activeSources = new HashSet<>();
+
+    private AudioProcessingManager() {
+    }
 
     public static void init() {
         if (!Config.get().enableAudioEffects) return;

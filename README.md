@@ -40,3 +40,13 @@ Substance works as a standalone mod, but gains additional features when used wit
 
 ### Dependencies:
 This mod requires an appropriate version of [YACL](https://modrinth.com/mod/yacl).
+
+---
+
+## Audio credits
+
+Third-party audio retains the license shown below. See [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) for complete attribution and conversion details.
+
+- Hallucination: ["Percussive_16BarWeirdness.wav" by kapnos_mantis](https://freesound.org/people/kapnos_mantis/sounds/212921/) — [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- Dread: ["FX one shot 9 -150 bpm - G min - STTTL" by STTTL](https://freesound.org/people/STTTL/sounds/829229/) — [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+- Dread: ["Acid audio effect" by Vicces1212](https://freesound.org/people/Vicces1212/sounds/839940/) — [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
