@@ -2,8 +2,9 @@ package jojoaky.substance.register;
 
 import jojoaky.substance.Config;
 import jojoaky.substance.Substance;
-import jojoaky.substance.content.effects.FixedStrengthMobEffect;
-import jojoaky.substance.content.effects.GameplayEffects;
+import jojoaky.substance.content.effects.KeenEffect;
+import jojoaky.substance.content.effects.RelaxationEffect;
+import jojoaky.substance.content.effects.SurgeEffect;
 import jojoaky.substance.content.effects.VisualMobEffect;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
@@ -41,16 +42,20 @@ public class ModEffects {
     // Alcohol -> visual: - / effect: smoothed / delayed inputs
     //public static final MobEffect STAGGER      = registerEffect("stagger",      MobEffectCategory.HARMFUL,    0xffddaa55);
     // Tobacco -> visual: tunnel vision, gray / effect: haste
-    public static final MobEffect KEEN         = registerEffect("keen",         MobEffectCategory.BENEFICIAL, 0xffeecc88);
+    public static final KeenEffect KEEN = registerEffect(
+            "keen", new KeenEffect(MobEffectCategory.BENEFICIAL, 0xffeecc88)
+    );
     // Herbs -> visual: warmth, blur / effect: peace
-    public static final MobEffect RELAXATION   = registerEffect("relaxation",   MobEffectCategory.BENEFICIAL, 0xffd9c27a);
+    public static final RelaxationEffect RELAXATION = registerEffect(
+            "relaxation", new RelaxationEffect(MobEffectCategory.BENEFICIAL, 0xffd9c27a)
+    );
     // Crystals -> visual: rush / effect: speed?
-    public static final MobEffect SURGE        = registerEffect(
+    public static final SurgeEffect SURGE = registerEffect(
             "surge",
-            new FixedStrengthMobEffect(MobEffectCategory.BENEFICIAL, 0xffffee44)
+            new SurgeEffect(MobEffectCategory.BENEFICIAL, 0xffffee44)
                     .addAttributeModifier(
                             Attributes.MOVEMENT_SPEED,
-                            GameplayEffects.SURGE_MOVEMENT_SPEED_MODIFIER_UUID,
+                            SurgeEffect.MOVEMENT_SPEED_MODIFIER_UUID,
                             Config.get().surgeMovementSpeedBonus,
                             AttributeModifier.Operation.MULTIPLY_TOTAL
                     )
@@ -75,12 +80,13 @@ public class ModEffects {
         return registerEffect(name, new VisualMobEffect(category, color));
     }
 
-    private static MobEffect registerEffect(String name, MobEffect effect) {
-        return Registry.registerForHolder(
+    private static <T extends MobEffect> T registerEffect(String name, T effect) {
+        Registry.registerForHolder(
                 BuiltInRegistries.MOB_EFFECT,
                 Substance.resource(name),
                 effect
-        ).value();
+        );
+        return effect;
     }
 
     private static PotionSet registerPotionSet(

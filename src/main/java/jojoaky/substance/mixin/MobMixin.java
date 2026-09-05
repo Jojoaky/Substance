@@ -1,8 +1,8 @@
 package jojoaky.substance.mixin;
 
-import jojoaky.substance.content.effects.GameplayEffects;
 import jojoaky.substance.content.mob.equipment.MobEquipmentRegistry;
 import jojoaky.substance.content.mob.MobUseConsumableGoal;
+import jojoaky.substance.register.ModEffects;
 import jojoaky.substance.register.ModTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.DifficultyInstance;
@@ -37,7 +37,7 @@ public abstract class MobMixin {
 
     @Inject(method = "setTarget", at = @At("HEAD"), cancellable = true)
     private void preventTargetingRelaxedEntities(@Nullable LivingEntity target, CallbackInfo ci) {
-        if (target != null && GameplayEffects.isRelaxed(target)) {
+        if (target != null && ModEffects.RELAXATION.isAppliedTo(target)) {
             ci.cancel();
         }
     }
@@ -45,7 +45,7 @@ public abstract class MobMixin {
     @Inject(method = "tick", at = @At("HEAD"))
     private void forgetRelaxedTarget(CallbackInfo ci) {
         Mob mob = (Mob) (Object) this;
-        if (mob.getTarget() != null && GameplayEffects.isRelaxed(mob.getTarget())) {
+        if (mob.getTarget() != null && ModEffects.RELAXATION.isAppliedTo(mob.getTarget())) {
             mob.setTarget(null);
         }
     }

@@ -14,8 +14,8 @@ public class ModMenuIntegration implements ModMenuApi {
         return parentScreen -> YetAnotherConfigLib.createBuilder()
                 .title(Component.translatable("text.config.substance.title"))
                 .save(() -> Config.HANDLER.save())
-                .category(buildGameplayCategory())
                 .category(buildClientCategory())
+                .category(buildGameplayCategory())
                 .build()
                 .generateScreen(parentScreen);
     }

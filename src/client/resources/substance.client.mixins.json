@@ -3,7 +3,7 @@
   "package": "jojoaky.substance.client.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "ApparitionRendererMixin",
+    "TripVisualRendererMixin",
     "AbstractZombieModelMixin",
     "ChannelMixin",
     "GameRendererAccessor",
