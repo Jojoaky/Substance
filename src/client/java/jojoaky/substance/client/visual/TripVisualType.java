@@ -4,6 +4,7 @@ import jojoaky.substance.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.SectionPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
@@ -51,7 +52,8 @@ public abstract class TripVisualType {
     );
 
     protected final LivingEntity createEntity(ClientLevel level, EntityType<?> entityType, Vec3 position) {
-        if (!level.hasChunkAt(BlockPos.containing(position))) {
+        BlockPos pos = BlockPos.containing(position);
+        if (!level.hasChunk(SectionPos.blockToSectionCoord(pos.getX()), SectionPos.blockToSectionCoord(pos.getZ()))) {
             return null;
         }
         if (!(entityType.create(level) instanceof LivingEntity entity)) {

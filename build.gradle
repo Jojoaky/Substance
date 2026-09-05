@@ -29,15 +29,13 @@ repositories {
 loom {
 	splitEnvironmentSourceSets()
 
-	loom {
-		runs {
-			datagen {
-				server()
-				name "Data Generation"
-				vmArg "-Dfabric-api.datagen"
-				vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-				vmArg "-Dfabric-api.datagen.modid=substance"
-			}
+	runs {
+		datagen {
+			server()
+			name "Data Generation"
+			vmArg "-Dfabric-api.datagen"
+			vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
+			vmArg "-Dfabric-api.datagen.modid=substance"
 		}
 	}
 
@@ -47,78 +45,6 @@ loom {
 			sourceSet sourceSets.client
 		}
 	}
-
-}
-
-fabricApi {
-	/*
-	configureDataGeneration {
-		client = true
-	}
-	*/
-}
-
-sourceSets {
-	main {
-		resources {
-			srcDirs += "src/main/generated"
-		}
-	}
-}
-
-dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings loom.layered() {
-plugins {
-	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
-	id 'maven-publish'
-}
-
-version = project.mod_version
-group = project.maven_group
-
-repositories {
-	maven {
-		name = "ParchmentMC"
-		url = 'https://maven.parchmentmc.org'
-	}
-
-	maven { url = "https://api.modrinth.com/maven" }
-	maven { url = "https://mvn.devos.one/releases/" }
-
-	maven {
-		name = "Terraformers"
-		url = "https://maven.terraformersmc.com/"
-	}
-
-	maven {
-		name = 'Xander Maven'
-		url = 'https://maven.isxander.dev/releases'
-	}
-}
-
-loom {
-	splitEnvironmentSourceSets()
-
-	loom {
-		runs {
-			datagen {
-				server()
-				name "Data Generation"
-				vmArg "-Dfabric-api.datagen"
-				vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-				vmArg "-Dfabric-api.datagen.modid=substance"
-			}
-		}
-	}
-
-	mods {
-		"substance" {
-			sourceSet sourceSets.main
-			sourceSet sourceSets.client
-		}
-	}
-
 }
 
 fabricApi {
@@ -174,7 +100,7 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.release = 17
-	it.options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
+	it.options.compilerArgs << "-Xlint:deprecation"
 }
 
 java {

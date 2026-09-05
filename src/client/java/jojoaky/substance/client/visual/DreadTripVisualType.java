@@ -5,6 +5,7 @@ import jojoaky.substance.register.ModEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.SectionPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
@@ -89,7 +90,7 @@ public final class DreadTripVisualType extends TripVisualType {
 
     private BlockPos groundAt(ClientLevel level, Vec3 position) {
         BlockPos column = BlockPos.containing(position);
-        if (!level.hasChunkAt(column)) {
+        if (!level.hasChunk(SectionPos.blockToSectionCoord(column.getX()), SectionPos.blockToSectionCoord(column.getZ()))) {
             return null;
         }
 

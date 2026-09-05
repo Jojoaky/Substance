@@ -5,6 +5,7 @@ import jojoaky.substance.register.ModEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.SectionPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
@@ -69,7 +70,7 @@ public final class HallucinationTripVisualType extends TripVisualType {
                     random.nextInt(7) - 3,
                     random.nextInt(15) - 7
             );
-            if (!level.hasChunkAt(position)) {
+            if (!level.hasChunk(SectionPos.blockToSectionCoord(position.getX()), SectionPos.blockToSectionCoord(position.getZ()))) {
                 continue;
             }
             BlockState state = level.getBlockState(position);

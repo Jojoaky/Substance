@@ -7,7 +7,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -44,7 +44,7 @@ public final class BlockTripVisual extends TripVisual {
         minecraft.getBlockRenderer().renderSingleBlock(
                 block,
                 context.matrixStack(),
-                type -> blockImage.getBuffer(RenderType.entityTranslucent(TextureAtlas.LOCATION_BLOCKS)),
+                type -> blockImage.getBuffer(RenderType.entityTranslucent(InventoryMenu.BLOCK_ATLAS)),
                 packedLight,
                 OverlayTexture.NO_OVERLAY
         );
