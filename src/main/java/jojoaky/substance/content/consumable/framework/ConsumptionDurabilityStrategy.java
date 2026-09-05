@@ -25,7 +25,7 @@ public class ConsumptionDurabilityStrategy implements DurabilityStrategy {
 
     @Override
     public Item.Properties configureProperties(Item.Properties properties) {
-        return properties.stacksTo(1);
+        return properties;
     }
 
     @Override
@@ -38,6 +38,12 @@ public class ConsumptionDurabilityStrategy implements DurabilityStrategy {
         if (nextDamage >= getConsumeDurability(stack)) {
             item.stopConsuming(stack, level, entity, useDuration);
             stack.shrink(1);
+            if (!stack.isEmpty() && stack.hasTag()) {
+                stack.getTag().remove(DAMAGE_KEY);
+                if (stack.getTag().isEmpty()) {
+                    stack.setTag(null);
+                }
+            }
         } else {
             setCustomDamage(stack, nextDamage);
         }

@@ -50,7 +50,7 @@ public class ModItems {
 
     public static final Item HERBAL_ROLL = register(
             new JointItem(new FabricItemSettings()
-                    .stacksTo(1)
+                    .stacksTo(16)
                     .rarity(Rarity.UNCOMMON)
             ),
             "herbal_roll"
@@ -58,7 +58,7 @@ public class ModItems {
 
     public static final Item THICK_HERBAL_ROLL = register(
             new ThickJointItem(new FabricItemSettings()
-                    .stacksTo(1)
+                    .stacksTo(16)
                     .rarity(Rarity.RARE)
             ),
             "thick_herbal_roll"
@@ -66,7 +66,7 @@ public class ModItems {
 
     public static final Item CIGARETTE = register(
             new CigaretteItem(new FabricItemSettings()
-                    .stacksTo(1)
+                    .stacksTo(16)
                     .rarity(Rarity.RARE)
             ),
             "cigarette"

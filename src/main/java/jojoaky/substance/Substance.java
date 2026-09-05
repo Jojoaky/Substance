@@ -73,12 +73,12 @@ public class Substance implements ModInitializer {
 		));
 
 		PipeRegistry.register(PipeSmokableItem.effectGiving(
-				ModFluids.WHITE_CRYSTAL_OIL_FLASK,
+				ModItems.WHITE_CRYSTALS,
 				new StackingEffect(ModEffects.SURGE, 8, 1000, 1)
 		));
 
 		PipeRegistry.register(PipeSmokableItem.effectGiving(
-				ModFluids.BLUE_CRYSTAL_OIL_FLASK,
+				ModItems.BLUE_CRYSTALS,
 				new StackingEffect(ModEffects.SURGE, 8, 700, 3)
 		));
 
@@ -91,7 +91,7 @@ public class Substance implements ModInitializer {
 						SubstanceEffectHelper.applyEffectBase(
 								context.entity(),
 								ModEffects.DREAD,
-								context.consumeDuration() * 10,
+								context.consumeDuration() * 5,
 								0
 						);
 					} else {
