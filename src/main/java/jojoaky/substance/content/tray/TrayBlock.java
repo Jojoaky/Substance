@@ -30,6 +30,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
+import org.jetbrains.annotations.NotNull;
 
 public class TrayBlock extends Block {
     public static final IntegerProperty LEVEL = IntegerProperty.create("level", 1, 3);
@@ -52,7 +53,9 @@ public class TrayBlock extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    @SuppressWarnings("deprecation")
+    public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos,
+                                          @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
         ItemStack heldStack = player.getItemInHand(hand);
         int trayLevel = state.getValue(LEVEL);
 
@@ -115,26 +118,29 @@ public class TrayBlock extends Block {
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    @SuppressWarnings("deprecation")
+    public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return state.getValue(EmptyTrayBlock.FACING).getAxis() == net.minecraft.core.Direction.Axis.Z
                 ? EmptyTrayBlock.SHAPE
                 : EmptyTrayBlock.ROTATED_SHAPE;
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         return defaultBlockState().setValue(EmptyTrayBlock.FACING, EmptyTrayBlock.getPlacementFacing(context));
     }
 
     @Override
-    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+    @SuppressWarnings("deprecation")
+    public boolean canSurvive(@NotNull BlockState state, LevelReader level, BlockPos pos) {
         BlockPos below = pos.below();
         return level.getBlockState(below).isFaceSturdy(level, below, Direction.UP);
     }
 
     @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,
-                                  LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+    @SuppressWarnings("deprecation")
+    public @NotNull BlockState updateShape(@NotNull BlockState state, @NotNull Direction direction, @NotNull BlockState neighborState,
+                                           @NotNull LevelAccessor level, @NotNull BlockPos pos, @NotNull BlockPos neighborPos) {
         if (direction == Direction.DOWN && !canSurvive(state, level, pos)) {
             return Blocks.AIR.defaultBlockState();
         }
@@ -142,7 +148,8 @@ public class TrayBlock extends Block {
     }
 
     @Override
-    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+    @SuppressWarnings("deprecation")
+    public void onPlace(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
         if (!level.isClientSide && state.getValue(LEVEL) == 3 && !state.getValue(DRIED)) {
             level.scheduleTick(pos, this, DRY_DELAY_TICKS);
@@ -155,7 +162,8 @@ public class TrayBlock extends Block {
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, net.minecraft.util.RandomSource random) {
+    @SuppressWarnings("deprecation")
+    public void tick(BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull net.minecraft.util.RandomSource random) {
         if (state.getValue(LEVEL) == 3 && !state.getValue(DRIED)) {
             level.setBlock(pos, state.setValue(DRIED, true), Block.UPDATE_ALL);
             level.playSound(null, pos, net.minecraft.sounds.SoundEvents.BOTTLE_FILL,

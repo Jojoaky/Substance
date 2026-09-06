@@ -94,6 +94,7 @@ public class LargeHerbBlock extends DoublePlantBlock implements BonemealableBloc
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos,
                                           Player player, InteractionHand hand, BlockHitResult hit) {
         int age = state.getValue(AGE);
@@ -139,6 +140,7 @@ public class LargeHerbBlock extends DoublePlantBlock implements BonemealableBloc
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void randomTick(BlockState state, ServerLevel level,
                            BlockPos pos, RandomSource random) {
         int age = state.getValue(AGE);

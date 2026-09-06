@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
+import org.jetbrains.annotations.NotNull;
 
 public class ChemicalFluidBlock extends LiquidBlock {
 
@@ -21,7 +22,8 @@ public class ChemicalFluidBlock extends LiquidBlock {
     }
 
     @Override
-    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+    @SuppressWarnings("deprecation")
+    public void entityInside(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos, @NotNull Entity entity) {
         if (toxicity <= 0) return;
 
         if (!(entity instanceof LivingEntity livingEntity)) return;

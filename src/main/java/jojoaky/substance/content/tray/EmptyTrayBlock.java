@@ -50,7 +50,9 @@ public class EmptyTrayBlock extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    @SuppressWarnings("deprecation")
+    public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos,
+                                          Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
         ModTrays.TrayEntry tray = ModTrays.getForFlask(player.getItemInHand(hand).getItem());
         if (tray == null) return InteractionResult.PASS;
 
@@ -64,7 +66,8 @@ public class EmptyTrayBlock extends Block {
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    @SuppressWarnings("deprecation")
+    public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return state.getValue(FACING).getAxis() == Direction.Axis.Z ? SHAPE : ROTATED_SHAPE;
     }
 
@@ -74,14 +77,16 @@ public class EmptyTrayBlock extends Block {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         BlockPos below = pos.below();
         return level.getBlockState(below).isFaceSturdy(level, below, Direction.UP);
     }
 
     @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,
-                                  LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+    @SuppressWarnings("deprecation")
+    public @NotNull BlockState updateShape(@NotNull BlockState state, @NotNull Direction direction, @NotNull BlockState neighborState,
+                                           @NotNull LevelAccessor level, @NotNull BlockPos pos, @NotNull BlockPos neighborPos) {
         if (direction == Direction.DOWN && !canSurvive(state, level, pos)) {
             return Blocks.AIR.defaultBlockState();
         }
@@ -93,7 +98,8 @@ public class EmptyTrayBlock extends Block {
     }
 
     @Override
-    public @NotNull List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+    @SuppressWarnings("deprecation")
+    public @NotNull List<ItemStack> getDrops(@NotNull BlockState state, LootParams.@NotNull Builder builder) {
         return List.of(new ItemStack(asItem()));
     }
 
