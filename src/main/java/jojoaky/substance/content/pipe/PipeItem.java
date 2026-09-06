@@ -37,8 +37,8 @@ public class PipeItem extends ConsumableItem {
         super(
                 properties,
                 new VanillaSuppliedDurabilityStrategy(durabilityProvider),
-                () -> Math.round(Config.get().maxSmokeDuration * 20.0f),
-                () -> Math.round(Config.get().smokeCooldown * 20.0f),
+                () -> Math.round(Config.gameplay().maxSmokeDuration() * 20.0f),
+                () -> Math.round(Config.gameplay().smokeCooldown() * 20.0f),
                 UseAnim.SPYGLASS,
                 new SmokeComponent()
         );
@@ -86,7 +86,7 @@ public class PipeItem extends ConsumableItem {
     }
 
     private void reduceStackAfterConsume(RandomSource random, ItemStack stack, int useDuration) {
-        float probability = Config.get().pipeItemConsumeProbability;
+        float probability = Config.gameplay().pipeItemConsumeProbability();
 
         if (probability <= 0) return;
 

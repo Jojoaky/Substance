@@ -10,6 +10,6 @@ public final class KeenEffect extends VisualMobEffect {
     }
 
     public float applyMiningSpeed(Player player, float speed) {
-        return player.hasEffect(this) ? speed * Config.get().keenMiningSpeedMultiplier : speed;
+        return player.hasEffect(this) ? speed * Config.gameplay().keenMiningSpeedMultiplier() : speed;
     }
 }

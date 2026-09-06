@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 
 public class ThickJointItem extends JointItem {
     public ThickJointItem(Properties properties) {
-        super(properties, stack -> Config.get().thickHerbalRollDurability);
+        super(properties, stack -> Config.gameplay().thickHerbalRollDurability());
     }
 
     @Override

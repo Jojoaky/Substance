@@ -17,9 +17,9 @@ public class CigaretteItem extends ConsumableItem {
     public CigaretteItem(Properties properties) {
         super(
                 properties,
-                new ConsumptionDurabilityStrategy(stack -> Config.get().cigaretteDurability),
-                () -> Math.round(Config.get().maxSmokeDuration * 20.0f),
-                () -> Math.round(Config.get().smokeCooldown * 20.0f),
+                new ConsumptionDurabilityStrategy(stack -> Config.gameplay().cigaretteDurability()),
+                () -> Math.round(Config.gameplay().maxSmokeDuration() * 20.0f),
+                () -> Math.round(Config.gameplay().smokeCooldown() * 20.0f),
                 UseAnim.SPYGLASS,
                 new SmokeComponent()
         );

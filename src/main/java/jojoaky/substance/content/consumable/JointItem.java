@@ -15,15 +15,15 @@ import net.minecraft.world.level.Level;
 
 public class JointItem extends ConsumableItem {
     public JointItem(Properties properties) {
-        this(properties, stack -> Config.get().herbalRollDurability);
+        this(properties, stack -> Config.gameplay().herbalRollDurability());
     }
 
     protected JointItem(Properties properties, java.util.function.ToIntFunction<ItemStack> durabilityProvider) {
         super(
                 properties,
                 new ConsumptionDurabilityStrategy(durabilityProvider),
-                () -> Math.round(Config.get().maxSmokeDuration * 20.0f),
-                () -> Math.round(Config.get().smokeCooldown * 20.0f),
+                () -> Math.round(Config.gameplay().maxSmokeDuration() * 20.0f),
+                () -> Math.round(Config.gameplay().smokeCooldown() * 20.0f),
                 UseAnim.SPYGLASS,
                 new SmokeComponent()
         );

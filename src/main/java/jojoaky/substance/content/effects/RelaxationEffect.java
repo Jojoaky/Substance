@@ -26,7 +26,7 @@ public final class RelaxationEffect extends VisualMobEffect {
         }
 
         player.removeEffect(this);
-        player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, Config.get().relaxationDarknessDuration, 0));
+        player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, Config.gameplay().relaxationDarknessDuration(), 0));
 
         LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(level);
         if (lightning == null) {

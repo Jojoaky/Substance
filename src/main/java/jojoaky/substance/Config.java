@@ -3,9 +3,14 @@ package jojoaky.substance;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
+import jojoaky.substance.config.GameplayConfig;
+import jojoaky.substance.config.GameplayOption;
+import jojoaky.substance.config.GameplayOptions;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.resources.ResourceLocation;
 
-public class Config {
+public class Config implements GameplayOptions {
+    private static volatile GameplayConfig synchronizedGameplay;
     public static final boolean DEFAULT_ENABLE_SHADER_EFFECTS = true;
     public static final float DEFAULT_VISUAL_EFFECT_STRENGTH = 1.0f;
     public static final boolean DEFAULT_VISUAL_EFFECTS_IN_MENUS = true;
@@ -45,7 +50,7 @@ public class Config {
     public static final int DEFAULT_RELAXATION_DARKNESS_DURATION = 200;
 
     public static ConfigClassHandler<Config> HANDLER = ConfigClassHandler.createBuilder(Config.class)
-            .id(Substance.resource("config"))
+            .id(new ResourceLocation(Substance.MOD_ID, "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(FabricLoader.getInstance().getConfigDir().resolve("substance.json"))
                     .build())
@@ -53,6 +58,19 @@ public class Config {
 
     public static Config get() {
         return HANDLER.instance();
+    }
+
+    public static GameplayOptions gameplay() {
+        GameplayConfig synchronizedConfig = synchronizedGameplay;
+        return synchronizedConfig != null ? synchronizedConfig : get();
+    }
+
+    public static void setSynchronizedGameplay(GameplayConfig gameplayConfig) {
+        synchronizedGameplay = gameplayConfig;
+    }
+
+    public static void clearSynchronizedGameplay() {
+        synchronizedGameplay = null;
     }
 
     // Client
@@ -115,54 +133,162 @@ public class Config {
 
     // Gameplay
     @SerialEntry
+    @GameplayOption
     public int woodenPipeDurability = DEFAULT_WOODEN_PIPE_DURABILITY;
 
     @SerialEntry
+    @GameplayOption
     public int bubblePipeDurability = DEFAULT_BUBBLE_PIPE_DURABILITY;
 
     @SerialEntry
+    @GameplayOption
     public int herbalRollDurability = DEFAULT_HERBAL_ROLL_DURABILITY;
 
     @SerialEntry
+    @GameplayOption
     public int thickHerbalRollDurability = DEFAULT_THICK_HERBAL_ROLL_DURABILITY;
 
     @SerialEntry
+    @GameplayOption
     public int cigaretteDurability = DEFAULT_CIGARETTE_DURABILITY;
 
     @SerialEntry
+    @GameplayOption
     public float maxSmokeDuration = DEFAULT_MAX_SMOKE_DURATION;
     @SerialEntry
+    @GameplayOption
     public float smokeCooldown = DEFAULT_SMOKE_COOLDOWN;
 
     @SerialEntry
+    @GameplayOption
     public float maxSniffDuration = DEFAULT_MAX_SNIFF_DURATION;
     @SerialEntry
+    @GameplayOption
     public float sniffCooldown = DEFAULT_SNIFF_COOLDOWN;
 
     @SerialEntry
+    @GameplayOption
     public float pipeItemConsumeProbability = DEFAULT_PIPE_ITEM_CONSUME_PROBABILITY;
 
     @SerialEntry
+    @GameplayOption
     public int mobUseAttemptInterval = DEFAULT_MOB_USE_ATTEMPT_INTERVAL;
 
     @SerialEntry
+    @GameplayOption
     public float horrorTripChance = DEFAULT_HORROR_TRIP_CHANCE;
 
     @SerialEntry
+    @GameplayOption
     public float surgeMovementSpeedBonus = DEFAULT_SURGE_MOVEMENT_SPEED_BONUS;
 
     @SerialEntry
+    @GameplayOption
     public float surgeElytraBoost = DEFAULT_SURGE_ELYTRA_BOOST;
 
     @SerialEntry
+    @GameplayOption
     public float surgeElytraMaxSpeed = DEFAULT_SURGE_ELYTRA_MAX_SPEED;
 
     @SerialEntry
+    @GameplayOption
     public float surgeElytraMaxSpeedPerLevel = DEFAULT_SURGE_ELYTRA_MAX_SPEED_PER_LEVEL;
 
     @SerialEntry
+    @GameplayOption
     public float keenMiningSpeedMultiplier = DEFAULT_KEEN_MINING_SPEED_MULTIPLIER;
 
     @SerialEntry
+    @GameplayOption
     public int relaxationDarknessDuration = DEFAULT_RELAXATION_DARKNESS_DURATION;
+
+    @Override
+    public int woodenPipeDurability() {
+        return woodenPipeDurability;
+    }
+
+    @Override
+    public int bubblePipeDurability() {
+        return bubblePipeDurability;
+    }
+
+    @Override
+    public int herbalRollDurability() {
+        return herbalRollDurability;
+    }
+
+    @Override
+    public int thickHerbalRollDurability() {
+        return thickHerbalRollDurability;
+    }
+
+    @Override
+    public int cigaretteDurability() {
+        return cigaretteDurability;
+    }
+
+    @Override
+    public float maxSmokeDuration() {
+        return maxSmokeDuration;
+    }
+
+    @Override
+    public float smokeCooldown() {
+        return smokeCooldown;
+    }
+
+    @Override
+    public float maxSniffDuration() {
+        return maxSniffDuration;
+    }
+
+    @Override
+    public float sniffCooldown() {
+        return sniffCooldown;
+    }
+
+    @Override
+    public float pipeItemConsumeProbability() {
+        return pipeItemConsumeProbability;
+    }
+
+    @Override
+    public int mobUseAttemptInterval() {
+        return mobUseAttemptInterval;
+    }
+
+    @Override
+    public float horrorTripChance() {
+        return horrorTripChance;
+    }
+
+    @Override
+    public float surgeMovementSpeedBonus() {
+        return surgeMovementSpeedBonus;
+    }
+
+    @Override
+    public float surgeElytraBoost() {
+        return surgeElytraBoost;
+    }
+
+    @Override
+    public float surgeElytraMaxSpeed() {
+        return surgeElytraMaxSpeed;
+    }
+
+    @Override
+    public float surgeElytraMaxSpeedPerLevel() {
+        return surgeElytraMaxSpeedPerLevel;
+    }
+
+    @Override
+    public float keenMiningSpeedMultiplier() {
+        return keenMiningSpeedMultiplier;
+    }
+
+    @Override
+    public int relaxationDarknessDuration() {
+        return relaxationDarknessDuration;
+    }
 }

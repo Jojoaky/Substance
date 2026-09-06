@@ -5,6 +5,8 @@ import com.terraformersmc.modmenu.api.ModMenuApi;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.*;
 import jojoaky.substance.Config;
+import jojoaky.substance.config.ConfigSync;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 
 public class ModMenuIntegration implements ModMenuApi {
@@ -13,11 +15,22 @@ public class ModMenuIntegration implements ModMenuApi {
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return parentScreen -> YetAnotherConfigLib.createBuilder()
                 .title(Component.translatable("text.config.substance.title"))
-                .save(() -> Config.HANDLER.save())
+                .save(this::saveConfig)
                 .category(buildClientCategory())
                 .category(buildGameplayCategory())
                 .build()
                 .generateScreen(parentScreen);
+    }
+
+    private void saveConfig() {
+        Config.HANDLER.save();
+
+        Minecraft client = Minecraft.getInstance();
+        var server = client.getSingleplayerServer();
+        if (server != null) {
+            Config.clearSynchronizedGameplay();
+            server.execute(() -> ConfigSync.broadcast(server));
+        }
     }
 
     private ConfigCategory buildGameplayCategory() {

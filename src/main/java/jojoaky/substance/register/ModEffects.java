@@ -1,6 +1,5 @@
 package jojoaky.substance.register;
 
-import jojoaky.substance.Config;
 import jojoaky.substance.Substance;
 import jojoaky.substance.content.effects.KeenEffect;
 import jojoaky.substance.content.effects.RelaxationEffect;
@@ -12,8 +11,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -53,12 +50,6 @@ public class ModEffects {
     public static final SurgeEffect SURGE = registerEffect(
             "surge",
             new SurgeEffect(MobEffectCategory.BENEFICIAL, 0xffffee44)
-                    .addAttributeModifier(
-                            Attributes.MOVEMENT_SPEED,
-                            SurgeEffect.MOVEMENT_SPEED_MODIFIER_UUID,
-                            Config.get().surgeMovementSpeedBonus,
-                            AttributeModifier.Operation.MULTIPLY_TOTAL
-                    )
     );
     // Shrooms -> visual: fake entities / effect: peace?
     public static final MobEffect HALLUCINATION= registerEffect("hallucination",MobEffectCategory.NEUTRAL,    0xffcc44cc);

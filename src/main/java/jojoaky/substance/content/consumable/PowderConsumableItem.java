@@ -11,8 +11,8 @@ public class PowderConsumableItem extends ConsumableItem {
         super(
                 properties,
                 new SingleUseDurabilityStrategy(),
-                () -> Math.round(Config.get().maxSniffDuration * 20.0f),
-                () -> Math.round(Config.get().sniffCooldown * 20.0f),
+                () -> Math.round(Config.gameplay().maxSniffDuration() * 20.0f),
+                () -> Math.round(Config.gameplay().sniffCooldown() * 20.0f),
                 UseAnim.NONE,
                 new PowderComponent()
         );

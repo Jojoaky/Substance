@@ -73,10 +73,10 @@ public interface SmokableItem {
     }
 
     default int getSmokeDuration() {
-        return Math.round(Config.get().maxSmokeDuration * 20.0f);
+        return Math.round(Config.gameplay().maxSmokeDuration() * 20.0f);
     }
 
     default int getSmokeCooldown() {
-        return Math.round(Config.get().smokeCooldown * 20.0f);
+        return Math.round(Config.gameplay().smokeCooldown() * 20.0f);
     }
 }

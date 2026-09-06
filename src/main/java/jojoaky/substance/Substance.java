@@ -6,6 +6,7 @@ import jojoaky.substance.content.mob.equipment.MobEquipmentRegistry;
 import jojoaky.substance.content.pipe.PipeMenu;
 import jojoaky.substance.content.pipe.PipeRegistry;
 import jojoaky.substance.content.pipe.PipeSmokableItem;
+import jojoaky.substance.config.ConfigSync;
 import jojoaky.substance.datagen.entries.Loot;
 import jojoaky.substance.datagen.entries.SecretTrades;
 import jojoaky.substance.datagen.entries.Trades;
@@ -41,6 +42,7 @@ public class Substance implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		Config.HANDLER.load();
+		ConfigSync.initializeServer();
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> WelcomeHandler.onPlayerJoin(handler.getPlayer(), server));
 
@@ -86,7 +88,7 @@ public class Substance implements ModInitializer {
 		PipeRegistry.register(new PipeSmokableItem(
 				Items.RED_MUSHROOM,
 				(context) -> {
-					boolean horrorTrip = context.level().random.nextFloat() < Config.get().horrorTripChance;
+					boolean horrorTrip = context.level().random.nextFloat() < Config.gameplay().horrorTripChance();
 
 					if (horrorTrip) {
 						SubstanceEffectHelper.applyEffectBase(
@@ -114,7 +116,6 @@ public class Substance implements ModInitializer {
 //  - Create detailed documentation / wiki for all content (markdown or github pages)
 //  - Create a tutorial / summary.
 //  - Add more translations.
-//  - Sync config between server and client
 //	- Check config
 //  - Make relaxation effect only stop when hitting living entity
 // 	(future):

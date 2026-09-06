@@ -3,6 +3,7 @@ package jojoaky.substance.client;
 import jojoaky.substance.Config;
 import jojoaky.substance.Substance;
 import jojoaky.substance.client.itemmodel.PipeItemModel;
+import jojoaky.substance.client.config.ClientConfigSync;
 import jojoaky.substance.client.screen.PipeScreen;
 import jojoaky.substance.content.chemical_fluid.ChemicalBucket;
 import jojoaky.substance.content.flask.FilledFlaskItem;
@@ -31,6 +32,7 @@ import static jojoaky.substance.register.ModFluids.ALL_FLUIDS;
 public class SubstanceClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
+		ClientConfigSync.initialize();
 		TripVisuals.init();
 		MenuScreens.register(Substance.PIPE_MENU, PipeScreen::new);
 

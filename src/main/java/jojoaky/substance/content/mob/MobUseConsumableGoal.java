@@ -29,7 +29,7 @@ public class MobUseConsumableGoal extends Goal {
             return false;
         }
 
-        int interval = Math.max(1, Config.get().mobUseAttemptInterval);
+        int interval = Math.max(1, Config.gameplay().mobUseAttemptInterval());
         this.checkCooldown = mob.getRandom().nextInt(interval);
 
         if (mob.getMainHandItem().getItem() instanceof ConsumableItem) {

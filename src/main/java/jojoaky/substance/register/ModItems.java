@@ -77,7 +77,7 @@ public class ModItems {
                     new FabricItemSettings()
                             .stacksTo(1)
                             .rarity(Rarity.RARE),
-                    stack -> Config.get().woodenPipeDurability
+                    stack -> Config.gameplay().woodenPipeDurability()
             ),
             "wooden_pipe"
     );
@@ -87,7 +87,7 @@ public class ModItems {
                     new FabricItemSettings()
                             .stacksTo(1)
                             .rarity(Rarity.RARE),
-                    stack -> Config.get().bubblePipeDurability
+                    stack -> Config.gameplay().bubblePipeDurability()
             ),
             "bubble_pipe"
     );
