@@ -112,12 +112,11 @@ public class Substance implements ModInitializer {
 // TODO: (before release)
 //  - Check crafting recipes and ensure all content is obtainable.
 //  - Check mod compatibility with other mods.
+//  /
 //  - Update README and pages with features, quick tutorial and screenshots
 //  - Create detailed documentation / wiki for all content (markdown or github pages)
 //  - Create a tutorial / summary.
 //  - Add more translations.
-//	- Check config
-//  - Make relaxation effect only stop when hitting living entity
 // 	(future):
 //  - Addiction
 //  - Update to work with 1.21.1 neoforge and latest fabric & (neo/)forge

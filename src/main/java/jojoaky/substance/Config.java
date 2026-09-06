@@ -47,7 +47,7 @@ public class Config implements GameplayOptions {
     public static final float DEFAULT_SURGE_ELYTRA_MAX_SPEED = 0.25f;
     public static final float DEFAULT_SURGE_ELYTRA_MAX_SPEED_PER_LEVEL = 0.1f;
     public static final float DEFAULT_KEEN_MINING_SPEED_MULTIPLIER = 3.0f;
-    public static final int DEFAULT_RELAXATION_DARKNESS_DURATION = 200;
+    public static final int DEFAULT_RELAXATION_DARKNESS_DURATION = 120;
 
     public static ConfigClassHandler<Config> HANDLER = ConfigClassHandler.createBuilder(Config.class)
             .id(new ResourceLocation(Substance.MOD_ID, "config"))
