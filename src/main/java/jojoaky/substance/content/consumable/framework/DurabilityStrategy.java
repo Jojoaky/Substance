@@ -39,6 +39,10 @@ public interface DurabilityStrategy {
         return null;
     }
 
+    default int getMaxDamage(Item item, ItemStack stack) {
+        return item.getMaxDamage();
+    }
+
     default void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
     }
 

@@ -113,6 +113,9 @@
   "item.minecraft.lingering_potion.effect.surge": "Verweiltrank des Energieschubs",
   "item.minecraft.lingering_potion.effect.hallucination": "Verweiltrank der Halluzination",
 
+  "subtitles.substance.effect.dread.ambient": "Ein beunruhigendes Geräusch kündigt sich an",
+  "subtitles.substance.effect.hallucination.ambient": "Seltsame Geräusche hallen wider",
+
   "text.config.substance.title": "Substance Konfig",
   "text.config.substance.category.gameplay": "Gameplay",
   "text.config.substance.category.gameplay.tooltip": "Verwalte gameplaybezogene Einstellungen.",

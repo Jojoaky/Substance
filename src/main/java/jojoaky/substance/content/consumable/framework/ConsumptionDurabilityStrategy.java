@@ -1,6 +1,7 @@
 package jojoaky.substance.content.consumable.framework;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
@@ -31,25 +32,24 @@ public class ConsumptionDurabilityStrategy implements DurabilityStrategy {
 
     @Override
     public void onConsumeTick(ConsumableItem item, ItemStack stack, Level level, LivingEntity entity, int useDuration) {
+        if (level.isClientSide) return;
+
         if (!(entity instanceof Player player) || player.isCreative()) return;
 
         if (isUnbreakable(stack)) return;
 
+        int maxDurability = getConsumeDurability(stack);
+
         int nextDamage = getCustomDamage(stack) + 1;
-        if (nextDamage >= getConsumeDurability(stack)) {
+        if (nextDamage >= maxDurability) {
+            item.onConsumptionBreak(stack, level, entity);
             item.stopConsuming(stack, level, entity, useDuration);
             stack.shrink(1);
             if (!stack.isEmpty()) {
-                CompoundTag tag = stack.getTag();
-                if (tag != null) {
-                    tag.remove(DAMAGE_KEY);
-                    if (tag.isEmpty()) {
-                        stack.setTag(null);
-                    }
-                }
+                clearDurability(stack);
             }
         } else {
-            setCustomDamage(stack, nextDamage);
+            setCustomDamage(stack, nextDamage, maxDurability);
         }
     }
 
@@ -102,7 +102,7 @@ public class ConsumptionDurabilityStrategy implements DurabilityStrategy {
     }
 
     private int getConsumeDurability(ItemStack stack) {
-        return maxDurabilityProvider.applyAsInt(stack);
+        return Math.max(1, maxDurabilityProvider.applyAsInt(stack));
     }
 
     private int getCustomDamage(ItemStack stack) {
@@ -110,7 +110,17 @@ public class ConsumptionDurabilityStrategy implements DurabilityStrategy {
         return tag != null ? tag.getInt(DAMAGE_KEY) : 0;
     }
 
-    private void setCustomDamage(ItemStack stack, int damage) {
-        stack.getOrCreateTag().putInt(DAMAGE_KEY, Mth.clamp(damage, 0, getConsumeDurability(stack)));
+    private void setCustomDamage(ItemStack stack, int damage, int maxDurability) {
+        stack.getOrCreateTag().putInt(DAMAGE_KEY, Mth.clamp(damage, 0, maxDurability));
+    }
+
+    private void clearDurability(ItemStack stack) {
+        CompoundTag tag = stack.getTag();
+        if (tag != null) {
+            tag.remove(DAMAGE_KEY);
+            if (tag.isEmpty()) {
+                stack.setTag(null);
+            }
+        }
     }
 }

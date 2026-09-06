@@ -73,19 +73,21 @@ public class ModItems {
     );
 
     public static final Item WOODEN_PIPE = register(
-            new PipeItem(new FabricItemSettings()
-                    .stacksTo(1)
-                    .durability(Config.get().woodenPipeDurability)
-                    .rarity(Rarity.RARE)
+            new PipeItem(
+                    new FabricItemSettings()
+                            .stacksTo(1)
+                            .rarity(Rarity.RARE),
+                    stack -> Config.get().woodenPipeDurability
             ),
             "wooden_pipe"
     );
 
     public static final Item BUBBLE_PIPE = register(
-            new PipeItem(new FabricItemSettings()
-                    .stacksTo(1)
-                    .durability(Config.get().bubblePipeDurability)
-                    .rarity(Rarity.RARE)
+            new PipeItem(
+                    new FabricItemSettings()
+                            .stacksTo(1)
+                            .rarity(Rarity.RARE),
+                    stack -> Config.get().bubblePipeDurability
             ),
             "bubble_pipe"
     );

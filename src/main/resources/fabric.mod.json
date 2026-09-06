@@ -3,13 +3,14 @@
 	"id": "substance",
 	"version": "${version}",
 	"name": "Substance",
-	"description": "Substance adds various consumable alcohol, smokable, and Breaking Bad inspired items!",
+	"description": "Substance adds various consumable, smokable, and Breaking Bad inspired items!",
 	"authors": [
 		"Jojoaky", "Zute"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/Jojoaky/Substance",
+		"sources": "https://github.com/Jojoaky/Substance",
+		"issues": "https://github.com/Jojoaky/Substance/issues"
 	},
 	"license": "GPL-3.0-only",
 	"icon": "assets/substance/icon.png",
@@ -47,7 +48,7 @@
 			"links": {
 				"modmenu.github": "https://github.com/Jojoaky/Substance",
 				"modmenu.modrinth": "https://modrinth.com/project/EiAqNYtB",
-				"modmenu.curseforge": ""
+				"modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/substance-create-compatible"
 			},
 			"update_checker": true
 		}

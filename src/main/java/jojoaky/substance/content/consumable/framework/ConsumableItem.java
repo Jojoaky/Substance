@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.IntSupplier;
 
-public class ConsumableItem extends Item {
+public class ConsumableItem extends Item implements DynamicDurabilityItem {
 
     private final DurabilityStrategy durabilityStrategy;
     private final IntSupplier useDurationProvider;
@@ -136,6 +136,11 @@ public class ConsumableItem extends Item {
     }
 
     @Override
+    public int getMaxDamage(Item item, ItemStack stack) {
+        return durabilityStrategy.getMaxDamage(item, stack);
+    }
+
+    @Override
     public boolean allowNbtUpdateAnimation(
             Player player,
             InteractionHand hand,
@@ -194,5 +199,8 @@ public class ConsumableItem extends Item {
     }
 
     protected void onFinishConsuming(ItemStack stack, Level level, LivingEntity entity, int useDuration) {
+    }
+
+    protected void onConsumptionBreak(ItemStack stack, Level level, LivingEntity entity) {
     }
 }

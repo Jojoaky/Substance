@@ -3,9 +3,7 @@ package jojoaky.substance.content.pipe;
 import jojoaky.substance.Config;
 import jojoaky.substance.Substance;
 import  jojoaky.substance.content.ItemContainer;
-import jojoaky.substance.content.consumable.framework.ConsumableItem;
-import jojoaky.substance.content.consumable.framework.SmokeComponent;
-import jojoaky.substance.content.consumable.framework.VanillaDurabilityStrategy;
+import jojoaky.substance.content.consumable.framework.*;
 import jojoaky.substance.register.ModEffects;
 import jojoaky.substance.util.SubstanceEffectHelper;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
@@ -32,13 +30,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Consumer;
+import java.util.function.ToIntFunction;
 
 public class PipeItem extends ConsumableItem {
-    public PipeItem(Properties properties) {
+    public PipeItem(Properties properties, ToIntFunction<ItemStack> durabilityProvider) {
         super(
                 properties,
-                new VanillaDurabilityStrategy(),
+                new VanillaSuppliedDurabilityStrategy(durabilityProvider),
                 () -> Math.round(Config.get().maxSmokeDuration * 20.0f),
                 () -> Math.round(Config.get().smokeCooldown * 20.0f),
                 UseAnim.SPYGLASS,
@@ -105,6 +103,8 @@ public class PipeItem extends ConsumableItem {
 
     private void handleConsumeIngredient(ItemStack ingredientStack, Set<Item> processedItems, ItemStack stack, Level level, LivingEntity entity, int useDuration) {
         if (ingredientStack == null || ingredientStack.isEmpty()) return;
+
+        if (level.isClientSide) return;
 
         Item item = ingredientStack.getItem();
 
