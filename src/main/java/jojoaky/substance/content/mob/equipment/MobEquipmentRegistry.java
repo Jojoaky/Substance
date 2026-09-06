@@ -14,8 +14,10 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public final class MobEquipmentRegistry {
     public static final String DIRECTORY = "mob_equipment";
@@ -39,6 +41,7 @@ public final class MobEquipmentRegistry {
 
     public static void applyRandomEquipment(Mob mob) {
         if (!(mob.level() instanceof ServerLevel serverLevel)) return;
+        Set<EquipmentSlot> assigned = EnumSet.noneOf(EquipmentSlot.class);
 
         for (MobEquipment definition : EQUIPMENT_DEFINITIONS) {
             if (!definition.matches(mob.getType())) {
@@ -46,10 +49,16 @@ public final class MobEquipmentRegistry {
             }
 
             for (Map.Entry<EquipmentSlot, ResourceLocation> entry : definition.equipment().entrySet()) {
+                EquipmentSlot slot = entry.getKey();
+                if (assigned.contains(slot) || !mob.getItemBySlot(slot).isEmpty()) {
+                    continue;
+                }
+
                 List<ItemStack> generatedItems = generateItems(serverLevel, mob, entry.getValue());
 
-                if (generatedItems.size() == 1) {
-                    mob.setItemSlot(entry.getKey(), generatedItems.get(0));
+                if (generatedItems.size() == 1 && !generatedItems.get(0).isEmpty()) {
+                    mob.setItemSlot(slot, generatedItems.get(0));
+                    assigned.add(slot);
                 } else if (generatedItems.size() > 1) {
                     Substance.LOGGER.error(
                             "Mob equipment loot table {} for definition {} generated {} items; expected at most one.",

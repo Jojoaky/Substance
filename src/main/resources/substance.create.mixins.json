@@ -1,20 +1,15 @@
 {
-  "required": true,
+  "required": false,
   "package": "jojoaky.substance.mixin",
   "plugin": "jojoaky.substance.ConditionalMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "FireworkRocketItemMixin",
-    "ItemStackMixin",
-    "LivingEntityMixin",
-    "LootContextRegisterInvoker",
-    "MobMixin",
-    "PlayerMixin"
+    "HarvesterMovementBehaviourMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "overwrites": {
     "requireAnnotations": true
-	}
+  }
 }

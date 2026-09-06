@@ -31,6 +31,7 @@
 	},
 	"mixins": [
 		"substance.mixins.json",
+		"substance.create.mixins.json",
 		{
 			"config": "substance.client.mixins.json",
 			"environment": "client"

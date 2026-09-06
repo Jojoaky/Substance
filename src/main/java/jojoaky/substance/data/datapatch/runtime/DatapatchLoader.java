@@ -3,13 +3,13 @@ package jojoaky.substance.data.datapatch.runtime;
 import jojoaky.substance.Substance;
 import jojoaky.substance.data.generator.datapatch.DatapatchRegistry;
 import jojoaky.substance.data.generator.datapatch.def.LootEntryDef;
+import jojoaky.substance.data.generator.datapatch.def.MerchantTradeDef;
 import jojoaky.substance.data.generator.datapatch.def.VillagerTradeDef;
 import jojoaky.substance.data.generator.datapatch.def.WanderingTraderTradeDef;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
@@ -20,50 +20,34 @@ import java.util.*;
 
 // Currently uses hardcoded items from DatapackRegistry, might upgrade to data-driven approach in the future
 public class DatapatchLoader {
-    public static final Map<ResourceLocation, List<LootEntryDef>> LOOT_PATCHES = new HashMap<>();
-    public static final Map<VillagerProfession, Map<Integer, List<VillagerTradeDef>>> VILLAGER_TRADES = new HashMap<>();
-    public static final Map<Integer, List<WanderingTraderTradeDef>> WANDERING_TRADER_TRADES = new HashMap<>();
+    public static volatile Map<ResourceLocation, List<LootEntryDef>> LOOT_PATCHES = Map.of();
+    public static volatile Map<VillagerProfession, Map<Integer, List<VillagerTradeDef>>> VILLAGER_TRADES = Map.of();
+    public static volatile Map<Integer, List<WanderingTraderTradeDef>> WANDERING_TRADER_TRADES = Map.of();
 
-    private static boolean lootTableEventRegistered = false;
+    private static boolean callbacksRegistered = false;
 
     public static void init() {
-        LOOT_PATCHES.clear();
-        VILLAGER_TRADES.clear();
-        WANDERING_TRADER_TRADES.clear();
+        Map<ResourceLocation, List<LootEntryDef>> lootPatches = new HashMap<>();
+        Map<VillagerProfession, Map<Integer, List<VillagerTradeDef>>> villagerTrades = new HashMap<>();
+        Map<Integer, List<WanderingTraderTradeDef>> wanderingTraderTrades = new HashMap<>();
 
-        DatapatchRegistry.LOOT_TABLE_PATCHES.forEach(entry -> LOOT_PATCHES.computeIfAbsent(entry.getTargetTable(), k -> new ArrayList<>()).add(entry));
-        DatapatchRegistry.VILLAGER_TRADES.forEach(trade -> VILLAGER_TRADES.computeIfAbsent(trade.getProfession(), p -> new HashMap<>()).computeIfAbsent(trade.getLevel(), l -> new ArrayList<>()).add(trade));
-        DatapatchRegistry.WANDERING_TRADER_TRADES.forEach(trade -> WANDERING_TRADER_TRADES.computeIfAbsent(trade.getPool(), p -> new ArrayList<>()).add(trade));
+        DatapatchRegistry.LOOT_TABLE_PATCHES.forEach(entry -> lootPatches.computeIfAbsent(entry.getTargetTable(), k -> new ArrayList<>()).add(entry));
+        DatapatchRegistry.VILLAGER_TRADES.forEach(trade -> villagerTrades.computeIfAbsent(trade.getProfession(), p -> new HashMap<>()).computeIfAbsent(trade.getLevel(), l -> new ArrayList<>()).add(trade));
+        DatapatchRegistry.WANDERING_TRADER_TRADES.forEach(trade -> wanderingTraderTrades.computeIfAbsent(trade.getPool(), p -> new ArrayList<>()).add(trade));
 
-        registerLootTableEvent();
+        LOOT_PATCHES = immutableLists(lootPatches);
+        VILLAGER_TRADES = immutableNestedLists(villagerTrades);
+        WANDERING_TRADER_TRADES = immutableLists(wanderingTraderTrades);
 
-        // Register villager trades via Fabric's TradeOfferHelper
-        VILLAGER_TRADES.forEach((profession, levelMap) -> levelMap.forEach((level, trades) -> {
-            TradeOfferHelper.registerVillagerOffers(profession, level, factories -> {
-                for (var def : trades) {
-                    factories.add((entity, random) -> {
-                        try {
-                            if (!def.getCostB().isEmpty()) {
-                                return new MerchantOffer(def.getCostA(), def.getCostB(), def.getResult(), def.getMaxUses(), def.getVillagerXp(), def.getPriceMultiplier());
-                            } else {
-                                return new MerchantOffer(def.getCostA(), def.getResult(), def.getMaxUses(), def.getVillagerXp(), def.getPriceMultiplier());
-                            }
-                        } catch (Exception e) {
-                            Substance.LOGGER.error("Failed to create merchant offer for trade {}: {}", def.getName(), e.getMessage());
-                            return null;
-                        }
-                    });
-                }
-            });
-        }));
+        registerCallbacks();
 
         Substance.LOGGER.info("Loaded hardcoded datapatches: {} loot entries, {} villager trades, {} wandering trades",
                 DatapatchRegistry.LOOT_TABLE_PATCHES.size(), DatapatchRegistry.VILLAGER_TRADES.size(), DatapatchRegistry.WANDERING_TRADER_TRADES.size());
     }
 
-    private static void registerLootTableEvent() {
-        if (lootTableEventRegistered) return;
-        lootTableEventRegistered = true;
+    private static void registerCallbacks() {
+        if (callbacksRegistered) return;
+        callbacksRegistered = true;
 
         LootTableEvents.MODIFY.register((resourceManager, lootManager, lootId, tableBuilder, source) -> {
             for (LootEntryDef entry : LOOT_PATCHES.getOrDefault(lootId, Collections.emptyList())) {
@@ -78,5 +62,49 @@ public class DatapatchLoader {
                 }
             }
         });
+
+        VILLAGER_TRADES.forEach((profession, levelMap) -> levelMap.forEach((level, ignored) -> {
+            TradeOfferHelper.registerVillagerOffers(profession, level, factories -> {
+                for (VillagerTradeDef def : VILLAGER_TRADES
+                        .getOrDefault(profession, Collections.emptyMap())
+                        .getOrDefault(level, Collections.emptyList())) {
+                    factories.add((entity, random) -> createOffer(def));
+                }
+            });
+        }));
+
+        WANDERING_TRADER_TRADES.forEach((pool, ignored) ->
+                TradeOfferHelper.registerWanderingTraderOffers(pool, factories -> {
+                    for (WanderingTraderTradeDef def : WANDERING_TRADER_TRADES
+                            .getOrDefault(pool, Collections.emptyList())) {
+                        factories.add((entity, random) -> createOffer(def));
+                    }
+                })
+        );
+    }
+
+    private static MerchantOffer createOffer(MerchantTradeDef<?> def) {
+        try {
+            if (!def.getCostB().isEmpty()) {
+                return new MerchantOffer(def.getCostA(), def.getCostB(), def.getResult(), def.getMaxUses(), def.getVillagerXp(), def.getPriceMultiplier());
+            } else {
+                return new MerchantOffer(def.getCostA(), def.getResult(), def.getMaxUses(), def.getVillagerXp(), def.getPriceMultiplier());
+            }
+        } catch (Exception e) {
+            Substance.LOGGER.error("Failed to create merchant offer for trade {}: {}", def.getName(), e.getMessage());
+            return null;
+        }
+    }
+
+    private static <K, V> Map<K, List<V>> immutableLists(Map<K, List<V>> source) {
+        Map<K, List<V>> snapshot = new HashMap<>();
+        source.forEach((key, values) -> snapshot.put(key, List.copyOf(values)));
+        return Map.copyOf(snapshot);
+    }
+
+    private static <K1, K2, V> Map<K1, Map<K2, List<V>>> immutableNestedLists(Map<K1, Map<K2, List<V>>> source) {
+        Map<K1, Map<K2, List<V>>> snapshot = new HashMap<>();
+        source.forEach((key, values) -> snapshot.put(key, immutableLists(values)));
+        return Map.copyOf(snapshot);
     }
 }

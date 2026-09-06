@@ -49,7 +49,7 @@ public class Trades {
                         .xp(2)
                         .maxUses(12),
 
-                VillagerTradeDef.named("cleric_empty_flask", VillagerProfession.CLERIC, 1)
+                VillagerTradeDef.named("cleric_bubble_pipe", VillagerProfession.CLERIC, 1)
                         .buys(Items.EMERALD, 12)
                         .sells(ModItems.BUBBLE_PIPE, 1)
                         .xp(2)

@@ -3,6 +3,7 @@ package jojoaky.substance.client.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import jojoaky.substance.Config;
+import jojoaky.substance.Substance;
 import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
@@ -40,6 +41,7 @@ public class JsonEffectShaderProgramMixin {
         String path = id.substring(colon + 1);
 
         namespace = namespace.substring(namespace.lastIndexOf('/') + 1);
+
         if (!path.endsWith(".json")) path += ".json";
 
         return new ResourceLocation(namespace, SHADER_DIR + path);
@@ -69,6 +71,7 @@ public class JsonEffectShaderProgramMixin {
         String path = id.substring(colon + 1);
 
         namespace = namespace.substring(namespace.lastIndexOf('/') + 1);
+        if (!namespace.equals(Substance.MOD_ID)) return original.call(id);
 
         return new ResourceLocation(namespace, SHADER_DIR + path);
     }

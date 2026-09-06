@@ -17,6 +17,10 @@ public record MobEquipment(
     public static final int ENTITY_PRIORITY = 200;
     public static final int TAG_PRIORITY = 100;
 
+    public MobEquipment {
+        equipment = Map.copyOf(equipment);
+    }
+
     public static MobEquipment forEntity(ResourceLocation id, EntityType<?> entityType, Map<EquipmentSlot, ResourceLocation> equipment) {
         return forEntity(id, entityType, ENTITY_PRIORITY, equipment);
     }

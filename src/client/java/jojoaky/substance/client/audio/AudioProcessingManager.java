@@ -32,7 +32,7 @@ public final class AudioProcessingManager {
             if (!AL.getCapabilities().ALC_EXT_EFX) {
                 return;
             }
-        } catch (IllegalStateException e) {
+        } catch (IllegalStateException | LinkageError e) {
             return;
         }
 
@@ -55,7 +55,7 @@ public final class AudioProcessingManager {
             EXTEfx.alAuxiliaryEffectSloti(reverbSlot, EXTEfx.AL_EFFECTSLOT_EFFECT, reverbEffect);
 
             initialized = true;
-        } catch (Exception e) {
+        } catch (Exception | LinkageError e) {
             reset();
         }
     }
@@ -64,8 +64,22 @@ public final class AudioProcessingManager {
      * Called when Minecraft destroys/re-creates the SoundEngine (e.g., audio device change).
      */
     public static void reset() {
+        reset(true);
+    }
+
+    private static void reset(boolean forgetSources) {
         synchronized (activeSources) {
-            activeSources.clear();
+            try {
+                for (Integer source : activeSources) {
+                    if (AL10.alIsSource(source)) {
+                        AL10.alSourcei(source, EXTEfx.AL_DIRECT_FILTER, EXTEfx.AL_FILTER_NULL);
+                        AL11.alSource3i(source, EXTEfx.AL_AUXILIARY_SEND_FILTER, EXTEfx.AL_EFFECTSLOT_NULL, 0, EXTEfx.AL_FILTER_NULL);
+                    }
+                }
+            } catch (IllegalStateException | LinkageError ignored) {
+                // OpenAL context might already be invalidated/destroyed by Minecraft
+            }
+            if (forgetSources) activeSources.clear();
         }
 
         try {
@@ -74,7 +88,7 @@ public final class AudioProcessingManager {
                 if (reverbEffect != -1) EXTEfx.alDeleteEffects(reverbEffect);
                 if (reverbSlot != -1) EXTEfx.alDeleteAuxiliaryEffectSlots(reverbSlot);
             }
-        } catch (Exception ignored) {
+        } catch (Exception | LinkageError ignored) {
             // OpenAL context might already be invalidated/destroyed by Minecraft
         }
 
@@ -95,7 +109,10 @@ public final class AudioProcessingManager {
     private static final float OVERDRIVE_MAX = 2.0f;
 
     public static void tick(boolean pause) {
-        if (!Config.get().enableAudioEffects) return;
+        if (!Config.get().enableAudioEffects) {
+            if (initialized) reset(false);
+            return;
+        }
 
         try {
             if (!initialized) {
@@ -116,7 +133,7 @@ public final class AudioProcessingManager {
             float overdrive = Mth.clamp(baseIntensity * configMultiplier, 0.0f, OVERDRIVE_MAX);
 
             updateFilters(overdrive);
-        } catch (IllegalStateException e) {
+        } catch (IllegalStateException | LinkageError e) {
             // Context was destroyed during processing; reset state for the next tick
             reset();
         }
@@ -155,11 +172,11 @@ public final class AudioProcessingManager {
     }
 
     public static void onSourceCreated(int sourceId) {
-        if (!Config.get().enableAudioEffects) return;
-
         synchronized (activeSources) {
             activeSources.add(sourceId);
         }
+        if (!Config.get().enableAudioEffects) return;
+
         if (initialized) {
             try {
                 if (lowPassFilter != -1 && AL10.alIsSource(sourceId)) {
@@ -168,14 +185,12 @@ public final class AudioProcessingManager {
                 if (reverbSlot != -1 && AL10.alIsSource(sourceId)) {
                     AL11.alSource3i(sourceId, EXTEfx.AL_AUXILIARY_SEND_FILTER, reverbSlot, 0, EXTEfx.AL_FILTER_NULL);
                 }
-            } catch (IllegalStateException ignored) {
+            } catch (IllegalStateException | LinkageError ignored) {
             }
         }
     }
 
     public static void onSourceReleased(int sourceId) {
-        if (!Config.get().enableAudioEffects) return;
-
         synchronized (activeSources) {
             activeSources.remove(sourceId);
         }

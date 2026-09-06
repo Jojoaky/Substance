@@ -7,7 +7,7 @@
         "stream": true
       },
       {
-        "name": "substance:effects/trip_ambient",
+        "name": "substance:effects/trip_shared_ambient",
         "stream": true
       }
     ]
@@ -20,7 +20,7 @@
         "stream": true
       },
       {
-        "name": "substance:effects/trip_ambient",
+        "name": "substance:effects/trip_shared_ambient",
         "stream": true
       }
     ]

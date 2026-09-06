@@ -43,6 +43,7 @@ public class Substance implements ModInitializer {
 	public void onInitialize() {
 		Config.HANDLER.load();
 		ConfigSync.initializeServer();
+		WelcomeHandler.initialize();
 
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> WelcomeHandler.onPlayerJoin(handler.getPlayer(), server));
 
@@ -111,7 +112,6 @@ public class Substance implements ModInitializer {
 
 // TODO: (before release)
 //  - Check crafting recipes and ensure all content is obtainable.
-//  - Check mod compatibility with other mods.
 //  /
 //  - Update README and pages with features, quick tutorial and screenshots
 //  - Create detailed documentation / wiki for all content (markdown or github pages)
