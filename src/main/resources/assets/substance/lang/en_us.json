@@ -256,5 +256,9 @@
   "advancements.substance.misc.oxygen.title": "Life Support",
   "advancements.substance.misc.oxygen.description": "Obtain oxygen from a soul sand bubble column",
   "advancements.substance.misc.all_effects.title": "A Furious Snack",
-  "advancements.substance.misc.all_effects.description": "Have the effects haze, warp, keen, relaxation and surge at the same time!"
+  "advancements.substance.misc.all_effects.description": "Have the effects haze, warp, keen, relaxation and surge at the same time!",
+  "advancements.substance.misc.hallucination.title": "Seeing Things",
+  "advancements.substance.misc.hallucination.description": "Experience a mushroom-induced hallucination",
+  "advancements.substance.misc.dread.title": "Bad Trip",
+  "advancements.substance.misc.dread.description": "Experience a mushroom-induced horror trip"
 }

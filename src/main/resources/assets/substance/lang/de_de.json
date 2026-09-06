@@ -263,5 +263,9 @@
   "advancements.substance.misc.oxygen.title": "Lebenserhaltung",
   "advancements.substance.misc.oxygen.description": "Gewinne Sauerstoff aus einer Seelensand-Blasensäule",
   "advancements.substance.misc.all_effects.title": "Ein seltsamer Snack",
-  "advancements.substance.misc.all_effects.description": "Habe gleichzeitig die Effekte Dunst, Verzerrung, Scharfsinn, Entspannung und Schub!"
+  "advancements.substance.misc.all_effects.description": "Habe gleichzeitig die Effekte Dunst, Verzerrung, Scharfsinn, Entspannung und Schub!",
+  "advancements.substance.misc.hallucination.title": "Dinge sehen",
+  "advancements.substance.misc.hallucination.description": "Erlebe eine pilzinduzierte Halluzination",
+  "advancements.substance.misc.dread.title": "Schlechter Trip",
+  "advancements.substance.misc.dread.description": "Erlebe einen pilzinduzierten Horror-Trip"
 }
