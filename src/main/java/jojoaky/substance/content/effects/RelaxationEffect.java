@@ -6,9 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LightningBolt;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 
 public final class RelaxationEffect extends VisualMobEffect {
@@ -20,10 +18,13 @@ public final class RelaxationEffect extends VisualMobEffect {
         return entity.hasEffect(this);
     }
 
-    public void punishAttack(Player player) {
+    public void punishAttack(Player player, Entity target) {
         if (!(player.level() instanceof ServerLevel level) || !isAppliedTo(player)) {
             return;
         }
+
+        boolean isLiving = target instanceof Mob || target instanceof Player;
+        if (!isLiving) return;
 
         player.removeEffect(this);
         player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, Config.gameplay().relaxationDarknessDuration(), 0));

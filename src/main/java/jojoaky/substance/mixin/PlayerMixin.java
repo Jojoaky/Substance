@@ -32,6 +32,6 @@ public abstract class PlayerMixin {
 
     @Inject(method = "attack", at = @At("TAIL"))
     private void punishRelaxedAttack(Entity target, CallbackInfo ci) {
-        ModEffects.RELAXATION.punishAttack((Player) (Object) this);
+        ModEffects.RELAXATION.punishAttack((Player) (Object) this, target);
     }
 }
