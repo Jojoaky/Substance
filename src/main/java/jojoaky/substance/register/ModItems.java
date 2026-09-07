@@ -7,11 +7,10 @@ import jojoaky.substance.content.gas_bottle.EmptyGasBottleItem;
 import jojoaky.substance.content.pipe.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -256,5 +255,16 @@ public class ModItems {
                     itemGroup.accept(ModItems.GAS_BOTTLE_HYDROGEN);
                     itemGroup.accept(ModItems.GAS_BOTTLE_NITROGEN);
                 });
+
+        CompostingChanceRegistry.INSTANCE.add(ModItems.EPHEDRA_BUNDLE, 0.65f);
+        CompostingChanceRegistry.INSTANCE.add(ModItems.EPHEDRA_SEEDS, 0.3f);
+
+        CompostingChanceRegistry.INSTANCE.add(ModItems.HERB_BUD, 0.6f);
+        CompostingChanceRegistry.INSTANCE.add(ModItems.DRIED_HERB_BUD, 0.8f);
+        CompostingChanceRegistry.INSTANCE.add(ModItems.HERB_SEEDS, 0.3f);
+
+        CompostingChanceRegistry.INSTANCE.add(ModItems.DRIED_TOBACCO_LEAF, 0.8f);
+        CompostingChanceRegistry.INSTANCE.add(ModItems.RIPE_TOBACCO_LEAF, 0.6f);
+        CompostingChanceRegistry.INSTANCE.add(ModItems.TOBACCO_SEEDS, 0.3f);
     }
 }

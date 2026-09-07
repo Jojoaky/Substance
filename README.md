@@ -1,6 +1,6 @@
 <p align="center">
   <img
-    src="https://github.com/Jojoaky/Substance/blob/master/.idea/icon.png?raw=true"
+    src="https://github.com/Jojoaky/Substance/blob/master/src/main/resources/assets/substance/icon.png?raw=true"
     width="200"
     style="image-rendering: pixelated;"
   />
@@ -8,45 +8,49 @@
 
 <h1 align="center">Substance</h1>
 
-**Substance** is a fun Minecraft mod that adds various consumable substances like **alcohol**, **smokables**, and **Breaking Bad** inspired items.
+**Substance** is a humorous Minecraft mod centered around fictional substances, questionable chemistry,
+smokables, and items inspired by **Breaking Bad**.
 
-### Disclaimer:
-**This mod is purely fictional and for entertainment only. It is not meant to encourage or promote the use of real-life drugs or illegal substances.**
+Rather than simply adding consumable items, the mod gives them their own survival progression.
+Ingredients can be **grown, found, traded, and processed** through multistep production chains.
 
----
+When **Create** is installed, many of these processes gain additional recipes and
+can be integrated into automated production lines.
 
-## Features
+Substances can provide a variety of gameplay and visual effects, and many items interact with villagers,
+loot, world generation, and other existing Minecraft systems.
 
-**TODO:** Create short tutorial and summary of features
+> This mod is fictional and intended purely for entertainment.
+> It does not encourage or promote real-life drug use or illegal substances.
 
-Substance works as a standalone mod, but gains additional features when used with:
+## Quick Start
 
-- **Create** [[forge](https://modrinth.com/mod/create)] [[fabric](https://modrinth.com/mod/create-fabric)]
-  Enables advanced crafting and automation. Some recipes are replaced for better production chains.
+Substance currently supports **Minecraft 1.20.1 with Fabric**.
+Support for newer Minecraft versions and NeoForge is planned.
 
-- **Farmer's Delight** [[forge](https://modrinth.com/mod/farmers-delight)] [[fabric](https://modrinth.com/mod/farmers-delight-refabricated)]
-  Adds food-related crafting recipes and expands consumable variety.
+1. Install Substance for the matching Minecraft version and mod loader.
+2. Install [Yet Another Config Lib (YACL)](https://modrinth.com/mod/yacl), 
+   which is required by the mod's configuration
+3. Optionally install **Create** [[forge](https://modrinth.com/mod/create)] [[fabric](https://modrinth.com/mod/create-fabric)]
+   - Create adds additional processing recipes and allows many production chains to be automated.
+4. Open the Substance creative tab to explore the available content or discover it naturally through survival progression.
 
----
+For a more detailed overview of the mod's content and progression, see [docs/content.md](docs/content.md).
 
-## Requirements
-### Minecraft Versions
-| Version | Fabric | NeoForge |
-|---------|--------|----------|
-| 1.20.1  | ✅      | ❌        |
-| 1.21.1  |        |          |
+## Development and building
 
-> Support for newer versions (including 1.21.1 and beyond) is planned but not guaranteed.
+Substance targets Java 17.
+Build the project with: ```./gradlew build```
 
-### Dependencies:
-This mod requires an appropriate version of [YACL](https://modrinth.com/mod/yacl).
+Build artifacts are written to: `build/libs/`
 
----
+Generated resources can be refreshed using the Gradle datagen run configuration.
 
-## Audio credits
+## Downloads & Source
+- [Source code and issues](https://github.com/Jojoaky/Substance)
+- [Modrinth](https://modrinth.com/project/EiAqNYtB)
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/substance-create-compatible)
 
-Third-party audio retains the license shown below. See [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) for complete attribution and conversion details.
-
-- Hallucination: ["Percussive_16BarWeirdness.wav" by kapnos_mantis](https://freesound.org/people/kapnos_mantis/sounds/212921/) — [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- Dread: ["FX one shot 9 -150 bpm - G min - STTTL" by STTTL](https://freesound.org/people/STTTL/sounds/829229/) — [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
-- Dread: ["Acid audio effect" by Vicces1212](https://freesound.org/people/Vicces1212/sounds/839940/) — [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+## Licensing
+- [License](LICENSE)
+- [Third-party audio attributions](THIRD_PARTY_LICENSES.md)

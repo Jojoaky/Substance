@@ -6,6 +6,7 @@ import jojoaky.substance.content.crops.LargeHerbBlock;
 import jojoaky.substance.content.crops.TobaccoBlock;
 import jojoaky.substance.content.tray.EmptyTrayBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -77,5 +78,7 @@ public class ModBlocks {
         ItemGroupEvents.modifyEntriesEvent(ModCreativeTab.SUSPICIOUS_ITEM_GROUP_KEY).register((itemGroup) -> {
             itemGroup.accept(ModBlocks.LARGE_HERB.asItem());
         });
+
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.LARGE_HERB.asItem(), 0.5f);
     }
 }

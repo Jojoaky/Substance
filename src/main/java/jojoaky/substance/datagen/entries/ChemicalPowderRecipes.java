@@ -17,12 +17,10 @@ public class ChemicalPowderRecipes {
                         .build(),
 
                 ShapelessRecipeDef.named("white_phosphorus")
-                        .createCrushing()
-                        .vanillaShapeless()
-                        .disableVanillaIfCreate()
-                        .require(Items.CALCITE)
+                        .smelting(100, 1)
+                        .blasting()
+                        .require(Items.BONE_MEAL)
                         .output(ModItems.WHITE_PHOSPHORUS)
-                        .output(ModItems.WHITE_PHOSPHORUS, 1, 0.6f)
                         .build(),
 
                 ShapelessRecipeDef.named("red_phosphorus")
