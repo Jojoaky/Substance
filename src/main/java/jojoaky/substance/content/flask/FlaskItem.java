@@ -5,6 +5,7 @@ import net.minecraft.world.item.Item;
 
 @SuppressWarnings("UnstableApiUsage")
 public class FlaskItem extends Item {
+
     public FlaskItem(Properties properties) {
         super(properties);
     }

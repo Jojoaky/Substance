@@ -15,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GameplayConfigTest {
     private static final GameplayConfig DISTINCT_VALUES = new GameplayConfig(
-            101, 102, 103, 104, 105,
+            101, 102, 103,
             1.25f, 2.5f, 3.75f, 4.125f, 0.625f,
-            106, 0.875f, 1.125f, 0.03125f, 2.25f, 0.375f, 7.5f, 107
+            104, 0.875f, 1.125f, 0.03125f, 2.25f, 0.375f, 7.5f, 105
     );
 
     @Test

@@ -25,12 +25,12 @@ public class SubstanceEffectHelper {
         int currentAmplifier = effectInstance!=null ? effectInstance.getAmplifier() : 0;
 
         int newDuration = currentDuration + duration;
-        int newAmplifier = newDuration / durationPerAmplifier;
+        int newAmplifier = Math.min(newDuration / durationPerAmplifier, maxAmplifier);
 
         if (newAmplifier < currentAmplifier) return;
 
-        newDuration = Math.min(newDuration, maxAmplifier * durationPerAmplifier);
-        newAmplifier = Math.min(newAmplifier, maxAmplifier);
+        int maximumDuration = Math.max(duration, maxAmplifier * durationPerAmplifier);
+        newDuration = Math.min(newDuration, maximumDuration);
 
         entity.addEffect(new MobEffectInstance(effect, newDuration, newAmplifier));
     }

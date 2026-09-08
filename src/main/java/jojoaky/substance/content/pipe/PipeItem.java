@@ -30,13 +30,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.ToIntFunction;
-
 public class PipeItem extends ConsumableItem {
-    public PipeItem(Properties properties, ToIntFunction<ItemStack> durabilityProvider) {
+    public PipeItem(Properties properties) {
         super(
                 properties,
-                new VanillaSuppliedDurabilityStrategy(durabilityProvider),
+                new VanillaDurabilityStrategy(),
                 () -> Math.round(Config.gameplay().maxSmokeDuration() * 20.0f),
                 () -> Math.round(Config.gameplay().smokeCooldown() * 20.0f),
                 UseAnim.SPYGLASS,

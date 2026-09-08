@@ -44,18 +44,6 @@ public class ModMenuIntegration implements ModMenuApi {
                         .description(OptionDescription.of(Component.translatable("text.config.substance.group.durabilities.desc")))
 
                         .option(Option.<Integer>createBuilder()
-                                .name(Component.translatable("text.config.substance.option.woodenPipeDurability"))
-                                .binding(Config.DEFAULT_WOODEN_PIPE_DURABILITY, () -> Config.get().woodenPipeDurability, val -> Config.get().woodenPipeDurability = val)
-                                .controller(opt -> IntegerFieldControllerBuilder.create(opt).min(1))
-                                .build())
-
-                        .option(Option.<Integer>createBuilder()
-                                .name(Component.translatable("text.config.substance.option.bubblePipeDurability"))
-                                .binding(Config.DEFAULT_BUBBLE_PIPE_DURABILITY, () -> Config.get().bubblePipeDurability, val -> Config.get().bubblePipeDurability = val)
-                                .controller(opt -> IntegerFieldControllerBuilder.create(opt).min(1))
-                                .build())
-
-                        .option(Option.<Integer>createBuilder()
                                 .name(Component.translatable("text.config.substance.option.herbalRollDurability"))
                                 .binding(Config.DEFAULT_HERBAL_ROLL_DURABILITY, () -> Config.get().herbalRollDurability, val -> Config.get().herbalRollDurability = val)
                                 .controller(opt -> IntegerFieldControllerBuilder.create(opt).min(1))

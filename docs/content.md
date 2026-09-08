@@ -1,21 +1,23 @@
 # Substance content guide
 
-Substance adds a progression from farming and smoking to fluid chemistry and crystal processing. The mod is designed for Minecraft 1.20.1 on Fabric. The creative tab (`Substance`) is useful for discovering content, but normal survival progression is built around the recipes, loot injections, villager trades, and optional Create processing described below.
+The creative tab (`Substance`) is useful for discovering content,
+but normal survival progression is built around the recipes, loot injections, villager trades, and
+optional Create processing described below.
 
 ## Consumables and effects
 
-The main consumables are:
+The consumable and smoking items are:
 
-| Item | Role |
-| --- | --- |
-| `substance:herbal_roll` | Herbal smoking item. |
-| `substance:thick_herbal_roll` | A stronger herbal roll. |
-| `substance:cigarette` | Tobacco smoking item. |
-| `substance:wooden_pipe` | Reusable pipe with configurable durability. |
-| `substance:bubble_pipe` | Reusable pipe with configurable durability. |
-| `substance:white_crystals` | White crystal consumable. |
-| `substance:white_crystals_chili` | White crystals mixed with chili. |
-| `substance:blue_crystals` | Blue crystal consumable. |
+| Item                                                                                                                          | ID                               | Effects                                                                       |
+|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------|-------------------------------------------------------------------------------|
+| ![White Crystals](../src/main/resources/assets/substance/textures/item/white_crystals.png) White Crystals                     | `substance:white_crystals`       | Surge and Warp.                                                               |
+| ![Spiced White Crystals](../src/main/resources/assets/substance/textures/item/white_crystals_chili.png) Spiced White Crystals | `substance:white_crystals_chili` | Surge and Warp.                                                               |
+| ![Blue Crystals](../src/main/resources/assets/substance/textures/item/blue_crystals.png) Blue Crystals                        | `substance:blue_crystals`        | Surge and Warp.                                                               |
+| ![Herbal Roll](../src/main/resources/assets/substance/textures/item/herbal_roll.png) Herbal Roll                              | `substance:herbal_roll`          | Relaxation and Warp. A long use also causes Confusion.                        |
+| ![Thick Herbal Roll](../src/main/resources/assets/substance/textures/item/thick_herbal_roll.png) Thick Herbal Roll            | `substance:thick_herbal_roll`    | Stronger Relaxation and Warp, plus Haze. A long use also causes Confusion.    |
+| ![Cigarette](../src/main/resources/assets/substance/textures/item/cigarette.png) Cigarette                                    | `substance:cigarette`            | Keen and Haste. A long use also causes Confusion.                             |
+| ![Wooden Pipe](../src/main/resources/assets/substance/textures/item/wooden_pipe.png) Wooden Pipe                              | `substance:wooden_pipe`          | Reusable pipe; smoking gives Haze and Warp, plus the effects of its contents. |
+| ![Bubble Pipe](../src/main/resources/assets/substance/textures/item/bubble_pipe.png) Bubble Pipe                              | `substance:bubble_pipe`          | Reusable pipe; smoking gives Haze and Warp, plus the effects of its contents. |
 
 Using a consumable can apply one or more Substance effects. The effect names and their broad gameplay themes are:
 

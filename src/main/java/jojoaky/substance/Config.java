@@ -30,8 +30,6 @@ public class Config implements GameplayOptions {
     public static final float DEFAULT_AUDIO_EFFECT_STRENGTH = 1.0f;
     public static final boolean DEFAULT_ENABLE_AMBIENT_SOUNDS = true;
     public static final float DEFAULT_AMBIENT_SOUND_INTERVAL = 30.0f;
-    public static final int DEFAULT_WOODEN_PIPE_DURABILITY = 2048;
-    public static final int DEFAULT_BUBBLE_PIPE_DURABILITY = 512;
     public static final int DEFAULT_HERBAL_ROLL_DURABILITY = 460;
     public static final int DEFAULT_THICK_HERBAL_ROLL_DURABILITY = 570;
     public static final int DEFAULT_CIGARETTE_DURABILITY = 525;
@@ -134,14 +132,6 @@ public class Config implements GameplayOptions {
     // Gameplay
     @SerialEntry
     @GameplayOption
-    public int woodenPipeDurability = DEFAULT_WOODEN_PIPE_DURABILITY;
-
-    @SerialEntry
-    @GameplayOption
-    public int bubblePipeDurability = DEFAULT_BUBBLE_PIPE_DURABILITY;
-
-    @SerialEntry
-    @GameplayOption
     public int herbalRollDurability = DEFAULT_HERBAL_ROLL_DURABILITY;
 
     @SerialEntry
@@ -201,16 +191,6 @@ public class Config implements GameplayOptions {
     @SerialEntry
     @GameplayOption
     public int relaxationDarknessDuration = DEFAULT_RELAXATION_DARKNESS_DURATION;
-
-    @Override
-    public int woodenPipeDurability() {
-        return woodenPipeDurability;
-    }
-
-    @Override
-    public int bubblePipeDurability() {
-        return bubblePipeDurability;
-    }
 
     @Override
     public int herbalRollDurability() {

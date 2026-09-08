@@ -133,8 +133,6 @@
   "text.config.substance.group.immersion": "Immersion",
   "text.config.substance.group.immersion.desc": "Passe die visuellen und akustischen Effekte dieser Mod an oder deaktiviere sie.",
 
-  "text.config.substance.option.woodenPipeDurability": "Holzpfeifen-Haltbarkeit",
-  "text.config.substance.option.bubblePipeDurability": "Seifenblasenpfeifen-Haltbarkeit",
   "text.config.substance.option.herbalRollDurability": "Kräuterrollen-Haltbarkeit",
   "text.config.substance.option.thickHerbalRollDurability": "Dicke Kräuterrollen-Haltbarkeit",
   "text.config.substance.option.cigaretteDurability": "Zigaretten-Haltbarkeit",

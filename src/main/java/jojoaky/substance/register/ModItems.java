@@ -1,6 +1,5 @@
 package jojoaky.substance.register;
 
-import jojoaky.substance.Config;
 import jojoaky.substance.Substance;
 import jojoaky.substance.content.consumable.*;
 import jojoaky.substance.content.gas_bottle.EmptyGasBottleItem;
@@ -17,6 +16,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 
 public class ModItems {
+    private static final int WOODEN_PIPE_DURABILITY = 2048;
+    private static final int BUBBLE_PIPE_DURABILITY = 512;
+
     public static Item register(Item item, String id) {
         ResourceLocation itemID = new ResourceLocation(Substance.MOD_ID, id);
         return Registry.register(BuiltInRegistries.ITEM, itemID, item);
@@ -24,25 +26,31 @@ public class ModItems {
 
     // --- consumables ---
     public static final Item WHITE_CRYSTALS = register(
-            new CrystalsItem(new FabricItemSettings()
-                    .stacksTo(16)
-                    .rarity(Rarity.UNCOMMON)
+            new CrystalsItem(
+                    new FabricItemSettings()
+                            .stacksTo(16)
+                            .rarity(Rarity.UNCOMMON),
+                    CrystalsItem.Type.WHITE
             ),
             "white_crystals"
     );
 
     public static final Item WHITE_CRYSTALS_CHILI = register(
-            new CrystalsItem(new FabricItemSettings()
-                    .stacksTo(16)
-                    .rarity(Rarity.RARE)
+            new CrystalsItem(
+                    new FabricItemSettings()
+                            .stacksTo(16)
+                            .rarity(Rarity.RARE),
+                    CrystalsItem.Type.WHITE_CHILI
             ),
             "white_crystals_chili"
     );
 
     public static final Item BLUE_CRYSTALS = register(
-            new CrystalsItem(new FabricItemSettings()
-                    .stacksTo(16)
-                    .rarity(Rarity.EPIC)
+            new CrystalsItem(
+                    new FabricItemSettings()
+                            .stacksTo(16)
+                            .rarity(Rarity.EPIC),
+                    CrystalsItem.Type.BLUE
             ),
             "blue_crystals"
     );
@@ -75,8 +83,8 @@ public class ModItems {
             new PipeItem(
                     new FabricItemSettings()
                             .stacksTo(1)
-                            .rarity(Rarity.RARE),
-                    stack -> Config.gameplay().woodenPipeDurability()
+                            .rarity(Rarity.RARE)
+                            .durability(WOODEN_PIPE_DURABILITY)
             ),
             "wooden_pipe"
     );
@@ -85,8 +93,8 @@ public class ModItems {
             new PipeItem(
                     new FabricItemSettings()
                             .stacksTo(1)
-                            .rarity(Rarity.RARE),
-                    stack -> Config.gameplay().bubblePipeDurability()
+                            .rarity(Rarity.RARE)
+                            .durability(BUBBLE_PIPE_DURABILITY)
             ),
             "bubble_pipe"
     );

@@ -19,6 +19,8 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Items;
 import org.slf4j.Logger;
@@ -92,6 +94,19 @@ public class Substance implements ModInitializer {
 					boolean horrorTrip = context.level().random.nextFloat() < Config.gameplay().horrorTripChance();
 
 					if (horrorTrip) {
+						if (context.entity().hasEffect(ModEffects.HALLUCINATION)) {
+							context.entity().removeEffect(ModEffects.HALLUCINATION);
+						}
+
+						context.level().playSound(
+								context.entity(),
+								context.entity().blockPosition(),
+								SoundEvents.LIGHTNING_BOLT_THUNDER,
+								SoundSource.PLAYERS,
+								5.0f,
+								0.8f
+						);
+
 						SubstanceEffectHelper.applyEffectBase(
 								context.entity(),
 								ModEffects.DREAD,

@@ -5,12 +5,15 @@ import jojoaky.substance.register.ModCreativeTab;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.loader.api.FabricLoader;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -81,6 +84,10 @@ public class ModFlasks {
     public static void initialize() {
         //CreateCompat.initialize(); // Doesn't work reliably, not really needed either
 
+        final int LAVA_BUCKET_BURN_TIME = 20_000;
+        final int LAVA_FLASK_BURN_TIME = Mth.floor(LAVA_BUCKET_BURN_TIME * ((float) FlaskItem.CAPACITY / FluidConstants.BUCKET));
+
+        FuelRegistry.INSTANCE.add(LAVA_FLASK, LAVA_FLASK_BURN_TIME);
 
         FluidStorage.ITEM.registerForItems(
                 (itemStack, context) -> new EmptyFlaskFluidStorage(context),

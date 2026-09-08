@@ -9,8 +9,6 @@ import net.minecraft.network.FriendlyByteBuf;
  * the network representation do not become coupled to Gson or YACL.</p>
  */
 public record GameplayConfig(
-        int woodenPipeDurability,
-        int bubblePipeDurability,
         int herbalRollDurability,
         int thickHerbalRollDurability,
         int cigaretteDurability,
@@ -30,8 +28,6 @@ public record GameplayConfig(
 ) implements GameplayOptions {
     public static GameplayConfig from(GameplayOptions config) {
         return new GameplayConfig(
-                config.woodenPipeDurability(),
-                config.bubblePipeDurability(),
                 config.herbalRollDurability(),
                 config.thickHerbalRollDurability(),
                 config.cigaretteDurability(),
@@ -52,8 +48,6 @@ public record GameplayConfig(
     }
 
     public void write(FriendlyByteBuf buffer) {
-        buffer.writeVarInt(woodenPipeDurability);
-        buffer.writeVarInt(bubblePipeDurability);
         buffer.writeVarInt(herbalRollDurability);
         buffer.writeVarInt(thickHerbalRollDurability);
         buffer.writeVarInt(cigaretteDurability);
@@ -74,8 +68,6 @@ public record GameplayConfig(
 
     public static GameplayConfig read(FriendlyByteBuf buffer) {
         return new GameplayConfig(
-                buffer.readVarInt(),
-                buffer.readVarInt(),
                 buffer.readVarInt(),
                 buffer.readVarInt(),
                 buffer.readVarInt(),

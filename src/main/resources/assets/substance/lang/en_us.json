@@ -131,8 +131,6 @@
   "text.config.substance.group.immersion": "Immersion",
   "text.config.substance.group.immersion.desc": "Tune or disable visual and audio effects introduced by this mod.",
 
-  "text.config.substance.option.woodenPipeDurability": "Wooden Pipe Durability",
-  "text.config.substance.option.bubblePipeDurability": "Bubble Pipe Durability",
   "text.config.substance.option.herbalRollDurability": "Herbal Roll Durability",
   "text.config.substance.option.thickHerbalRollDurability": "Thick Herbal Roll Durability",
   "text.config.substance.option.cigaretteDurability": "Cigarette Durability",

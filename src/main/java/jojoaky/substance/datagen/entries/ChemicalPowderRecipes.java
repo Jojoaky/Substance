@@ -17,14 +17,15 @@ public class ChemicalPowderRecipes {
                         .build(),
 
                 ShapelessRecipeDef.named("white_phosphorus")
-                        .smelting(100, 1)
-                        .blasting()
+                        .smelting(200, 1)
+                        .blasting(100, 1)
                         .require(Items.BONE_MEAL)
                         .output(ModItems.WHITE_PHOSPHORUS)
                         .build(),
 
                 ShapelessRecipeDef.named("red_phosphorus")
-                        .smelting(100, 1)
+                        .smelting(200, 1)
+                        .blasting(100, 1)
                         .require(ModItems.WHITE_PHOSPHORUS)
                         .output(ModItems.RED_PHOSPHORUS)
                         .build(),

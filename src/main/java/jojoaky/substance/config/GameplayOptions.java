@@ -2,8 +2,6 @@ package jojoaky.substance.config;
 
 /** Read-only view of the gameplay settings used by common client/server code. */
 public interface GameplayOptions {
-    int woodenPipeDurability();
-    int bubblePipeDurability();
     int herbalRollDurability();
     int thickHerbalRollDurability();
     int cigaretteDurability();

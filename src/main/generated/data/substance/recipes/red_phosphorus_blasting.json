@@ -4,7 +4,7 @@
   "cookingtime": 100,
   "experience": 1.0,
   "ingredient": {
-    "item": "minecraft:bone_meal"
+    "item": "substance:white_phosphorus"
   },
-  "result": "substance:white_phosphorus"
+  "result": "substance:red_phosphorus"
 }
