@@ -13,6 +13,7 @@
       "item": "substance:ephedra_bundle"
     }
   ],
+  "processingTime": 100,
   "results": [
     {
       "item": "substance:pseudoephedrine"

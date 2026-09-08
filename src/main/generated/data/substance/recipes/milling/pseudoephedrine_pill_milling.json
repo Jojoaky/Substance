@@ -13,6 +13,7 @@
       "item": "substance:sudafed_pill"
     }
   ],
+  "processingTime": 100,
   "results": [
     {
       "count": 2,

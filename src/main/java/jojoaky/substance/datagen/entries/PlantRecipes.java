@@ -17,6 +17,13 @@ public class PlantRecipes {
                         .vanillaShapeless()
                         .require(ModItems.HERB_BUD)
                         .output(ModItems.HERB_SEEDS)
+                        .build(),
+
+                ShapelessRecipeDef.named("chili_seeds")
+                        .vanillaShapeless()
+                        .require(ModItems.CHILI_PEPPER)
+                        .output(ModItems.CHILI_SEEDS)
+                        .output(ModItems.CHILI_SEEDS, 1, 0.25f)
                         .build()
         );
     }

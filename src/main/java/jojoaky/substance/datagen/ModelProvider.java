@@ -49,6 +49,8 @@ public class ModelProvider extends FabricModelProvider {
             ModItems.DRIED_HERB_BUD,
             ModItems.EPHEDRA_SEEDS,
             ModItems.EPHEDRA_BUNDLE,
+            ModItems.CHILI_SEEDS,
+            ModItems.CHILI_PEPPER,
             ModItems.TOBACCO_SEEDS,
             ModItems.RIPE_TOBACCO_LEAF,
             ModItems.DRIED_TOBACCO_LEAF,

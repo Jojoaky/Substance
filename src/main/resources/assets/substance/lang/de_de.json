@@ -29,6 +29,8 @@
 
   "item.substance.ephedra_bundle": "Ephedra-Bündel",
   "item.substance.ephedra_seeds": "Ephedra-Samen",
+  "item.substance.chili_seeds": "Chilisamen",
+  "item.substance.chili_pepper": "Chilischote",
   "item.substance.herb_seeds": "Kräutersamen",
   "item.substance.herb_bud": "Kräuterknospe",
   "item.substance.dried_herb_bud": "Getrocknete Kräuterknospe",
@@ -45,6 +47,7 @@
   "item.substance.red_phosphorus": "Roter Phosphor",
 
   "block.substance.large_herb": "Große Kräuterpflanze",
+  "block.substance.chili": "Chilipflanze",
   "block.substance.ephedra": "Ephedra",
   "block.substance.tobacco": "Tabakpflanze",
 
@@ -244,7 +247,7 @@
   "advancements.substance.crystals.white_crystals.title": "Kristallklar",
   "advancements.substance.crystals.white_crystals.description": "Erhalte weiße Kristalle",
   "advancements.substance.crystals.white_crystals_chili.title": "Extra scharf",
-  "advancements.substance.crystals.white_crystals_chili.description": "Mische Chilipulver in weiße Kristalle",
+  "advancements.substance.crystals.white_crystals_chili.description": "Mische eine Chilischote in weiße Kristalle",
   "advancements.substance.crystals.blue_oil_tray.title": "99,9 % Reinheit",
   "advancements.substance.crystals.blue_oil_tray.description": "Fülle ein Tablett mit blauem Öl",
   "advancements.substance.crystals.blue_crystals.title": "Farbkorrektur",

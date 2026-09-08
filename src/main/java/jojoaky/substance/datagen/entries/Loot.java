@@ -13,6 +13,10 @@ public class Loot {
     static final ResourceLocation mansionChest = new ResourceLocation("minecraft", "chests/woodland_mansion");
     static final ResourceLocation pillagerDrop = new ResourceLocation("minecraft", "entities/pillager");
     static final ResourceLocation vindicatorDrop = new ResourceLocation("minecraft", "entities/vindicator");
+    public static ResourceLocation desertPyramid = new ResourceLocation("minecraft", "chests/desert_pyramid");
+    public static ResourceLocation desertVillage = new ResourceLocation("minecraft", "chests/village/village_desert_house");
+    public static ResourceLocation savannaVillage = new ResourceLocation("minecraft", "chests/village/village_savanna_house");
+
 
     static final ResourceLocation[] ALL_VILLAGE_CHESTS = new ResourceLocation[]{
             // Desert
@@ -47,13 +51,28 @@ public class Loot {
                 LootEntryDef.named("wooden_pipe_vindicator", vindicatorDrop)
                         .drops(ModItems.WOODEN_PIPE)
                         .weight(1)
-                        .count(1.0f, 1.0f)
+                        .count(1.0f, 1.0f),
+
+                LootEntryDef.named("chili_pyramid_loot", desertPyramid)
+                        .drops(ModItems.CHILI_PEPPER)
+                        .weight(12)
+                        .count(1.0f, 4.0f),
+
+                LootEntryDef.named("chili_desert_village_loot", desertVillage)
+                        .drops(ModItems.CHILI_PEPPER)
+                        .weight(5)
+                        .count(1.0f, 2.0f),
+
+                LootEntryDef.named("chili_savanna_village_loot", savannaVillage)
+                        .drops(ModItems.CHILI_PEPPER)
+                        .weight(5)
+                        .count(1.0f, 2.0f)
         );
 
         Stream<LootEntryDef> villageBubblePipeLoot = Arrays.stream(ALL_VILLAGE_CHESTS)
                 .map(chestLocation -> LootEntryDef.named("bubble_pipe_" + chestLocation.getPath().replace('/', '_'), chestLocation)
                         .drops(ModItems.BUBBLE_PIPE)
-                        .weight(2)
+                        .weight(1)
                         .count(1.0f, 1.0f)
                 );
 

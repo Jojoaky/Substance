@@ -39,10 +39,11 @@ The effect ingredients are fermented spider eye (Haze), cyanide (Warp), sculk (D
 
 ## Plants and farming
 
-Substance adds three plant lines:
+Substance adds four plant lines:
 
 - **Herb**: plant `substance:herb_seeds` to grow the large herb crop, harvest `herb_bud`, and dry the bud before using it in herbal rolls.
 - **Ephedra**: plant `substance:ephedra_seeds` to grow ephedra and obtain ephedra bundles for the chemistry chain.
+- **Chili**: buy `substance:chili_seeds` from a wandering trader, grow chili peppers, and combine a pepper with white crystals to craft spiced white crystals.
 - **Tobacco**: plant `substance:tobacco_seeds`, harvest ripe tobacco leaves, and dry them to obtain dried tobacco leaves for cigarettes and Keen brewing.
 
 Crop drops and growth are data-defined in the `substance` loot tables. The crop blocks are intentionally lightweight and can be harvested like other vanilla crops.
