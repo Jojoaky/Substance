@@ -14,7 +14,10 @@ import jojoaky.substance.register.*;
 import jojoaky.substance.util.StackingEffect;
 import jojoaky.substance.util.SubstanceEffectHelper;
 import net.fabricmc.api.ModInitializer;
-
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -43,6 +46,15 @@ public class Substance implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		ModContainer container = FabricLoader.getInstance()
+				.getModContainer(MOD_ID)
+				.orElseThrow();
+		ResourceManagerHelper.registerBuiltinResourcePack(
+				resource("programmer_art"),
+				container,
+				ResourcePackActivationType.NORMAL
+		);
+
 		Config.HANDLER.load();
 		ConfigSync.initializeServer();
 		WelcomeHandler.initialize();

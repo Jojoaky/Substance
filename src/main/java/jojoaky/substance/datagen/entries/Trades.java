@@ -21,6 +21,11 @@ public class Trades {
                         .sells(ModItems.EPHEDRA_SEEDS, 3)
                         .maxUses(8),
 
+                WanderingTraderTradeDef.named("chili_seeds_trader", 1)
+                        .buys(Items.EMERALD, 3)
+                        .sells(ModItems.CHILI_SEEDS, 5)
+                        .maxUses(8),
+
                 VillagerTradeDef.named("farmer_ephedra_bundle", VillagerProfession.FARMER, 2)
                         .buys(Items.EMERALD, 12)
                         .sells(ModItems.EPHEDRA_BUNDLE, 1)

@@ -46,5 +46,14 @@ public class CrystalRecipes {
                         .require(ModItems.WHITE_OIL_TRAY)
                         .build()
         );
+
+        RecipeGeneratorRegistry.accept(
+                ShapelessRecipeDef.named("white_crystals_chili")
+                        .vanillaShapeless()
+                        .require(ModItems.WHITE_CRYSTALS)
+                        .require(ModItems.CHILI_PEPPER)
+                        .output(ModItems.WHITE_CRYSTALS_CHILI)
+                        .build()
+        );
     }
 }

@@ -35,7 +35,7 @@ public class ModTrays {
         ));
         Item filledTray = Registry.register(BuiltInRegistries.ITEM, Substance.resource(name),
                 new BlockItem(block, new Item.Properties()
-                        .stacksTo(1)
+                        .stacksTo(16)
                         .craftRemainder(ModBlocks.TRAY.asItem())));
         TrayEntry entry = new TrayEntry(fluid, flask, ModFlasks.EMPTY_FLASK, filledTray, block);
         BY_FLASK.put(flask, entry);

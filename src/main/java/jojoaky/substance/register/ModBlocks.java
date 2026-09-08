@@ -1,6 +1,7 @@
 package jojoaky.substance.register;
 
 import jojoaky.substance.Substance;
+import jojoaky.substance.content.crops.ChiliCropBlock;
 import jojoaky.substance.content.crops.EphedraCropBlock;
 import jojoaky.substance.content.crops.LargeHerbBlock;
 import jojoaky.substance.content.crops.TobaccoBlock;
@@ -60,6 +61,17 @@ public class ModBlocks {
             "ephedra",
             false
         );
+
+    public static final Block CHILI_CROP = register(
+            new ChiliCropBlock(
+                    BlockBehaviour.Properties.of()
+                            .sound(SoundType.CROP)
+                            .noCollission()
+                            .instabreak()
+            ),
+            "chili",
+            false
+    );
 
     public static final Block TOBACCO = register(
             new TobaccoBlock(

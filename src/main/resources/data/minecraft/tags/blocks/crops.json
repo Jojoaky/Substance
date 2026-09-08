@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "substance:ephedra",
+    "substance:chili",
     "substance:tobacco"
   ]
 }

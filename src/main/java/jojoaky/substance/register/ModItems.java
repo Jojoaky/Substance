@@ -172,6 +172,22 @@ public class ModItems {
             "ephedra_bundle"
     );
 
+    public static final Item CHILI_SEEDS = register(
+            new ItemNameBlockItem(ModBlocks.CHILI_CROP, new FabricItemSettings()),
+            "chili_seeds"
+    );
+
+    public static final Item CHILI_PEPPER = register(
+            new Item(new FabricItemSettings().food(
+                    new net.minecraft.world.food.FoodProperties.Builder()
+                            .nutrition(1)
+                            .saturationMod(0.2f)
+                            .fast()
+                            .build()
+            )),
+            "chili_pepper"
+    );
+
     public static final Item TOBACCO_SEEDS = register(
             new ItemNameBlockItem(ModBlocks.TOBACCO, new FabricItemSettings()),
             "tobacco_seeds"
@@ -243,6 +259,8 @@ public class ModItems {
                     // plants
                     itemGroup.accept(ModItems.EPHEDRA_BUNDLE);
                     itemGroup.accept(ModItems.EPHEDRA_SEEDS);
+                    itemGroup.accept(ModItems.CHILI_PEPPER);
+                    itemGroup.accept(ModItems.CHILI_SEEDS);
                     itemGroup.accept(ModItems.HERB_BUD);
                     itemGroup.accept(ModItems.DRIED_HERB_BUD);
                     itemGroup.accept(ModItems.HERB_SEEDS);
@@ -266,6 +284,9 @@ public class ModItems {
 
         CompostingChanceRegistry.INSTANCE.add(ModItems.EPHEDRA_BUNDLE, 0.65f);
         CompostingChanceRegistry.INSTANCE.add(ModItems.EPHEDRA_SEEDS, 0.3f);
+
+        CompostingChanceRegistry.INSTANCE.add(ModItems.CHILI_PEPPER, 0.65f);
+        CompostingChanceRegistry.INSTANCE.add(ModItems.CHILI_SEEDS, 0.3f);
 
         CompostingChanceRegistry.INSTANCE.add(ModItems.HERB_BUD, 0.6f);
         CompostingChanceRegistry.INSTANCE.add(ModItems.DRIED_HERB_BUD, 0.8f);

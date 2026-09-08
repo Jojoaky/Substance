@@ -26,6 +26,7 @@ public class MillingGen extends MillingRecipeGen {
         create(def.getRecipeName(CREATE_MILLING), b -> {
             applyIngredients(b, def);
             applyOutputs(b, def);
+            b.averageProcessingDuration();
             b.whenModLoaded(Create.ID);
             def.getConditionsFor(CREATE_MILLING).forEach(b::withCondition);
             return b;
