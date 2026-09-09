@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/crop",
+  "parent": "minecraft:block/cross",
   "textures": {
-    "crop": "substance:block/chili_stage2"
+    "cross": "substance:block/chili_stage2"
   }
 }

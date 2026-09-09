@@ -1,20 +1,22 @@
 package jojoaky.substance.content.crops;
 
-import jojoaky.substance.register.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -32,70 +34,133 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class ChiliCropBlock extends CropBlock {
+public class ChiliCropBlock extends BushBlock implements BonemealableBlock {
+
     public static final int MAX_AGE = 3;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
+
     public static final int AGE_AFTER_HARVEST = 1;
 
-    private static final ResourceLocation CUT_LOOT_TABLE =
+    private static final ResourceLocation HARVEST_LOOT_TABLE =
             new ResourceLocation("substance", "gameplay/chili_cut");
 
-    private static final VoxelShape[] SHAPE_BY_AGE = {
-            Block.box(0.0, 0.0, 0.0, 16.0, 3.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 7.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 11.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 15.0, 16.0)
-    };
+    private static final VoxelShape SHAPE =
+            Block.box(2.0, 0.0, 2.0, 14.0, 14.0, 14.0);
 
     public ChiliCropBlock(Properties properties) {
         super(properties);
+
+        registerDefaultState(
+                stateDefinition.any()
+                        .setValue(AGE, 0)
+        );
     }
 
     @Override
-    protected @NotNull IntegerProperty getAgeProperty() {
-        return AGE;
-    }
-
-    @Override
-    public int getMaxAge() {
-        return MAX_AGE;
-    }
-
-    @Override
-    protected @NotNull ItemLike getBaseSeedId() {
-        return ModItems.CHILI_SEEDS;
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(
+            StateDefinition.Builder<Block, BlockState> builder
+    ) {
         builder.add(AGE);
     }
 
     @Override
-    public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE_BY_AGE[getAge(state)];
+    protected boolean mayPlaceOn(
+            @NotNull BlockState state,
+            @NotNull BlockGetter level,
+            @NotNull BlockPos pos
+    ) {
+        return state.is(BlockTags.DIRT);
     }
 
     @Override
-    protected int getBonemealAgeIncrease(@NotNull Level level) {
-        return 1;
+    @SuppressWarnings("deprecation")
+    public @NotNull VoxelShape getShape(
+            @NotNull BlockState state,
+            @NotNull BlockGetter level,
+            @NotNull BlockPos pos,
+            @NotNull CollisionContext context
+    ) {
+        return SHAPE;
     }
 
-    public List<ItemStack> cut(BlockState state, ServerLevel level, BlockPos pos, ItemStack tool) {
-        if (getAge(state) < MAX_AGE) {
+    @Override
+    public boolean isRandomlyTicking(@NotNull BlockState state) {
+        return state.getValue(AGE) < MAX_AGE;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public void randomTick(
+            @NotNull BlockState state,
+            @NotNull ServerLevel level,
+            @NotNull BlockPos pos,
+            @NotNull RandomSource random
+    ) {
+        int age = state.getValue(AGE);
+
+        if (age >= MAX_AGE) {
+            return;
+        }
+
+        if (level.getRawBrightness(pos.above(), 0) < 9) {
+            return;
+        }
+
+        if (random.nextInt(5) != 0) {
+            return;
+        }
+
+        level.setBlock(
+                pos,
+                state.setValue(AGE, age + 1),
+                Block.UPDATE_CLIENTS
+        );
+    }
+
+    public List<ItemStack> harvest(
+            BlockState state,
+            ServerLevel level,
+            BlockPos pos,
+            ItemStack tool
+    ) {
+        if (state.getValue(AGE) < MAX_AGE) {
             return List.of();
         }
 
-        level.setBlock(pos, state.setValue(AGE, AGE_AFTER_HARVEST), Block.UPDATE_CLIENTS);
+        level.setBlock(
+                pos,
+                state.setValue(AGE, AGE_AFTER_HARVEST),
+                Block.UPDATE_CLIENTS
+        );
 
-        float pitch = 0.9F + level.random.nextFloat() * 0.2F;
-        level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, pitch);
+        float pitch = 0.8F + level.random.nextFloat() * 0.4F;
 
-        LootTable lootTable = level.getServer().getLootData().getLootTable(CUT_LOOT_TABLE);
+        level.playSound(
+                null,
+                pos,
+                SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES,
+                SoundSource.BLOCKS,
+                1.0F,
+                pitch
+        );
+
+        LootTable lootTable = level.getServer()
+                .getLootData()
+                .getLootTable(HARVEST_LOOT_TABLE);
+
         LootParams params = new LootParams.Builder(level)
-                .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
-                .withParameter(LootContextParams.TOOL, tool)
-                .withOptionalParameter(LootContextParams.BLOCK_STATE, state)
+                .withParameter(
+                        LootContextParams.ORIGIN,
+                        Vec3.atCenterOf(pos)
+                )
+                .withParameter(
+                        LootContextParams.TOOL,
+                        tool
+                )
+                .withOptionalParameter(
+                        LootContextParams.BLOCK_STATE,
+                        state
+                )
                 .create(LootContextParamSets.BLOCK);
 
         return lootTable.getRandomItems(params);
@@ -111,24 +176,65 @@ public class ChiliCropBlock extends CropBlock {
             @NotNull InteractionHand hand,
             @NotNull BlockHitResult hit
     ) {
-        ItemStack stack = player.getItemInHand(hand);
-        if (getAge(state) < MAX_AGE) {
+        if (state.getValue(AGE) < MAX_AGE) {
             return InteractionResult.PASS;
         }
 
         if (level instanceof ServerLevel serverLevel) {
-            List<ItemStack> drops = cut(state, serverLevel, pos, stack);
-            level.gameEvent(
-                    player,
-                    GameEvent.BLOCK_CHANGE,
-                    pos
+            List<ItemStack> drops = harvest(
+                    state,
+                    serverLevel,
+                    pos,
+                    player.getItemInHand(hand)
             );
 
             for (ItemStack drop : drops) {
                 popResource(level, pos, drop);
             }
+
+            level.gameEvent(
+                    player,
+                    GameEvent.BLOCK_CHANGE,
+                    pos
+            );
         }
 
-        return InteractionResult.SUCCESS;
+        return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    @Override
+    public boolean isValidBonemealTarget(
+            @NotNull LevelReader level,
+            @NotNull BlockPos pos,
+            @NotNull BlockState state,
+            boolean isClient
+    ) {
+        return state.getValue(AGE) < MAX_AGE;
+    }
+
+    @Override
+    public boolean isBonemealSuccess(
+            @NotNull Level level,
+            @NotNull RandomSource random,
+            @NotNull BlockPos pos,
+            @NotNull BlockState state
+    ) {
+        return true;
+    }
+
+    @Override
+    public void performBonemeal(
+            @NotNull ServerLevel level,
+            @NotNull RandomSource random,
+            @NotNull BlockPos pos,
+            @NotNull BlockState state
+    ) {
+        int age = state.getValue(AGE);
+
+        level.setBlock(
+                pos,
+                state.setValue(AGE, Math.min(MAX_AGE, age + 1)),
+                Block.UPDATE_CLIENTS
+        );
     }
 }

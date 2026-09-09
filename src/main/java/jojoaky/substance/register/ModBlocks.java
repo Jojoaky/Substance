@@ -57,10 +57,10 @@ public class ModBlocks {
                             .sound(SoundType.CROP)
                             .noCollission()
                             .instabreak()
-                    ),
+            ),
             "ephedra",
             false
-        );
+    );
 
     public static final Block CHILI_CROP = register(
             new ChiliCropBlock(
