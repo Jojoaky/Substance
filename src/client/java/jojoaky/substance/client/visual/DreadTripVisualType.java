@@ -6,11 +6,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
-import net.minecraft.util.Mth;
+import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.function.Consumer;
@@ -72,8 +71,11 @@ public final class DreadTripVisualType extends TripVisualType {
                 0,
                 Math.cos(angle) * distance
         );
-        EntityType<?>[] animals = {EntityType.COW, EntityType.PIG, EntityType.CHICKEN};
-        EntityType<?> entityType = animals[random.nextInt(animals.length)];
+        EntityType<?>[] entityTypes = config.dreadDistantEntityTypeCache();
+        if (entityTypes.length == 0) {
+            return;
+        }
+        EntityType<?> entityType = entityTypes[random.nextInt(entityTypes.length)];
         int count = 1 + random.nextInt(3);
         for (int i = 0; i < count; i++) {
             BlockPos ground = groundAt(level, center.add(i * 2.5, 0, random.nextDouble() * 3));
@@ -94,14 +96,18 @@ public final class DreadTripVisualType extends TripVisualType {
             return null;
         }
 
-        // NO_LEAVES is not synchronized to clients and starts empty in client chunks.
-        BlockPos ground = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, column);
-        if (ground.getY() <= level.getMinBuildHeight()
-                || !level.getFluidState(ground.below()).isEmpty()
-                || !level.getBlockState(ground).isAir()
-                || !level.getBlockState(ground.above()).isAir()) {
-            return null;
+        int highestY = Math.min(level.getMaxBuildHeight() - 2, column.getY() + 2);
+        int lowestY = Math.max(level.getMinBuildHeight() + 1, column.getY() - 16);
+        for (int y = highestY; y >= lowestY; y--) {
+            BlockPos ground = new BlockPos(column.getX(), y, column.getZ());
+            BlockPos floor = ground.below();
+            if (level.getFluidState(floor).isEmpty()
+                    && level.getBlockState(floor).isFaceSturdy(level, floor, Direction.UP)
+                    && level.getBlockState(ground).isAir()
+                    && level.getBlockState(ground.above()).isAir()) {
+                return ground;
+            }
         }
-        return ground;
+        return null;
     }
 }

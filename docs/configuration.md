@@ -70,6 +70,7 @@ Existing partially consumed herbal rolls and cigarettes retain their stored maxi
 | `dreadApparitionInterval` |       `4.0 s` | Average interval          |
 | `dreadMaxApparitions`     |           `8` | `0` disables apparitions  |
 | `dreadCreeperChance`      |         `0.2` | Probability (`0.0`-`1.0`) |
+| `dreadDistantEntityTypes` | Six vanilla entity IDs | Entity IDs for distant apparitions |
 | `dreadAnimalDistance`     | `24.0 blocks` | Spawn distance            |
 | `dreadAnimalFadeDistance` |  `4.0 blocks` | Fade distance             |
 

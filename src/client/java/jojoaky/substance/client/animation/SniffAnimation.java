@@ -44,9 +44,14 @@ public final class SniffAnimation {
         int side = ItemUseAnimation.usedArm(entity) == HumanoidArm.RIGHT ? 1 : -1;
 
         float pitch = Mth.clamp(head.xRot, -0.7F, 0.7F) - 1.78F - 0.06F * sniff;
-        arm.xRot = Mth.lerp(blend, arm.xRot, pitch);
-        arm.yRot = Mth.lerp(blend, arm.yRot, head.yRot - side * 0.35F);
-        arm.zRot = Mth.lerp(blend, arm.zRot, 0.0F);
+        arm.xRot = lerpRadians(blend, arm.xRot, pitch);
+        arm.yRot = lerpRadians(blend, arm.yRot, head.yRot - side * 0.35F);
+        arm.zRot = lerpRadians(blend, arm.zRot, 0.0F);
+    }
+
+    private static float lerpRadians(float amount, float start, float end) {
+        float difference = Mth.wrapDegrees((end - start) * Mth.RAD_TO_DEG) * Mth.DEG_TO_RAD;
+        return start + amount * difference;
     }
 
     private static float sniffPulse(float elapsed) {

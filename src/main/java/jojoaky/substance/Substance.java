@@ -56,6 +56,7 @@ public class Substance implements ModInitializer {
 		);
 
 		Config.HANDLER.load();
+		Config.refreshDreadDistantEntityTypes();
 		ConfigSync.initializeServer();
 		WelcomeHandler.initialize();
 

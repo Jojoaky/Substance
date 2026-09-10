@@ -1,5 +1,9 @@
 package jojoaky.substance;
 
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
@@ -7,7 +11,13 @@ import jojoaky.substance.config.GameplayConfig;
 import jojoaky.substance.config.GameplayOption;
 import jojoaky.substance.config.GameplayOptions;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Config implements GameplayOptions {
     private static volatile GameplayConfig synchronizedGameplay;
@@ -24,6 +34,10 @@ public class Config implements GameplayOptions {
     public static final float DEFAULT_DREAD_APPARITION_INTERVAL = 4.0f;
     public static final int DEFAULT_DREAD_MAX_APPARITIONS = 8;
     public static final float DEFAULT_DREAD_CREEPER_CHANCE = 0.2f;
+    public static final List<String> DEFAULT_DREAD_DISTANT_ENTITY_TYPES = List.of(
+            "minecraft:cow", "minecraft:pig", "minecraft:chicken", "minecraft:horse",
+            "minecraft:zombie", "minecraft:wandering_trader"
+    );
     public static final float DEFAULT_DREAD_ANIMAL_DISTANCE = 24.0f;
     public static final float DEFAULT_DREAD_ANIMAL_FADE_DISTANCE = 4.0f;
     public static final boolean DEFAULT_ENABLE_AUDIO_EFFECTS = true;
@@ -51,11 +65,55 @@ public class Config implements GameplayOptions {
             .id(new ResourceLocation(Substance.MOD_ID, "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(FabricLoader.getInstance().getConfigDir().resolve("substance.json"))
+                    .appendGsonBuilder(builder -> builder.registerTypeAdapter(
+                            new TypeToken<List<String>>() {}.getType(),
+                            (JsonDeserializer<List<String>>) Config::deserializeDreadDistantEntityTypes
+                    ))
                     .build())
             .build();
 
     public static Config get() {
         return HANDLER.instance();
+    }
+
+    public static void refreshDreadDistantEntityTypes() {
+        Config config = get();
+        config.dreadDistantEntityTypeCache = config.dreadDistantEntityTypes == null
+                ? new EntityType<?>[0]
+                : config.dreadDistantEntityTypes.stream()
+                .map(ResourceLocation::tryParse)
+                .filter(java.util.Objects::nonNull)
+                .filter(BuiltInRegistries.ENTITY_TYPE::containsKey)
+                .map(BuiltInRegistries.ENTITY_TYPE::get)
+                .toArray(EntityType<?>[]::new);
+    }
+
+    private static List<String> deserializeDreadDistantEntityTypes(
+            JsonElement json,
+            java.lang.reflect.Type type,
+            com.google.gson.JsonDeserializationContext context
+    ) {
+        if (json.isJsonPrimitive() && json.getAsJsonPrimitive().isString()) {
+            return Arrays.stream(json.getAsString().split(","))
+                    .map(String::trim)
+                    .filter(value -> !value.isEmpty())
+                    .toList();
+        }
+        if (!json.isJsonArray()) {
+            throw new JsonParseException("Expected an array of entity IDs");
+        }
+
+        List<String> entityIds = new ArrayList<>();
+        for (JsonElement entry : json.getAsJsonArray()) {
+            if (entry.isJsonPrimitive() && entry.getAsJsonPrimitive().isString()) {
+                entityIds.add(entry.getAsString());
+            }
+        }
+        return entityIds;
+    }
+
+    public EntityType<?>[] dreadDistantEntityTypeCache() {
+        return dreadDistantEntityTypeCache;
     }
 
     public static GameplayOptions gameplay() {
@@ -110,6 +168,11 @@ public class Config implements GameplayOptions {
 
     @SerialEntry
     public float dreadCreeperChance = DEFAULT_DREAD_CREEPER_CHANCE;
+
+    @SerialEntry
+    public List<String> dreadDistantEntityTypes = DEFAULT_DREAD_DISTANT_ENTITY_TYPES;
+
+    private transient EntityType<?>[] dreadDistantEntityTypeCache = new EntityType<?>[0];
 
     @SerialEntry
     public float dreadAnimalDistance = DEFAULT_DREAD_ANIMAL_DISTANCE;

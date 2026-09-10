@@ -213,6 +213,8 @@
   "text.config.substance.option.dreadMaxApparitions.desc": "Begrenze gleichzeitig sichtbare Grauenerscheinungen. Null deaktiviert sie, lässt aber den Shader aktiv.",
   "text.config.substance.option.dreadCreeperChance": "Chance auf falsche Creeper",
   "text.config.substance.option.dreadCreeperChance.desc": "Lege fest, wie oft ein falscher Creeper statt entfernter Tiere erscheint.",
+  "text.config.substance.option.dreadDistantEntityTypes": "Entfernte Entitätstypen",
+  "text.config.substance.option.dreadDistantEntityTypes.desc": "Füge Entität-IDs für entfernte Erscheinungen hinzu. Ungültige IDs werden ignoriert. Entferne alle Einträge, um sie zu deaktivieren.",
   "text.config.substance.option.dreadAnimalDistance": "Erscheinungsdistanz der Tiere",
   "text.config.substance.option.dreadAnimalDistance.desc": "Lege fest, wie weit entfernt Tiererscheinungen auftauchen.",
   "text.config.substance.option.dreadAnimalFadeDistance": "Ausblenddistanz der Tiere",

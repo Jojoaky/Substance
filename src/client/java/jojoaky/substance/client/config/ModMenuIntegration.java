@@ -24,6 +24,7 @@ public class ModMenuIntegration implements ModMenuApi {
 
     private void saveConfig() {
         Config.HANDLER.save();
+        Config.refreshDreadDistantEntityTypes();
 
         Minecraft client = Minecraft.getInstance();
         var server = client.getSingleplayerServer();
@@ -270,6 +271,7 @@ public class ModMenuIntegration implements ModMenuApi {
                         .build())
                 .group(buildHallucinationVisualsGroup())
                 .group(buildDreadVisualsGroup())
+                .group(dreadDistantEntityTypesOption())
                 .build();
     }
 
@@ -308,6 +310,18 @@ public class ModMenuIntegration implements ModMenuApi {
                         () -> Config.get().dreadAnimalDistance, val -> Config.get().dreadAnimalDistance = val))
                 .option(floatOption("dreadAnimalFadeDistance", Config.DEFAULT_DREAD_ANIMAL_FADE_DISTANCE, 1.0f, 64.0f, 1.0f, "%.0f blocks",
                         () -> Config.get().dreadAnimalFadeDistance, val -> Config.get().dreadAnimalFadeDistance = val))
+                .build();
+    }
+
+    private ListOption<String> dreadDistantEntityTypesOption() {
+        return ListOption.<String>createBuilder()
+                .name(Component.translatable("text.config.substance.option.dreadDistantEntityTypes"))
+                .description(OptionDescription.of(Component.translatable("text.config.substance.option.dreadDistantEntityTypes.desc")))
+                .binding(Config.DEFAULT_DREAD_DISTANT_ENTITY_TYPES,
+                        () -> Config.get().dreadDistantEntityTypes,
+                        val -> Config.get().dreadDistantEntityTypes = val)
+                .controller(StringControllerBuilder::create)
+                .initial("")
                 .build();
     }
 

@@ -206,6 +206,8 @@
   "text.config.substance.option.dreadMaxApparitions.desc": "Limit how many dread apparitions may be visible at once. Set to zero to disable them while keeping the shader.",
   "text.config.substance.option.dreadCreeperChance": "Fake Creeper Chance",
   "text.config.substance.option.dreadCreeperChance.desc": "Set the chance that a dread apparition is a fake creeper instead of distant animals.",
+  "text.config.substance.option.dreadDistantEntityTypes": "Distant Entity Types",
+  "text.config.substance.option.dreadDistantEntityTypes.desc": "Add entity IDs for distant apparitions. Invalid IDs are ignored. Remove every entry to disable them.",
   "text.config.substance.option.dreadAnimalDistance": "Animal Spawn Distance",
   "text.config.substance.option.dreadAnimalDistance.desc": "Set how far away distant animal apparitions appear.",
   "text.config.substance.option.dreadAnimalFadeDistance": "Animal Fade Distance",
