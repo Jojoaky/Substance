@@ -35,7 +35,7 @@ import org.jetbrains.annotations.NotNull;
 public class TrayBlock extends Block {
     public static final IntegerProperty LEVEL = IntegerProperty.create("level", 1, 3);
     public static final BooleanProperty DRIED = BooleanProperty.create("dried");
-    private static final int DRY_DELAY_TICKS = 30;
+    public static final int DRY_DELAY_TICKS = 30;
 
     private final Item filledFlask;
     private final Item emptyFlask;
