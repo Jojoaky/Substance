@@ -3,6 +3,7 @@ package jojoaky.substance.register;
 import jojoaky.substance.Substance;
 import jojoaky.substance.content.consumable.*;
 import jojoaky.substance.content.gas_bottle.EmptyGasBottleItem;
+import jojoaky.substance.content.gas_bottle.FilledGasBottleItem;
 import jojoaky.substance.content.pipe.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -57,7 +58,7 @@ public class ModItems {
 
     public static final Item HERBAL_ROLL = register(
             new JointItem(new FabricItemSettings()
-                    .stacksTo(16)
+                    .stacksTo(1)
                     .rarity(Rarity.UNCOMMON)
             ),
             "herbal_roll"
@@ -65,7 +66,7 @@ public class ModItems {
 
     public static final Item THICK_HERBAL_ROLL = register(
             new ThickJointItem(new FabricItemSettings()
-                    .stacksTo(16)
+                    .stacksTo(1)
                     .rarity(Rarity.RARE)
             ),
             "thick_herbal_roll"
@@ -73,7 +74,7 @@ public class ModItems {
 
     public static final Item CIGARETTE = register(
             new CigaretteItem(new FabricItemSettings()
-                    .stacksTo(16)
+                    .stacksTo(1)
                     .rarity(Rarity.RARE)
             ),
             "cigarette"
@@ -214,7 +215,7 @@ public class ModItems {
     );
 
     public static final Item GAS_BOTTLE_OXYGEN = register(
-            new Item(new FabricItemSettings()
+            new FilledGasBottleItem(new FabricItemSettings()
                     .craftRemainder(ModItems.GAS_BOTTLE)
                     .stacksTo(16)
             ),
@@ -222,7 +223,7 @@ public class ModItems {
     );
 
     public static final Item GAS_BOTTLE_HYDROGEN = register(
-            new Item(new FabricItemSettings()
+            new FilledGasBottleItem(new FabricItemSettings()
                     .craftRemainder(ModItems.GAS_BOTTLE)
                     .stacksTo(16)
             ),
@@ -230,7 +231,7 @@ public class ModItems {
     );
 
     public static final Item GAS_BOTTLE_NITROGEN = register(
-            new Item(new FabricItemSettings()
+            new FilledGasBottleItem(new FabricItemSettings()
                     .craftRemainder(ModItems.GAS_BOTTLE)
                     .stacksTo(16)
             ),

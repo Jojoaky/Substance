@@ -1,82 +1,73 @@
 # Substance content guide
 
-The creative tab (`Substance`) is useful for discovering content,
-but normal survival progression is built around the recipes, loot injections, villager trades, and
-optional Create processing described below.
+Substance adds growable ingredients, consumables, pipes, status effects, potions, and multistep chemistry. This page summarizes the available content and links to the detailed guides.
 
-## Consumables and effects
+All durations and chances in these guides use the default settings. Server owners can change many of them. See the [configuration reference](configuration.md).
 
-The consumable and smoking items are:
+## Consumables
 
-| Item                                                                                                                          | ID                               | Effects                                                                       |
-|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------|-------------------------------------------------------------------------------|
-| ![White Crystals](../src/main/resources/assets/substance/textures/item/white_crystals.png) White Crystals                     | `substance:white_crystals`       | Surge and Warp.                                                               |
-| ![Spiced White Crystals](../src/main/resources/assets/substance/textures/item/white_crystals_chili.png) Spiced White Crystals | `substance:white_crystals_chili` | Surge and Warp.                                                               |
-| ![Blue Crystals](../src/main/resources/assets/substance/textures/item/blue_crystals.png) Blue Crystals                        | `substance:blue_crystals`        | Surge and Warp.                                                               |
-| ![Herbal Roll](../src/main/resources/assets/substance/textures/item/herbal_roll.png) Herbal Roll                              | `substance:herbal_roll`          | Relaxation and Warp. A long use also causes Confusion.                        |
-| ![Thick Herbal Roll](../src/main/resources/assets/substance/textures/item/thick_herbal_roll.png) Thick Herbal Roll            | `substance:thick_herbal_roll`    | Stronger Relaxation and Warp, plus Haze. A long use also causes Confusion.    |
-| ![Cigarette](../src/main/resources/assets/substance/textures/item/cigarette.png) Cigarette                                    | `substance:cigarette`            | Keen and Haste. A long use also causes Confusion.                             |
-| ![Wooden Pipe](../src/main/resources/assets/substance/textures/item/wooden_pipe.png) Wooden Pipe                              | `substance:wooden_pipe`          | Reusable pipe; smoking gives Haze and Warp, plus the effects of its contents. |
-| ![Bubble Pipe](../src/main/resources/assets/substance/textures/item/bubble_pipe.png) Bubble Pipe                              | `substance:bubble_pipe`          | Reusable pipe; smoking gives Haze and Warp, plus the effects of its contents. |
+| Item | Main effects | Guide |
+|------|--------------|-------|
+| ![White Crystals](../src/main/resources/assets/substance/textures/item/white_crystals.png) White Crystals | [Surge](effects.md#surge) and [Warp](effects.md#warp) | [White Crystals](white-crystals.md#white-crystals) |
+| ![Spiced White Crystals](../src/main/resources/assets/substance/textures/item/white_crystals_chili.png) Spiced White Crystals | Stronger [Surge](effects.md#surge), [Warp](effects.md#warp), and minor damage | [Spiced White Crystals](white-crystals.md#spiced-white-crystals) |
+| ![Blue Crystals](../src/main/resources/assets/substance/textures/item/blue_crystals.png) Blue Crystals | Stronger [Surge](effects.md#surge) and [Warp](effects.md#warp) | [Blue Crystals](blue-crystals.md#blue-crystals) |
+| ![Herbal Roll](../src/main/resources/assets/substance/textures/item/herbal_roll.png) Herbal Roll | [Relaxation](effects.md#relaxation) and [Warp](effects.md#warp) | [Herbal Roll](herbal-rolls.md#herbal-roll) |
+| ![Thick Herbal Roll](../src/main/resources/assets/substance/textures/item/thick_herbal_roll.png) Thick Herbal Roll | Stronger [Relaxation](effects.md#relaxation) and [Warp](effects.md#warp), plus [Haze](effects.md#haze) | [Thick Herbal Roll](herbal-rolls.md#thick-herbal-roll) |
+| ![Cigarette](../src/main/resources/assets/substance/textures/item/cigarette.png) Cigarette | [Keen](effects.md#keen) and Haste II | [Cigarette](cigarette.md#cigarette) |
 
-Using a consumable can apply one or more Substance effects. The effect names and their broad gameplay themes are:
+Crystals are single-use powders. Finish the use action to consume one and receive its effects. Rolls and cigarettes burn down while held in use, so shorter draws consume less of the item and give shorter effects. A draw longer than five seconds also gives four seconds of Nausea.
 
-- **Haze**: visual disorientation and delayed visual effects.
-- **Warp**: visual distortion and altered perception.
-- **Keen**: a beneficial mining/haste-style effect; its mining multiplier is configurable.
-- **Relaxation**: a beneficial calming effect with defensive behavior and configurable darkness duration.
-- **Surge**: a movement and Elytra boost; speed and flight parameters are configurable.
-- **Hallucination**: client-side apparitions, displaced block images, and ambient sounds.
-- **Dread**: a harmful horror effect with darkness, false Creepers, animal apparitions, and ambient sounds.
+## Pipes
 
-Potions are registered for every active effect. For each effect there is a base, long, and strong potion. The brewing pattern is:
+| Item | Durability | How to obtain |
+|------|-----------:|---------------|
+| ![Wooden Pipe](../src/main/resources/assets/substance/textures/item/wooden_pipe.png) [Wooden Pipe](pipes.md#wooden-pipe) | 2,048 ticks | Pillagers, vindicators, pillager outposts, and woodland mansions |
+| ![Bubble Pipe](../src/main/resources/assets/substance/textures/item/bubble_pipe.png) [Bubble Pipe](pipes.md#bubble-pipe) | 512 ticks | Cleric villagers and village chests |
 
-1. Brew an awkward potion with the effect ingredient.
-2. Add redstone to make the long version.
-3. Add glowstone dust to make the strong version.
+Both pipes have five ingredient slots and accept dried herb buds, dried tobacco leaves, White Crystals, Blue Crystals, and red mushrooms. See the [pipe guide](pipes.md) for controls and ingredient effects.
 
-The effect ingredients are fermented spider eye (Haze), cyanide (Warp), sculk (Dread), dried tobacco leaf (Keen), herb bud (Relaxation), white crystals (Surge), and red mushroom (Hallucination).
+## Effects and potions
+
+Substance has seven active effects:
+
+- [Haze](effects.md#haze) adds visual trails, distortion, and muffled audio.
+- [Warp](effects.md#warp) bends the view, separates colors, and alters audio.
+- [Keen](effects.md#keen) increases mining speed and narrows the visible area.
+- [Relaxation](effects.md#relaxation) warms and blurs the view, but punishes attacks.
+- [Surge](effects.md#surge) increases movement speed and grants boosted flight.
+- [Hallucination](effects.md#hallucination) creates false blocks, floating villagers, and ambient sounds.
+- [Dread](effects.md#dread) darkens the view and creates threatening apparitions.
+
+Each effect has a normal, extended, and strong potion. The [effects and potions guide](effects.md#potions) lists every brewing ingredient and duration.
 
 ## Plants and farming
 
-Substance adds four plant lines:
+| Plant | Main product | Used for |
+|-------|--------------|----------|
+| ![Mature Large Herb](../src/main/resources/assets/substance/textures/block/large_herb_bottom_stage3.png) Large Herb | ![Herb Bud](../src/main/resources/assets/substance/textures/item/herb_bud.png) Herb Bud | [Herbal rolls](herbal-rolls.md) and Potions of [Relaxation](effects.md#relaxation) |
+| ![Mature Tobacco](../src/main/resources/assets/substance/textures/block/tobacco_bottom_stage3.png) Tobacco | ![Ripe Tobacco Leaf](../src/main/resources/assets/substance/textures/item/ripe_tobacco_leaf.png) Ripe Tobacco Leaf | [Cigarettes](cigarette.md) and Potions of [Keen](effects.md#keen) |
+| ![Mature Ephedra](../src/main/resources/assets/substance/textures/block/ephedra_stage3.png) Ephedra | ![Ephedra Bundle](../src/main/resources/assets/substance/textures/item/ephedra_bundle.png) Ephedra Bundle | [White Crystal chemistry](white-crystals.md#production-guide) |
+| ![Mature Chili Plant](../src/main/resources/assets/substance/textures/block/chili_stage3.png) Chili Plant | ![Chili Pepper](../src/main/resources/assets/substance/textures/item/chili_pepper.png) Chili Pepper | [Spiced White Crystals](white-crystals.md#spiced-white-crystals) |
 
-- **Herb**: plant `substance:herb_seeds` to grow the large herb crop, harvest `herb_bud`, and dry the bud before using it in herbal rolls.
-- **Ephedra**: plant `substance:ephedra_seeds` to grow ephedra and obtain ephedra bundles for the chemistry chain.
-- **Chili**: buy `substance:chili_seeds` from a wandering trader, grow chili peppers, and combine a pepper with white crystals to craft spiced white crystals.
-- **Tobacco**: plant `substance:tobacco_seeds`, harvest ripe tobacco leaves, and dry them to obtain dried tobacco leaves for cigarettes and Keen brewing.
+Herb seeds enter progression through piglin bartering. Farmers sell tobacco seeds and ephedra bundles, while wandering traders sell ephedra and chili seeds. Chili peppers can also appear in desert pyramids and desert or savanna village chests.
 
-Crop drops and growth are data-defined in the `substance` loot tables. The crop blocks are intentionally lightweight and can be harvested like other vanilla crops.
+## Chemistry and processing
 
-## Chemistry and fluids
+The chemistry system uses reusable glass flasks, gas bottles, liquid chemicals, and trays. White and Blue Crystals each have a complete vanilla-compatible production route. Installing Create adds machine recipes for many of the same stages.
 
-The chemistry system adds the following fluids, each with a world fluid, bucket, and flask representation:
+- [White Crystal production](white-crystals.md#production-guide) uses pseudoephedrine, red phosphorus, iodine, water, and heat.
+- [Blue Crystal production](blue-crystals.md#production-guide) uses two chemical branches that produce phenylacetone and methylamine.
+- [Pipe ingredients](pipes.md#ingredients) provide another way to use the finished materials.
 
-- Phenylacetic acid
-- Acetic anhydride
-- Methanol
-- Methylamine
-- Phenylacetone
-- Ammonia
-- White crystal oil
-- Blue crystal oil
+Chemical fluids can harm entities that stand in them. The more toxic fluids also apply Poison, Haze, or Blindness.
 
-The corresponding IDs use the lower-case names, for example `substance:methanol`, `substance:methanol_bucket`, and `substance:methanol_flask`. Empty flasks can be filled and returned by fluid interactions; filled gas bottles similarly return an empty bottle when consumed by a recipe.
+## World content
 
-Gas bottles are available as empty, oxygen, hydrogen, and nitrogen variants. The generated recipes describe how to obtain the gases from Create-compatible processing chains and vanilla inputs.
+Substance adds items to vanilla loot, villager trades, wandering-trader trades, and piglin bartering. Some illagers, piglins, skeletons, and zombies can spawn with smoking items and use them while idle.
 
-## Trays and crystal processing
+The advancement tree covers pipes, herb farming, tobacco, crystal production, chemistry, and collecting effects. It provides progression hints without locking the recipes behind advancements.
 
-The basic `substance:tray` is used to process crystal oils. Filled trays are available for white and blue crystal oil (`white_oil_tray` and `blue_oil_tray`). Filled trays can break during processing; the shatter loot tables control the resulting drops. The tray and filled trays are also included in the Substance creative tab.
+## Further reference
 
-## Mob equipment
-
-Some hostile and neutral mobs can spawn holding a smoking item. The built-in definitions cover the Illagers, Piglins, Skeletons, and Zombies entity tags. The definitions are loaded from `data/substance/mob_equipment/*.json`, so a datapack can add or replace definitions without changing Java code. See [custom-data.md](custom-data.md) for the schema.
-
-## Loot, trades, and compatibility
-
-The mod adds selected items to vanilla loot tables and villager/wandering-trader pools through its datapatch registry. Create integration supplies alternate processing recipes and replacement recipes when Create is loaded. Without Create, the vanilla recipe path remains available where one exists.
-
-## Advancements
-
-The advancement tree is grouped by pipes, herbs, tobacco, crystals, and miscellaneous chemistry. It is intended to provide discovery goals rather than gate the entire progression. If an advancement appears missing, verify that the resource pack and the `data/substance/advancements` files are present in the installed JAR.
+- [Configuration, data packs, and resource packs](configuration.md)
+- [Project README](../README.md)

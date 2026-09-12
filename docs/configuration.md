@@ -1,5 +1,7 @@
 # Configuration reference
 
+[Content guide](content.md) | [Effects and potions](effects.md) | [Pipes](pipes.md)
+
 Configure Substance in Mod Menu or in `.minecraft/config/substance.json` while Minecraft is stopped. Gameplay settings are server-authoritative and synchronized to clients; client settings apply only locally.
 
 ## Gameplay settings

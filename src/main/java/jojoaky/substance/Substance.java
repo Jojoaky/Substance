@@ -139,6 +139,7 @@ public class Substance implements ModInitializer {
 }
 
 // TODO: (before release)
+//  - Implement cigarette pack that can stack cigarettes
 //  - Check crafting recipes and ensure all content is obtainable.
 //  /
 //  - Update README and pages with features, quick tutorial and screenshots
@@ -146,5 +147,5 @@ public class Substance implements ModInitializer {
 //  - Create a tutorial / summary.
 //  - Add more translations.
 // 	(future):
-//  - Addiction
+//  - Addiction / Overdose
 //  - Update to work with 1.21.1 neoforge and latest fabric & (neo/)forge
