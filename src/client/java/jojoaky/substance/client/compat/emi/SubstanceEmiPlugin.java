@@ -15,6 +15,8 @@ public final class SubstanceEmiPlugin implements EmiPlugin {
     @Override
     public void register(EmiRegistry registry) {
         ModWorldInteractions.all().stream()
+                .filter(interaction -> !interaction.leftInputs().isEmpty()
+                        && !interaction.rightInputs().isEmpty())
                 .map(SubstanceEmiPlugin::adapt)
                 .forEach(registry::addRecipe);
     }
