@@ -49,14 +49,11 @@ Generated resources can be refreshed using the Gradle datagen run configuration.
 
 ## Credits
 
-I wrote most of this mod's code,  
-while Zute created most of this mod's textures.
+Most of the code for **Substance** was developed by me, while **Zute** created most of the textures.
 
-Substance's chemistry is heavily inspired by [Broken Bad](https://www.curseforge.com/minecraft/mc-mods/create-broken-bad).  
-The herbs are inspired by [Nirvana](https://www.curseforge.com/minecraft/mc-mods/nirvana)
+Substance's chemistry content is heavily inspired by [Create: Broken Bad](https://www.curseforge.com/minecraft/mc-mods/create-broken-bad), and its herbs are inspired by [Nirvana](https://www.curseforge.com/minecraft/mc-mods/nirvana).
 
-Sounds where used from [Freesound](https://freesound.org/) under Creative Commons legal tools 
-See [Third-party audio attributions](THIRD_PARTY_LICENSES.md)
+Some sound effects are sourced from [Freesound](https://freesound.org/) and used under their respective Creative Commons licenses and legal tools. See [Third-party audio attributions](THIRD_PARTY_LICENSES.md) for individual credits and licensing information.
 
 ## Downloads & Source
 - [Source code and issues](https://github.com/Jojoaky/Substance)

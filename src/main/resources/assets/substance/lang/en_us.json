@@ -1,6 +1,8 @@
 {
   "itemGroup.substance": "Substance",
 
+  "message.substance.welcome": "[SUBSTANCE] Welcome to the Substance Mod! This mod is purely fictional and for entertainment purposes only. It is not meant to encourage the use of illicit substances in any way.",
+
   "item.substance.consumption": "Consumption: %s / %s",
 
   "item.substance.white_crystals": "White Crystals",

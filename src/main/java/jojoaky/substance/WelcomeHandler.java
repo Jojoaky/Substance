@@ -49,10 +49,7 @@ public final class WelcomeHandler {
 
             ServerPlayer player = server.getPlayerList().getPlayer(entry.getKey());
             if (player != null) {
-                player.sendSystemMessage(
-                        Component.literal("[SUBSTANCE] ")
-                                .append(Component.literal("Welcome to the Substance Mod! This mod is purely fictional and for entertainment purposes only. It is not meant to encourage the use of illicit substances in any way."))
-                );
+                player.sendSystemMessage(Component.translatable("message.substance.welcome"));
             }
             iterator.remove();
         }
