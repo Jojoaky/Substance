@@ -25,10 +25,10 @@ public class FilledGasBottleItem extends Item {
         ItemStack heldStack = player.getItemInHand(hand);
 
         level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.FIRE_EXTINGUISH,
-                SoundSource.PLAYERS, 0.7F, 1.2F);
+                SoundSource.PLAYERS, 0.5F, 1.2F);
         player.awardStat(Stats.ITEM_USED.get(this));
 
-        ItemStack emptyBottle = ItemUtils.createFilledResult(heldStack, player, new ItemStack(ModItems.GAS_BOTTLE));
+        ItemStack emptyBottle = ItemUtils.createFilledResult(heldStack, player, new ItemStack(ModItems.GAS_BOTTLE), false);
         return InteractionResultHolder.sidedSuccess(emptyBottle, level.isClientSide());
     }
 }

@@ -139,9 +139,8 @@ public class Substance implements ModInitializer {
 }
 
 // TODO:
-//	- Emptying gas bottles does not work
 //	- Make vanilla automation possible + dispenser functionality for trays & gas bottles
-//  - Implement cigarette pack that can stack cigarettes
+//  - Cigarette pack that can stack cigarettes
 //  - Check crafting recipes and ensure all content is obtainable.
 //  - Add more translations.
 //  - Addiction / Overdose
