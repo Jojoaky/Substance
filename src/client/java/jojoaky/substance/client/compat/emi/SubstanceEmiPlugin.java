@@ -9,6 +9,8 @@ import jojoaky.substance.compat.recipeviewer.ModWorldInteractions;
 import jojoaky.substance.compat.recipeviewer.WorldInteractionDisplay;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.List;
+
 public final class SubstanceEmiPlugin implements EmiPlugin {
     @Override
     public void register(EmiRegistry registry) {
@@ -20,16 +22,26 @@ public final class SubstanceEmiPlugin implements EmiPlugin {
     private static EmiWorldInteractionRecipe adapt(WorldInteractionDisplay interaction) {
         EmiWorldInteractionRecipe.Builder builder = EmiWorldInteractionRecipe.builder()
                 .id(syntheticId(interaction.id()))
-                .leftInput(toEmi(interaction.inputs().get(0)),
-                        slot -> slot.appendTooltip(interaction.instruction()))
                 .supportsRecipeTree(false);
 
-        interaction.inputs().stream().skip(1)
-                .forEach(input -> builder.rightInput(toEmi(input), false));
-        interaction.catalysts()
-                .forEach(catalyst -> builder.rightInput(toEmi(catalyst), true));
-        interaction.outputs()
-                .forEach(output -> builder.output(EmiStack.of(output)));
+        boolean first = true;
+        for (WorldInteractionDisplay.InteractionInput input : interaction.leftInputs()) {
+            if (first) {
+                builder.leftInput(toEmi(input), slot -> slot.appendTooltip(interaction.instruction()));
+                first = false;
+            } else {
+                builder.leftInput(toEmi(input));
+            }
+        }
+
+        for (WorldInteractionDisplay.InteractionInput input : interaction.rightInputs()) {
+            builder.rightInput(toEmi(input), input.isCatalyst());
+        }
+
+        for (var output : interaction.outputs()) {
+            builder.output(EmiStack.of(output));
+        }
+
         return builder.build();
     }
 
@@ -38,7 +50,18 @@ public final class SubstanceEmiPlugin implements EmiPlugin {
         return path.startsWith("/") ? id : new ResourceLocation(id.getNamespace(), "/" + path);
     }
 
-    private static EmiIngredient toEmi(WorldInteractionDisplay.SizedIngredient ingredient) {
-        return EmiIngredient.of(ingredient.ingredient(), ingredient.amount());
+    private static EmiIngredient toEmi(WorldInteractionDisplay.InteractionInput input) {
+        if (input instanceof WorldInteractionDisplay.ItemInput item) {
+            return EmiIngredient.of(item.ingredient(), item.count());
+        } else if (input instanceof WorldInteractionDisplay.FluidInput fluid) {
+            if (fluid.fluids().size() == 1) {
+                return EmiStack.of(fluid.fluids().get(0), fluid.amount());
+            }
+            List<EmiIngredient> stacks = fluid.fluids().stream()
+                    .map(f -> (EmiIngredient) EmiStack.of(f, fluid.amount()))
+                    .toList();
+            return EmiIngredient.of(stacks);
+        }
+        throw new IllegalArgumentException("Unsupported interaction input type: " + input.getClass());
     }
 }

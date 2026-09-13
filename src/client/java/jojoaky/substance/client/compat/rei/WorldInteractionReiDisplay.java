@@ -31,8 +31,8 @@ public final class WorldInteractionReiDisplay extends BasicDisplay {
 
     private static List<EntryIngredient> inputs(WorldInteractionDisplay interaction) {
         List<EntryIngredient> entries = new ArrayList<>();
-        interaction.inputs().stream().map(WorldInteractionReiDisplay::toEntry).forEach(entries::add);
-        interaction.catalysts().stream().map(WorldInteractionReiDisplay::toEntry).forEach(entries::add);
+        interaction.leftInputs().stream().map(WorldInteractionReiDisplay::toEntry).forEach(entries::add);
+        interaction.rightInputs().stream().map(WorldInteractionReiDisplay::toEntry).forEach(entries::add);
         return List.copyOf(entries);
     }
 
@@ -40,11 +40,19 @@ public final class WorldInteractionReiDisplay extends BasicDisplay {
         return interaction.outputs().stream().map(EntryIngredients::of).toList();
     }
 
-    private static EntryIngredient toEntry(WorldInteractionDisplay.SizedIngredient sized) {
-        List<ItemStack> stacks = Arrays.stream(sized.ingredient().getItems())
-                .map(ItemStack::copy)
-                .peek(stack -> stack.setCount(sized.amount()))
-                .toList();
-        return EntryIngredients.ofItemStacks(stacks);
+    public static EntryIngredient toEntry(WorldInteractionDisplay.InteractionInput input) {
+        if (input instanceof WorldInteractionDisplay.ItemInput itemInput) {
+            List<ItemStack> stacks = Arrays.stream(itemInput.ingredient().getItems())
+                    .map(ItemStack::copy)
+                    .peek(stack -> stack.setCount(itemInput.count()))
+                    .toList();
+            return EntryIngredients.ofItemStacks(stacks);
+        } else if (input instanceof WorldInteractionDisplay.FluidInput fluid) {
+            var entries = fluid.fluids().stream()
+                    .flatMap(f -> EntryIngredients.of(f, fluid.amount()).stream())
+                    .toList();
+            return EntryIngredient.of(entries);
+        }
+        return EntryIngredient.empty();
     }
 }
