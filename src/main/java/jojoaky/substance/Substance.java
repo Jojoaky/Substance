@@ -138,14 +138,10 @@ public class Substance implements ModInitializer {
 	}
 }
 
-// TODO: (before release)
+// TODO:
+//	- Make vanilla automation possible + dispenser functionality for trays & gas bottles
 //  - Implement cigarette pack that can stack cigarettes
 //  - Check crafting recipes and ensure all content is obtainable.
-//  /
-//  - Update README and pages with features, quick tutorial and screenshots
-//  - Create detailed documentation / wiki for all content (markdown or github pages)
-//  - Create a tutorial / summary.
 //  - Add more translations.
-// 	(future):
 //  - Addiction / Overdose
 //  - Update to work with 1.21.1 neoforge and latest fabric & (neo/)forge

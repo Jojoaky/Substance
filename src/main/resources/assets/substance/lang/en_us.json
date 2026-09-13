@@ -50,6 +50,14 @@
   "item.substance.gas_bottle_hydrogen": "Gas Bottle of Hydrogen",
   "item.substance.gas_bottle_nitrogen": "Gas Bottle of Nitrogen",
 
+  "category.substance.world_interaction": "World Interaction",
+  "recipe.substance.world_interaction.oxygen_bottling": "Use on an upward Soul Sand bubble column",
+  "recipe.substance.world_interaction.hydrogen_bottling": "Use on a downward Magma Block bubble column",
+  "recipe.substance.world_interaction.white_oil_tray_filling": "Place the tray, then add %s white oil flasks",
+  "recipe.substance.world_interaction.blue_oil_tray_filling": "Place the tray, then add %s blue oil flasks",
+  "recipe.substance.world_interaction.white_crystal_extraction": "Place, wait %s seconds, then use a pickaxe",
+  "recipe.substance.world_interaction.blue_crystal_extraction": "Place, wait %s seconds, then use a pickaxe",
+
   "item.substance.phenylacetic_acid_bucket": "Bucket of Phenylacetic Acid",
   "item.substance.acetic_anhydride_bucket": "Bucket of Acetic Anhydride",
   "item.substance.methanol_bucket": "Bucket of Methanol",

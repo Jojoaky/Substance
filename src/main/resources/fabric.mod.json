@@ -22,6 +22,15 @@
 		"client": [
 			"jojoaky.substance.client.SubstanceClient"
 		],
+		"emi": [
+			"jojoaky.substance.client.compat.emi.SubstanceEmiPlugin"
+		],
+		"rei_client": [
+			"jojoaky.substance.client.compat.rei.SubstanceReiPlugin"
+		],
+		"jei_mod_plugin": [
+			"jojoaky.substance.client.compat.jei.SubstanceJeiPlugin"
+		],
 		"fabric-datagen": [
 			"jojoaky.substance.datagen.DataGen"
 		],

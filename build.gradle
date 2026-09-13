@@ -24,6 +24,16 @@ repositories {
 		name = 'Xander Maven'
 		url = 'https://maven.isxander.dev/releases'
 	}
+
+	maven {
+		name = 'Shedaniel Maven'
+		url = 'https://maven.shedaniel.me/'
+	}
+
+	maven {
+		name = 'BlameJared Maven'
+		url = 'https://maven.blamejared.com/'
+	}
 }
 
 loom {
@@ -80,6 +90,11 @@ dependencies {
 	// Config (ModMenu + YACL)
 	modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 	modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
+
+	// Optional recipe viewers. Keep their APIs out of the published runtime dependencies.
+	modCompileOnly "dev.emi:emi-fabric:${project.emi_version}:api"
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
+	modCompileOnly "mezz.jei:jei-${project.minecraft_version}-fabric-api:${project.jei_version}"
 
 	testImplementation "org.junit.jupiter:junit-jupiter:5.10.2"
 	testRuntimeOnly "org.junit.platform:junit-platform-launcher:1.10.2"
