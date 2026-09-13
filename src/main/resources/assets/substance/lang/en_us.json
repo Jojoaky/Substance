@@ -57,6 +57,9 @@
   "recipe.substance.world_interaction.blue_oil_tray_filling": "Place the tray, then add %s blue oil flasks",
   "recipe.substance.world_interaction.white_crystal_extraction": "Place, wait %s seconds, then use a pickaxe",
   "recipe.substance.world_interaction.blue_crystal_extraction": "Place, wait %s seconds, then use a pickaxe",
+  "recipe.substance.world_interaction.herb_cutting": "Cut the plant with shears",
+  "recipe.substance.world_interaction.tobacco_cutting": "Cut the plant with shears",
+  "recipe.substance.world_interaction.chili_cutting": "Harvest the mature plant",
 
   "item.substance.phenylacetic_acid_bucket": "Bucket of Phenylacetic Acid",
   "item.substance.acetic_anhydride_bucket": "Bucket of Acetic Anhydride",

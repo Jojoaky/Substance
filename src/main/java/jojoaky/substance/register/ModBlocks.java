@@ -41,7 +41,7 @@ public class ModBlocks {
                             .ignitedByLava()
             ),
             "large_herb",
-            true
+            false
     );
 
     public static final Block EPHEDRA_CROP = register(
@@ -80,10 +80,5 @@ public class ModBlocks {
     );
 
     public static void initialize() {
-        ItemGroupEvents.modifyEntriesEvent(ModCreativeTab.SUSPICIOUS_ITEM_GROUP_KEY).register((itemGroup) -> {
-            itemGroup.accept(ModBlocks.LARGE_HERB.asItem());
-        });
-
-        CompostingChanceRegistry.INSTANCE.add(ModBlocks.LARGE_HERB.asItem(), 0.5f);
     }
 }

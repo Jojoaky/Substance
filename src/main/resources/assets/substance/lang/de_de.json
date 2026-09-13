@@ -34,6 +34,9 @@
   "recipe.substance.world_interaction.blue_oil_tray_filling": "Tray platzieren und %s Kolben mit blauem Öl einfüllen",
   "recipe.substance.world_interaction.white_crystal_extraction": "Platzieren, %s Sekunden warten und Spitzhacke verwenden",
   "recipe.substance.world_interaction.blue_crystal_extraction": "Platzieren, %s Sekunden warten und Spitzhacke verwenden",
+  "recipe.substance.world_interaction.herb_cutting": "Pflanze mit einer Schere abschneiden",
+  "recipe.substance.world_interaction.tobacco_cutting": "Pflanze mit einer Schere abschneiden",
+  "recipe.substance.world_interaction.chili_cutting": "Reife Pflanze ernten",
 
   "item.substance.ephedra_bundle": "Ephedra-Bündel",
   "item.substance.ephedra_seeds": "Ephedra-Samen",
