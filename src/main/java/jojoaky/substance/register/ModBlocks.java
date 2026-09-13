@@ -17,6 +17,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
+import java.lang.reflect.Constructor;
+
 public class ModBlocks {
     public static Block register(Block block, String name, boolean shouldRegisterItem) {
         ResourceLocation id = Substance.resource(name);
@@ -39,15 +41,6 @@ public class ModBlocks {
                             .ignitedByLava()
             ),
             "large_herb",
-            true
-    );
-
-    public static final Block TRAY = register(
-            new EmptyTrayBlock(BlockBehaviour.Properties.of()
-                    .sound(SoundType.METAL)
-                    .strength(0.5F)
-                    .noOcclusion()),
-            "tray",
             true
     );
 

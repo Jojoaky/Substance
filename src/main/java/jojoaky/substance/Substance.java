@@ -79,67 +79,14 @@ public class Substance implements ModInitializer {
 
 		MobEquipmentRegistry.initialize();
 
+		ModDispenserBehavior.initialize();
+
 		PipeRegistry.initialize();
-
-		PipeRegistry.register(PipeSmokableItem.effectGiving(
-				ModItems.DRIED_HERB_BUD,
-				new StackingEffect(ModEffects.RELAXATION, 8, 1000, 4)
-		));
-
-		PipeRegistry.register(PipeSmokableItem.effectGiving(
-				ModItems.DRIED_TOBACCO_LEAF,
-				new StackingEffect(ModEffects.KEEN, 6, 550, 3)
-		));
-
-		PipeRegistry.register(PipeSmokableItem.effectGiving(
-				ModItems.WHITE_CRYSTALS,
-				new StackingEffect(ModEffects.SURGE, 8, 1000, 1)
-		));
-
-		PipeRegistry.register(PipeSmokableItem.effectGiving(
-				ModItems.BLUE_CRYSTALS,
-				new StackingEffect(ModEffects.SURGE, 8, 700, 3)
-		));
-
-		PipeRegistry.register(new PipeSmokableItem(
-				Items.RED_MUSHROOM,
-				(context) -> {
-					boolean horrorTrip = context.level().random.nextFloat() < Config.gameplay().horrorTripChance();
-
-					if (horrorTrip) {
-						if (context.entity().hasEffect(ModEffects.HALLUCINATION)) {
-							context.entity().removeEffect(ModEffects.HALLUCINATION);
-						}
-
-						context.level().playSound(
-								context.entity(),
-								context.entity().blockPosition(),
-								SoundEvents.LIGHTNING_BOLT_THUNDER,
-								SoundSource.PLAYERS,
-								5.0f,
-								0.8f
-						);
-
-						SubstanceEffectHelper.applyEffectBase(
-								context.entity(),
-								ModEffects.DREAD,
-								context.consumeDuration() * 5,
-								0
-						);
-					} else {
-						SubstanceEffectHelper.applyStackingEffect(
-								context.entity(),
-								context.consumeDuration(),
-								new StackingEffect(ModEffects.HALLUCINATION, 8, 1000, 1)
-						);
-					}
-				}
-		));
+		ModPipeIngredients.initialize();
 	}
 }
 
 // TODO:
-//	- Make vanilla automation possible + dispenser functionality for trays & gas bottles
 //  - Cigarette pack that can stack cigarettes
 //  - Check crafting recipes and ensure all content is obtainable.
 //  - Add more translations.

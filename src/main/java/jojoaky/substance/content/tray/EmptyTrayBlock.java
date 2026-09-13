@@ -53,16 +53,26 @@ public class EmptyTrayBlock extends Block {
     @SuppressWarnings("deprecation")
     public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos,
                                           Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
-        ModTrays.TrayEntry tray = ModTrays.getForFlask(player.getItemInHand(hand).getItem());
-        if (tray == null) return InteractionResult.PASS;
+        ItemStack heldStack = player.getItemInHand(hand);
+        ModTrays.TrayEntry tray = ModTrays.getForFlask(heldStack.getItem());
+        if (!tryFill(state, level, pos, heldStack)) return InteractionResult.PASS;
 
         if (!level.isClientSide) {
             TrayBlock.replaceFlask(player, hand, tray.emptyFlask());
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    public boolean tryFill(BlockState state, Level level, BlockPos pos, ItemStack stack) {
+        ModTrays.TrayEntry tray = ModTrays.getForFlask(stack.getItem());
+        if (tray == null) return false;
+
+        if (!level.isClientSide) {
             level.setBlock(pos, tray.block().defaultBlockState()
                     .setValue(TrayBlock.LEVEL, 1)
                     .setValue(FACING, state.getValue(FACING)), Block.UPDATE_ALL);
         }
-        return InteractionResult.sidedSuccess(level.isClientSide);
+        return true;
     }
 
     @Override

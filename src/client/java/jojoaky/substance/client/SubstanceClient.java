@@ -40,7 +40,7 @@ public class SubstanceClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.EPHEDRA_CROP, RenderType.cutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CHILI_CROP, RenderType.cutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.TOBACCO, RenderType.cutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.TRAY, RenderType.cutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(ModTrays.EMPTY_TRAY, RenderType.cutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModTrays.WHITE_CRYSTAL_OIL.block(), RenderType.translucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModTrays.BLUE_CRYSTAL_OIL.block(), RenderType.translucent());
 

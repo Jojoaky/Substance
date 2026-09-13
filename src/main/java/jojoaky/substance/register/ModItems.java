@@ -102,7 +102,7 @@ public class ModItems {
 
 
     // --- production ---
-    public static final Item TRAY = ModBlocks.TRAY.asItem();
+    public static final Item TRAY = ModTrays.EMPTY_TRAY.asItem();
     public static final Item WHITE_OIL_TRAY = ModTrays.WHITE_CRYSTAL_OIL.filledTray();
     public static final Item BLUE_OIL_TRAY = ModTrays.BLUE_CRYSTAL_OIL.filledTray();
 

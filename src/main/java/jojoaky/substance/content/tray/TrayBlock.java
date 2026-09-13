@@ -1,6 +1,7 @@
 package jojoaky.substance.content.tray;
 
 import jojoaky.substance.register.ModBlocks;
+import jojoaky.substance.register.ModTrays;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -18,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -42,7 +44,7 @@ public class TrayBlock extends Block {
     private final ResourceLocation lootTable;
 
     public TrayBlock(Properties properties, Item filledFlask, Item emptyFlask, ResourceLocation lootTable) {
-        super(properties);
+        super(properties.pushReaction(PushReaction.DESTROY));
         this.filledFlask = filledFlask;
         this.emptyFlask = emptyFlask;
         this.lootTable = lootTable;
@@ -57,51 +59,80 @@ public class TrayBlock extends Block {
     public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos,
                                           @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
         ItemStack heldStack = player.getItemInHand(hand);
-        int trayLevel = state.getValue(LEVEL);
 
-        if (state.getValue(DRIED) && heldStack.getItem() instanceof PickaxeItem) {
+        if (tryShatter(state, level, pos, heldStack)) {
             if (!level.isClientSide) {
-                LootTable table = ((ServerLevel) level).getServer().getLootData().getLootTable(lootTable);
-                LootParams params = new LootParams.Builder((ServerLevel) level)
-                        .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
-                        .withParameter(LootContextParams.TOOL, heldStack)
-                        .withOptionalParameter(LootContextParams.BLOCK_STATE, state)
-                        .create(LootContextParamSets.BLOCK);
-
-                for (ItemStack drop : table.getRandomItems(params)) {
-                    popResource(level, pos, drop);
-                }
                 heldStack.hurtAndBreak(1, player, ignored -> {});
-                level.playSound(null, pos, net.minecraft.sounds.SoundEvents.GLASS_BREAK,
-                        net.minecraft.sounds.SoundSource.BLOCKS, 0.7F, 1.1F);
-                level.setBlock(pos, ModBlocks.TRAY.defaultBlockState()
-                        .setValue(EmptyTrayBlock.FACING, state.getValue(EmptyTrayBlock.FACING)), Block.UPDATE_ALL);
             }
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        if (heldStack.is(filledFlask) && trayLevel < 3) {
+        if (tryFill(state, level, pos, heldStack)) {
             if (!level.isClientSide) {
                 replaceFlask(player, hand, emptyFlask);
-                BlockState filled = state.setValue(LEVEL, trayLevel + 1).setValue(DRIED, false);
-                level.setBlock(pos, filled, Block.UPDATE_ALL);
-                if (trayLevel + 1 == 3) level.scheduleTick(pos, this, DRY_DELAY_TICKS);
             }
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        if (heldStack.is(emptyFlask) && !state.getValue(DRIED)) {
+        if (tryEmpty(state, level, pos, heldStack)) {
             if (!level.isClientSide) {
                 replaceFlask(player, hand, filledFlask);
-                BlockState replacement = trayLevel == 1
-                        ? ModBlocks.TRAY.defaultBlockState().setValue(EmptyTrayBlock.FACING, state.getValue(EmptyTrayBlock.FACING))
-                        : state.setValue(LEVEL, trayLevel - 1).setValue(DRIED, false);
-                level.setBlock(pos, replacement, Block.UPDATE_ALL);
             }
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
 
         return InteractionResult.PASS;
+    }
+
+    public boolean tryFill(BlockState state, Level level, BlockPos pos, ItemStack stack) {
+        int trayLevel = state.getValue(LEVEL);
+        if (!stack.is(filledFlask) || trayLevel >= 3) return false;
+
+        if (!level.isClientSide) {
+            BlockState filled = state.setValue(LEVEL, trayLevel + 1).setValue(DRIED, false);
+            level.setBlock(pos, filled, Block.UPDATE_ALL);
+            if (trayLevel + 1 == 3) level.scheduleTick(pos, this, DRY_DELAY_TICKS);
+        }
+        return true;
+    }
+
+    public boolean tryEmpty(BlockState state, Level level, BlockPos pos, ItemStack stack) {
+        if (!stack.is(emptyFlask) || state.getValue(DRIED)) return false;
+
+        if (!level.isClientSide) {
+            int trayLevel = state.getValue(LEVEL);
+            BlockState replacement = trayLevel == 1
+                    ? ModTrays.EMPTY_TRAY.defaultBlockState().setValue(EmptyTrayBlock.FACING, state.getValue(EmptyTrayBlock.FACING))
+                    : state.setValue(LEVEL, trayLevel - 1).setValue(DRIED, false);
+            level.setBlock(pos, replacement, Block.UPDATE_ALL);
+        }
+        return true;
+    }
+
+    public boolean tryShatter(BlockState state, Level level, BlockPos pos, ItemStack stack) {
+        if (!state.getValue(DRIED) || !(stack.getItem() instanceof PickaxeItem)) return false;
+
+        if (level instanceof ServerLevel serverLevel) {
+            LootTable table = serverLevel.getServer().getLootData().getLootTable(lootTable);
+            LootParams params = new LootParams.Builder(serverLevel)
+                    .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
+                    .withParameter(LootContextParams.TOOL, stack)
+                    .withOptionalParameter(LootContextParams.BLOCK_STATE, state)
+                    .create(LootContextParamSets.BLOCK);
+
+            for (ItemStack drop : table.getRandomItems(params)) {
+                popResource(level, pos, drop);
+            }
+            level.playSound(null, pos, net.minecraft.sounds.SoundEvents.GLASS_BREAK,
+                    net.minecraft.sounds.SoundSource.BLOCKS, 0.7F, 1.1F);
+            level.setBlock(pos, ModTrays.EMPTY_TRAY.defaultBlockState()
+                    .setValue(EmptyTrayBlock.FACING, state.getValue(EmptyTrayBlock.FACING)), Block.UPDATE_ALL);
+        }
+        return true;
+    }
+
+    public Item getFilledFlask() {
+        return filledFlask;
     }
 
     static void replaceFlask(Player player, InteractionHand hand, Item result) {
