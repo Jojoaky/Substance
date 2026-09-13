@@ -8,23 +8,23 @@ Substance effects can change gameplay, rendering, or sound. Visual and audio pro
 
 Every effect on this page has three potion variants:
 
-| Variant | Duration | Level | Brewing step |
-|---------|----------|-------|--------------|
-| Normal | 30 seconds | I | Awkward Potion plus the effect ingredient |
-| Extended | 1 minute 30 seconds | I | Normal potion plus Redstone Dust |
-| Strong | 15 seconds | II | Normal potion plus Glowstone Dust |
+| Variant  | Duration            | Level | Brewing step                              |
+|----------|---------------------|-------|-------------------------------------------|
+| Normal   | 30 seconds          | I     | Awkward Potion plus the effect ingredient |
+| Extended | 1 minute 30 seconds | I     | Normal potion plus Redstone Dust          |
+| Strong   | 15 seconds          | II    | Normal potion plus Glowstone Dust         |
 
 Splash and lingering versions can be made with the normal Minecraft brewing steps.
 
-| Effect | Ingredient |
-|--------|------------|
-| [Haze](#haze) | Fermented Spider Eye |
-| [Warp](#warp) | ![Cyanide Powder](../src/main/resources/assets/substance/textures/item/cyanide.png) Cyanide Powder |
-| [Keen](#keen) | ![Dried Tobacco Leaf](../src/main/resources/assets/substance/textures/item/dried_tobacco_leaf.png) Dried Tobacco Leaf |
-| [Relaxation](#relaxation) | ![Herb Bud](../src/main/resources/assets/substance/textures/item/herb_bud.png) Herb Bud |
-| [Surge](#surge) | ![White Crystals](../src/main/resources/assets/substance/textures/item/white_crystals.png) White Crystals |
-| [Hallucination](#hallucination) | Red Mushroom |
-| [Dread](#dread) | Sculk |
+| Effect                          | Ingredient                                                                                                            |
+|---------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| [Haze](#haze)                   | Fermented Spider Eye                                                                                                  |
+| [Warp](#warp)                   | ![Cyanide Powder](../src/main/resources/assets/substance/textures/item/cyanide.png) Cyanide Powder                    |
+| [Keen](#keen)                   | ![Dried Tobacco Leaf](../src/main/resources/assets/substance/textures/item/dried_tobacco_leaf.png) Dried Tobacco Leaf |
+| [Relaxation](#relaxation)       | ![Herb Bud](../src/main/resources/assets/substance/textures/item/herb_bud.png) Herb Bud                               |
+| [Surge](#surge)                 | ![White Crystals](../src/main/resources/assets/substance/textures/item/white_crystals.png) White Crystals             |
+| [Hallucination](#hallucination) | Red Mushroom                                                                                                          |
+| [Dread](#dread)                 | Sculk                                                                                                                 |
 
 ## Haze
 
@@ -51,6 +51,8 @@ Warp slowly bends the view and separates the red and blue color channels. Like H
 Sources include [herbal rolls](herbal-rolls.md#effects), [crystals](white-crystals.md#properties), [pipes](pipes.md#base-pipe-effects), and Potions of Warp.
 
 ## Keen
+
+![Keen](../src/main/resources/assets/substance/textures/mob_effect/keen.png)
 
 - ID: `substance:keen`
 - Category: Beneficial

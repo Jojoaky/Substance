@@ -38,7 +38,6 @@ public class ModelProvider extends FabricModelProvider {
             ModItems.WHITE_OIL_TRAY,
             ModItems.BLUE_OIL_TRAY,
             ModItems.SCULK_CATALYST_CRYSTAL,
-            ModItems.SUDAFED_PILL,
             ModItems.CYANIDE,
             ModItems.IODINE,
             ModItems.PSEUDO,

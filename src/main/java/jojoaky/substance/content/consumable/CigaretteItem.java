@@ -39,7 +39,5 @@ public class CigaretteItem extends ConsumableItem {
         if (useDuration > 100) entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 4 * 20));
 
         SubstanceEffectHelper.applyStackingEffect(entity, ModEffects.KEEN, useDuration * 6, 550, 2);
-        SubstanceEffectHelper.applyEffectBase(entity, MobEffects.DIG_SPEED, 400, 1);
-
     }
 }

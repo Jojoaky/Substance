@@ -23,7 +23,22 @@ public class ModPipeIngredients {
 
         PipeRegistry.register(PipeSmokableItem.effectGiving(
                 ModItems.WHITE_CRYSTALS,
-                new StackingEffect(ModEffects.SURGE, 8, 1000, 1)
+                new StackingEffect(ModEffects.SURGE, 8, 1000, 0)
+        ));
+
+        PipeRegistry.register(new PipeSmokableItem(
+                ModItems.WHITE_CRYSTALS_CHILI,
+                (context) -> {
+                    SubstanceEffectHelper.applyStackingEffect(
+                            context.entity(),
+                            context.consumeDuration(),
+                            new StackingEffect(ModEffects.SURGE, 8, 1000, 1)
+                    );
+
+                    if (!context.level().isClientSide) {
+                        context.entity().hurt(context.level().damageSources().magic(), 1.0f);
+                    }
+                }
         ));
 
         PipeRegistry.register(PipeSmokableItem.effectGiving(

@@ -30,10 +30,13 @@ Craft the Cigarette in one horizontal row:
 
 ## Effects
 
-Smoking maintains [Keen](effects.md#keen) while the item is in use. Releasing the use control extends Keen according to the draw length and applies Haste II for 20 seconds. Repeated draws can raise Keen to level III.
+Smoking maintains [Keen](effects.md#keen) while the item is in use. Releasing the use control extends Keen according to the draw length.  
+Repeated draws can raise Keen to level III.
 
-A draw longer than five seconds also gives four seconds of Nausea. Dried Tobacco Leaves can provide Keen without the Haste effect when used in a [pipe](pipes.md#ingredients).
+A draw longer than five seconds also gives four seconds of Nausea.
+Dried Tobacco Leaves can provide Keen without the Haste effect when used in a [pipe](pipes.md#ingredients).
 
-The total smoking time is covered by the [durability settings](configuration.md#durabilities). Maximum draw duration and cooldown are covered by [smoking and sniffing](configuration.md#smoking-and-sniffing), and Keen has a configurable [mining-speed multiplier](configuration.md#effect-behavior).
+The total smoking time is covered by the [durability settings](configuration.md#durabilities).
+Maximum draw duration and cooldown are covered by [smoking and sniffing](configuration.md#smoking-and-sniffing), and Keen has a configurable [mining-speed multiplier](configuration.md#effect-behavior).
 
 [Back to the content index](content.md)

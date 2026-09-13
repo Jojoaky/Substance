@@ -36,6 +36,7 @@ Support for newer Minecraft versions and NeoForge is planned.
 4. Open the Substance creative tab to explore the available content or discover it naturally through survival progression.
 
 For a more detailed overview of the mod's content and progression, see [docs/content.md](docs/content.md).
+Alternatively, EMI, JEI, or REI can be used to view almost all relevant crafting and processing recipes.
 
 ## Development and building
 
@@ -45,6 +46,17 @@ Build the project with: ```./gradlew build```
 Build artifacts are written to: `build/libs/`
 
 Generated resources can be refreshed using the Gradle datagen run configuration.
+
+## Credits
+
+I wrote most of this mod's code,  
+while Zute created most of this mod's textures.
+
+Substance's chemistry is heavily inspired by [Broken Bad](https://www.curseforge.com/minecraft/mc-mods/create-broken-bad).  
+The herbs are inspired by [Nirvana](https://www.curseforge.com/minecraft/mc-mods/nirvana)
+
+Sounds where used from [Freesound](https://freesound.org/) under Creative Commons legal tools 
+See [Third-party audio attributions](THIRD_PARTY_LICENSES.md)
 
 ## Downloads & Source
 - [Source code and issues](https://github.com/Jojoaky/Substance)

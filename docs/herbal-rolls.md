@@ -40,10 +40,10 @@ Craft the roll in one horizontal row:
 
 Without Create, use this shaped recipe:
 
-|   | Paper |   |
-|---|-------|---|
+|                | Paper          |                |
+|----------------|----------------|----------------|
 | Dried Herb Bud | Dried Herb Bud | Dried Herb Bud |
-|   | Paper |   |
+|                | Paper          |                |
 
 When Create is installed, the normal recipe is replaced by Mechanical Crafting with this five-item row:
 

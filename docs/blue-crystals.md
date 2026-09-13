@@ -12,9 +12,11 @@ Blue Crystals are a single-use powder with a longer chemistry chain and higher e
 
 ## Properties
 
-Hold use for the full 2.5 seconds. One item is consumed and the player receives about 55 seconds of [Surge II](effects.md#surge) and 27.5 seconds of [Warp I](effects.md#warp) with the default settings.
+Hold use for the full 2.5 seconds. One item is consumed and the player receives about
+55 seconds of [Surge II](effects.md#surge) and 27.5 seconds of [Warp I](effects.md#warp).
 
-Repeated uses before the effects expire can raise Surge and Warp as high as level IV. Blue Crystals can also provide Surge when smoked in a [pipe](pipes.md#ingredients).
+Repeated uses before the effects expire can raise Surge and Warp as high as level IV. 
+Blue Crystals can also provide Surge when smoked in a [pipe](pipes.md#ingredients).
 
 ## Production guide
 
@@ -33,14 +35,12 @@ Blue Crystal Oil combines two branches. One produces Phenylacetone, while the ot
 
 ### Phenylacetone branch
 
-| Step | Inputs | Output |
-|-----:|--------|--------|
-| 1 | Apple | ![Cyanide Powder](../src/main/resources/assets/substance/textures/item/cyanide.png) Cyanide Powder |
-| 2 | Cyanide Powder and Water Flask | Phenylacetic Acid Flask |
-| 3 | Oxygen Gas Bottle and Sugar | Acetic Anhydride Flask |
-| 4 | Phenylacetic Acid Flask and Acetic Anhydride Flask | Two Phenylacetone Flasks |
-
-All four recipes are shapeless.
+| Step | Inputs                                             | Output                                                                                             |
+|-----:|----------------------------------------------------|----------------------------------------------------------------------------------------------------|
+|    1 | Apple                                              | ![Cyanide Powder](../src/main/resources/assets/substance/textures/item/cyanide.png) Cyanide Powder |
+|    2 | Cyanide Powder and Water Flask                     | Phenylacetic Acid Flask                                                                            |
+|    3 | Oxygen Gas Bottle and Sugar                        | Acetic Anhydride Flask                                                                             |
+|    4 | Phenylacetic Acid Flask and Acetic Anhydride Flask | Two Phenylacetone Flasks                                                                           |
 
 ### Methylamine branch
 

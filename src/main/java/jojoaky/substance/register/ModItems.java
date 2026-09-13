@@ -117,11 +117,6 @@ public class ModItems {
     );
 
     // --- chemicals ---
-    public static final Item SUDAFED_PILL = register(
-            new Item(new FabricItemSettings()),
-            "sudafed_pill"
-    );
-
     public static final Item CYANIDE = register(
             new Item(new FabricItemSettings()),
             "cyanide"
@@ -270,7 +265,6 @@ public class ModItems {
                     itemGroup.accept(ModItems.TOBACCO_SEEDS);
 
                     // chemicals
-                    itemGroup.accept(ModItems.SUDAFED_PILL);
                     itemGroup.accept(ModItems.CYANIDE);
                     itemGroup.accept(ModItems.IODINE);
                     itemGroup.accept(ModItems.PSEUDO);

@@ -53,16 +53,6 @@ public class ChemicalPowderRecipes {
                         .manualOnly()
                         .require(ModItems.EPHEDRA_BUNDLE, 4)
                         .output(ModItems.PSEUDO, 4)
-                        .build(),
-
-                ShapelessRecipeDef.named("pseudoephedrine_pill")
-                        .createMilling()
-                        .createCrushing()
-                        .vanillaShapeless()
-                        .manualOnly()
-                        .require(ModItems.SUDAFED_PILL)
-                        .output(ModItems.PSEUDO, 2)
-                        .output(ModItems.PSEUDO, 1, 0.7f)
                         .build()
         );
     }

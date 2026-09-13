@@ -42,13 +42,14 @@ Ingredient effects are added to these base effects.
 
 ## Ingredients
 
-| Ingredient | Effect from smoking | Related guide |
-|------------|---------------------|---------------|
-| ![Dried Herb Bud](../src/main/resources/assets/substance/textures/item/dried_herb_bud.png) Dried Herb Bud | [Relaxation](effects.md#relaxation), stacking up to level V | [Herbal rolls](herbal-rolls.md#obtaining-dried-herb-buds) |
-| ![Dried Tobacco Leaf](../src/main/resources/assets/substance/textures/item/dried_tobacco_leaf.png) Dried Tobacco Leaf | [Keen](effects.md#keen), stacking up to level IV | [Cigarette](cigarette.md#obtaining-dried-tobacco-leaves) |
-| ![White Crystals](../src/main/resources/assets/substance/textures/item/white_crystals.png) White Crystals | [Surge](effects.md#surge), stacking up to level II | [White Crystals](white-crystals.md) |
-| ![Blue Crystals](../src/main/resources/assets/substance/textures/item/blue_crystals.png) Blue Crystals | [Surge](effects.md#surge), stacking up to level IV | [Blue Crystals](blue-crystals.md) |
-| Red Mushroom | [Hallucination](effects.md#hallucination), or sometimes [Dread](effects.md#dread) | [Red mushroom](#red-mushroom) |
+| Ingredient                                                                                                                    | Effect from smoking                                                               | Related guide                                             |
+|-------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------|
+| ![Dried Herb Bud](../src/main/resources/assets/substance/textures/item/dried_herb_bud.png) Dried Herb Bud                     | [Relaxation](effects.md#relaxation), stacking up to level V                       | [Herbal rolls](herbal-rolls.md#obtaining-dried-herb-buds) |
+| ![Dried Tobacco Leaf](../src/main/resources/assets/substance/textures/item/dried_tobacco_leaf.png) Dried Tobacco Leaf         | [Keen](effects.md#keen), stacking up to level IV                                  | [Cigarette](cigarette.md#obtaining-dried-tobacco-leaves)  |
+| ![White Crystals](../src/main/resources/assets/substance/textures/item/white_crystals.png) White Crystals                     | [Surge](effects.md#surge), stacking up to level I                                 | [White Crystals](white-crystals.md)                       |
+| ![Spiced White Crystals](../src/main/resources/assets/substance/textures/item/white_crystals_chili.png) Spiced White Crystals | [Surge](effects.md#surge), stacking up to level II, causes minor damage           | [White Crystals](white-crystals.md)                       |
+| ![Blue Crystals](../src/main/resources/assets/substance/textures/item/blue_crystals.png) Blue Crystals                        | [Surge](effects.md#surge), stacking up to level IV                                | [Blue Crystals](blue-crystals.md)                         |
+| Red Mushroom                                                                                                                  | [Hallucination](effects.md#hallucination), or sometimes [Dread](effects.md#dread) | [Red mushroom](#red-mushroom)                             |
 
 Effect duration grows with the length of the draw. Repeated draws before an effect expires can extend its duration and raise its level up to the listed limit.
 
