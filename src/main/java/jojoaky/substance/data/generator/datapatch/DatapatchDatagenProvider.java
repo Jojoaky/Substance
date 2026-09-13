@@ -68,6 +68,9 @@ public class DatapatchDatagenProvider implements DataProvider {
                     false,
                     entry.getTargetTable(),
                     entry.getItem().asItem(),
+                    entry.getPlacement(),
+                    entry.getChance(),
+                    entry.getPoolIndex(),
                     entry.getWeight(),
                     entry.getMinCount(),
                     entry.getMaxCount()

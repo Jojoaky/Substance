@@ -35,44 +35,44 @@ public class Loot {
         DatapatchRegistry.accept(
                 LootEntryDef.named("wooden_pipe_outpost", outpostChest)
                         .drops(ModItems.WOODEN_PIPE)
-                        .weight(4)
+                        .chance(0.4f)
                         .count(1.0f, 1.0f),
 
                 LootEntryDef.named("wooden_pipe_mansion", mansionChest)
                         .drops(ModItems.WOODEN_PIPE)
-                        .weight(40)
+                        .chance(0.6f)
                         .count(1.0f, 1.0f),
 
                 LootEntryDef.named("wooden_pipe_pillager", pillagerDrop)
                         .drops(ModItems.WOODEN_PIPE)
-                        .weight(1)
+                        .chance(0.01f)
                         .count(1.0f, 1.0f),
 
                 LootEntryDef.named("wooden_pipe_vindicator", vindicatorDrop)
                         .drops(ModItems.WOODEN_PIPE)
-                        .weight(1)
+                        .chance(0.01f)
                         .count(1.0f, 1.0f),
 
                 LootEntryDef.named("chili_pyramid_loot", desertPyramid)
                         .drops(ModItems.CHILI_PEPPER)
-                        .weight(12)
+                        .chance(0.9f)
                         .count(1.0f, 4.0f),
 
                 LootEntryDef.named("chili_desert_village_loot", desertVillage)
                         .drops(ModItems.CHILI_PEPPER)
-                        .weight(5)
+                        .weightedInPool(0, 3)
                         .count(1.0f, 2.0f),
 
                 LootEntryDef.named("chili_savanna_village_loot", savannaVillage)
                         .drops(ModItems.CHILI_PEPPER)
-                        .weight(5)
+                        .weightedInPool(0, 3)
                         .count(1.0f, 2.0f)
         );
 
         Stream<LootEntryDef> villageBubblePipeLoot = Arrays.stream(ALL_VILLAGE_CHESTS)
                 .map(chestLocation -> LootEntryDef.named("bubble_pipe_" + chestLocation.getPath().replace('/', '_'), chestLocation)
                         .drops(ModItems.BUBBLE_PIPE)
-                        .weight(1)
+                        .weightedInPool(0, 1)
                         .count(1.0f, 1.0f)
                 );
 

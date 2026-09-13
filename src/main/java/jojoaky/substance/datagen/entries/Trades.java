@@ -40,12 +40,12 @@ public class Trades {
 
                 LootEntryDef.named("piglin_herb_seeds", piglinTable)
                         .drops(ModItems.HERB_SEEDS)
-                        .weight(40)
+                        .weightedInPool(0, 40)
                         .count(2.0f, 4.0f),
 
                 LootEntryDef.named("piglin_dried_herb_bud", piglinTable)
                         .drops(ModItems.DRIED_HERB_BUD)
-                        .weight(5)
+                        .weightedInPool(0, 5)
                         .count(2.0f, 3.0f),
 
                 VillagerTradeDef.named("cleric_empty_flask", VillagerProfession.CLERIC, 1)

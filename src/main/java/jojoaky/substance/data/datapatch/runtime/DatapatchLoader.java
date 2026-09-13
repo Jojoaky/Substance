@@ -11,11 +11,18 @@ import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 // Currently uses hardcoded items from DatapackRegistry, might upgrade to data-driven approach in the future
@@ -52,11 +59,7 @@ public class DatapatchLoader {
         LootTableEvents.MODIFY.register((resourceManager, lootManager, lootId, tableBuilder, source) -> {
             for (LootEntryDef entry : LOOT_PATCHES.getOrDefault(lootId, Collections.emptyList())) {
                 try {
-                    tableBuilder.modifyPools(poolBuilder -> poolBuilder.add(
-                            LootItem.lootTableItem(entry.getItem().asItem())
-                                    .setWeight(entry.getWeight())
-                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(entry.getMinCount(), entry.getMaxCount())))
-                    ));
+                    applyLootPatch(tableBuilder, entry);
                 } catch (Exception e) {
                     Substance.LOGGER.error("Failed to apply hardcoded loot entry {} to {}: {}", entry.getName(), lootId, e.getMessage());
                 }
@@ -81,6 +84,34 @@ public class DatapatchLoader {
                     }
                 })
         );
+    }
+
+    static void applyLootPatch(LootTable.Builder tableBuilder, LootEntryDef entry) {
+        if (entry.getPlacement() == LootEntryDef.Placement.INDEPENDENT_POOL) {
+            tableBuilder.withPool(LootPool.lootPool()
+                    .setRolls(ConstantValue.exactly(1.0f))
+                    .when(LootItemRandomChanceCondition.randomChance(entry.getChance()))
+                    .add(createLootItem(entry)));
+            return;
+        }
+
+        AtomicInteger currentPool = new AtomicInteger();
+        AtomicBoolean patched = new AtomicBoolean();
+        tableBuilder.modifyPools(poolBuilder -> {
+            if (currentPool.getAndIncrement() == entry.getPoolIndex()) {
+                poolBuilder.add(createLootItem(entry).setWeight(entry.getWeight()));
+                patched.set(true);
+            }
+        });
+
+        if (!patched.get()) {
+            throw new IllegalArgumentException("Target table has no loot pool at index " + entry.getPoolIndex());
+        }
+    }
+
+    private static LootPoolSingletonContainer.Builder<?> createLootItem(LootEntryDef entry) {
+        return LootItem.lootTableItem(entry.getItem().asItem())
+                .apply(SetItemCountFunction.setCount(UniformGenerator.between(entry.getMinCount(), entry.getMaxCount())));
     }
 
     private static MerchantOffer createOffer(MerchantTradeDef<?> def) {
