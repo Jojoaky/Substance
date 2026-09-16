@@ -2,7 +2,6 @@ package jojoaky.substance.content.effects;
 
 import jojoaky.substance.Config;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -18,10 +17,12 @@ public final class RelaxationEffect extends VisualMobEffect {
         return entity.hasEffect(this);
     }
 
-    public void punishAttack(Player player, Entity target) {
-        if (!(player.level() instanceof ServerLevel level) || !isAppliedTo(player)) {
-            return;
-        }
+    public void punishAttack(Entity source, Entity target) {
+        if (!(source.level() instanceof ServerLevel level)) return;
+
+        if (!(source instanceof Player player) || !isAppliedTo(player)) return;
+
+        if (source == target) return;
 
         boolean isLiving = target instanceof Mob || target instanceof Player;
         if (!isLiving) return;
@@ -35,9 +36,7 @@ public final class RelaxationEffect extends VisualMobEffect {
         }
 
         lightning.moveTo(player.position());
-        if (player instanceof ServerPlayer serverPlayer) {
-            lightning.setCause(serverPlayer);
-        }
+        lightning.setVisualOnly(true);
         level.addFreshEntity(lightning);
     }
 }

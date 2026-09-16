@@ -1,7 +1,6 @@
 package jojoaky.substance.mixin;
 
 import jojoaky.substance.register.ModEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,8 +29,4 @@ public abstract class PlayerMixin {
         cir.setReturnValue(ModEffects.KEEN.applyMiningSpeed(player, cir.getReturnValue()));
     }
 
-    @Inject(method = "attack", at = @At("TAIL"))
-    private void punishRelaxedAttack(Entity target, CallbackInfo ci) {
-        ModEffects.RELAXATION.punishAttack((Player) (Object) this, target);
-    }
 }
