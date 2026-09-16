@@ -10,7 +10,8 @@
     "LootContextRegisterInvoker",
     "MobMixin",
     "PlayerMixin",
-    "ShearsDispenseItemBehaviorMixin"
+    "ShearsDispenseItemBehaviorMixin",
+    "VillagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
