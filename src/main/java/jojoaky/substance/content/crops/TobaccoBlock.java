@@ -1,6 +1,5 @@
 package jojoaky.substance.content.crops;
 
-import jojoaky.substance.register.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -35,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class TobaccoBlock extends DoublePlantBlock implements BonemealableBlock {
+public class TobaccoBlock extends DoublePlantBlock implements BonemealableBlock, CuttableCrop {
 
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
     public static final int MAX_AGE = 3;
@@ -74,10 +73,14 @@ public class TobaccoBlock extends DoublePlantBlock implements BonemealableBlock 
         }
     }
 
-    public List<ItemStack> cut(BlockState state, ServerLevel level, BlockPos pos, ItemStack tool) {
-        int age = state.getValue(AGE);
+    @Override
+    public boolean isMature(BlockState state) {
+        return state.getValue(AGE) == MAX_AGE;
+    }
 
-        if (age < MAX_AGE) return List.of();
+    @Override
+    public List<ItemStack> cut(BlockState state, ServerLevel level, BlockPos pos, ItemStack tool) {
+        if (!isMature(state)) return List.of();
 
         setAge(level, pos, state, AGE_AFTER_HARVEST);
 
@@ -99,10 +102,9 @@ public class TobaccoBlock extends DoublePlantBlock implements BonemealableBlock 
     @SuppressWarnings("deprecation")
     public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos,
                                           Player player, InteractionHand hand, BlockHitResult hit) {
-        int age = state.getValue(AGE);
         ItemStack stack = player.getItemInHand(hand);
 
-        if (age < MAX_AGE || !stack.is(Items.SHEARS)) {
+        if (!isMature(state) || !stack.is(Items.SHEARS)) {
             return InteractionResult.PASS;
         }
 

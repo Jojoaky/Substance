@@ -3,9 +3,7 @@ package jojoaky.substance.mixin;
 import com.simibubi.create.api.behaviour.movement.MovementBehaviour;
 import com.simibubi.create.content.contraptions.actors.harvester.HarvesterMovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
-import jojoaky.substance.content.crops.ChiliCropBlock;
-import jojoaky.substance.content.crops.LargeHerbBlock;
-import jojoaky.substance.content.crops.TobaccoBlock;
+import jojoaky.substance.content.crops.CuttableCrop;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
@@ -26,30 +24,15 @@ public class HarvesterMovementBehaviourMixin {
 
     @Inject(method = "isValidCrop", at = @At("HEAD"), cancellable = true)
     private void onIsValidCrop(Level world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir) {
-        if (state.getBlock() instanceof LargeHerbBlock) {
-            cir.setReturnValue(false);
-        }
-
-        if (state.getBlock() instanceof TobaccoBlock) {
+        if (state.getBlock() instanceof CuttableCrop) {
             cir.setReturnValue(false);
         }
     }
 
     @Inject(method = "isValidOther", at = @At("HEAD"), cancellable = true)
     private void onIsValidOther(Level world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir) {
-        if (state.getBlock() instanceof LargeHerbBlock) {
-            boolean isMature = state.getValue(LargeHerbBlock.AGE) == LargeHerbBlock.MAX_AGE;
-            cir.setReturnValue(isMature);
-        }
-
-        if (state.getBlock() instanceof TobaccoBlock) {
-            boolean isMature = state.getValue(TobaccoBlock.AGE) == TobaccoBlock.MAX_AGE;
-            cir.setReturnValue(isMature);
-        }
-
-        if (state.getBlock() instanceof ChiliCropBlock) {
-            boolean isMature = state.getValue(ChiliCropBlock.AGE) == ChiliCropBlock.MAX_AGE;
-            cir.setReturnValue(isMature);
+        if (state.getBlock() instanceof CuttableCrop cuttableCrop) {
+            cir.setReturnValue(cuttableCrop.isMature(state));
         }
     }
 
@@ -77,27 +60,15 @@ public class HarvesterMovementBehaviourMixin {
 
         BlockState stateVisited = world.getBlockState(pos);
 
-        if (stateVisited.getBlock() instanceof LargeHerbBlock largeHerbBlock) {
+        if (stateVisited.getBlock() instanceof CuttableCrop cuttableCrop) {
             if (world instanceof ServerLevel serverLevel) {
-                List<ItemStack> result = largeHerbBlock.cut(stateVisited, serverLevel, pos, Items.SHEARS.getDefaultInstance());
-                result.forEach(item -> substance$dropItem(context, item));
-            }
-            ci.cancel();
-        }
-
-        if (stateVisited.getBlock() instanceof TobaccoBlock tobaccoBlock) {
-            if (world instanceof ServerLevel serverLevel) {
-                List<ItemStack> result = tobaccoBlock.cut(stateVisited, serverLevel, pos, Items.SHEARS.getDefaultInstance());
-                result.forEach(item -> substance$dropItem(context, item));
-            }
-
-            ci.cancel();
-        }
-
-        if (stateVisited.getBlock() instanceof ChiliCropBlock chiliCropBlock) {
-            if (world instanceof ServerLevel serverLevel) {
-                List<ItemStack> result = chiliCropBlock.harvest(stateVisited, serverLevel, pos, Items.SHEARS.getDefaultInstance());
-                result.forEach(item -> substance$dropItem(context, item));
+                List<ItemStack> drops = cuttableCrop.cut(
+                        stateVisited,
+                        serverLevel,
+                        pos,
+                        Items.SHEARS.getDefaultInstance()
+                );
+                drops.forEach(item -> substance$dropItem(context, item));
             }
 
             ci.cancel();

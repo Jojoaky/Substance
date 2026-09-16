@@ -34,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class ChiliCropBlock extends BushBlock implements BonemealableBlock {
+public class ChiliCropBlock extends BushBlock implements BonemealableBlock, CuttableCrop {
 
     public static final int MAX_AGE = 3;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
@@ -117,13 +117,19 @@ public class ChiliCropBlock extends BushBlock implements BonemealableBlock {
         );
     }
 
-    public List<ItemStack> harvest(
+    @Override
+    public boolean isMature(BlockState state) {
+        return state.getValue(AGE) == MAX_AGE;
+    }
+
+    @Override
+    public List<ItemStack> cut(
             BlockState state,
             ServerLevel level,
             BlockPos pos,
             ItemStack tool
     ) {
-        if (state.getValue(AGE) < MAX_AGE) {
+        if (!isMature(state)) {
             return List.of();
         }
 
@@ -176,12 +182,12 @@ public class ChiliCropBlock extends BushBlock implements BonemealableBlock {
             @NotNull InteractionHand hand,
             @NotNull BlockHitResult hit
     ) {
-        if (state.getValue(AGE) < MAX_AGE) {
+        if (!isMature(state)) {
             return InteractionResult.PASS;
         }
 
         if (level instanceof ServerLevel serverLevel) {
-            List<ItemStack> drops = harvest(
+            List<ItemStack> drops = cut(
                     state,
                     serverLevel,
                     pos,

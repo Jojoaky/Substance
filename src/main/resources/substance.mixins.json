@@ -9,7 +9,8 @@
     "LivingEntityMixin",
     "LootContextRegisterInvoker",
     "MobMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "ShearsDispenseItemBehaviorMixin"
   ],
   "injectors": {
     "defaultRequire": 1
