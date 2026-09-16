@@ -16,7 +16,7 @@ Cigarettes are reusable consumables made from dried tobacco leaves and paper. Th
 
 1. Buy three Tobacco Seeds from an apprentice farmer for four Emeralds.
 2. Plant the seeds on farmland with enough room for the plant's two-block height. Bone Meal can accelerate its growth.
-3. Use Shears on a mature plant to collect one to four Ripe Tobacco Leaves without destroying it. The plant returns to its first growth stage.
+3. Use Shears on a mature plant to collect one to four Ripe Tobacco Leaves without destroying it. The plant returns to its first growth stage. A dispenser facing the mature plant can do the same job when it contains Shears and receives redstone power. Each harvest costs one Shears durability.
 4. Dry each leaf in a smoker for 7.5 seconds or a furnace for 15 seconds. Either method gives one Dried Tobacco Leaf and 1 experience.
 
 Breaking a mature plant produces leaves and more seeds, but removes the plant.

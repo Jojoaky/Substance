@@ -12,7 +12,7 @@ Herbal Rolls and Thick Herbal Rolls are reusable consumables made from dried her
 
 1. Obtain Herb Seeds through piglin bartering. Piglins can also barter dried herb buds directly.
 2. Plant the Large Herb with enough room for its two-block height. Bone Meal can accelerate its growth.
-3. Use Shears on a mature plant to collect one to three Herb Buds without destroying it. The plant returns to an earlier growth stage.
+3. Use Shears on a mature plant to collect one to three Herb Buds without destroying it. The plant returns to an earlier growth stage. A dispenser facing the mature plant can do the same job when it contains Shears and receives redstone power. Each harvest costs one Shears durability.
 4. Dry each Herb Bud in a smoker for 7.5 seconds or a furnace for 15 seconds. Either method gives one Dried Herb Bud and 1 experience.
 
 One Herb Bud can also be crafted into one Herb Seed.
