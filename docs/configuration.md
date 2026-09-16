@@ -142,6 +142,7 @@ Substance exposes the following tags.
 | `substance:smokables` | Items        | Items recognized as smokables by the smoking visuals.                          |
 | `substance:drugs`     | Items        | Bundled grouping of Substance's drug items, available for pack authors to use. |
 | `substance:pipes`     | Items        | Bundled grouping of the mod's pipe items, available for pack authors to use.   |
+| `substance:farmer_plantable_seeds` | Items | Seeds that Substance farmers pick up and that vanilla farmers can plant. The bundled tag contains Ephedra Seeds. |
 | `substance:can_smoke` | Entity types | Mobs eligible for Substance's smoking behaviour.                               |
 | `substance:zombies`   | Entity types | Zombie-family group used by the bundled equipment definition.                  |
 | `substance:skeletons` | Entity types | Skeleton-family group used by the bundled equipment definition.                |

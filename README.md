@@ -15,7 +15,8 @@ Rather than simply adding consumable items, the mod gives them their own surviva
 Ingredients can be **grown, found, traded, and processed** through multistep production chains.
 
 When **Create** is installed, many of these processes gain additional recipes and
-can be integrated into automated production lines.
+can be integrated into automated production lines. Vanilla dispensers loaded with Shears can also harvest
+mature Large Herb, Tobacco, and Chili plants.
 
 Substances can provide a variety of gameplay and visual effects, and many items interact with villagers,
 loot, world generation, and other existing Minecraft systems.
@@ -37,6 +38,8 @@ Support for newer Minecraft versions and NeoForge is planned.
 
 For a more detailed overview of the mod's content and progression, see [docs/content.md](docs/content.md).
 Alternatively, EMI, JEI, or REI can be used to view almost all relevant crafting and processing recipes.
+
+Changes since 1.0.0 are listed in [CHANGELOG.md](CHANGELOG.md).
 
 ## Development and building
 

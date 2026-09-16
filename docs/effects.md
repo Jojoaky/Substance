@@ -70,7 +70,7 @@ Sources include [cigarettes](cigarette.md#effects), dried tobacco leaves smoked 
 - Category: Beneficial
 - Potion ingredient: ![Herb Bud](../src/main/resources/assets/substance/textures/item/herb_bud.png) Herb Bud
 
-Relaxation warms the screen colors and adds blur. Attacking a mob or another player immediately removes Relaxation, strikes the attacker with lightning, and applies six seconds of Darkness by default.
+Relaxation warms the screen colors and adds blur. Damaging a mob or another player, including with a ranged attack, immediately removes Relaxation, strikes the attacker with lightning, and applies six seconds of Darkness by default.
 
 Sources include [herbal rolls](herbal-rolls.md#effects), dried herb buds smoked in a [pipe](pipes.md#ingredients), and Potions of Relaxation.
 

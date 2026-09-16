@@ -68,8 +68,18 @@ The [effects and potions guide](effects.md#potions) lists every brewing ingredie
 | ![Mature Chili Plant](../src/main/resources/assets/substance/textures/block/chili_stage3.png) Chili Plant           | ![Chili Pepper](../src/main/resources/assets/substance/textures/item/chili_pepper.png) Chili Pepper                | [Spiced White Crystals](white-crystals.md#spiced-white-crystals)                   |
 
 Herb seeds enter progression through piglin bartering. Farmers sell tobacco seeds and ephedra bundles,
-while wandering traders sell ephedra and chili seeds.
+while wandering traders sell ephedra and chili seeds. Farmers also pick up and plant Ephedra Seeds, so an
+Ephedra field can be replanted by vanilla villager farming.
 Chili peppers can also appear in desert pyramids and desert or savanna village chests.
+
+## Automation
+
+Dispensers can harvest mature Large Herb, Tobacco, and Chili plants when loaded with Shears. Point the
+dispenser at the mature crop and power it. The dispenser drops the harvest, damages the Shears by one,
+and returns the crop to its normal post-harvest growth stage.
+
+With Create installed, Herb Buds and Dried Herb Buds can be used as Potato Cannon ammunition. Each deals
+two damage before the Potato Cannon's modifiers.
 
 ## Chemistry and processing
 
@@ -92,3 +102,4 @@ The advancement tree covers pipes, herb farming, tobacco, crystal production, ch
 
 - [Configuration, data packs, and resource packs](configuration.md)
 - [Project README](../README.md)
+- [Changelog](./CHANGELOG.md)
