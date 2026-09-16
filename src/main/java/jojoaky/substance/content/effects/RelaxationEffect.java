@@ -18,10 +18,11 @@ public final class RelaxationEffect extends VisualMobEffect {
     }
 
     public void punishAttack(Entity source, Entity target) {
+        if (source == null || target == null) return;
+
         if (!(source.level() instanceof ServerLevel level)) return;
 
         if (!(source instanceof Player player) || !isAppliedTo(player)) return;
-
         if (source == target) return;
 
         boolean isLiving = target instanceof Mob || target instanceof Player;
