@@ -50,7 +50,10 @@ public final class MobEquipmentRegistry {
 
             for (Map.Entry<EquipmentSlot, ResourceLocation> entry : definition.equipment().entrySet()) {
                 EquipmentSlot slot = entry.getKey();
-                if (assigned.contains(slot) || !mob.getItemBySlot(slot).isEmpty()) {
+                if (definition.shouldSkipSlot(
+                        assigned.contains(slot),
+                        !mob.getItemBySlot(slot).isEmpty()
+                )) {
                     continue;
                 }
 

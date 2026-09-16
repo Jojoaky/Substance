@@ -87,17 +87,20 @@ Use YACL's reset controls or delete `config/substance.json` while Minecraft is s
 
 ### Mob equipment definitions (experimental)
 
-This mod adds a custom data format for defining equpiment mobs spawn with using loot tables.
+This mod adds a custom data format for defining equipment that mobs spawn with using loot tables.
 The custom data format for mob equipment is **experimental**, and it might not work as expected.
 The definitions live under `data/<namespace>/mob_equipment/<name>.json` and have these fields:
 
-| Field       | Type   | Description                                                                                               |
-|-------------|--------|-----------------------------------------------------------------------------------------------------------|
-| `entities`  | array  | Entity IDs such as `minecraft:zombie`, or entity-tag IDs prefixed with `#`, such as `#substance:zombies`. |
-| `equipment` | object | Maps an equipment slot to a loot-table ID using the custom `"type": "substance:equipment"`.               |
+| Field       | Type    | Default | Description                                                                                               |
+|-------------|---------|---------|-----------------------------------------------------------------------------------------------------------|
+| `entities`  | array   | required | Entity IDs such as `minecraft:zombie`, or entity-tag IDs prefixed with `#`, such as `#substance:zombies`. |
+| `equipment` | object  | required | Maps an equipment slot to a loot-table ID using the custom `"type": "substance:equipment"`.              |
+| `priority`  | integer | `0`     | Higher-priority definitions run before lower-priority definitions.                                        |
+| `override`  | boolean | `false` | When `true`, generated equipment may replace an item assigned by vanilla.                                 |
 
-Exact entity entries are applied before tag entries, then by identifier.
+Definitions are ordered by descending `priority`, then exact entity entries before tag entries, then alphabetically by identifier.
 The first definition that successfully assigns a slot wins.
+`override` only controls equipment already present before these definitions run. It does not let a lower-priority definition replace an item assigned by a higher-priority definition.
 Valid slot names include `mainhand`, `offhand`, `head`, `chest`, `legs`, and `feet`. 
 
 `"type": "substance:equipment"` is a custom loot table format that includes information about the entity and the spawn location.
@@ -116,6 +119,19 @@ For example, this is used to spawn zombies with cigarettes and herbal rolls.
 
 - `"substance:equipment/smoking_zombie"` is a `"type": "substance:equipment"` loot table.  
 - `"#substance:zombies"` is an entity_type tag.
+
+#### Replacing or disabling a definition
+
+Mob equipment definitions follow normal data-pack resource priority. A higher-priority pack can replace a definition by using the same namespace and path. For example, a pack can disable the bundled `data/substance/mob_equipment/illagers.json` definition with:
+
+```json
+{
+  "entities": [],
+  "equipment": {}
+}
+```
+
+The loader reads only the highest-priority version of `substance:illagers`. It does not merge that file with the version from Substance.
 
 ### Tags
 

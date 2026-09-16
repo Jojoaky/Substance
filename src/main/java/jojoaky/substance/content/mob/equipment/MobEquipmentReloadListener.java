@@ -17,6 +17,11 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public class MobEquipmentReloadListener extends SimpleJsonResourceReloadListener implements IdentifiableResourceReloadListener {
+    static final Comparator<MobEquipment> DEFINITION_ORDER = Comparator
+            .comparingInt(MobEquipment::priority).reversed()
+            .thenComparing(Comparator.comparingInt(MobEquipment::specificity).reversed())
+            .thenComparing(MobEquipment::id);
+
     private final Consumer<List<MobEquipment>> consumer;
 
     public MobEquipmentReloadListener(Consumer<List<MobEquipment>> consumer) {
@@ -43,9 +48,7 @@ public class MobEquipmentReloadListener extends SimpleJsonResourceReloadListener
                         .ifPresent(raw -> definitions.addAll(raw.toMobEquipment(id)))
         );
 
-        definitions.sort(Comparator
-                .comparingInt(MobEquipment::priority).reversed()
-                .thenComparing(MobEquipment::id));
+        definitions.sort(DEFINITION_ORDER);
 
         consumer.accept(definitions);
         Substance.LOGGER.info("Loaded {} mob equipment definitions", definitions.size());

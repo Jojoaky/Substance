@@ -2,6 +2,7 @@
   "entities": [
     "#substance:skeletons"
   ],
+  "override": true,
   "equipment": {
     "mainhand": "substance:equipment/smoking_skeleton"
   }

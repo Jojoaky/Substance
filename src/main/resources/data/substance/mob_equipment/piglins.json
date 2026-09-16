@@ -2,6 +2,7 @@
   "entities": [
     "#substance:piglins"
   ],
+  "override": true,
   "equipment": {
     "mainhand": "substance:equipment/smoking_piglin"
   }
