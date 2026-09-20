@@ -1,0 +1,87 @@
+package jojoaky.substance;
+
+import com.google.gson.Gson;
+import jojoaky.substance.content.flask.ModFlasks;
+import jojoaky.substance.content.mob.equipment.MobEquipmentRegistry;
+import jojoaky.substance.content.pipe.PipeMenu;
+import jojoaky.substance.content.pipe.PipeRegistry;
+import jojoaky.substance.config.ConfigSync;
+import jojoaky.substance.datagen.entries.Loot;
+import jojoaky.substance.datagen.entries.SecretTrades;
+import jojoaky.substance.datagen.entries.Trades;
+import jojoaky.substance.register.*;
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.MenuType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class Substance implements ModInitializer {
+	public static final String MOD_ID = "substance";
+	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+	public static final MenuType<PipeMenu> PIPE_MENU = net.minecraft.core.Registry.register(
+			BuiltInRegistries.MENU,
+			resource("pipe_menu"),
+			new ExtendedScreenHandlerType<>(PipeMenu::new)
+);
+	public static final Gson GSON = new Gson();
+
+	public static ResourceLocation resource(String string) {
+		return new ResourceLocation(MOD_ID, string);
+	}
+
+	@Override
+	public void onInitialize() {
+		ModContainer container = FabricLoader.getInstance()
+				.getModContainer(MOD_ID)
+				.orElseThrow();
+		ResourceManagerHelper.registerBuiltinResourcePack(
+				resource("programmer_art"),
+				container,
+				ResourcePackActivationType.NORMAL
+		);
+
+		Config.HANDLER.load();
+		Config.refreshDreadDistantEntityTypes();
+		ConfigSync.initializeServer();
+		WelcomeHandler.initialize();
+
+		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> WelcomeHandler.onPlayerJoin(handler.getPlayer(), server));
+
+		ModCreativeTab.initialize();
+		ModItems.initialize();
+		ModBlocks.initialize();
+		ModFlasks.initialize();
+		ModFluids.initialize();
+		ModTrays.initialize();
+		ModEffects.initialize();
+		ModSounds.initialize();
+		ModTags.initialize();
+
+		Trades.initialize();
+		SecretTrades.initialize();
+		Loot.initialize();
+		ModRegisterDatapatch.initialize();
+
+		MobEquipmentRegistry.initialize();
+
+		ModDispenserBehavior.initialize();
+
+		PipeRegistry.initialize();
+		ModPipeIngredients.initialize();
+	}
+}
+
+// TODO:
+//  - Cigarette pack that can stack cigarettes
+//  - Add more translations
+//  - Addiction / Overdose mechanics
+//  - Update to work with 1.21.1 neoforge and latest fabric & neoforge
