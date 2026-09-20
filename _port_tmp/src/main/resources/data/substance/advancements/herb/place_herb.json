@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:herb_bud"
+    },
+    "title": {"translate": "advancements.substance.herb.place_herb.title"},
+    "description": {"translate": "advancements.substance.herb.place_herb.description"}
+  },
+  "parent": "substance:substance",
+  "criteria": {
+    "place_herb_block": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:block_state_property",
+            "block": "substance:large_herb"
+          }
+        ]
+      }
+    }
+  }
+}

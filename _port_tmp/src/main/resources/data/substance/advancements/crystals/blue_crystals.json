@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:blue_crystals"
+    },
+    "title": {"translate": "advancements.substance.crystals.blue_crystals.title"},
+    "description": {"translate": "advancements.substance.crystals.blue_crystals.description"}
+  },
+  "parent": "substance:crystals/blue_oil_tray",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:blue_crystals"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

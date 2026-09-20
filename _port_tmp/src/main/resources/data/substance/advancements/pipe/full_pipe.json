@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:wooden_pipe"
+    },
+    "title": {"translate": "advancements.substance.pipe.full_pipe.title"},
+    "description": {"translate": "advancements.substance.pipe.full_pipe.description"}
+  },
+  "parent": "substance:pipe/pipe",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "substance:bubble_pipe",
+            "substance:wooden_pipe"
+          ],
+          "nbt": "{Inventory:[{Slot:0b},{Slot:1b},{Slot:2b},{Slot:3b},{Slot:4b}]}"
+        }
+      }
+    }
+  }
+}

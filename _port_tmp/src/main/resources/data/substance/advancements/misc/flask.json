@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:flask"
+    },
+    "title": {"translate": "advancements.substance.misc.flask.title"},
+    "description": {"translate": "advancements.substance.misc.flask.description"}
+  },
+  "parent": "substance:substance",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:flask"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

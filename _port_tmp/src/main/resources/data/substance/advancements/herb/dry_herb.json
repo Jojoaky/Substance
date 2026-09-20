@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:dried_herb_bud"
+    },
+    "title": {"translate": "advancements.substance.herb.dry_herb.title"},
+    "description": {"translate": "advancements.substance.herb.dry_herb.description"}
+  },
+  "parent": "substance:herb/place_herb",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:dried_herb_bud"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

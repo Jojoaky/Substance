@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:white_crystals"
+    },
+    "title": {"translate": "advancements.substance.crystals.white_crystals.title"},
+    "description": {"translate": "advancements.substance.crystals.white_crystals.description"}
+  },
+  "parent": "substance:crystals/white_oil_tray",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:white_crystals"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "substance:herbal_roll",
+    "substance:thick_herbal_roll",
+    "substance:cigarette",
+    "substance:wooden_pipe",
+    "substance:bubble_pipe"
+  ]
+}

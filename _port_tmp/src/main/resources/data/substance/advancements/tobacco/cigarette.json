@@ -1,0 +1,22 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:cigarette"
+    },
+    "title": {"translate": "advancements.substance.tobacco.cigarette.title"},
+    "description": {"translate": "advancements.substance.tobacco.cigarette.description"}
+  },
+  "parent": "substance:tobacco/place_tobacco",
+  "criteria": {
+    "interacted_item": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "substance:cigarette"
+          ]
+        }
+      }
+    }
+  }
+}

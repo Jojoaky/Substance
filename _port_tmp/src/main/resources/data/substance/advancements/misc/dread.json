@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:red_mushroom"
+    },
+    "title": {"translate": "advancements.substance.misc.dread.title"},
+    "description": {"translate": "advancements.substance.misc.dread.description"}
+  },
+  "parent": "substance:substance",
+  "criteria": {
+    "has_dread": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "substance:dread": {}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:thick_herbal_roll"
+    },
+    "title": {"translate": "advancements.substance.herb.thick_herb_roll.title"},
+    "description": {"translate": "advancements.substance.herb.thick_herb_roll.description"}
+  },
+  "parent": "substance:herb/dry_herb",
+  "criteria": {
+    "interacted_item": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "substance:thick_herbal_roll"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:white_crystals_chili"
+    },
+    "title": {"translate": "advancements.substance.misc.all_effects.title"},
+    "description": {"translate": "advancements.substance.misc.all_effects.description"},
+    "frame": "goal"
+  },
+  "parent": "substance:substance",
+  "criteria": {
+    "has_multiple_effects": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "substance:haze": {},
+          "substance:warp": {},
+          "substance:keen": {},
+          "substance:relaxation": {},
+          "substance:surge": {}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "textures": {"fluid": "substance:block/chemical_still", "particle": "substance:block/chemical_still"},
+  "elements": [{"from": [2, 1.125, 4], "to": [14, 1.25, 12], "faces": {"up": {"uv": [0, 0, 12, 8], "texture": "#fluid", "tintindex": 0}}}]
+}

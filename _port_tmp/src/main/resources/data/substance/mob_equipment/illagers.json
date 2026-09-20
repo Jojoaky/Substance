@@ -1,0 +1,9 @@
+{
+  "entities": [
+    "#substance:illagers"
+  ],
+  "override": true,
+  "equipment": {
+    "mainhand": "substance:equipment/smoking_illager"
+  }
+}

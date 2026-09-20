@@ -1,0 +1,17 @@
+{
+  "targets": [ "swap" ],
+  "passes": [
+    {
+      "name": "substance:warmth",
+      "intarget": "minecraft:main",
+      "outtarget": "swap",
+      "uniforms": []
+    },
+    {
+      "name": "minecraft:blur",
+      "intarget": "swap",
+      "outtarget": "minecraft:main",
+      "uniforms": []
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "substance:gas_bottle_nitrogen"
+    },
+    "title": {"translate": "advancements.substance.misc.nitrogen.title"},
+    "description": {"translate": "advancements.substance.misc.nitrogen.description"}
+  },
+  "parent": "substance:misc/gas_bottle",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "substance:gas_bottle_nitrogen"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

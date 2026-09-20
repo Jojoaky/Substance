@@ -1,0 +1,22 @@
+{
+  "blend": {
+    "func": "add",
+    "srcrgb": "srcalpha",
+    "dstrgb": "1-srcalpha"
+  },
+  "vertex": "blit",
+  "fragment": "substance:wave_mix",
+  "attributes": [ "Position" ],
+  "samplers": [
+    { "name": "SamplerA" },
+    { "name": "SamplerB" }
+  ],
+  "uniforms": [
+    { "name": "ProjMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+    { "name": "OutSize", "type": "float", "count": 2, "values": [ 1.0, 1.0 ] },
+    { "name": "ShaderGameTime", "type": "float", "count": 1, "values": [ 0.0 ] },
+    { "name": "Frequency", "type": "float", "count": 1, "values": [ 0.5 ] },
+    { "name": "Strength", "type": "float", "count": 1, "values": [ 1.0 ] },
+    { "name": "Bias", "type": "float", "count": 1, "values": [ 0.0 ] }
+  ]
+}

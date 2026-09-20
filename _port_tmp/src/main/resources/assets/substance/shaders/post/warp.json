@@ -1,0 +1,21 @@
+{
+  "targets": [ "swap" ],
+  "passes": [
+      {
+        "name": "substance:distortion",
+        "intarget": "minecraft:main",
+        "outtarget": "swap",
+        "uniforms": [
+          { "name": "Speed", "values": [ 0.01 ] }
+        ]
+      },
+      {
+        "name": "substance:chroma",
+        "intarget": "swap",
+        "outtarget": "minecraft:main",
+        "uniforms": [
+          { "name": "Speed", "values": [ 0.4 ] }
+        ]
+      }
+  ]
+}

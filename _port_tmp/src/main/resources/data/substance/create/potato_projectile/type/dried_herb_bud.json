@@ -1,0 +1,13 @@
+{
+  "items": [
+    "substance:dried_herb_bud"
+  ],
+  "damage": 2,
+  "reload_ticks": 7,
+  "knockback": 0.2,
+  "sound_pitch": 1.7,
+  "velocity_multiplier": 1.4,
+  "render_mode": {
+    "type": "create:tumble"
+  }
+}
