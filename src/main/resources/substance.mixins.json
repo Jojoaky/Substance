@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "com.example.examplemod.mixin",
+  "package": "jojoaky.substance.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
   "injectors": {

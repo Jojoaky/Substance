@@ -24,17 +24,16 @@ loot, world generation, and other existing Minecraft systems.
 > This mod is fictional and intended purely for entertainment.
 > It does not encourage or promote real-life drug use or illegal substances.
 
-## Quick Start
+## Quick start
 
-Substance currently supports **Minecraft 1.20.1 with Fabric**.
-Support for newer Minecraft versions and NeoForge is planned.
+Substance currently targets **Minecraft 1.21.1 with NeoForge**.
 
 1. Install Substance for the matching Minecraft version and mod loader.
-2. Install [Yet Another Config Lib (YACL)](https://modrinth.com/mod/yacl), 
-   which is required by the mod's configuration
-3. Optionally install **Create** [[forge](https://modrinth.com/mod/create)] [[fabric](https://modrinth.com/mod/create-fabric)]
+2. Optionally install [Create](https://modrinth.com/mod/create).
    - Create adds additional processing recipes and allows many production chains to be automated.
-4. Open the Substance creative tab to explore the available content or discover it naturally through survival progression.
+3. Open the Substance creative tab to explore the available content or discover it naturally through survival progression.
+
+Substance uses NeoForge's built-in configuration system. Open the Mods screen, select Substance, and press Config. Gameplay settings are stored per world and synchronized from the server. Visual and audio settings are local to each client.
 
 For a more detailed overview of the mod's content and progression, see [docs/content.md](docs/content.md).
 Alternatively, EMI, JEI, or REI can be used to view almost all relevant crafting and processing recipes.
@@ -43,8 +42,8 @@ Changes since 1.0.0 are listed in [CHANGELOG.md](CHANGELOG.md).
 
 ## Development and building
 
-Substance targets Java 17.
-Build the project with: ```./gradlew build```
+Substance targets Java 21.
+Build the project with `./gradlew build`.
 
 Build artifacts are written to: `build/libs/`
 
@@ -58,7 +57,7 @@ Substance's chemistry content is heavily inspired by [Create: Broken Bad](https:
 
 Some sound effects are sourced from [Freesound](https://freesound.org/) and used under their respective Creative Commons licenses and legal tools. See [Third-party audio attributions](THIRD_PARTY_LICENSES.md) for individual credits and licensing information.
 
-## Downloads & Source
+## Downloads and source
 - [Source code and issues](https://github.com/Jojoaky/Substance)
 - [Modrinth](https://modrinth.com/project/EiAqNYtB)
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/substance-create-compatible)
