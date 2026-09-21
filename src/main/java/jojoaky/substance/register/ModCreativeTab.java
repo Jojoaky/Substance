@@ -1,6 +1,7 @@
 package jojoaky.substance.register;
 
 import jojoaky.substance.Substance;
+import jojoaky.substance.content.flask.ModFlasks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -43,12 +44,17 @@ public class ModCreativeTab {
                                 */
 
                                 // tools
-                                /*
                                 output.accept(ModItems.TRAY.get());
                                 output.accept(ModItems.WHITE_OIL_TRAY.get());
                                 output.accept(ModItems.BLUE_OIL_TRAY.get());
-                                 */
                                 output.accept(ModItems.SCULK_CATALYST_CRYSTAL.get());
+                                output.accept(ModFlasks.EMPTY_FLASK.get());
+                                for (ModFlasks.FlaskEntry entry : ModFlasks.ALL_FLASK_ENTRIES) {
+                                    output.accept(entry.flask().get());
+                                }
+                                for (ModFluids.ChemicalFluidSet fluid : ModFluids.ALL_FLUIDS) {
+                                    output.accept(fluid.bucket().get());
+                                }
 
                                 // plants
                                 output.accept(ModItems.EPHEDRA_BUNDLE.get());
@@ -69,12 +75,10 @@ public class ModCreativeTab {
                                 output.accept(ModItems.WHITE_PHOSPHORUS.get());
                                 output.accept(ModItems.RED_PHOSPHORUS.get());
 
-                                /*
                                 output.accept(ModItems.GAS_BOTTLE.get());
                                 output.accept(ModItems.GAS_BOTTLE_OXYGEN.get());
                                 output.accept(ModItems.GAS_BOTTLE_HYDROGEN.get());
                                 output.accept(ModItems.GAS_BOTTLE_NITROGEN.get());
-                                */
                             })
 
                             .build()
