@@ -32,7 +32,6 @@ public class ModCreativeTab {
 
                             .displayItems((parameters, output) -> {
                                 // consumables
-                                /*
                                 output.accept(ModItems.WHITE_CRYSTALS.get());
                                 output.accept(ModItems.WHITE_CRYSTALS_CHILI.get());
                                 output.accept(ModItems.BLUE_CRYSTALS.get());
@@ -41,7 +40,6 @@ public class ModCreativeTab {
                                 output.accept(ModItems.CIGARETTE.get());
                                 output.accept(ModItems.BUBBLE_PIPE.get());
                                 output.accept(ModItems.WOODEN_PIPE.get());
-                                */
 
                                 // tools
                                 output.accept(ModItems.TRAY.get());

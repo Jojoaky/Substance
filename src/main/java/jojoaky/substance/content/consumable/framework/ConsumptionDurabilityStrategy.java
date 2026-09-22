@@ -1,7 +1,7 @@
 package jojoaky.substance.content.consumable.framework;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
@@ -91,14 +92,8 @@ public class ConsumptionDurabilityStrategy implements DurabilityStrategy {
         }
     }
 
-    @Override
-    public boolean allowNbtUpdateAnimation(Player player, InteractionHand hand, ItemStack oldStack, ItemStack newStack) {
-        return true;
-    }
-
     private boolean isUnbreakable(ItemStack stack) {
-        CompoundTag tag = stack.getTag();
-        return tag != null && tag.getBoolean("Unbreakable");
+        return stack.has(DataComponents.UNBREAKABLE);
     }
 
     private int getConsumeDurability(ItemStack stack) {
@@ -106,21 +101,26 @@ public class ConsumptionDurabilityStrategy implements DurabilityStrategy {
     }
 
     private int getCustomDamage(ItemStack stack) {
-        CompoundTag tag = stack.getTag();
-        return tag != null ? tag.getInt(DAMAGE_KEY) : 0;
+        return getCustomData(stack).getInt(DAMAGE_KEY);
     }
 
     private void setCustomDamage(ItemStack stack, int damage, int maxDurability) {
-        stack.getOrCreateTag().putInt(DAMAGE_KEY, Mth.clamp(damage, 0, maxDurability));
+        CompoundTag tag = getCustomData(stack);
+        tag.putInt(DAMAGE_KEY, Mth.clamp(damage, 0, maxDurability));
+        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
     }
 
     private void clearDurability(ItemStack stack) {
-        CompoundTag tag = stack.getTag();
-        if (tag != null) {
-            tag.remove(DAMAGE_KEY);
-            if (tag.isEmpty()) {
-                stack.setTag(null);
-            }
+        CompoundTag tag = getCustomData(stack);
+        tag.remove(DAMAGE_KEY);
+        if (tag.isEmpty()) {
+            stack.remove(DataComponents.CUSTOM_DATA);
+        } else {
+            stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
         }
+    }
+
+    private CompoundTag getCustomData(ItemStack stack) {
+        return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
     }
 }

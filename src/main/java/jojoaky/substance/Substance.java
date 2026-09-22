@@ -9,6 +9,8 @@ import jojoaky.substance.register.ModCreativeTab;
 import jojoaky.substance.register.ModEffects;
 import jojoaky.substance.register.ModFluids;
 import jojoaky.substance.register.ModItems;
+import jojoaky.substance.register.ModMenus;
+import jojoaky.substance.register.ModPipeIngredients;
 import jojoaky.substance.register.ModTrays;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -30,12 +32,14 @@ public final class Substance {
         Config.register(modContainer, modEventBus);
 
         ModItems.register(modEventBus);
+        ModMenus.register(modEventBus);
         ModFlasks.register(modEventBus);
         ModFluids.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModTrays.register(modEventBus);
         ModEffects.register(modEventBus);
         ModCreativeTab.register(modEventBus);
+        ModPipeIngredients.register(modEventBus);
         modEventBus.addListener(ModDataGenerators::gatherData);
     }
 }

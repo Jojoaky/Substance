@@ -4,6 +4,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -25,7 +26,10 @@ public class VanillaSuppliedDurabilityStrategy implements DurabilityStrategy {
     @Override
     public void onConsumeTick(ConsumableItem item, ItemStack stack, Level level, LivingEntity entity, int useDuration) {
         if (!level.isClientSide) {
-            stack.hurtAndBreak(1, entity, p -> item.stopConsuming(stack, level, entity, useDuration));
+            if (stack.getDamageValue() + 1 >= stack.getMaxDamage()) {
+                item.stopConsuming(stack, level, entity, useDuration);
+            }
+            stack.hurtAndBreak(1, entity, EquipmentSlot.MAINHAND);
         }
     }
 

@@ -2,8 +2,10 @@ package jojoaky.substance;
 
 import jojoaky.substance.content.flask.FilledFlaskItem;
 import jojoaky.substance.content.flask.ModFlasks;
+import jojoaky.substance.client.screen.PipeScreen;
 import jojoaky.substance.register.ModBlocks;
 import jojoaky.substance.register.ModFluids;
+import jojoaky.substance.register.ModMenus;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
@@ -13,10 +15,12 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import org.jetbrains.annotations.NotNull;
 
 /** Registers client-only extensions for Substance. */
 @Mod(value = Substance.MOD_ID, dist = Dist.CLIENT)
@@ -25,7 +29,12 @@ public final class SubstanceClient {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         modEventBus.addListener(SubstanceClient::clientSetup);
         modEventBus.addListener(SubstanceClient::registerItemColors);
+        modEventBus.addListener(SubstanceClient::registerMenuScreens);
         modEventBus.addListener(SubstanceClient::registerClientExtensions);
+    }
+
+    private static void registerMenuScreens(RegisterMenuScreensEvent event) {
+        event.register(ModMenus.PIPE_MENU.get(), PipeScreen::new);
     }
 
     @SuppressWarnings("deprecation")
@@ -68,12 +77,12 @@ public final class SubstanceClient {
         for (ModFluids.ChemicalFluidSet fluid : ModFluids.ALL_FLUIDS) {
             event.registerFluidType(new IClientFluidTypeExtensions() {
                 @Override
-                public ResourceLocation getStillTexture() {
+                public @NotNull ResourceLocation getStillTexture() {
                     return stillTexture;
                 }
 
                 @Override
-                public ResourceLocation getFlowingTexture() {
+                public @NotNull ResourceLocation getFlowingTexture() {
                     return flowingTexture;
                 }
 

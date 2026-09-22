@@ -15,7 +15,7 @@ public class PowderComponent implements ConsumableComponent {
         // Broadcast once from the server, in time with the animation's inhale pulses.
         if (!level.isClientSide && useDuration >= FIRST_SNIFF_TICK
                 && (useDuration - FIRST_SNIFF_TICK) % SNIFF_INTERVAL_TICKS == 0
-                && useDuration < stack.getUseDuration() - 5) {
+                && useDuration < stack.getUseDuration(entity) - 5) {
             level.playSound(
                     null,
                     entity.getX(), entity.getY(), entity.getZ(),

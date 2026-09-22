@@ -135,23 +135,13 @@ public class ConsumableItem extends Item implements DynamicDurabilityItem {
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
-        durabilityStrategy.appendHoverText(stack, level, tooltipComponents, isAdvanced);
+    public void appendHoverText(@NotNull ItemStack stack, @NotNull Item.TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
+        durabilityStrategy.appendHoverText(stack, context.level(), tooltipComponents, isAdvanced);
     }
 
     @Override
-    public int getMaxDamage(Item item, ItemStack stack) {
-        return durabilityStrategy.getMaxDamage(item, stack);
-    }
-
-    @Override
-    public boolean allowNbtUpdateAnimation(
-            Player player,
-            InteractionHand hand,
-            ItemStack oldStack,
-            ItemStack newStack
-    ) {
-        return durabilityStrategy.allowNbtUpdateAnimation(player, hand, oldStack, newStack);
+    public int getMaxDamage(ItemStack stack) {
+        return durabilityStrategy.getMaxDamage(this, stack);
     }
 
     public boolean hasCustomRenderModel() {

@@ -2,6 +2,7 @@ package jojoaky.substance.datagen;
 
 import jojoaky.substance.Substance;
 import jojoaky.substance.content.flask.ModFlasks;
+import jojoaky.substance.register.ModFluids;
 import jojoaky.substance.register.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
@@ -54,6 +55,13 @@ public class SimpleItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         for (Item item : SIMPLE_MODEL_ITEMS) {
             basicItem(item);
+        }
+
+        for (ModFluids.ChemicalFluidSet fluid : ModFluids.ALL_FLUIDS) {
+            withExistingParent(
+                    fluid.bucket().getId().getPath(),
+                    modLoc("item/_template_bucket")
+            );
         }
 
         basicItem(ModFlasks.EMPTY_FLASK.get());

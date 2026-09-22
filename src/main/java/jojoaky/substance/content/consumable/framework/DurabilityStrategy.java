@@ -1,8 +1,7 @@
 package jojoaky.substance.content.consumable.framework;
 
-import net.minecraft.world.InteractionHand;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -40,18 +39,10 @@ public interface DurabilityStrategy {
     }
 
     default int getMaxDamage(Item item, ItemStack stack) {
-        return item.getMaxDamage();
+        return stack.getOrDefault(DataComponents.MAX_DAMAGE, 0);
     }
 
     default void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
     }
 
-    default boolean allowNbtUpdateAnimation(
-            Player player,
-            InteractionHand hand,
-            ItemStack oldStack,
-            ItemStack newStack
-    ) {
-        return false;
-    }
 }

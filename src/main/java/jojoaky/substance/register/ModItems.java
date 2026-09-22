@@ -1,12 +1,18 @@
 package jojoaky.substance.register;
 
 import jojoaky.substance.Substance;
+import jojoaky.substance.content.consumable.CigaretteItem;
+import jojoaky.substance.content.consumable.CrystalsItem;
+import jojoaky.substance.content.consumable.JointItem;
+import jojoaky.substance.content.consumable.ThickJointItem;
 import jojoaky.substance.content.gas_bottle.EmptyGasBottleItem;
 import jojoaky.substance.content.gas_bottle.FilledGasBottleItem;
+import jojoaky.substance.content.pipe.PipeItem;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -15,6 +21,9 @@ import org.jetbrains.annotations.NotNull;
 public class ModItems {
     public static final DeferredRegister.Items ITEMS =
             DeferredRegister.createItems(Substance.MOD_ID);
+
+    private static final int WOODEN_PIPE_DURABILITY = 2048;
+    private static final int BUBBLE_PIPE_DURABILITY = 512;
 
     // --- production ---
     public static final DeferredItem<jojoaky.substance.content.tray.EmptyTrayItem> TRAY =
@@ -159,76 +168,74 @@ public class ModItems {
     // --- consumables ---
     public static final DeferredItem<CrystalsItem> WHITE_CRYSTALS = ITEMS.register(
             "white_crystals",
-            new CrystalsItem(
-                    new FabricItemSettings()
+            () -> new CrystalsItem(
+                    new Item.Properties()
                             .stacksTo(16)
                             .rarity(Rarity.UNCOMMON),
                     CrystalsItem.Type.WHITE
             )
     );
 
-    public static final Item WHITE_CRYSTALS_CHILI = register(
-            new CrystalsItem(
-                    new FabricItemSettings()
+    public static final DeferredItem<CrystalsItem> WHITE_CRYSTALS_CHILI = ITEMS.register(
+            "white_crystals_chili",
+            () -> new CrystalsItem(
+                    new Item.Properties()
                             .stacksTo(16)
                             .rarity(Rarity.RARE),
                     CrystalsItem.Type.WHITE_CHILI
-            ),
-            "white_crystals_chili"
+            )
     );
 
-    public static final Item BLUE_CRYSTALS = register(
-            new CrystalsItem(
-                    new FabricItemSettings()
+    public static final DeferredItem<CrystalsItem> BLUE_CRYSTALS = ITEMS.register(
+            "blue_crystals",
+            () -> new CrystalsItem(
+                    new Item.Properties()
                             .stacksTo(16)
                             .rarity(Rarity.EPIC),
                     CrystalsItem.Type.BLUE
-            ),
-            "blue_crystals"
+            )
     );
 
-    public static final Item HERBAL_ROLL = register(
-            new JointItem(new FabricItemSettings()
+    public static final DeferredItem<JointItem> HERBAL_ROLL = ITEMS.register(
+            "herbal_roll",
+            () -> new JointItem(new Item.Properties()
                     .stacksTo(1)
                     .rarity(Rarity.UNCOMMON)
-            ),
-            "herbal_roll"
+            )
     );
 
-    public static final Item THICK_HERBAL_ROLL = register(
-            new ThickJointItem(new FabricItemSettings()
+    public static final DeferredItem<ThickJointItem> THICK_HERBAL_ROLL = ITEMS.register(
+            "thick_herbal_roll",
+            () -> new ThickJointItem(new Item.Properties()
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
-            ),
-            "thick_herbal_roll"
+            )
     );
 
-    public static final Item CIGARETTE = register(
-            new CigaretteItem(new FabricItemSettings()
+    public static final DeferredItem<CigaretteItem> CIGARETTE = ITEMS.register(
+            "cigarette",
+            () -> new CigaretteItem(new Item.Properties()
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
-            ),
-            "cigarette"
+            )
     );
 
-    public static final Item WOODEN_PIPE = register(
-            new PipeItem(
-                    new FabricItemSettings()
-                            .stacksTo(1)
-                            .rarity(Rarity.RARE)
-                            .durability(WOODEN_PIPE_DURABILITY)
-            ),
-            "wooden_pipe"
+    public static final DeferredItem<PipeItem> WOODEN_PIPE = ITEMS.register(
+            "wooden_pipe",
+            () -> new PipeItem(new Item.Properties()
+                    .stacksTo(1)
+                    .rarity(Rarity.RARE)
+                    .durability(WOODEN_PIPE_DURABILITY)
+            )
     );
 
-    public static final Item BUBBLE_PIPE = register(
-            new PipeItem(
-                    new FabricItemSettings()
-                            .stacksTo(1)
-                            .rarity(Rarity.RARE)
-                            .durability(BUBBLE_PIPE_DURABILITY)
-            ),
-            "bubble_pipe"
+    public static final DeferredItem<PipeItem> BUBBLE_PIPE = ITEMS.register(
+            "bubble_pipe",
+            () -> new PipeItem(new Item.Properties()
+                    .stacksTo(1)
+                    .rarity(Rarity.RARE)
+                    .durability(BUBBLE_PIPE_DURABILITY)
+            )
     );
 
     public static void register(IEventBus modEventBus) {

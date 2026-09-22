@@ -1,4 +1,4 @@
-package jojoaky.substance.content;
+package jojoaky.substance.util;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.SimpleContainer;
